@@ -1,9 +1,17 @@
 /*
+ * $Source$
+ * $Revision$
  *
- * Created on 28-Jul-2003
+ * Copyright (C) 2003 Tim Pizey 
  *
- * @author timp@paneris.org
+ * Part of a Melati application. This application is free software;
+ * Permission is granted to copy, distribute and/or modify this
+ * software under the same terms as those set out for Melati at 
+ * http://melati.org.
  *
+ * Contact details for copyright holder:
+ *
+ *     Tim Pizey  <timp@paneris.org>
  */
 package org.paneris.melati.boards.receivemail.nntp;
 
