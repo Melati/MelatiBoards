@@ -1,6 +1,6 @@
-#parse $board.templatePath("BoardHeader")
+#include as template "$board.templatePath("BoardHeader")"
 We have received your message for this board. A manager needs
 to approve your message before it appears on the board.
-#parse $board.templatePath("ManagerList")
-#parse $board.templatePath("BoardFooter")
+#include as template "$board.templatePath("ManagerList")"
+#include as template "$board.templatePath("BoardFooter")"
 
