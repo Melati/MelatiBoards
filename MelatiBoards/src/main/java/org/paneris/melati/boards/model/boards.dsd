@@ -163,12 +163,14 @@ table Subscription
     User user
         (description = "The user")
         (displaylevel = summary)
-        (searchability = yes);
+        (searchability = yes)
+        (integrityfix = delete);
 
     Board board
         (description = "The board to which this user belongs")
         (displaylevel = summary)
-        (searchability = primary);
+        (searchability = primary)
+        (integrityfix = delete);
 
     MembershipStatus status
         (description = "How users would like to receive emails from this board")
@@ -201,7 +203,8 @@ table Message
         (description = "The board this message belongs to")
         (displaylevel = summary)
         (displayorderpriority = 0)
-        (searchability = primary);
+        (searchability = primary)
+        (integrityfix = delete);
 
     Timestamp date
         (description = "The date and time at which this message was posted")
@@ -220,7 +223,8 @@ table Message
     User author
         (description = "Author of this message")
         (displaylevel = summary)
-        (searchability = yes);
+        (searchability = yes)
+        (integrityfix = delete);
 
     Message parent (nullable)
         (displayname = "Parent")
@@ -278,7 +282,8 @@ table Attachment
         (description = "The message this attachment belongs to")
         (displaylevel = summary)
         (displayorderpriority = 0)
-        (searchability = yes);
+        (searchability = yes)
+        (integrityfix = delete);
 
     String filename (size = unlimited) (width = 40)
         (uncreateable)
@@ -317,4 +322,6 @@ table Setting extends Setting
     (displayorder = 3040)  {
   // So we can add boards-specific settings
 }
+
+
 
