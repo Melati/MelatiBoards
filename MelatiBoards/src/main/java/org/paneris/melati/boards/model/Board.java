@@ -334,6 +334,7 @@ public class Board extends BoardBase {
     body += ":\n";
     body += getMessageURL(message) + "\n";
     
+    //TODO add real names as per org.paneris.messageboards.model.Message
     try {
       Email.sendToList(
       getDatabase(),
