@@ -62,12 +62,12 @@ public class User extends UserBase {
   public User() {}
   
   public void generateDefaults() {
-    if (getPassword() == null) setPassword(StringUtils.randomString(6));
-    if (getLogin() == null) setLogin(generateLogin());
+    if (getPassword() == null || getPassword().equals("")) setPassword(StringUtils.randomString(6));
+    if (getLogin() == null || getLogin().equals("")) setLogin(generateLogin());
     // we must have a name, but it should not be the email address as it would 
     // not be fair to expose the user's email address on systems where this should
     // be kept hidden.
-    if (getName() == null) setName(generateName());
+    if (getName() == null || getName().equals("")) setName(generateName());
   }
 
    public String generateName() {
@@ -85,9 +85,9 @@ public class User extends UserBase {
     String loginid = getName();
     
     // no name - try email
-    if (loginid == null) loginid = getEmail();
+    if (loginid == null || loginid.equals("")) loginid = getEmail();
     // ahhh - still none - randomise
-    if (loginid == null) return StringUtils.randomString(6);
+    if (loginid == null || loginid.equals("")) return StringUtils.randomString(6);
     
     int space = loginid.indexOf(' ');
     if (space > 0) {
