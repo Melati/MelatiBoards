@@ -67,7 +67,9 @@ public class User extends UserBase {
     // we must have a name, but it should not be the email address as it would 
     // not be fair to expose the user's email address on systems where this should
     // be kept hidden.
+    System.err.println("name:" + getName() + ":");
     if (getName() == null || getName().equals("")) setName(generateName());
+    System.err.println("name:" + getName() + ":");
   }
 
    public String generateName() {
