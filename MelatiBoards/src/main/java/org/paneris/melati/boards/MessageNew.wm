@@ -1,48 +1,97 @@
 #set $Response.ContentType = "text/html"
+
 #set $ml=$melati.HTMLMarkupLanguage
+
 #set $board=$melati.Object
 
+
+
 <html>
+
 <head>
+
 <title>Post message to board: $ml.rendered($board)</title>
+
 <SCRIPT src="$melati.JavascriptLibraryURL/validation.js"></SCRIPT>
+
 </head>
 
+
+
 <body>
+
 <h1>Board: $ml.rendered($board)</h1>
+
+
 
 #parse "melati/boards/Menu.wm"
 
+
+
 <h2>Post a new message</h2>
+
+
 
 #if ($board.canPost($melati.User)) #begin
 
+
+
  <form action="$boardutils.MessageCreateURL($board)" method=post>
+
  <input type=hidden name=field_board value=$board.Troid>
+
  <input type=hidden name=field_deleted value=false>
+
  #if ($parent) #begin <input type=hidden name=field_parent value=$parent.Troid> #end
+
  <p>
+
   Subject:<br>
+
    <input type=text name=field_subject
-    #if ($parent) #begin value="Re: $parent.Subject" #end size=80>
+
+    #if ($parent) #begin 
+	value="Re: $parent.Subject" #end size=80>
+
  </p>
+
+
 
 <SCRIPT LANGUAGE=JavaScript1.2>add_rule("field_subject", "Subject", true)</SCRIPT> <p>
 
+
+
   Message:<br>
+
    <textarea name=field_body rows=20 cols=80>#if ($parent) #begin $ml.rendered($parent.IndentBody()) #end</textarea>
+
  </p>
+
+
 
 <SCRIPT LANGUAGE=JavaScript1.2>add_rule("field_body", "Body", true)</SCRIPT> <p>
 
+
+
   <p>
+
    <input type=submit value="Send Message" ONCLICK="return validate(this.form);">
+
   </p>
+
  </form>
+
 #end #else #begin
+
     You must be subscribed to this board to post messages to it
+
 #end
 
 
+
+
+
 </body>
+
 </html>
+
