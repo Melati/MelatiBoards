@@ -139,8 +139,9 @@ public class BoardAdmin extends TemplateServlet {
                 AccessToken.root,
                 new PoemTask() {
                     public void run() {
-                          Persistent p = db.getTable(parts[1]).displayColumn().
-                                        firstWhereEq(parts[2]);
+                          Persistent p = db.getTable(parts[1]).
+                                             primaryCriterionColumn().
+                                                 firstWhereEq(parts[2]);
                           it.troid = p.troid();
                       }
                  });
