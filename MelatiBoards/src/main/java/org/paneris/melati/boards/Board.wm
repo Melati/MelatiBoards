@@ -11,7 +11,7 @@
 <body>
 <h1>Board: $ml.rendered($board)</h1>
 #if($messages == null) #begin NULL #end
-$messages
+
 #parse "melati/boards/Menu.wm"
 
 <h2>Messages</h2>
