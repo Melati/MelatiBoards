@@ -3,6 +3,9 @@ We have received your request to join the board.
 A manager will either approve or decline your request. 
 You will be notified either way.
 
+#if ($board.Openmemberlist) #begin
+Managers for this board are:
 #include as template "$board.templatePath("ManagerList")"
+#end
 #include as template "$board.templatePath("BoardFooter")"
 

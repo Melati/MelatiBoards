@@ -1,9 +1,6 @@
-#if ($board.Openmemberlist) #begin
 
-Managers for this board are:
 #foreach $manager in $board.Managers
 #begin
   * $manager <$manager.Email>
 #end
 
-#end
