@@ -130,6 +130,9 @@ public class NNTPStore {
     return null;
   }
 
+ /**
+  * @todo implement ranges starting with "<"
+  */
   private Enumeration getRange(String range, Board selectedBoard)
     throws SQLException {
     // check for msg id
@@ -137,7 +140,7 @@ public class NNTPStore {
       return null;
     if (range == null)
       range = "" + selectedBoard.getFirstMessageId();
-    //todo implement that
+    //implement this
     if (range.startsWith("<")) {
       return null;
     }
@@ -187,7 +190,10 @@ public class NNTPStore {
     }
     return references;
   }
-  //todo: move to NNTPSession
+
+ /**
+  * @todo move to NNTPSession
+  */
   public void printOverview(
     String range,
     PrintWriter writer,
@@ -228,12 +234,15 @@ public class NNTPStore {
     }
   }
 
-  //sending 430 response (no such article) seems not required (checked with 
-  //Mozilla and news4.fido7.ru)
-  //Mozilla shows error message, but if no headers has been founded Mozilla 
-  //and 221 response sent Mozilla says that no messages found
-  //todo: check with other clients
-  //todo: move to NNTPSession
+  /**
+   * sending 430 response (no such article) seems not required (checked with 
+   * Mozilla and news4.fido7.ru)
+   * Mozilla shows error message, but if no headers has been founded Mozilla 
+   * and 221 response sent Mozilla says that no messages found
+   *
+   * @todo check with other clients
+   * @todo move to NNTPSession
+   */
   public void xpat(
     String header,
     String range,
@@ -310,7 +319,9 @@ public class NNTPStore {
     }
   }
 
-  //todo: output attachments
+ /**
+  * @todo output attachments
+  */
   public Message getArticle(int id) throws AccessPoemException {
     Message message = null;
     try {
@@ -472,8 +483,8 @@ public class NNTPStore {
             (org.paneris.melati.boards.model.User)sender,
             "MessageReceived");
         }
-        //BUG: M$ Outlook doesn't sends used encoding in headers
-        //TODO: should be an interface to inject heuristic encoding detector or
+        //BUG: M$ Outlook doesn't send used encoding in headers
+        //todo: should be an interface to inject heuristic encoding detector or
         //simple by-contract detector
         /*
         String enc = "KOI8_R";
