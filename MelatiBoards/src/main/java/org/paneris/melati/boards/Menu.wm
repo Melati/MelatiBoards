@@ -41,8 +41,8 @@
 
     #if ($melati.User.isGuest()) #begin
 
-     <b>Not logged in:</b> <a href="$boardutils.LoginURL($board)">Log in</a>
-
+     <b>Not logged in:</b> <a href="$boardutils.LoginURL($board)">Log in</a> |
+     <a href="$boardutils.UnsubscribeURL($board)">Unsubscribe</a> 
     #end #else #begin
 
      #if ($board.isMember($melati.User)) #begin
