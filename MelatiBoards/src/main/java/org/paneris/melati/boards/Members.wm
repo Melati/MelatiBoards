@@ -19,7 +19,7 @@
 <P>
 #if ($board.canViewMembers($melati.User)) #begin
  #foreach $member in $board.Members #begin
-  #if ($board.isManager($melati.User)) #begin <a href=mailto:$member.Email>#end
+  #if ($board.canManage($melati.User)) #begin <a href=mailto:$member.Email_unsafe>#end
   $ml.rendered($member.Name_unsafe)</a>
   #if ($board.isManager($member)) #begin
    <i>(Manager)</i>
