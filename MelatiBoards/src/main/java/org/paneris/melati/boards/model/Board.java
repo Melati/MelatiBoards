@@ -553,7 +553,7 @@ public class Board extends BoardBase {
   /**
    * Retrieve the last message Id.
    * 
-   * @see #getFirstMessage
+   * @see #getFirstMessageId
    * @return the max message table id
    * @throws SQLException if anything goes wrong at the SQL level
    */
