@@ -39,7 +39,7 @@ public class NNTPServerServlet implements Servlet {
 
   private ServletConfig config = null;
   static Thread nntpServer = null;
-  private static final int port = 119;
+  private static int port = 119;
   private static final String logPathDefault =
     "/usr/local/apache/log/messageboard-nntp.log";
   Log log = new Log("nntp");
@@ -52,6 +52,10 @@ public class NNTPServerServlet implements Servlet {
 //    String pt = config.getInitParameter("port");
     String database = config.getInitParameter("database");
     String prefix = config.getInitParameter("prefix");
+    String port = config.getInitParameter("port");
+    if(port != null) {
+      NNTPServerServlet.port = Integer.parseInt(port);
+    }
     identifier = config.getInitParameter("identifier");
     try {
       if (logPath == null) {
@@ -67,7 +71,7 @@ public class NNTPServerServlet implements Servlet {
       if (nntpServer == null) {
         nntpServer =
           new Thread(
-            new NNTPServer(identifier, port, props, 65536, log),
+            new NNTPServer(identifier, NNTPServerServlet.port, props, 65536, log),
             "boards nntpserver");
         nntpServer.start();
         log.debug("Started NNTP server servlet");
