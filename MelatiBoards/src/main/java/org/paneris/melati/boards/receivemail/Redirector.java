@@ -30,10 +30,13 @@ public class Redirector extends Thread {
   private int port = 119;
   //actual server port
   private int actualPort = 8119;
+  //actual server host
+  private String host = "localhost";
 
-  public Redirector(int port, int actualPort) {
+  public Redirector(int port, int actualPort, String host) {
     this.port = port;
     this.actualPort = actualPort;
+    this.host = host;
   }
 
   private void addPair(SocketChannel client, SocketChannel server) {
@@ -69,7 +72,6 @@ public class Redirector extends Thread {
       Selector selector = Selector.open();
       ServerSocketChannel ssc = ServerSocketChannel.open();
       ssc.configureBlocking(false);
-      InetAddress local = InetAddress.getLocalHost();
       InetSocketAddress isa = new InetSocketAddress(port);
       ssc.socket().bind(isa);
       ssc.register(selector, SelectionKey.OP_ACCEPT);
@@ -89,7 +91,7 @@ public class Redirector extends Thread {
               SocketChannel serverChannel = null;
               try {
                 serverChannel =
-                  SocketChannel.open(new InetSocketAddress(local, actualPort));
+                  SocketChannel.open(new InetSocketAddress(host, actualPort));
                 serverChannel.configureBlocking(true);
                 if (serverChannel.finishConnect()) {
                   serverChannel.configureBlocking(false);
@@ -132,6 +134,7 @@ public class Redirector extends Thread {
   public static void main(String[] args) {
     int port = 119;
     int actualPort = 8119;
+    String host = "localhost";
     if (args.length > 0) {
       if (Pattern.matches("[0-9]+", args[0])) {
         port = Integer.parseInt(args[0]);
@@ -142,7 +145,10 @@ public class Redirector extends Thread {
         actualPort = Integer.parseInt(args[1]);
       }
     }
-    new Redirector(port, actualPort).start();
+    if(args.length > 2) {
+      host = args[2];
+    }
+    new Redirector(port, actualPort, host).start();
   }
 
 }
