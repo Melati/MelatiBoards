@@ -129,7 +129,9 @@
          <property name="tokens" value="TYPECAST"/>
         </module>
         <module name="NoWhitespaceBefore"/>
-        <!-- module name="OperatorWrap"/ -->
+        <!-- Bad check - sometimes the operator should be on a new
+        line sometimes not -->
+        <!-- module name="OperatorWrap"/-->
         <!-- No padding -->
         <module name="TypecastParenPad"/>
         <!-- No padding -->
