@@ -185,7 +185,7 @@ public class SMTPServerServlet implements Servlet {
     String logPath = null;
 
     String pt = config.getInitParameter("port");
-    try { port = new Integer(pt).intValue(); } catch (Exception e) {}
+    port = new Integer(pt).intValue(); 
     String props = config.getInitParameter("properties");
     if (props != null && !props.equals(""))
       propertiesName = props;
