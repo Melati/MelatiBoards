@@ -539,7 +539,7 @@ public class BoardAdmin extends TemplateServlet {
     }
 
     context.put("start",
-      getBoardStart(board, melati.getRequest().getSession(false),
+      getBoardStart(board, melati.getRequest().getSession(true),
                              context.getForm("start")));
 
     if (melati.getTable() == null) {
