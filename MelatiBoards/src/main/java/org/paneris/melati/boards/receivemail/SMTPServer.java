@@ -42,11 +42,10 @@
  *
  * Contact details for copyright holder:
  *
- *     Mylesc Chippendale <mylesc@paneris.org>
+ *     Myles Chippendale <mylesc@paneris.org>
  *     http://paneris.org/
  *     29 Stanley Road, Oxford, OX4 1QY, UK
  */
-
 
 package org.paneris.melati.boards.receivemail;
 
@@ -81,19 +80,18 @@ public class SMTPServer implements Runnable {
    *                            corresponding messageboard lives (see
    *                            <TT>smtpServer.properties.example</TT>)
    *
-   * @param bufSize             how much to buffer the IPC stream coming from <TT>sendmail</TT>
-   *                            (non-critical, say 64k)
+   * @param bufSize             how much to buffer the IPC stream coming from
+   *                            <TT>sendmail</TT> (non-critical, say 64k)
    *
    * @param log                 where to report errors
    */
 
   public SMTPServer(SMTPServerServlet launcher,
-                         String smtpIdentifier,
-                         int port,
-                         Properties databaseNameOfDomain,
-                         int bufSize,
-                         Log log) throws ServletException {
-
+                    String smtpIdentifier,
+                    int port,
+                    Properties databaseNameOfDomain,
+                    int bufSize,
+                    Log log) throws ServletException {
       this.launcher = launcher;
       this.smtpIdentifier = smtpIdentifier;
       this.port = port;
@@ -115,14 +113,13 @@ public class SMTPServer implements Runnable {
 
         // die when SMTPServerServlet is 'destroy'ed
         // (and sets its smtpserver to null)
+
         while (launcher.smtpserver == myThread)
-        {
           (new SMTPSession(smtpIdentifier,
                            serverSocket.accept(),
                            databaseNameOfDomain,
                            bufSize,
                            log)).start();
-        }
     }
     catch (Exception e) {
       log.exception(e);
@@ -130,6 +127,4 @@ public class SMTPServer implements Runnable {
       System.exit(1);
     }
   }
-
 }
-
