@@ -210,7 +210,8 @@ public class NNTPStore {
     int end = -1;
     int idx = range.indexOf('-');
     if (idx == -1) {
-      start = end = Integer.parseInt(range) - 1;
+      start = Integer.parseInt(range) - 1;
+      end = start; 
     } else {
       start = Integer.parseInt(range.substring(0, idx)) - 1;
       if (idx + 1 == range.length())
