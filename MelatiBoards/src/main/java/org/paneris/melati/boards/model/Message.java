@@ -177,7 +177,8 @@ public class Message extends MessageBase implements Treeable {
     try {
       Board b = getBoardsDatabaseTables().getBoardTable().
                    getBoardObject(getBoard_unsafe());
-      if (!b.canManage((User)token))
+      if (!b.canManage((User)token) &&
+          !getAuthor_unsafe().equals(((User)token).troid()) )
         throw new AccessPoemException(token, new Capability("Logged In"));
     } catch (ClassCastException e) {
         throw new AccessPoemException(token, new Capability("Logged In"));
