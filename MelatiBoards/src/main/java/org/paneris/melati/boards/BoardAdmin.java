@@ -50,19 +50,37 @@
 
 package org.paneris.melati.boards;
 
-import java.io.*;
-import java.util.*;
-import java.net.*;
-import javax.servlet.*;
-import javax.servlet.http.*;
-import org.melati.*;
-import org.melati.util.*;
-import org.melati.servlet.*;
-import org.melati.template.*;
-import org.paneris.melati.boards.model.User;
-import org.melati.poem.*;
+import java.util.Vector;
+import javax.servlet.http.HttpSession;
+import org.melati.Melati;
+import org.melati.MelatiConfig;
+import org.melati.MelatiUtil;
+import org.melati.util.Email;
+import org.melati.util.EnumUtils;
+import org.melati.util.MappedEnumeration;
+import org.melati.util.MelatiWriter;
+import org.melati.util.DumbPageEnumeration;
+import org.melati.servlet.TemplateServlet;
 import org.melati.servlet.InvalidUsageException;
-import org.paneris.melati.boards.model.*;
+import org.melati.template.TemplateContext;
+import org.melati.template.TemplateEngine;
+import org.melati.poem.PoemTask;
+import org.melati.poem.PoemThread;
+import org.melati.poem.PoemException;
+import org.melati.poem.AccessToken;
+import org.melati.poem.Capability;
+import org.melati.poem.Persistent;
+import org.melati.poem.Initialiser;
+import org.melati.poem.AccessPoemException;
+import org.melati.poem.ValidationPoemException;
+import org.paneris.melati.boards.model.User;
+import org.paneris.melati.boards.model.Board;
+import org.paneris.melati.boards.model.Message;
+import org.paneris.melati.boards.model.Subscription;
+import org.paneris.melati.boards.model.MembershipStatus;
+import org.paneris.melati.boards.model.BoardsDatabaseTables;
+import org.paneris.melati.boards.model.BoardTable;
+import org.paneris.melati.boards.model.MessageTable;
 
 
 public class BoardAdmin extends TemplateServlet {
