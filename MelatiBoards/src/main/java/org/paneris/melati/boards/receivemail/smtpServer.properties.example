@@ -8,3 +8,8 @@ org.paneris.melati.boards.receivemail.database.boards.dgroup.co.uk=dgroup
 
 # Mail sent to ....@messageboards.betrothed.co.uk will be sent to the `betrothed' database
 org.paneris.melati.boards.receivemail.database.messageboards.betrothed.co.uk=betrothed
+
+#Default board store
+org.paneris.melati.boards.receivemail.BoardStoreImpl=org.paneris.melati.boards.receivemail.BoardStoreImpl
+
+
