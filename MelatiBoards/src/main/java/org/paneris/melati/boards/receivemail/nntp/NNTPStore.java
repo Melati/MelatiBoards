@@ -54,7 +54,7 @@ public class NNTPStore {
   public NNTPStore(String database, String prefix, String nntpIdentifier)
     throws Exception {
     db = (BoardsDatabase)LogicalDatabase.getDatabase(database);
-    db.setLogSQL(true);
+    db.setLogSQL(false);
     this.prefix = prefix;
     msgIDSuffix = "$msg@" + nntpIdentifier;
   }
@@ -99,6 +99,8 @@ public class NNTPStore {
    * @param from
    * @param wildmat
    * @return
+   * @todo there should be a way to display newly created empty boards
+   * 
    */
   public Enumeration getBoards(Date from, String wildmat) {
     try {
