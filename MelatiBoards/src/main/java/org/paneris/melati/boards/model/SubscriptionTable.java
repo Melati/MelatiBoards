@@ -162,8 +162,7 @@ public class SubscriptionTable extends SubscriptionTableBase {
                       getBoardColumn().eqClause(board.troid()));
     if (e.hasMoreElements())
       return (Subscription)e.nextElement();
-    else
-      return null;
+    return null;
   }
 
   /**

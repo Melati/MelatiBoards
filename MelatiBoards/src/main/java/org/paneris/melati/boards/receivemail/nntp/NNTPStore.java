@@ -72,11 +72,9 @@ import org.melati.util.IoUtils;
 import org.paneris.melati.boards.BoardAdmin;
 import org.paneris.melati.boards.model.Attachment;
 import org.paneris.melati.boards.model.AttachmentType;
-import org.paneris.melati.boards.model.AttachmentTypeTable;
 import org.paneris.melati.boards.model.Board;
 import org.paneris.melati.boards.model.BoardsDatabaseTables;
 import org.paneris.melati.boards.model.Message;
-import org.paneris.melati.boards.model.MessageTable;
 import org.paneris.melati.boards.model.User;
 import org.paneris.melati.boards.receivemail.Log;
 
@@ -452,7 +450,7 @@ public class NNTPStore {
       contentType = contentType.substring(0, semicolonIndex);
 
     final AttachmentType type =
-      ((AttachmentTypeTable)db.getAttachmentTypeTable()).ensure(contentType);
+      db.getAttachmentTypeTable().ensure(contentType);
 
     Attachment att =
       (Attachment)db.getAttachmentTable().create(new Initialiser() {
@@ -497,7 +495,7 @@ public class NNTPStore {
       final String subject = message.getSubject();
       Message m =
         (Message)
-          ((MessageTable)db.getMessageTable()).create(new Initialiser() {
+          db.getMessageTable().create(new Initialiser() {
         public void init(Persistent object)
           throws AccessPoemException, ValidationPoemException {
           object.setRaw("subject", subject);

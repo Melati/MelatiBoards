@@ -77,15 +77,14 @@ public class NNTPServerServlet implements Servlet {
   Properties props = null;
   String identifier = null;
 
-  public void init(ServletConfig config) throws ServletException {
-    this.config = config;
+  public void init(ServletConfig configP) throws ServletException {
+    this.config = configP;
     String logPath = config.getInitParameter("log");
-//    String pt = config.getInitParameter("port");
     String database = config.getInitParameter("database");
     String prefix = config.getInitParameter("prefix");
-    String port = config.getInitParameter("port");
-    if(port != null) {
-      NNTPServerServlet.port = Integer.parseInt(port);
+    String portS = config.getInitParameter("port");
+    if(portS != null) {
+      NNTPServerServlet.port = Integer.parseInt(portS);
     }
     identifier = config.getInitParameter("identifier");
     try {

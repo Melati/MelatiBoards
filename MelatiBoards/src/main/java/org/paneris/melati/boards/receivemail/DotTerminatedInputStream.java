@@ -87,11 +87,9 @@ public class DotTerminatedInputStream extends FilterInputStream {
 
   private int superRead() throws IOException {
     if (byte1 == -1) return super.read();
-    else {
-      int it = byte1;
-      byte1 = -1;
-      return it;
-    }
+    int it = byte1;
+    byte1 = -1;
+    return it;
   }
 
   private void pushBack(byte b) {
@@ -122,11 +120,9 @@ public class DotTerminatedInputStream extends FilterInputStream {
       if (pushedBackOut < pushedBackIn) {
         return pushedBack[pushedBackOut++];
       }
-      else {
-        pushedBackOut = 0;
-        pushedBackIn = 0;
-        state = state1;
-      }
+      pushedBackOut = 0;
+      pushedBackIn = 0;
+      state = state1;
       break;
 
     case TEXT:

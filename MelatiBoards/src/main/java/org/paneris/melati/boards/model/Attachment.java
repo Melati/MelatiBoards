@@ -68,10 +68,10 @@ public class Attachment extends AttachmentBase {
 
   public void setFilename_unsafe(String cooked) {
     super.setFilename_unsafe(cooked);
-    Message message = (Message)getDatabase().getTable("message").
+    Message thisMessage = (Message)getDatabase().getTable("message").
                         getObject(getMessage_unsafe());
     Board board = (Board)getDatabase().getTable("board").
-                        getObject(message.getBoard_unsafe());
+                        getObject(thisMessage.getBoard_unsafe());
     setPath_unsafe(board.getAttachmentspath_unsafe() +
                          File.separatorChar + cooked);
     setUrl_unsafe(board.getAttachmentsurl_unsafe() +
@@ -97,33 +97,34 @@ public class Attachment extends AttachmentBase {
     setFilename(cooked);
   }
 
-  public String makeUnique(String filename) {
-    // there are some situations where the messageboard has to deal with 
-    // attachments that don't have a filename!  I have no idea why, but it is 
-    // bound to be microsoft's fault.
-    // if we have null, than set it to a default string.  perhaps this
-    // should be stored in the setting table, but perhaps it's not worthwhile
-    if (filename == null) filename = "attachment";
-    Message message = (Message)getDatabase().getTable("message").
+ /** There are some situations where the messageboard has to deal with 
+  * attachments that don't have a filename!  I have no idea why, but it is 
+  * bound to be microsoft's fault.
+  * if we have null, than set it to a default string.  Perhaps this
+  * should be stored in the setting table, but perhaps it's not worthwhile
+  */
+  public String makeUnique(String fileName) {
+    if (fileName == null) fileName = "attachment";
+    Message thisMessage = (Message)getDatabase().getTable("message").
                         getObject(getMessage_unsafe());
     Board board = (Board)getDatabase().getTable("board").
-                        getObject(message.getBoard_unsafe());
+                        getObject(thisMessage.getBoard_unsafe());
     File testFile;
     // throw nicer exception if it goes tits up
     try {
-      testFile = new File(board.getAttachmentspath_unsafe(), filename);
+      testFile = new File(board.getAttachmentspath_unsafe(), fileName);
     } catch (Exception e) {
       throw new UnexpectedExceptionException("Failed to create a file in directory:" +
-                            board.getAttachmentspath_unsafe() + " filename:" + filename, e);
+                            board.getAttachmentspath_unsafe() + " filename:" + fileName, e);
     }
-    int dot = filename.lastIndexOf(".");
-    String start = (dot != -1) ? filename.substring(0, dot) : filename;
+    int dot = fileName.lastIndexOf(".");
+    String start = (dot != -1) ? fileName.substring(0, dot) : fileName;
     String extension = (dot != -1)
-                        ? filename.substring(dot, filename.length()) : "";
+                        ? fileName.substring(dot, fileName.length()) : "";
     int count = 0;
     while (testFile.exists()) {
-      filename = start + (count++) + extension;
-      testFile = new File(board.getAttachmentspath_unsafe(), filename);
+      fileName = start + (count++) + extension;
+      testFile = new File(board.getAttachmentspath_unsafe(), fileName);
     }
     return testFile.getName();
   }

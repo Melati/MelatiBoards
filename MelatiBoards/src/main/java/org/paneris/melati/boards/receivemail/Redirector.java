@@ -88,9 +88,9 @@ public class Redirector extends Thread {
     this.host = host;
   }
 
-  private void addPair(SocketChannel client, SocketChannel server) {
-    this.client.put(client, server);
-    this.server.put(server, client);
+  private void addPair(SocketChannel clientSC, SocketChannel serverSC) {
+    this.client.put(clientSC, serverSC);
+    this.server.put(serverSC, clientSC);
   }
 
   //todo make more elegant :)

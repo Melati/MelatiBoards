@@ -150,11 +150,9 @@ public class MembershipStatusTable extends MembershipStatusTableBase {
                     (MembershipStatus)getStatusColumn().firstWhereEq(name);
     if (status != null)
       return status;
-    else {
-      status = (MembershipStatus) newPersistent();
-      status.setStatus(name);
-      return (MembershipStatus)getStatusColumn().ensure(status);
-    }
+    status = (MembershipStatus) newPersistent();
+    status.setStatus(name);
+    return (MembershipStatus)getStatusColumn().ensure(status);
   }
 
 }

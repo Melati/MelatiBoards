@@ -348,12 +348,10 @@ public class BoardAdmin extends TemplateServlet {
       newMessage.distribute();
       return boardTemplate(context, "MessageCreate");
     }
-    else {
-      emailNotification(newMessage.getBoard(),
-                        user,
-                        "MessageReceived");
-      return boardTemplate(context, "MessageNeedsModerating");
-    }
+    emailNotification(newMessage.getBoard(),
+                      user,
+                      "MessageReceived");
+    return boardTemplate(context, "MessageNeedsModerating");
   }
 
   protected String pendingMessagesTemplate(TemplateContext context, Melati melati, Board board)
@@ -722,10 +720,10 @@ public class BoardAdmin extends TemplateServlet {
     }
   }
 
-  public static MelatiConfig   mConfig = null;
-  public static TemplateEngine tEngine = null;
+  static MelatiConfig   mConfig = null;
+  static TemplateEngine tEngine = null;
 
-  public static String evalTemplate(User user, String template, Board board)
+  static String evalTemplate(User user, String template, Board board)
                                 throws Exception {
     if (mConfig == null)
       mConfig = new MelatiConfig();
@@ -756,7 +754,7 @@ class DistributeThread extends Thread {
   private User user;
   private String message;
 
-  public DistributeThread(Board board, User user, String message) {
+  DistributeThread(Board board, User user, String message) {
     this.board = board;
     this.user = user;
     this.message = message;
