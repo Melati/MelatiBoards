@@ -239,11 +239,22 @@ class SMTPSession extends Thread {
 
     	// now we know which database we are concerned with, we can
 	    // validate the sender and recipient
-
-        store = new BoardStore(database, log,
+        /*
+         store = new BoardStore(database, log,
                                new InternetAddress(sender1),
                                new InternetAddress(address1));
-
+        */      
+        String boardStoreImpl=databaseNameOfDomain.
+                                getProperty("org.paneris.melati.boards.receivemail.BoardStoreImpl");
+        Class clazz=null;
+        try {
+          clazz=Class.forName(boardStoreImpl);
+        } catch (Exception e) {
+          clazz=Class.forName("org.paneris.melati.boards.receivemail.BoardStoreImpl");
+        }
+        store = (BoardStore)clazz.newInstance();
+        store.init(database, log, new InternetAddress(sender1), new InternetAddress(address1));
+        
         toClient.println("250 Recipient OK");
       }
       catch (MessagingException e) {
