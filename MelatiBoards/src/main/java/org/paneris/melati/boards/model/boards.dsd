@@ -9,13 +9,13 @@ table BoardType
     (seqcached) {
 
     (primary) Integer id
-        (displaylevel = record)
-        (displayorderpriority = 0);
+        (displaylevel = record);
 
     (unique) String type (size=unlimited) (width=40)
         (description = "The name of a type")
         (displaylevel = primary)
-        (searchability = yes);
+        (searchability = yes)
+        (displayorderpriority = 0);
 
     (unique) String description (size=unlimited) (width=40) (height = 6)
         (description = "The description of the type")
