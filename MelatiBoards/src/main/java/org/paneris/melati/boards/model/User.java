@@ -63,21 +63,30 @@ public class User extends UserBase {
   
   public void generateDefaults() {
     if (getPassword() == null) setPassword(StringUtils.randomString(6));
-    // we must have a name!
-    if (getName() == null) setName(getEmail());
-    if (getLogin() == null) generateLogin();
+    if (getLogin() == null) setLogin(generateLogin());
+    // we must have a name, but it should not be the email address as it would 
+    // not be fair to expose the user's email address on systems where this should
+    // be kept hidden.
+    if (getName() == null) setName(generateName());
   }
-  
+
+   public String generateName() {
+     // by default - name = login
+     return getLogin();
+   }
+
   /*
    * this calculates the login id from the user name.  the string before the 
    * 1st ' ', '@' or '.' is extracted, and then made unique.
    * 
    * override this to do your own thing
    */
-  public void generateLogin() {
+  public String generateLogin() {
     String loginid = getName();
     
-    // no email - randomise
+    // no name - try email
+    if (loginid == null) loginid = getEmail();
+    // ahhh - still none - randomise
     if (loginid == null) loginid = StringUtils.randomString(6);
     
     int space = loginid.indexOf(' ');
@@ -108,7 +117,7 @@ public class User extends UserBase {
       testId += count;
       found = loginColumn.selectionWhereEq(testId).hasMoreElements();
     }
-    setLogin(testId.trim());
+    return testId.trim();
   }
 
 }
