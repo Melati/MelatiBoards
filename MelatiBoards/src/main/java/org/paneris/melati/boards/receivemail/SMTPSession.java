@@ -49,15 +49,27 @@
 
 package org.paneris.melati.boards.receivemail;
 
-import java.util.Properties;
-import java.io.*;
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.io.PushbackInputStream;
 import java.net.Socket;
 import java.sql.SQLException;
+import java.util.Properties;
+
 import javax.mail.MessagingException;
 import javax.mail.internet.InternetAddress;
-import org.melati.*;
-import org.melati.poem.*;
-import org.melati.util.*;
+
+import org.melati.LogicalDatabase;
+import org.melati.poem.AccessToken;
+import org.melati.poem.Database;
+import org.melati.poem.PoemTask;
+import org.melati.util.DatabaseInitException;
+import org.melati.util.ExceptionUtils;
+import org.melati.util.StringUtils;
 
 /**
  * An SMTP session for receiving one or more incoming emails from a
