@@ -42,6 +42,7 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeUtility;
 
 import org.melati.poem.AccessPoemException;
+import org.melati.poem.PoemDatabase;
 import org.melati.poem.PoemTask;
 import org.paneris.melati.boards.model.Attachment;
 import org.paneris.melati.boards.model.Board;
@@ -233,7 +234,7 @@ public class NNTPSession extends Thread {
         return true;
       }
     };
-    store.db.inSession(authInfo.user, t);
+    ((PoemDatabase)store.db).inSession(authInfo.user, t);
     return t.result;
   }
 
