@@ -44,6 +44,18 @@
 
  #if ($parent) #begin <input type=hidden name=field_parent value=$parent.Troid> #end
 
+## if we are the guest, then we must collect an email address
+ #if ($melati.User.isGuest()) #begin
+
+ <p>Email:<br>
+  <input type=text name=field_email class="textn12"
+  
+    #if ($Form.field_email) #begin value="$Form.field_email" #end 
+   size=80>
+<SCRIPT LANGUAGE=JavaScript1.2>add_rule("field_email", "Email", true)</SCRIPT> 
+ </p>
+  #end
+
  <p>
 
   Subject:<br>
