@@ -50,24 +50,19 @@
 
 package org.paneris.melati.boards.model;
 
+import org.paneris.melati.boards.model.User;
+import org.paneris.melati.boards.model.UserTable;
+import org.paneris.melati.boards.model.generated.BoardBase;
 import java.io.File;
-import java.lang.ref.SoftReference;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Vector;
 import java.util.Enumeration;
 import java.util.Hashtable;
-import java.util.Vector;
-
+import java.lang.ref.SoftReference;
 import javax.swing.tree.DefaultMutableTreeNode;
-
-import org.melati.poem.AccessPoemException;
-import org.melati.poem.AccessToken;
-import org.melati.poem.CachedCount;
-import org.melati.poem.CachedSelection;
-import org.melati.poem.Capability;
-import org.melati.util.ChildrenDrivenMutableTree;
-import org.melati.util.Email;
-import org.melati.util.EnumUtils;
-import org.melati.util.MappedEnumeration;
-import org.paneris.melati.boards.model.generated.BoardBase;
+import org.melati.poem.*;
+import org.melati.util.*;
 
 public class Board extends BoardBase {
   public Board() {}
@@ -260,8 +255,7 @@ public class Board extends BoardBase {
     subscribe(user, this, status, ismanager, approved);
     
     if (sub.getApproved_unsafe() == Boolean.FALSE) {
-      // FIXME
-      // send getSubscriptionRequestReceivedNote() message to user
+      // FIXME send getSubscriptionRequestReceivedNote() message to user
     }
   }
   
@@ -472,7 +466,8 @@ public class Board extends BoardBase {
       computeThreads();
     
     Vector realMessages = new Vector();
-    for(int i=0; i < threadTrees.size(); i++) {
+    for(int i=0; i < threadTrees.size(); i++)
+    {
       ChildrenDrivenMutableTree thread =
       (ChildrenDrivenMutableTree)threadTrees.elementAt(i);
       Enumeration e = thread.preorderEnumeration();
@@ -500,6 +495,24 @@ public class Board extends BoardBase {
       messageCount =
       getBoardsDatabaseTables().getMessageTable().cachedMessageCount(this);
     return messageCount.count();
+  }
+  
+  public int getFirstMessageId() throws SQLException {
+    int result = -1;
+    ResultSet rs = getDatabase().sqlQuery("SELECT MIN(\"id\"), \"id\" FROM \"message\" WHERE \"board\"="+getTroid().intValue());
+    if(rs.next())
+      result = rs.getInt(1);
+    rs.close();
+    return result;
+  }
+  
+  public int getLastMessageId() throws SQLException {
+    int result = -1;
+    ResultSet rs = getDatabase().sqlQuery("SELECT MAX(\"id\"), \"id\" FROM \"message\" WHERE \"board\"="+getTroid().intValue());
+    if(rs.next())
+      result = rs.getInt(1);
+    rs.close();
+    return result;
   }
   
   /********************
