@@ -113,21 +113,9 @@ public class SettingTable extends SettingTableBase {
 
     super.unifyWithDB(colDescs);
 
-    Setting blank = (Setting)newPersistent();
-    blank.setUsereditable(Boolean.TRUE);
-    blank.setTypefactory(PoemTypeFactory.STRING);
-    blank.setNullable(Boolean.FALSE);
-    blank.setSize(new Integer(-1));
-    blank.setWidth(new Integer(40));
-    blank.setHeight(new Integer(1));
-
     for (int i = 0; i < names.length; i++) {
-      Setting _new = (Setting)blank.duplicatedFloating();
-      _new.setName(names[i]);
-      _new.setValue("");
-      _new.setDisplayname(displaynames[i]);
-      _new.setDescription(descriptions[i]);
-      getNameColumn().ensure(_new);
+       ensure(names[i], PoemTypeFactory.STRING, "",
+              displaynames[i], descriptions[i]);
     }
 
 /*
