@@ -351,7 +351,10 @@ public class Board extends BoardBase {
     return roots.objects();
   }
   
+  // ordered list of thread roots
   private Vector threadTrees = null;
+  
+  // hashtable of thread roots
   private Hashtable threadsByRoot = null;
   
   private void computeThreads() {
@@ -367,13 +370,20 @@ public class Board extends BoardBase {
   void addThread(Message root) {
     addThread(root, false);
   }
-  
+
   void addThread(Message root, boolean atStart) {
+    if (atStart) 
+      addThread(root,0);
+    else 
+      addThread(root,-1);
+  }
+  
+  void addThread(Message root, int index) {
     if (threadTrees == null)  // Don't bother is we haven't built the trees
       return;                 // (They will be built when we try to access them)
     ChildrenDrivenMutableTree tree = new ChildrenDrivenMutableTree(root);
-    if (atStart)
-      threadTrees.insertElementAt(tree, 0);
+    if (index != -1)
+      threadTrees.insertElementAt(tree, index);
     else
       threadTrees.addElement(tree);
     threadsByRoot.put(root, tree);
@@ -392,6 +402,36 @@ public class Board extends BoardBase {
     computeMessages();
   }
   
+  void removeAndSquash(Message message) {
+    if (threadTrees == null)  // Don't bother if we haven't built the trees
+      return;                 // (They will be built when we try to access them)
+    
+    // ajust caches
+    DefaultMutableTreeNode parent = null;
+    int treeIndex = 0;
+    if (message.getParent() != null) {
+      parent = (DefaultMutableTreeNode)getTreeNode(message.getParent());
+    } else {
+      treeIndex = threadTrees.indexOf(threadWithRoot(message));
+    }
+    // set the children so they have no parent, or their grandparent
+    DefaultMutableTreeNode node = getTreeNode(message);
+    Enumeration children = node.children();
+    while (children.hasMoreElements()) {
+      DefaultMutableTreeNode child = (DefaultMutableTreeNode)children.nextElement();
+      if (parent == null) {
+        child.setParent(null);
+        addThread((Message)child.getUserObject(),treeIndex);
+      } else {
+        parent.add(child);
+      }
+    }
+    node.removeFromParent();
+    threadTrees.remove(threadWithRoot(message));
+    threadsByRoot.remove(message);
+    computeMessages();
+  }
+    
   private DefaultMutableTreeNode getTreeNode(Message m) {
     DefaultMutableTreeNode res = null;
     for(int i=0; i < threadTrees.size(); i++) {
@@ -429,6 +469,7 @@ public class Board extends BoardBase {
     
     messages = new SoftReference(realMessages);
   }
+  
   
   
   public Enumeration getMessages() {
