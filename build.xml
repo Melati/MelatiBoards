@@ -25,7 +25,7 @@
   </path>
 
   <path id="classpath.jetty">
-    <pathelement path="${build.lib}/servlet.jar"/>
+    <pathelement path="${build.lib}/servlet-2.2.jar"/>
     <pathelement path="${build.lib}/javax.xml.jaxp.jar"/>
     <pathelement path="${build.lib}/org.apache.crimson.jar"/>
     <pathelement path="${build.lib}/org.apache.jasper.jar"/>
@@ -33,8 +33,8 @@
     <pathelement path="${build.lib}/melati.jar"/>
     <pathelement path="${build.dist}/WEB-INF/lib/boards.jar"/>
     <pathelement path="${build.dist}/WEB-INF/classes"/>
+    <pathelement path="${build.dist}/WEB-INF/javamail-1.2.jar"/>
     <pathelement path="${build.dist}/WEB-INF/lib/webmacro.jar"/>
-    <pathelement path="${build.dist}/WEB-INF/lib/mail.jar"/>
     <pathelement path="${build.dist}/WEB-INF/lib/jakarta-oro-2.0.jar"/>
     <pathelement path="${build.dist}/WEB-INF/lib/hsqldb.jar"/>
     <pathelement path="${build.dist}/WEB-INF/lib/boards.jar"/>
@@ -52,7 +52,8 @@
     <copy file="etc/web.xml" tofile="${build.dist}/WEB-INF/web.xml"/>
     <copy todir="${build.dist}/WEB-INF/lib">
      <fileset dir="lib" includes="hsqldb.jar, webmacro.jar,
-	jakarta-oro-2.0.jar, melati.jar, mail.jar, activation.jar"/>
+	jakarta-oro-2.0.jar, melati.jar, javamail-1.2.jar, 
+        activation.jar"/>
     </copy>
     <copy todir="${build.dist}/WEB-INF/classes">
       <fileset dir="etc/properties"/>
