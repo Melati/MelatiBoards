@@ -1,0 +1,316 @@
+package org.paneris.melati.boards.model;
+
+table BoardType
+    (displayorder = 1010)
+    (displayname = "Board Type")
+    (description = "A type of a board")
+    (category = "Boards")
+    (cachelimit = unlimited)
+    (seqcached) {
+
+    (primary) Integer id
+        (displaylevel = record)
+        (displayorderpriority = 0);
+
+    (unique) String type (size=unlimited) (width=40)
+        (description = "The name of a type")
+        (displaylevel = primary)
+        (searchability = yes);
+
+    (unique) String description (size=unlimited) (width=40) (height = 6)
+        (description = "The description of the type")
+        (displaylevel = record)
+        (searchability = yes);
+}
+
+
+table Board
+    (displayorder = 1020)
+    (displayname = "Board")
+    (description = "A board for messages")
+    (category = "Boards")
+    (cachelimit = 20)
+    (seqcached) {
+
+    (primary) Integer id;
+
+    BoardType type
+        (description = "The type of this messageboard")
+        (displayorderpriority = 0)
+        (displaylevel = summary)
+        (searchability = primary);
+
+    (unique) String name (size = unlimited) (width = 40)
+        (displayname = "Name")
+        (description = "A code-name for this board")
+        (displayorderpriority = 1)
+        (displaylevel = summary)
+        (searchability = yes);
+
+    (unique) String displayname (size = unlimited) (width = 40)
+        (description = "A user-friendly name of this board")
+        (displaylevel = primary)
+        (searchability = yes);
+
+    String purpose (size = unlimited) (width = 40) (height = 6) (nullable)
+        (description = "The purpose of this message board")
+        (displaylevel = record)
+        (searchability = no);
+
+    Boolean archived
+        (description = "If a board is archived then it cannot be viewed and is not displayed on lists by default")
+        (displaylevel = record)
+        (searchability = no);
+
+    Boolean opensubscription
+        (displayname = "Open Subscription")
+        (description = "With open subscription anyone can subscribe to the board. Otherwise a board manager must subscribe members")
+        (displaylevel = record)
+        (searchability = no);
+
+    Boolean moderatedsubscription
+        (displayname = "Moderated Subscription")
+        (description = "With moderated subscription the manager must approved all requests to be subscribed")
+        (displaylevel = record)
+        (searchability = no);
+
+    Boolean openposting
+        (displayname = "Open Posting")
+        (description = "With open posting anyone can post a message to this list. Otherwise, only members can post")
+        (displaylevel = record)
+        (searchability = no);
+
+    Boolean moderatedposting
+        (displayname = "Moderated Posting")
+        (description = "With moderated posting all messages must be approved by a manager")
+        (displaylevel = record)
+        (searchability = no);
+
+    Boolean openmessageviewing
+        (displayname = "Open Message Viewing")
+        (description = "With open message viewing anyone can view messages in a board. Otherwise, only members can see messages")
+        (displaylevel = record)
+        (searchability = no);
+
+    Boolean openmemberlist
+        (displayname = "Open Member List")
+        (description = "With open member list anyone can see the members of the list. Otherwise, only members can see who else is subscribed")
+        (displaylevel = record)
+        (searchability = no);
+
+    Boolean attachmentsallowed
+        (displayname = "Attachments Allowed")
+        (description = "Can attachments be sent with messages. If not, attachments are ignored")
+        (displaylevel = record)
+        (searchability = no);
+
+    String attachmentspath (size = unlimited) (width = 70)
+        (displayname = "Attachments Path")
+        (description = "A path to the directory containing attachments for this board")
+        (uncreateable)
+        (displaylevel = record)
+        (searchability = yes);
+
+    String attachmentsurl (size = unlimited) (width = 70)
+        (displayname = "Attachments URL")
+        (description = "A URL to the directory containing attachments for this board")
+        (uncreateable)
+        (displaylevel = record)
+        (searchability = yes);
+}
+
+
+table User extends org.melati.poem.User 
+    (displayorder = 2010)
+    (description = "A board user (with an email address)")
+    (category = "User") {
+
+    String email (size=unlimited) (width=40)
+        (description = "The user's email address")
+        (displaylevel = summary)
+        (displayorder = 50)
+        (searchability = yes);
+}
+
+table MembershipStatus
+    (displayorder = 1030)
+    (displayname = "Membership Status")
+    (description = "The status of a user's subscription to a board")
+    (category = "Boards")
+    (cachelimit = unlimited)
+    (seqcached) {
+
+    (primary) Integer id
+        (displaylevel = record)
+        (displayorderpriority = 0);
+
+    (unique) String status (size=unlimited) (width=40)
+        (description = "The name of a status")
+        (displaylevel = primary)
+        (searchability = yes);
+}
+
+
+table Subscription
+    (displayorder = 1040)
+    (displayname = "Subscription")
+    (description = "Which users are members of which boards with what settings")
+    (category = "Boards") {
+
+    (primary) Integer id
+        (displaylevel = primary);
+
+    User user
+        (description = "The user")
+        (displaylevel = summary)
+        (searchability = yes);
+
+    Board board
+        (description = "The board to which this user belongs")
+        (displaylevel = summary)
+        (searchability = primary);
+
+    MembershipStatus status
+        (description = "How users would like to receive emails from this board")
+        (displaylevel = summary)
+        (searchability = yes);
+
+    Boolean ismanager
+        (displayname = "Is A Manager")
+        (description = "Can the user administrator the board with manager priviledges?")
+        (displaylevel = summary)
+        (searchability = yes);
+
+    Boolean approved
+        (displayname = "Approved")
+        (description = "Has this user's subscription to this board been approved by a manager (if the board has moderated subscription)")
+        (uncreateable)
+        (displaylevel = summary)
+        (searchability = yes);
+}
+
+
+table Message
+    (displayorder = 1050)
+    (description = "A message posted to a message board")
+    (category = "Boards") {
+
+    (primary) Integer id;
+
+    Board board
+        (description = "The board this message belongs to")
+        (displaylevel = summary)
+        (displayorderpriority = 0)
+        (searchability = primary);
+
+    Timestamp date
+        (description = "The date and time at which this message was posted")
+        (uncreateable)
+        (uneditable)
+        (displaylevel = summary)
+        (displayorderpriority = 1)
+        (sortdescending)
+        (searchability = no);
+
+    String subject (size = unlimited) (width = 40)
+        (description = "The subject line of this message")
+        (displaylevel = primary)
+        (searchability = yes);
+
+    User author
+        (description = "Author of this message")
+        (displaylevel = summary)
+        (searchability = yes);
+
+    Message parent (nullable)
+        (displayname = "Parent")
+        (description = "The message to which this message is a follow-up")
+        (displaylevel = record)
+        (searchability = yes);
+
+    String body (size = unlimited) (width = 70) (height = 20) (nullable)
+        (description = "The main content of this message")
+        (displaylevel = record)
+        (searchability = yes);
+
+    Boolean deleted
+        (displayname = "Deleted")
+        (description = "A deleted message cannot be viewed or displayed on lists")
+        (displaylevel = record)
+        (searchability = no);
+
+    Boolean approved
+        (displayname = "Approved")
+        (description = "A message must be approved by a manager of the board before it can be viewed (if the board has moderated postings)")
+        (uncreateable)
+        (displaylevel = record)
+        (searchability = no);
+}
+
+
+table AttachmentType
+    (displayorder = 1060)
+    (displayname = "Attachment Type")
+    (description = "A type of an attachment")
+    (category = "Boards")
+    (cachelimit = unlimited)
+    (seqcached) {
+
+    (primary) Integer id
+        (displaylevel = record)
+        (displayorderpriority = 0);
+
+    (unique) String type (size=unlimited) (width=40)
+        (description = "The name of a type")
+        (displaylevel = primary)
+        (searchability = yes);
+}
+
+
+table Attachment
+    (displayorder = 1070)
+    (description = "A file sent as an attachment to a message")
+    (category = "Boards") {
+
+    (primary) Integer id;
+
+    Message message
+        (description = "The message this attachment belongs to")
+        (displaylevel = summary)
+        (displayorderpriority = 0)
+        (searchability = yes);
+
+    String filename (size = unlimited) (width = 40)
+        (uncreateable)
+        (uneditable)
+        (description = "The filename of this attachment")
+        (displaylevel = primary)
+        (displayorderpriority = 1)
+        (searchability = yes);
+
+    String path (size = unlimited) (width = 40)
+        (uncreateable)
+        (description = "The path to this attachment")
+        (displaylevel = record)
+        (searchability = yes);
+
+    String url (size = unlimited) (width = 40)
+        (uncreateable)
+        (description = "A url to this attachment")
+        (displaylevel = record)
+        (searchability = yes);
+
+    Integer size
+        (description = "The size of the file in bytes")
+        (uncreateable)
+        (uneditable)
+        (displaylevel = summary)
+        (searchability = no);
+
+    AttachmentType type
+        (description = "The type of this attachment")
+        (displaylevel = summary)
+        (searchability = yes);
+}
+
+

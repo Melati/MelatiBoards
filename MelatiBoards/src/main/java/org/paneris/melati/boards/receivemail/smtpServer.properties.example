@@ -1,0 +1,10 @@
+# smtp.properties.example
+#
+# This file configures the Paneris melati boards system by associating
+# incoming mail to a particular domain to a particular database
+
+# Mail sent to ....@boards.dgroup.co.uk will be sent to the `dgroup' database
+org.paneris.melati.board.receivemail.database.boards.dgroup.co.uk=dgroup
+
+# Mail sent to ....@messageboards.betrothed.co.uk will be sent to the `betrothed' database
+org.paneris.melati.board.receivemail.database.messageboards.betrothed.co.uk=betrothed

@@ -1,0 +1,79 @@
+#set $Response.ContentType = "text/html"
+#set $ml=$melati.HTMLMarkupLanguage
+#set $message=$melati.Object
+#set $board=$message.Board
+
+<html>
+<head>
+<title>$ml.rendered($board) message: $ml.rendered($message.Subject)</title>
+</head>
+
+<body>
+<h1>Board: $ml.rendered($board)</h1>
+<P>
+#if ($melati.User.isGuest()) #begin
+ Log in
+#end
+#else #begin
+ #if ($board.canPost($melati.User)) #begin
+  <a href="$utils.NewMessageURL($board)?parent=$message.Troid">Reply to this message</a>\ 
+ #end
+#end
+<a href="$utils.BoardURL($board, $start)">Return to board</a>
+</P>
+<table>
+ <tr>
+  <th>Subject</th>
+  <td>$ml.rendered($message.Subject)</td>
+ </tr>
+ <tr>
+  <th>Author</th>
+  <td>$ml.rendered($message.Author)</td>
+ </tr>
+ <tr>
+  <th>Date</th>
+  <td>$ml.renderedLong($message.DateField)</td>
+ </tr>
+ <tr>
+  <th>Message</th>
+  <td><pre>$message.Body</pre></td>
+ </tr>
+ <tr>
+  <th>Message Context</th>
+  <td>
+    <table cellpadding=0 cellspacing=0>
+#foreach $messageNode in $message.Thread.preorderEnumeration() #begin
+<tr\ #if ($messageNode.UserObject == $message) #begin bgcolor=lightyellow #end>
+ <td>
+  <img src="$melati.StaticURL/admin/plus.gif" height=1 width=$utils.indent(20, $messageNode.Level)>
+  <A href="$utils.ShowMessageURL($messageNode.UserObject)?start=$start">$ml.rendered($messageNode.UserObject)</a>
+ </td>
+ <td>
+  <a href="mailto:$messageNode.UserObject.Author.Email">$ml.rendered($messageNode.UserObject.Author)</a>
+ </td>
+ <td>
+  $ml.renderedMedium($messageNode.UserObject.DateField)
+ </td>
+</tr>
+#end
+   </table>
+  </td>
+ </tr>
+
+#set $attachments = $message.Attachments
+#if ($attachments.hasMoreElements()) #begin
+ <tr>
+  <th>Attachments</th>
+  <td>
+#foreach $attachment in $attachments #begin
+<A href="$attachment.Url">$ml.rendered($attachment.Filename)</a><br>
+#end
+  </td>
+ </tr>
+#end
+
+</table>
+
+</body>
+</html>
+

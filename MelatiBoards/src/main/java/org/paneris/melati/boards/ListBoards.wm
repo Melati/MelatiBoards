@@ -1,0 +1,23 @@
+#set $Response.ContentType = "text/html"
+#set $ml = $melati.HTMLMarkupLanguage
+
+<html>
+<head>
+<title>List of Boards</title>
+</head>
+
+<body>
+<h1>Boards of type $ml.rendered($melati.Object.Type)</h1>
+Please select one of the following boards to view it:
+<blockquote>
+#foreach $board in $melati.Database.BoardTable.TypeColumn.referencesTo($melati.Object) #begin
+  <a href="$utils.BoardURL($board, "0")">$ml.rendered($board)</a>
+  <a href="mailto:$board.EmailAddress">$board.EmailAddress</a>
+  ($board.MessageCount message, $board.MemberCount subscribers)
+  <br>
+#end
+</blockquote>
+</body>
+
+</html>
+

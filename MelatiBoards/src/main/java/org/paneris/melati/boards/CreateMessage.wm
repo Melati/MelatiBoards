@@ -1,0 +1,7 @@
+#set $Response.ContentType = "text/html"
+#set $ml=$melati.HTMLMarkupLanguage
+#set $board=$melati.Object
+
+<html>
+<META HTTP-EQUIV="Refresh" CONTENT="1; URL=$utils.BoardURL($board, $start)">
+</html>

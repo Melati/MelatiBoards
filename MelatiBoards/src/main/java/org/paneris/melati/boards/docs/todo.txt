@@ -1,0 +1,39 @@
+1) Finish the UI system, in particular the ApproveMessages,
+   ApproveSubscriptions and the bits that let User alter their
+   settings and the manager alter the board's settings and allow
+   users to subscribe others (all of these can be done through the
+   Admin system)
+
+2) Send out messages to users when they subscribe and send a message
+   to a moderated board.
+
+3) Allow upload of attachments through the web interface (need the
+   'neutral' stuff)
+
+4) Update DSD to allow users to automatically include the boards system
+   into their database (currently you have to manually make sure that
+   your database extends org.paneris.melati.boards.model.BoardsDatabase)
+
+5) Re-add Score to message and do other odds and ends including 
+   making it optional to send [board] in the message subject, etc.
+
+6) The digest mechanism
+
+7) Date ordering
+
+8) There seems to be a bug in the upload code (not ours) which truncates
+   files and double-spaces them :-(
+
+9) Remove dependencies on mail.jar, activation.jar and Webmacro log files
+   in the receivemail stuff.
+
+10) Currently all messages in a board are sucked into memory when we look
+    at any messages. This is fine for dgroup, but probably not for paneris.
+    I'm not sure that caching the pages in HTML will be a good idea (imagine
+    having to generate 50 pages every time you post a message to a big board)
+    but I'll have a think.
+
+11) Docs and comments
+
+12) Pretty up the web interface a bit
+
