@@ -57,10 +57,10 @@ import java.util.Date;
 
 public class Log {
 
-    static private PrintWriter target =
+    private static PrintWriter target =
 //         new PrintWriter(new OutputStreamWriter(System.err));
          new PrintWriter(System.err);
-    static private DateFormat dateFormat =
+    private static DateFormat dateFormat =
       DateFormat.getDateTimeInstance(DateFormat.SHORT,DateFormat.SHORT);
     private String module = null;
 
