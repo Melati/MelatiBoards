@@ -132,6 +132,7 @@ public class Message extends MessageBase implements Treeable {
     Vector kidsVector = EnumUtils.vectorOf(kidsEnum);
     Treeable[] kidsArray = new Treeable[kidsVector.size()];
     kidsVector.copyInto(kidsArray);
+    // cater for deleted children
     return kidsArray;
   }
 
@@ -144,6 +145,23 @@ public class Message extends MessageBase implements Treeable {
 
   public ChildrenDrivenMutableTree getThread() {
     return getBoard().threadWithRoot(getThreadRoot());
+  }
+
+  // if we delete a message, recompute the messages for the board
+  public void setDeleted(Boolean cooked)
+      throws AccessPoemException, ValidationPoemException {
+    if (getDeleted() == Boolean.FALSE && cooked == Boolean.TRUE) {
+      getBoard().removeAndSquash(this);
+      
+      // sort out the kids!
+      Enumeration kidsEnum = getTable().
+         selection(getMessageTable().getParentColumn().eqClause(troid()));
+      while (kidsEnum.hasMoreElements()) {
+        Message child = (Message)kidsEnum.nextElement();
+        child.setParent(getParent());
+      }
+    }
+    super.setDeleted(cooked);
   }
 
   /**
