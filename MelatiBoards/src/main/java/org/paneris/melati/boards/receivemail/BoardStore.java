@@ -1,4 +1,4 @@
-/*
+ /*
  * $Source$
  * $Revision$
  *
@@ -152,7 +152,7 @@ class BoardStore {
                                               throws MessagingException {
 
     sender = (org.melati.poem.User)database.getTable("user").
-                getColumn("email").firstWhereEq(email.getAddress().toLowerCase());
+                getColumn("email").firstWhereEq(email.getAddress());
 
     if (sender == null)
       throw new MessagingException(
