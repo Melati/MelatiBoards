@@ -235,6 +235,18 @@ public class Message extends MessageBase implements Treeable {
          ") to a message on a different board (message id:"+raw+")");
     setParent_unsafe(raw);
   }
+
+
+  /**
+   * This function is currently used by the admin suite
+   * to label Treeable objects.  
+   * It might make sense to change the admin suite at some point
+   * to use a more specific function such as getTreeableNodeLabel
+   */
+  public String getName()
+      throws AccessPoemException {
+    return getSubject();
+  }
 }
 
 
