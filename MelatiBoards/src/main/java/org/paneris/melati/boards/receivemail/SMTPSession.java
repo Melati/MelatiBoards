@@ -74,7 +74,7 @@ class SMTPSession extends Thread {
   private String smtpIdentifier;
   private Socket withClient;
   private PushbackInputStream fromClientPushBack;
-  private DataInputStream fromClient;
+  private BufferedReader fromClient;
   private Properties databaseNameOfDomain;
   private int bufSize;
   private PrintWriter toClient;
@@ -124,7 +124,7 @@ class SMTPSession extends Thread {
                                     withClient.getInputStream(),
                                     bufSize));
 
-    fromClient = new DataInputStream(fromClientPushBack);
+    fromClient = new BufferedReader(new InputStreamReader(fromClientPushBack));
 
     toClient =
       new PrintWriter(new OutputStreamWriter(withClient.getOutputStream(),
@@ -186,7 +186,7 @@ class SMTPSession extends Thread {
           "(no entry `" + propertyName + "' in properties)");
 
     try {
-       return LogicalDatabase.named(databaseName);
+       return LogicalDatabase.getDatabase(databaseName);
     }
     catch (DatabaseInitException e) {
       throw new IOException(
