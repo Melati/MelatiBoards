@@ -1,11 +1,47 @@
 #set $Response.ContentType = "text/html"
+#set $ml = $melati.HTMLMarkupLanguage
+#set $board = $melati.Object
 
 <html>
 <head>
+<title>Subscribe to board: $ml.rendered($board)</title>
 </head>
 
 <body>
-Not implemented
+<h1>Board: $ml.rendered($board)</h1>
+
+#parse "melati/boards/Menu.wm"
+
+<h2>Subscribe</h2>
+
+<p>
+#if ($managersubscribe) #begin
+  A manager of this board must subscribe you.
+  #if ($board.Openmemberlist) #begin
+    Please contact one of the
+    managers listed below and ask them to subscribe you:
+    <ul>
+      #foreach $subscription in $board.ManagersSubscriptions #begin
+      <li>$ml.rendered($subscription.User) :
+          <a href="mailto:$ml.Attr.rendered($subscription.User.Email)">$ml.rendered($subscription.User.Email)</a>
+      #end
+    </ul>
+  #end #else #begin
+    Unfortunately, the list of managers is only available to members of the list!
+  #end
+#end #else #begin
+  #if ($alreadysubscribed) #begin
+    You are already subscribed to this board
+  #end #else #begin
+    #if ($board.Moderatedsubscription) #begin
+     <p>Your subscription request has been forwarded to a manager for approval</p>
+    #end #else #begin
+     <p>You have now been subscribed</p>
+    #end
+  #end
+#end
+</p>
+
 </body>
 </html>
 

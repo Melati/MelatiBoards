@@ -1,0 +1,55 @@
+<!-- Start Board Navigation -->
+
+#if ($board.Purpose) #begin
+<p>Purpose: $ml.rendered($board.Purpose)</p>
+#end
+
+<P>
+    <!-- Actions -->
+
+    <a href="$utils.BoardURL($board, $start)">Messages</a> |
+    <a href="$utils.MessageNewURL($board)?start=$start">Post a new message</a> |
+    Search Board |
+    <a href="$utils.MembersURL($board)">Members</a>
+    ($ml.rendered($board.MemberCount)) |
+    <a href="$utils.SettingsURL($board)">Settings</a>
+<br>
+    <!-- User -->
+
+    #if ($melati.User.isGuest()) #begin
+     <b>Not logged in:</b> <a href="$utils.LoginURL($board)">Log in</a>
+    #end #else #begin
+     #if ($board.isMember($melati.User)) #begin
+      <b>$melati.User.Name</b> (Subscribed) :
+     <a href="$melati.LogoutURL?returnURL=$utils.BoardURL($board, $start)">Log out</a> |
+      <a href="$utils.UnsubscribeURL($board)">Unsubscribe</a> |
+      <a href="$utils.SubscriptionEditURL($board.getUserSubscription($melati.User))">Your options</a>
+     #end #else #begin
+      <b>$melati.User.Name</b> (Not subscribed) :
+     <a href="$melati.LogoutURL?returnURL=$utils.BoardURL($board, $start)">Log out</a> |
+     <a href="$utils.SubscribeURL($board)">Subscribe</a>
+     #end
+    #end
+<br>
+    <!-- Manager -->
+
+#if ($board.canManage($melati.User)) #begin
+     <b>You are a manager:</b>
+     #if ($board.hasPendingMessages()) #begin
+      <a href="$utils.PendingMessagesURL($board)">Pending messages</a>
+      ($board.PendingMessageCount) |
+     #end #else #begin
+      Pending messages (0) |
+     #end
+     #if ($board.hasPendingSubscriptions()) #begin
+      <a href="$utils.PendingSubscriptionsURL($board)">Pending subscriptions</a>
+      ($board.PendingSubscriptionCount) |
+     #end #else #begin
+      Pending subscriptions (0) |
+     #end
+     <a href="$utils.MembersEditURL($board)">Edit members</a> |
+     <a href="$utils.SettingsEditURL($board)">Edit settings</a>
+#end
+</p>
+<!-- End Board Navigation -->
+

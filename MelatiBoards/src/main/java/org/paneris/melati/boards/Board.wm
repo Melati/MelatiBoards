@@ -4,138 +4,15 @@
 
 <html>
 <head>
-<title>Messages for $ml.rendered($melati.Object)</title>
+<title>Board: $ml.rendered($board)</title>
 </head>
 
 <body>
 <h1>Board: $ml.rendered($board)</h1>
 
-<P>
-#if ($board.Purpose) #begin
-Purpose: $ml.rendered($board.Purpose)
-#end
-</P>
+#parse "melati/boards/Menu.wm"
 
-<!-- Start Board Options -->
-<P>
-<b>Board Options:</b>
-<br>
-#if ($board.Opensubscription) #begin
- Anyone can subscribe
-#end #else #begin
- Members must be subscribed by a Manager
-#end
-<br>
-#if ($board.Moderatedsubscription) #begin
- Subscriptions require approval from a manager
-#end
-#if ($board.Openposting) #begin
- Anyone can post a message
-#end #else #begin
- Only members can post messages
-#end
-<br>
-#if ($board.Moderatedposting) #begin
- Messages are moderated by a manager<br>
-#end
-#if ($board.Openmessageviewing) #begin
- Anyone can view messages
-#end #else #begin
- Only members can view messages
-#end
-<br>
-#if ($board.Openmemberlist) #begin
- Anyone can view the list of members
-#end #else #begin
- Only members can view the list of members
-#end
-<br>
-#if ($board.Attachmentsallowed) #begin
- Attachments are allowed
-#end #else #begin
- Attachments are not allowed
-#end
-</P>
-<!-- End Board Options -->
-
-<!-- Start Board Navigation -->
-
-<P>
-    <b>Actions:</b>
-    <br>
-    #if ($board.canPost($melati.User)) #begin
-     <a href="$utils.NewMessageURL($board)?start=$start">Post a new message</a> |
-    #end #else #begin
-     Post a new message |
-    #end
-    Search Board |
-    View Members
-<br>
-    #if ($melati.User.isGuest()) #begin
-     Not logged in: <a href="$utils.LoginURL($board)">Log in</a>
-    #end #else #begin
-     Logged in as $melati.User.Name:
-     #if ($board.isMember($melati.User)) #begin
-<br>
-      You are subscribed to this board:
-      <a href="$utils.UnsubscribeURL($board)">Unsubscribe</a> |
-      <a href="$utils.SubscriptionOptionsURL($board)">Your Options</a>
-     #end #else #begin
-<br>
-      You are not subscribed to this board:
-      #if ($board.canSubscribe($melati.User)) #begin
-       <a href="$utils.SubscribeURL($board)">Subscribe</a>
-      #end #else #begin
-       Subscribe
-      #end
-     #end
-    #end
-<br>
-#if ($board.canManage($melati.User)) #begin
- <tr>
-  <td align=right colspan=2>
-     You are a manager:
-     <a href="">Subscribe others</a> |
-     #if ($board.hasPendingMessages()) #begin
-      <a href="$utils.ListPendingMessagesURL($board)">Pending Messages</a>
-      ($board.PendingMessageCount) |
-     #end #else #begin
-      Pending Messages (0) |
-     #end
-     #if ($board.hasPendingSubscriptions()) #begin
-      <a href="$utils.ListPendingSubscriptionsURL($board)">Pending Subscriptions</a>
-      ($board.PendingSubscriptionCount) |
-     #end #else #begin
-      Pending Subscriptions (0) |
-     #end
-     <a href="$utils.ManageURL($board)">Edit Board Options</a>
-  </td>
- </tr>
-#end
-</p>
-
-<!-- End Board Navigation -->
-
-
-<!-- Start Member List -->
-<P>
-#if ($board.canViewMembers($melati.User)) #begin
- <b>Members:</b><br>
- #foreach $member in $board.Members #begin
-  <a href="mailto:$ml.rendered($member.Email)">$ml.rendered($member.Name)</a>
-  #if ($board.isManager($member)) #begin
-   <i>(Manager)</i>
-  #end
-  #if ($board.canManage($melati.User)) #begin
-   <a href="">Manage members</a>
-  #end
-  <br>
- #end
-#end #else #begin
- The member list is for MEMBERS ONLY
-#end
-</P>
-<!-- End Member List -->
+<h2>Messages</h2>
 
 <!-- Start Messages -->
 <P>
@@ -155,7 +32,7 @@ Purpose: $ml.rendered($board.Purpose)
     #end
     #foreach $page in $messages.PageStartList #begin
      #if ($page.Start == $messages.PageStart) #begin
-      $page.Number
+      <b>$page.Number</b>
      #end #else #begin
       <a href="$utils.BoardURL($board, "$page.Start")">$page.Number</a>
      #end
@@ -171,14 +48,14 @@ Purpose: $ml.rendered($board.Purpose)
     #foreach $messageNode in $messages #begin
     <tr>
      <td>
-      <img src="$melati.StaticURL/admin/plus.gif" height=1 width=$utils.indent(20, $messageNode.Level)>
-      <A href="$utils.ShowMessageURL($messageNode.UserObject)?start=$messages.PageStart">$ml.rendered($messageNode.UserObject)</a>
+      <img src="$melati.Config.StaticURL/admin/plus.gif" height=1 width=$utils.indent(20, $messageNode.Level)>
+      <A href="$utils.MessageURL($messageNode.UserObject, "$messages.PageStart")">$ml.rendered($messageNode.UserObject)</a>
      </td>
      <td>
       <a href="mailto:$messageNode.UserObject.Author.Email">$ml.rendered($messageNode.UserObject.Author)</a>
      </td>
      <td>
-      $messageNode.UserObject.DateField.LondonDate - HI
+      $ml.renderedShort($messageNode.UserObject.DateField)
       #if ($messageNode.UserObject.hasAttachments()) #begin
        $messageNode.UserObject.AttachmentCount attachments
       #end
@@ -187,7 +64,7 @@ Purpose: $ml.rendered($board.Purpose)
     #end
 </table>
 #end #else #begin
- Messages are for MEMBERS ONLY
+ You must be subscribed to this board to view its messages
 #end
 </P>
 <!-- End Messages -->

@@ -90,18 +90,6 @@ http://java.sun.com/products/javamail/
 The notes below are for the future. At present you must change the following
 line in your XXXXDatabaseBase.java:
 
-public class XXXXDatabaseBase extends PoemDatabase {
-
-to
-
-public class XXXXDatabaseBase extends
-                           org.paneris.melati.boards.model.BoardsDatabase {
-
-You don't need to subclass BoardsDatabase, however. You can just include
-the contents of org.paneris.melati.boards.model.generated.BoardsDatabaseBase.java
-in your own XXXXDatabase.java (or XXXXDatabaseBase).
-
-[
 In your .dsd file, include the following line after the `package ...' line
 but before the first table definition:
 
@@ -109,13 +97,10 @@ import org.paneris.melati.boards.model.dgroup.dsd
 
 This will include all tables used by the boards system and adds an `email'
 field to the user table.
-]
 
 Because of this, if you wish to extend the User table then you will need
 to `extend org.paneris.melati.boards.model.User' rather than the more usual
-`extend org.melati.poem.User'. In fact, if you are not subclassing
-BoardsDatabase then you should ensure that your User table subclasses
-org.paneris.melati.boards.model.User
+`extend org.melati.poem.User'. 
 
 
 2) Set up your boards
@@ -133,7 +118,7 @@ E.g. go to /testapp/org.melati.admin.Admin/testdb/Main and
 2a) Settings
 -----------
 
-The values that you must set up in the Settings table:
+The values that you must set up in the Settings table (they are all Strings):
 
 smtpserver            - the SMTP server for outgoing mail
     (e.g. testapp.co.uk) 
@@ -292,6 +277,7 @@ c) You now need to direct messages addressed to boards to the SMTP server
 So you need to copy smtpServer.properties.example to smtpServer.properties and
 add your own line of the form
 
+   org.paneris.melati.boards.receivemail.database.messageboards.x.com=x
 
 
 5) Customise the UI
@@ -348,8 +334,7 @@ and the filename of the attachment.
 When you create a board, the user who created it is automatically subscribed
 to it as a manager.
 
-_administrator_ and _guest_ cannot be subscribed to boards (and so cannot
-create them - see above).
+_guest_ cannot be subscribed to boards (and so cannot create them - see above).
 
 Use Attachment.setFilename_unique[_unsafe] to prevent overwriting old files.
 (note, message must be set already in the Attachment)

@@ -1,0 +1,77 @@
+#set $Response.ContentType = "text/html"
+#set $ml=$melati.HTMLMarkupLanguage
+#set $message=$melati.Object
+#set $board=$message.Board
+
+<html>
+<head>
+<title>Message on board: $ml.rendered($board)</title>
+</head>
+
+<body>
+<h1>Board: $ml.rendered($board)</h1>
+
+#parse "melati/boards/Menu.wm"
+
+<h2>Subject: $ml.rendered($message.Subject)</h2>
+
+<table>
+ <tr>
+  <td valign=top>Author</td>
+  <td>$ml.rendered($message.Author.Name)</td>
+ </tr>
+ <tr>
+  <td valign=top>Date</td>
+  <td>$ml.renderedLong($message.DateField)</td>
+ </tr>
+#set $attachments = $message.Attachments
+#if ($attachments.hasMoreElements()) #begin
+ <tr>
+  <td>Attachments</td>
+  <td>
+#foreach $attachment in $attachments #begin
+<A href="$attachment.Url">$ml.rendered($attachment.Filename)</a><br>
+#end
+  </td>
+ </tr>
+#end
+ <tr>
+  <td valign=top>Message</td>
+  <td><pre>$message.Body</pre></td>
+ </tr>
+</table>
+
+<P>
+#if ($melati.User.isGuest()) #begin
+ You need to <a href="$utils.LoginURL($board)">Log in</a> to reply to this message.
+#end
+#else #begin
+ #if ($board.canPost($melati.User)) #begin
+  <a href="$utils.MessageNewURL($board)?parent=$message.Troid">Reply to this message</a>\ 
+ #end
+#end
+</P>
+
+#if ($withThread) #begin
+<h3>Message Thread</h3>
+    <table cellpadding=0 cellspacing=0>
+    #foreach $messageNode in $message.Thread.preorderEnumeration() #begin
+    <tr\ #if ($messageNode.UserObject == $message) #begin bgcolor=lightyellow #end>
+     <td>
+      <img src="$melati.Config.StaticURL/admin/plus.gif" height=1 width=$utils.indent(20, $messageNode.Level)>
+      <A href="$utils.MessageURL($messageNode.UserObject, $start)">$ml.rendered($messageNode.UserObject)</a>
+     </td>
+     <td>
+      <a href="mailto:$messageNode.UserObject.Author.Email">$ml.rendered($messageNode.UserObject.Author)</a>
+     </td>
+     <td>
+      $ml.renderedShort($messageNode.UserObject.DateField)
+     </td>
+    </tr>
+    #end
+   </table>
+#end
+
+</body>
+</html>
+

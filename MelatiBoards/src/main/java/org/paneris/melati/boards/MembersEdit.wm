@@ -1,0 +1,83 @@
+#set $Response.ContentType = "text/html"
+#set $ml = $melati.HTMLMarkupLanguage
+#set $board = $melati.Object
+
+<html>
+<head>
+<title>Edit members of board: $ml.rendered($board)</title>
+</head>
+
+<body>
+<h1>Board: $ml.rendered($board)</h1>
+
+#parse "melati/boards/Menu.wm"
+
+<h2>Edit members</h2>
+
+<form action="$utils.MembersEditURL($board)" method=post>
+<table>
+ <tr>
+  <td><b>User</b></td>
+  <td><b>Manager</b></td>
+  <td><b>Status</b></td>
+  <td><b>Delete</b></td>
+ </tr>
+ #foreach $sub in $board.MembersSubscriptions #begin
+ <tr>
+  <td>$ml.rendered($sub.User.Name)</td>
+  <td align=center>
+   <input type=checkbox name=manager-$sub.Troid value=true
+   #if ($sub.Ismanager) #begin checked #end>
+  <td>
+<SELECT NAME="status-$sub.Troid">
+  #foreach $poss in $sub.StatusField.First1000Possibilities #begin
+    <OPTION VALUE="$ml.Attr.rendered($poss.RawString)"
+      #if ($poss.sameRawAs($sub.StatusField)) #begin
+        SELECTED
+      #end
+    >$ml.rendered($poss)</OPTION>
+  #end
+</SELECT>
+  </td>
+  <td align=center>
+    <input type=hidden name=subscription value=$sub.Troid>
+    #if ($sub.User != $melati.User) #begin
+      <input type=checkbox name=delete-$sub.Troid value=true>
+    #end
+  </td>
+ </tr>
+ #end
+ <tr>
+  <td colspan=4 align=center><input type=submit value="Update members"></td>
+ </tr>
+</table>
+</form>
+
+
+<h3>Subscribe new members</h3>
+
+<form action="$utils.SubscribeOthersURL($board)" method=post>
+<p>
+Please select the users to subscribe to this board:<br>
+<select name=others multiple>
+#foreach $user in $melati.Database.UserTable.selection() #begin
+   ## Somehow, putting these 2 tests into a single if macro doesn't work ... FIXME
+   #if (!$user.isGuest()) #begin
+     #if (!$board.isMember($user)) #begin
+       #if ($user != $melati.Database.UserTable.administratorUser()) #begin
+         <option value=$user.Troid>$ml.rendered($user)</option>
+       #end
+     #end
+   #end
+#end
+</select>
+<br>(press CTRL as you click on a name to select multiple new members)
+</p>
+<p>
+Make these users managers? : <input type=checkbox name=manager value=true>
+</p>
+<input type=submit value="Subscribe users">
+</form>
+</body>
+</html>
+
