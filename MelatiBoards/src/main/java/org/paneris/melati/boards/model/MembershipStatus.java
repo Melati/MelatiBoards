@@ -6,7 +6,7 @@
  *
  * Part of a Melati application. This application is free software;
  * Permission is granted to copy, distribute and/or modify this
- * software under the same terms as those set out for Melati, below.
+ * software under the same terms as those set out for Melati below.
  *
  * Melati (http://melati.org) is a framework for the rapid
  * development of clean, maintainable web applications.
@@ -52,7 +52,40 @@ package org.paneris.melati.boards.model;
 
 import org.paneris.melati.boards.model.generated.MembershipStatusBase;
 
+/**
+ * Melati POEM generated, programmer modifiable stub 
+ * for a <code>Persistent</code> <code>MembershipStatus</code> object.
+ * 
+ * <p> 
+ * Description: 
+ *   The status of a user's subscription to a board. 
+ * </p>
+ * 
+ * <table> 
+ * <tr><th colspan='3'>
+ * Field summary for SQL table <code>MembershipStatus</code>
+ * </th></tr>
+ * <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+ * <tr><td> id </td><td> Integer </td><td> &nbsp; </td></tr> 
+ * <tr><td> status </td><td> String </td><td> The name of a status </td></tr> 
+ * </table> 
+ * 
+ * @generator org.melati.poem.prepro.TableDef#generateMainJava 
+ */
 public class MembershipStatus extends MembershipStatusBase {
-  public MembershipStatus() {}
 
+ /**
+  * Constructor 
+  * for a <code>Persistent</code> <code>MembershipStatus</code> object.
+  * <p>
+  * Description: 
+  *   The status of a user's subscription to a board. 
+  * </p>
+  * 
+  * @generator org.melati.poem.prepro.TableDef#generateMainJava 
+  */
+  public MembershipStatus() { }
+
+  // programmer's domain-specific code here
 }
+

@@ -6,7 +6,7 @@
  *
  * Part of a Melati application. This application is free software;
  * Permission is granted to copy, distribute and/or modify this
- * software under the same terms as those set out for Melati, below.
+ * software under the same terms as those set out for Melati below.
  *
  * Melati (http://melati.org) is a framework for the rapid
  * development of clean, maintainable web applications.
@@ -63,14 +63,65 @@ import org.melati.poem.PoemException;
 import org.melati.poem.ValidationPoemException;
 import org.paneris.melati.boards.model.generated.MessageTableBase;
 
+/**
+ * Melati POEM generated, programmer modifiable stub 
+ * for a <code>MessageTable</code> object.
+ * <p>
+ * Description: 
+ *   A message posted to a message board. 
+ * </p>
+ *
+ * 
+ * <table> 
+ * <tr><th colspan='3'>
+ * Field summary for SQL table <code>Message</code>
+ * </th></tr>
+ * <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+ * <tr><td> id </td><td> Integer </td><td> &nbsp; </td></tr> 
+ * <tr><td> board </td><td> Board </td><td> The board this message belongs to 
+ * </td></tr> 
+ * <tr><td> date </td><td> Timestamp </td><td> The date and time at which 
+ * this message was posted </td></tr> 
+ * <tr><td> subject </td><td> String </td><td> The subject line of this 
+ * message </td></tr> 
+ * <tr><td> author </td><td> User </td><td> Author of this message </td></tr> 
+ * <tr><td> parent </td><td> Message </td><td> The message to which this 
+ * message is a follow-up </td></tr> 
+ * <tr><td> body </td><td> String </td><td> The main content of this message 
+ * </td></tr> 
+ * <tr><td> deleted </td><td> Boolean </td><td> A deleted message cannot be 
+ * viewed or displayed on lists </td></tr> 
+ * <tr><td> approved </td><td> Boolean </td><td> A message must be approved 
+ * by a manager of the board before it can be viewed (if the board has 
+ * moderated postings) </td></tr> 
+ * </table> 
+ * 
+ * @generator  org.melati.poem.prepro.TableDef#generateTableMainJava 
+ */
 public class MessageTable extends MessageTableBase {
 
+ /**
+  * Constructor.
+  * 
+  * @generator org.melati.poem.prepro.TableDef#generateTableMainJava 
+  * @param database          the POEM database we are using
+  * @param name              the name of this <code>Table</code>
+  * @param definitionSource  which definition is being used
+  * @throws PoemException    if anything goes wrong
+  */
   public MessageTable(
       Database database, String name,
       DefinitionSource definitionSource) throws PoemException {
     super(database, name, definitionSource);
   }
 
+  // programmer's domain-specific code here
+
+ /**
+  * Write down a message.
+  *
+  * @param persistent  a persistent object to write down
+  */
   public void create(Persistent persistent)
       throws AccessPoemException, ValidationPoemException,
              InitialisationPoemException {
@@ -103,10 +154,9 @@ public class MessageTable extends MessageTableBase {
     }
   }
 
-  /**
-   * Get messages
-   */
-
+ /**
+  * Get messages
+  */
   public String messageInBoardSQL(Board board, boolean approved) {
     return getBoardColumn().eqClause(board.troid()) + " AND " +
            getApprovedColumn().eqClause(new Boolean(approved)) + " AND " +

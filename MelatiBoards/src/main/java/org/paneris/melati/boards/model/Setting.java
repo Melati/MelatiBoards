@@ -6,7 +6,7 @@
  *
  * Part of a Melati application. This application is free software;
  * Permission is granted to copy, distribute and/or modify this
- * software under the same terms as those set out for Melati, below.
+ * software under the same terms as those set out for Melati below.
  *
  * Melati (http://melati.org) is a framework for the rapid
  * development of clean, maintainable web applications.
@@ -52,8 +52,29 @@ package org.paneris.melati.boards.model;
 
 import org.paneris.melati.boards.model.generated.SettingBase;
 
+/**
+ * Melati POEM generated, programmer modifiable stub 
+ * for a <code>Persistent</code> <code>Setting</code> object.
+ * 
+ * 
+ * <table> 
+ * <tr><th colspan='3'>
+ * Field summary for SQL table <code>Setting</code>
+ * </th></tr>
+ * <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+ * </table> 
+ * 
+ * @generator org.melati.poem.prepro.TableDef#generateMainJava 
+ */
 public class Setting extends SettingBase {
-  public Setting() {}
+
+ /**
+  * Constructor 
+  * for a <code>Persistent</code> <code>Setting</code> object.
+  * 
+  * @generator org.melati.poem.prepro.TableDef#generateMainJava 
+  */
+  public Setting() { }
 
   // programmer's domain-specific code here
 }

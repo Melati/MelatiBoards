@@ -6,7 +6,7 @@
  *
  * Part of a Melati application. This application is free software;
  * Permission is granted to copy, distribute and/or modify this
- * software under the same terms as those set out for Melati, below.
+ * software under the same terms as those set out for Melati below.
  *
  * Melati (http://melati.org) is a framework for the rapid
  * development of clean, maintainable web applications.
@@ -52,6 +52,9 @@ package org.paneris.melati.boards.model;
 
 import org.paneris.melati.boards.model.generated.BoardsDatabaseTablesBase;
 
+/**
+ * Melati POEM generated, programmer modifyable interface stub.
+ */
 public interface BoardsDatabaseTables extends BoardsDatabaseTablesBase {
   // programmer's domain-specific code here
 }

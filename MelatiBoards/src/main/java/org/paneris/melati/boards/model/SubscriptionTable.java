@@ -6,7 +6,7 @@
  *
  * Part of a Melati application. This application is free software;
  * Permission is granted to copy, distribute and/or modify this
- * software under the same terms as those set out for Melati, below.
+ * software under the same terms as those set out for Melati below.
  *
  * Melati (http://melati.org) is a framework for the rapid
  * development of clean, maintainable web applications.
@@ -69,15 +69,57 @@ import org.melati.poem.PoemThread;
 import org.melati.poem.ValidationPoemException;
 import org.paneris.melati.boards.model.generated.SubscriptionTableBase;
 
+/**
+ * Melati POEM generated, programmer modifiable stub 
+ * for a <code>SubscriptionTable</code> object.
+ * <p>
+ * Description: 
+ *   Which users are members of which boards with what settings. 
+ * </p>
+ *
+ * 
+ * <table> 
+ * <tr><th colspan='3'>
+ * Field summary for SQL table <code>Subscription</code>
+ * </th></tr>
+ * <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+ * <tr><td> id </td><td> Integer </td><td> &nbsp; </td></tr> 
+ * <tr><td> user </td><td> User </td><td> The user </td></tr> 
+ * <tr><td> board </td><td> Board </td><td> The board to which this user 
+ * belongs </td></tr> 
+ * <tr><td> status </td><td> MembershipStatus </td><td> How users would like 
+ * to receive emails from this board </td></tr> 
+ * <tr><td> ismanager </td><td> Boolean </td><td> Can the user administrator 
+ * the board with manager priviledges? </td></tr> 
+ * <tr><td> approved </td><td> Boolean </td><td> Has this user's subscription 
+ * to this board been approved by a manager (if the board has moderated 
+ * subscription) </td></tr> 
+ * </table> 
+ * 
+ * @generator  org.melati.poem.prepro.TableDef#generateTableMainJava 
+ */
 public class SubscriptionTable extends SubscriptionTableBase {
 
+ /**
+  * Constructor.
+  * 
+  * @generator org.melati.poem.prepro.TableDef#generateTableMainJava 
+  * @param database          the POEM database we are using
+  * @param name              the name of this <code>Table</code>
+  * @param definitionSource  which definition is being used
+  * @throws PoemException    if anything goes wrong
+  */
   public SubscriptionTable(
       Database database, String name,
       DefinitionSource definitionSource) throws PoemException {
     super(database, name, definitionSource);
   }
 
-  // Convenience method
+  // programmer's domain-specific code here
+
+ /** 
+  * Convenience method to subscribe a user to a board.
+  */
   public Subscription subscribe(final User user,
                                 final Board board,
                                 final MembershipStatus status,
@@ -96,6 +138,9 @@ public class SubscriptionTable extends SubscriptionTableBase {
       });
   }
 
+ /** 
+  * Convenience method to unsubscribe a user to a board.
+  */
   public void unsubscribe(User user, Board board) {
     List toDelete = new ArrayList();
     for (Enumeration e = selection(
@@ -121,7 +166,7 @@ public class SubscriptionTable extends SubscriptionTableBase {
       return null;
   }
 
-  /*
+  /**
    * If they are a manager, observe the isManager/approved.
    * If this is the first subscription, set isManager/approved to true.
    * If they are a general subscriber, set isManager/approved to false
@@ -155,62 +200,94 @@ public class SubscriptionTable extends SubscriptionTableBase {
   }
 
 
-  /*
-   * Board membership/managership
-   */
-
+ /**
+  * Board managership SQL.
+  */
   public String managerSQL(Board board) {
     return getBoardColumn().eqClause(board.troid()) + " AND " +
            getApprovedColumn().eqClause(Boolean.TRUE) + " AND " +
            getIsmanagerColumn().eqClause(Boolean.TRUE);
   }
 
+ /**
+  * Board membership SQL.
+  */
   public String memberSQL(Board board) {
     return getBoardColumn().eqClause(board.troid()) + " AND " +
            getApprovedColumn().eqClause(Boolean.TRUE);
 
   }
 
+ /**
+  * Board membership pending SQL.
+  */
   public String pendingSubscriptionSQL(Board board) {
     return getBoardColumn().eqClause(board.troid()) + " AND " +
            getApprovedColumn().eqClause(Boolean.FALSE);
 
   }
 
+ /**
+  * Is a board manager SQL.
+  */
   public boolean isManager(User user, Board board) {
     return exists(getUserColumn().eqClause(user.troid()) + " AND " +
                     managerSQL(board));
   }
 
+ /**
+  * Is a member SQL.
+  */
   public boolean isMember(User user, Board board) {
     return exists(getUserColumn().eqClause(user.troid()) + " AND " +
                     memberSQL(board));
   }
 
+ /**
+  * @return a <tt>CachedSelection</tt> of the Managers.
+  */
   public CachedSelection cachedManagers(Board board) {
     return cachedSelection(managerSQL(board), null);
   }
 
+ /**
+  * @return a <tt>CachedSelection</tt> of the Members.
+  */
   public CachedSelection cachedMembers(Board board) {
     return cachedSelection(memberSQL(board), null);
   }
 
+ /**
+  * @return a <tt>CachedSelection</tt> of the PendingSubscriptions.
+  */
   public CachedSelection cachedPendingSubscriptions(Board board) {
     return cachedSelection(pendingSubscriptionSQL(board), null);
   }
 
+ /**
+  * @return a <tt>CachedCount</tt> of the Managers.
+  */
   public CachedCount cachedManagerCount(Board board) {
     return cachedCount(managerSQL(board));
   }
 
+ /**
+  * @return a <tt>CachedCount</tt> of the Members.
+  */
   public CachedCount cachedMemberCount(Board board) {
     return cachedCount(memberSQL(board));
   }
 
+ /**
+  * @return a <tt>CachedCount</tt> of the PendingSubscriptions.
+  */
   public CachedCount cachedPendingSubscriptionCount(Board board) {
     return cachedCount(pendingSubscriptionSQL(board));
   }
 
+ /**
+  * @return an <tt>enumeration</tt> of the Members.
+  */
   public Enumeration getNormalDistributionList(Board board) {
     return selection(memberSQL(board) + " AND " +
                      getStatusColumn().eqClause(
@@ -218,6 +295,9 @@ public class SubscriptionTable extends SubscriptionTableBase {
                          getNormal().getTroid()));
   }
 
+ /**
+  * @return an <tt>enumeration</tt> of the Digest Memebers.
+  */
   public Enumeration getDigestDistributionList(Board board) {
     return selection(memberSQL(board) + " AND " +
                      getStatusColumn().eqClause(

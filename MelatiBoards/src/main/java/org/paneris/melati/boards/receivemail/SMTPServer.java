@@ -6,7 +6,7 @@
  *
  * Part of a Melati application. This application is free software;
  * Permission is granted to copy, distribute and/or modify this
- * software under the same terms as those set out for Melati, below.
+ * software under the same terms as those set out for Melati below.
  *
  * Melati (http://melati.org) is a framework for the rapid
  * development of clean, maintainable web applications.
@@ -54,6 +54,9 @@ import java.util.Properties;
 
 import javax.servlet.ServletException;
 
+/**
+ * An SMTP Server.
+ */
 public class SMTPServer implements Runnable {
 
   private SMTPServerServlet launcher = null;

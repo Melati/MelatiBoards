@@ -6,7 +6,7 @@
  *
  * Part of a Melati application. This application is free software;
  * Permission is granted to copy, distribute and/or modify this
- * software under the same terms as those set out for Melati, below.
+ * software under the same terms as those set out for Melati below.
  *
  * Melati (http://melati.org) is a framework for the rapid
  * development of clean, maintainable web applications.
@@ -52,7 +52,42 @@ package org.paneris.melati.boards.model;
 
 import org.paneris.melati.boards.model.generated.BoardTypeBase;
 
+/**
+ * Melati POEM generated, programmer modifiable stub 
+ * for a <code>Persistent</code> <code>BoardType</code> object.
+ * 
+ * <p> 
+ * Description: 
+ *   A type of a board. 
+ * </p>
+ * 
+ * <table> 
+ * <tr><th colspan='3'>
+ * Field summary for SQL table <code>BoardType</code>
+ * </th></tr>
+ * <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+ * <tr><td> id </td><td> Integer </td><td> &nbsp; </td></tr> 
+ * <tr><td> type </td><td> String </td><td> The name of a type </td></tr> 
+ * <tr><td> description </td><td> String </td><td> The description of the 
+ * type </td></tr> 
+ * </table> 
+ * 
+ * @generator org.melati.poem.prepro.TableDef#generateMainJava 
+ */
 public class BoardType extends BoardTypeBase {
-  public BoardType() {}
+
+ /**
+  * Constructor 
+  * for a <code>Persistent</code> <code>BoardType</code> object.
+  * <p>
+  * Description: 
+  *   A type of a board. 
+  * </p>
+  * 
+  * @generator org.melati.poem.prepro.TableDef#generateMainJava 
+  */
+  public BoardType() { }
+
+  // programmer's domain-specific code here
 
 }

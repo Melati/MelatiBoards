@@ -6,7 +6,7 @@
  *
  * Part of a Melati application. This application is free software;
  * Permission is granted to copy, distribute and/or modify this
- * software under the same terms as those set out for Melati, below.
+ * software under the same terms as those set out for Melati below.
  *
  * Melati (http://melati.org) is a framework for the rapid
  * development of clean, maintainable web applications.
@@ -55,6 +55,9 @@ import org.paneris.melati.boards.model.BoardType;
 import org.paneris.melati.boards.model.Message;
 import org.paneris.melati.boards.model.Subscription;
 
+/**
+ * Board Utilities. 
+ */
 public class BoardUtils {
 
   private String boardURL;

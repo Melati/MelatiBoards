@@ -6,7 +6,7 @@
  *
  * Part of a Melati application. This application is free software;
  * Permission is granted to copy, distribute and/or modify this
- * software under the same terms as those set out for Melati, below.
+ * software under the same terms as those set out for Melati below.
  *
  * Melati (http://melati.org) is a framework for the rapid
  * development of clean, maintainable web applications.
@@ -72,8 +72,76 @@ import org.melati.util.EnumUtils;
 import org.melati.util.MappedEnumeration;
 import org.paneris.melati.boards.model.generated.BoardBase;
 
+/**
+ * Melati POEM generated, programmer modifiable stub 
+ * for a <code>Persistent</code> <code>Board</code> object.
+ * 
+ * <p> 
+ * Description: 
+ *   A board for messages. 
+ * </p>
+ * 
+ * <table> 
+ * <tr><th colspan='3'>
+ * Field summary for SQL table <code>Board</code>
+ * </th></tr>
+ * <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+ * <tr><td> id </td><td> Integer </td><td> &nbsp; </td></tr> 
+ * <tr><td> type </td><td> BoardType </td><td> The type of this messageboard 
+ * </td></tr> 
+ * <tr><td> name </td><td> String </td><td> A code-name for this board 
+ * </td></tr> 
+ * <tr><td> displayname </td><td> String </td><td> A user-friendly name of 
+ * this board </td></tr> 
+ * <tr><td> purpose </td><td> String </td><td> The purpose of this message 
+ * board </td></tr> 
+ * <tr><td> archived </td><td> Boolean </td><td> If a board is archived then 
+ * it cannot be viewed and is not displayed on lists by default </td></tr> 
+ * <tr><td> opensubscription </td><td> Boolean </td><td> With open 
+ * subscription anyone can subscribe to the board. Otherwise a board manager 
+ * must subscribe members </td></tr> 
+ * <tr><td> moderatedsubscription </td><td> Boolean </td><td> With moderated 
+ * subscription the manager must approve all requests to be subscribed 
+ * </td></tr> 
+ * <tr><td> openposting </td><td> Boolean </td><td> With open posting anyone 
+ * with a user account can post a message to this list. Otherwise, only 
+ * members can post </td></tr> 
+ * <tr><td> moderatedposting </td><td> Boolean </td><td> With moderated 
+ * posting all messages must be approved by a manager </td></tr> 
+ * <tr><td> openmessageviewing </td><td> Boolean </td><td> With open message 
+ * viewing anyone can view messages in a board. Otherwise, only members can 
+ * see messages </td></tr> 
+ * <tr><td> openmemberlist </td><td> Boolean </td><td> With open member list 
+ * anyone can see the members of the list. Otherwise, only members can see 
+ * who else is subscribed </td></tr> 
+ * <tr><td> attachmentsallowed </td><td> Boolean </td><td> Can attachments be 
+ * sent with messages. If not, attachments are ignored </td></tr> 
+ * <tr><td> anonymousposting </td><td> Boolean </td><td> Can people without 
+ * user accounts post to this messageboard. If so, a user account is created 
+ * for them when they post. </td></tr> 
+ * <tr><td> attachmentspath </td><td> String </td><td> A path to the 
+ * directory containing attachments for this board </td></tr> 
+ * <tr><td> attachmentsurl </td><td> String </td><td> A URL to the directory 
+ * containing attachments for this board </td></tr> 
+ * </table> 
+ * 
+ * @generator org.melati.poem.prepro.TableDef#generateMainJava 
+ */
 public class Board extends BoardBase {
-  public Board() {}
+
+ /**
+  * Constructor 
+  * for a <code>Persistent</code> <code>Board</code> object.
+  * <p>
+  * Description: 
+  *   A board for messages. 
+  * </p>
+  * 
+  * @generator org.melati.poem.prepro.TableDef#generateMainJava 
+  */
+  public Board() { }
+
+  // programmer's domain-specific code here
   
   /***************************
    * Users levels - Admin, Manager, Member
@@ -262,9 +330,9 @@ public class Board extends BoardBase {
     getBoardsDatabaseTables().getSubscriptionTable().
     subscribe(user, this, status, ismanager, approved);
     
-    if (sub.getApproved_unsafe() == Boolean.FALSE) {
-      // FIXME send getSubscriptionRequestReceivedNote() message to user
-    }
+    // FIXME send getSubscriptionRequestReceivedNote() message to user
+    //if (sub.getApproved_unsafe() == Boolean.FALSE) {
+    //}
   }
   
   public void subscribe(User user) {
@@ -387,9 +455,9 @@ public class Board extends BoardBase {
 
   void addThread(Message root, boolean atStart) {
     if (atStart) 
-      addThread(root,0);
+      addThread(root, 0);
     else 
-      addThread(root,-1);
+      addThread(root, -1);
   }
   
   void addThread(Message root, int index) {
@@ -439,7 +507,7 @@ public class Board extends BoardBase {
       DefaultMutableTreeNode child = (DefaultMutableTreeNode)children.nextElement();
       if (parent == null) {
         child.setParent(null);
-        addThread((Message)child.getUserObject(),treeIndex);
+        addThread((Message)child.getUserObject(), treeIndex);
       } else {
         parent.add(child);
       }

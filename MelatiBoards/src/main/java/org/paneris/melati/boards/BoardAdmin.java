@@ -6,7 +6,7 @@
  *
  * Part of a Melati application. This application is free software;
  * Permission is granted to copy, distribute and/or modify this
- * software under the same terms as those set out for Melati, below.
+ * software under the same terms as those set out for Melati below.
  *
  * Melati (http://melati.org) is a framework for the rapid
  * development of clean, maintainable web applications.
@@ -88,6 +88,10 @@ import org.paneris.melati.boards.model.BoardTable;
 import org.paneris.melati.boards.model.MessageTable;
 
 
+/**
+ * The main servlet.
+ * 
+ */
 public class BoardAdmin extends TemplateServlet {
 
   private static int MAX_HITS = 2000;
@@ -136,11 +140,10 @@ public class BoardAdmin extends TemplateServlet {
           try {
             final Database db = LogicalDatabase.getDatabase(parts[0]);
             db.inSession(
-                AccessToken.root,
+                AccessToken.root, 
                 new PoemTask() {
                     public void run() {
-                        String value = StringUtils.tr(parts[2],'.', ' '); 
-
+                        String value = StringUtils.tr(parts[2], '.', ' '); 
                         Persistent p = db.getTable(parts[1]).
                                            displayColumn().
                                                firstWhereEq(value);
@@ -242,14 +245,14 @@ public class BoardAdmin extends TemplateServlet {
 
   protected String settingsUpdateTemplate(TemplateContext context, Melati melati, Board board)
       throws PoemException {
-    checkBanned(board,melati.getUser());
+    checkBanned(board, melati.getUser());
     MelatiUtil.extractFields(context, melati.getObject());
     return boardTemplate(context, "SettingsUpdate");
   }
 
   protected String settingsEditTemplate(TemplateContext context, Melati melati, Board board)
       throws PoemException {
-    checkBanned(board,melati.getUser());
+    checkBanned(board, melati.getUser());
     return boardTemplate(context, "SettingsEdit");
   }
 
@@ -264,7 +267,7 @@ public class BoardAdmin extends TemplateServlet {
   protected String messageNewTemplate(TemplateContext context, Melati melati, Board board)
       throws PoemException {
 
-    checkBanned(board,melati.getUser());
+    checkBanned(board, melati.getUser());
     if (melati.getUser().isGuest() && !board.getAnonymousposting().booleanValue())
       throw new AccessPoemException(melati.getUser(), new Capability("Logged In"));
 
@@ -282,8 +285,8 @@ public class BoardAdmin extends TemplateServlet {
    * Message Actions
    *****************/
   
-  protected String messageTemplate(TemplateContext context, Melati melati, Board board,
-                                   boolean withThread)
+  protected String messageTemplate(TemplateContext context, Melati melati, 
+                                   Board board, boolean withThread)
       throws PoemException {
     context.put("withThread", new Boolean(withThread));
     return boardTemplate(context, "Message");
@@ -298,14 +301,14 @@ public class BoardAdmin extends TemplateServlet {
   protected String messageCreateTemplate(TemplateContext context, final Melati melati, Board board)
       throws PoemException {
         
-    checkBanned(board,melati.getUser());
+    checkBanned(board, melati.getUser());
     User user = (User)melati.getUser();
     if (user.isGuest() && board.getAnonymousposting().booleanValue()) {
       
       // fair play, i am not logged in, but do i already exist?
       // note that this can mean that people can fake posts to 'anonymous posting'
       // boards, but i guess this is the nature of anonymous posting
-      String email = MelatiUtil.getFormNulled(context,"field_email");
+      String email = MelatiUtil.getFormNulled(context, "field_email");
       user = (User)melati.getDatabase().getUserTable().firstSelection(
                         "UPPER(" +
                         melati.getDatabase().getDbms().getQuotedName("email") +
@@ -317,7 +320,7 @@ public class BoardAdmin extends TemplateServlet {
         // inSession as root to create me
         final User thisuser = user;
         board.getDatabase().inSession(
-          AccessToken.root,
+          AccessToken.root, 
           new PoemTask() {
             public void run() {
               melati.getDatabase().getUserTable().create(thisuser);
@@ -330,9 +333,10 @@ public class BoardAdmin extends TemplateServlet {
       }
     }
     
-    Message newMessage = (Message)create(((BoardTable)melati.getTable())
-                                   .getBoardsDatabaseTables().getMessageTable(), 
-                                   context, user);
+    Message newMessage = (Message)create(
+                             ((BoardTable)melati.getTable()).
+                                 getBoardsDatabaseTables().getMessageTable(), 
+                             context, user);
     if (newMessage.getApproved().booleanValue() == true) {
       newMessage.distribute();
       return boardTemplate(context, "MessageCreate");
@@ -354,7 +358,7 @@ public class BoardAdmin extends TemplateServlet {
       throws PoemException {
     String[] messages = melati.getRequest().getParameterValues("message");
     for(int i=0; i < messages.length; i++) {
-      String action = MelatiUtil.getFormNulled(context,messages[i]);
+      String action = MelatiUtil.getFormNulled(context, messages[i]);
       if (action != null) {
         Message message = (Message)
                             ((BoardsDatabaseTables)melati.getDatabase()).
@@ -385,9 +389,10 @@ public class BoardAdmin extends TemplateServlet {
    * a manager. If so, we let the user and the managers know by email,
    * otherwise we subscribe them to the board.
    */
-  protected String subscribeTemplate(TemplateContext context, Melati melati, Board board)
+  protected String subscribeTemplate(TemplateContext context, 
+                                     Melati melati, Board board)
       throws PoemException {
-    checkBanned(board,melati.getUser());
+    checkBanned(board, melati.getUser());
     User user = (User)melati.getUser();
 
     if (!board.canSubscribe(user)) {
@@ -396,8 +401,9 @@ public class BoardAdmin extends TemplateServlet {
     else if (board.isMember(user)) {
       return boardTemplate(context, "SubscribedAlready");
     }
-    else if ( ((BoardsDatabaseTables)melati.getDatabase()).getSubscriptionTable().
-                getUserSubscription(user, board) != null) {
+    else if (((BoardsDatabaseTables)melati.getDatabase()).
+                 getSubscriptionTable().
+                     getUserSubscription(user, board) != null) {
       return boardTemplate(context, "SubscriptionAlreadyPending");
     }
     else if (board.getModeratedsubscription().booleanValue() == true) {
@@ -567,13 +573,13 @@ public class BoardAdmin extends TemplateServlet {
 
   protected String subscriptionEditTemplate(TemplateContext context, Melati melati, Board board)
       throws PoemException {
-    checkBanned(board,melati.getUser());
+    checkBanned(board, melati.getUser());
     return boardTemplate(context, "SubscriptionEdit");
   }
 
   protected String subscriptionUpdateTemplate(TemplateContext context, Melati melati, Board board)
       throws PoemException {
-    checkBanned(board,melati.getUser());
+    checkBanned(board, melati.getUser());
     MelatiUtil.extractFields(context, melati.getObject());
     return boardTemplate(context, "SubscriptionUpdate");
   }
@@ -583,7 +589,7 @@ public class BoardAdmin extends TemplateServlet {
    * Handler
    *****************************/
 
-  protected String doTemplateRequest( 
+  protected String doTemplateRequest(
                    Melati melati, TemplateContext context) 
                    throws Exception {
 
@@ -608,68 +614,68 @@ public class BoardAdmin extends TemplateServlet {
     if (melati.getTable() == null) {
       if (melati.getMethod() != null) {
        if (melati.getMethod().equals("Types"))
-         return typesTemplate(context,melati);
+         return typesTemplate(context, melati);
        if (melati.getMethod().equals("SearchForBoard"))
-        return searchForBoardTemplate(context,melati);
+        return searchForBoardTemplate(context, melati);
       }
     }
     else if (melati.getTable().getName().equals("board") &&
                                          melati.getObject() != null) {
       if (melati.getMethod().equals("Board"))
-        return boardTemplate(context,melati);
+        return boardTemplate(context, melati);
       if (melati.getMethod().equals("Login"))
-        return loginTemplate(context,melati);
+        return loginTemplate(context, melati);
       if (melati.getMethod().equals("MessageNew"))
-        return messageNewTemplate(context,melati,board);
+        return messageNewTemplate(context, melati, board);
       if (melati.getMethod().equals("MessageCreate"))
-        return messageCreateTemplate(context,melati,board);
+        return messageCreateTemplate(context, melati, board);
       if (melati.getMethod().equals("SearchBoard"))
-        return searchBoardTemplate(context,melati,board);
+        return searchBoardTemplate(context, melati, board);
       if (melati.getMethod().equals("Settings"))
-        return settingsTemplate(context,melati,board);
+        return settingsTemplate(context, melati, board);
       if (melati.getMethod().equals("SettingsEdit"))
-        return settingsEditTemplate(context,melati,board);
+        return settingsEditTemplate(context, melati, board);
       if (melati.getMethod().equals("SettingsUpdate"))
-        return settingsUpdateTemplate(context,melati,board);
+        return settingsUpdateTemplate(context, melati, board);
       if (melati.getMethod().equals("Members"))
-        return membersTemplate(context,melati,board);
+        return membersTemplate(context, melati, board);
       if (melati.getMethod().equals("Subscribe"))
-        return subscribeTemplate(context,melati,board);
+        return subscribeTemplate(context, melati, board);
       if (melati.getMethod().equals("Unsubscribe"))
-        return unsubscribeTemplate(context,melati,board);
+        return unsubscribeTemplate(context, melati, board);
       if (melati.getMethod().equals("SubscribeOthers"))
-        return subscribeOthersTemplate(context,melati,board);
+        return subscribeOthersTemplate(context, melati, board);
       if (melati.getMethod().equals("MembersEdit"))
-        return membersEditTemplate(context,melati,board);
+        return membersEditTemplate(context, melati, board);
       if (melati.getMethod().equals("PendingMessages"))
-        return pendingMessagesTemplate(context,melati,board);
+        return pendingMessagesTemplate(context, melati, board);
       if (melati.getMethod().equals("PendingSubscriptions"))
-        return pendingSubscriptionsTemplate(context,melati,board);
+        return pendingSubscriptionsTemplate(context, melati, board);
       if (melati.getMethod().equals("ApproveMessages"))
-        return approveMessagesTemplate(context,melati,board);
+        return approveMessagesTemplate(context, melati, board);
       if (melati.getMethod().equals("DeleteMessages"))
-        return deleteMessagesTemplate(context,melati,board);
+        return deleteMessagesTemplate(context, melati, board);
       if (melati.getMethod().equals("ApproveSubscriptions"))
-        return approveSubscriptionsTemplate(context,melati,board);
+        return approveSubscriptionsTemplate(context, melati, board);
     }
     else if (melati.getTable().getName().equals("message") &&
                                          melati.getObject() != null) {
       if (melati.getMethod().equals("Message"))
-        return messageTemplate(context,melati,board, true);
+        return messageTemplate(context, melati, board, true);
       if (melati.getMethod().equals("MessageNoThread"))
-        return messageTemplate(context,melati,board, false);
+        return messageTemplate(context, melati, board, false);
     }
     else if (melati.getTable().getName().equals("boardtype") &&
                                          melati.getObject() != null) {
       if (melati.getMethod().equals("ListBoards"))
-        return listBoardsTemplate(context,melati);
+        return listBoardsTemplate(context, melati);
     }
     else if (melati.getTable().getName().equals("subscription") &&
                                              melati.getObject() != null) {
       if (melati.getMethod().equals("SubscriptionEdit"))
-        return subscriptionEditTemplate(context,melati,board);
+        return subscriptionEditTemplate(context, melati, board);
       if (melati.getMethod().equals("SubscriptionUpdate"))
-        return subscriptionUpdateTemplate(context,melati,board);
+        return subscriptionUpdateTemplate(context, melati, board);
     }
 
     throw new InvalidUsageException(this, melati.getContext());
@@ -684,7 +690,7 @@ public class BoardAdmin extends TemplateServlet {
    */
   private String getBoardStart(Board board, HttpSession session, String start) {
     if (board != null) {
-      String key = "org.paneris.melati.boards."+board.troid();
+      String key = "org.paneris.melati.boards." + board.troid();
       if (start == null)
         start = (String)session.getValue(key);
       else
@@ -757,7 +763,7 @@ class DistributeThread extends Thread {
           try {
 
       // Send email to user
-      Email.send(board.getDatabase(),
+      Email.send(board.getDatabase(), 
                  "admin."+board.getEmailAddress(),       // From
                  user.getEmail(),      // To
                  "",                   // reply to
@@ -774,7 +780,7 @@ class DistributeThread extends Thread {
       managers.copyInto(emailArray);
 
       // Send email to managers
-      Email.sendToList(board.getDatabase(),
+      Email.sendToList(board.getDatabase(), 
                        "admin."+board.getEmailAddress(),       // From
                        emailArray,           // To
                        user.getEmail(),     // Apparently to
