@@ -80,7 +80,7 @@ import org.paneris.melati.boards.model.MessageTable;
 
 /**
  * A wrapper to make a handy interface to the database tables comprising
- * a set of messageboards
+ * a set of messageboards.
  */
 
 public class BoardStoreImpl implements BoardStore {
@@ -93,7 +93,7 @@ public class BoardStoreImpl implements BoardStore {
   protected Message parent = null;
 
   /**
-   * A wrapper for the messageboards in a given database
+   * A wrapper for the messageboards in a given database.
    *
    */
   public BoardStoreImpl() {}
@@ -158,7 +158,7 @@ public class BoardStoreImpl implements BoardStore {
   /**
    * Return the user (poster) ID with a given email address.
    * <P>
-   * This is called in the constructor, and need to be called within
+   * This is called in the constructor, and needs to be called within
    * database.inSession()
    *
    * @param email            their <TT>x@y.z</TT> address, case-insensitive
@@ -166,22 +166,27 @@ public class BoardStoreImpl implements BoardStore {
    * @throws MessagingException e.g. if the user doesn't exist
    * @throws SQLException       if something fails
    *
-   * @return                   any object which will be recognised later by
-   *                            <TT>messageAccept</TT>
+   * @return                   an object which will be recognised later by
+   *                           <TT>messageAccept</TT>
    *
    * @see #messageAccept
    */
-  private org.paneris.melati.boards.model.User senderOfAddress(Recipient recipient,
-                                               InternetAddress email)
-                                              throws MessagingException {
+  private org.paneris.melati.boards.model.User 
+      senderOfAddress(Recipient recipient,
+                      InternetAddress email)
+      throws MessagingException {
 
 /*
     sender = (org.melati.poem.User)database.getTable("user").
                 getColumn("email").firstWhereEq(email.getAddress());
 */
+
+// Perhaps we should add an index to db:
+// CREATE INDEX upper_email ON "users" (UPPER("email") text_ops);
+
     sender = (org.paneris.melati.boards.model.User)database.getTable("user").
                firstSelection(
-                 "UPPER(email) = '" + email.getAddress().toUpperCase() + "'");
+                 "UPPER(" + database.getDbms().getQuotedName("email") + ") = '" + email.getAddress().toUpperCase() + "'");
 
     if (sender == null) {
       
@@ -208,7 +213,7 @@ public class BoardStoreImpl implements BoardStore {
    * Return the message board (and parent message) ID with a given email
    * address.
    * <P>
-   * This is called in the constructor, and need to be called within
+   * This is called in the constructor and needs to be called within
    * database.inSession()
    *
    * @param email            has the form
