@@ -178,7 +178,7 @@ http://sourceforge.net/mailarchive/forum.php?forum=melati-users
   <dependencies>
     <dependency>
       <id>melati</id>
-      <version>0.7.0</version>
+      <version>0.7.1</version>
       <url>http://www.melati.org/</url>
     </dependency>
     <dependency>
