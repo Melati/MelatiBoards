@@ -22,7 +22,8 @@ public class MessageTable extends MessageTableBase {
                 getBoardObject(((Message)persistent).getBoard_unsafe());
     AccessToken token = PoemThread.accessToken();
 
-    persistent.setRaw("date", new Timestamp(new java.util.Date().getTime()));
+    Timestamp now = new Timestamp(new java.util.Date().getTime());
+    persistent.setRaw("date", now);
     persistent.setRaw("author", ((User)token).troid());
     persistent.setRaw("approved",
                  new Boolean(

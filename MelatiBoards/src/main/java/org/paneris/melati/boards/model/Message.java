@@ -3,6 +3,7 @@ package org.paneris.melati.boards.model;
 import org.melati.util.*;
 
 import org.paneris.melati.boards.model.generated.*;
+import java.text.*;
 import java.util.*;
 import java.sql.Date;
 import java.sql.Timestamp;
@@ -11,6 +12,16 @@ import org.melati.poem.*;
 
 public class Message extends MessageBase implements Treeable {
   public Message() {}
+
+  private static DateFormat localeFormatter =
+    new SimpleDateFormat("dd MMM yyyy HH:mm:ss");
+  static {
+    localeFormatter.setTimeZone(TimeZone.getTimeZone("Europe/London"));
+  }
+
+  public String getLondonDate() {
+    return localeFormatter.format(getDate_unsafe());
+  }
 
   public void distribute() {
     (new DistributeThread(this)).start();
