@@ -95,9 +95,9 @@ public class BoardStoreImpl implements BoardStore {
   /**
    * A wrapper for the messageboards in a given database
    *
-   * @param connMgr            our handle to the DBMS
-   * @param database            the name of the database
-   * @param log                  where to log trouble
+   * @param connMgr      our handle to the DBMS
+   * @param database     the name of the database
+   * @param log          where to log trouble
    */
   
   public BoardStoreImpl() {}
@@ -135,10 +135,9 @@ public class BoardStoreImpl implements BoardStore {
     }
   }
 
-  /**
-   * Tidy up
-   */
-
+ /**
+  * Tidy up
+  */
   public void close() {
   }
 
@@ -146,9 +145,9 @@ public class BoardStoreImpl implements BoardStore {
     close();
   }
 
-  /**
-   * Return type of {@link #recipientOfAddress(InternetAddress)}.
-   */
+ /**
+  * Return type of {@link #recipientOfAddress(InternetAddress)}.
+  */
   public class Recipient {
     public Board board;
     public Integer parentID;
@@ -170,7 +169,6 @@ public class BoardStoreImpl implements BoardStore {
    *
    * @see #messageAccept
    */
-
   private org.paneris.melati.boards.model.User senderOfAddress(Recipient recipient,
                                                InternetAddress email)
                                               throws MessagingException {
@@ -251,6 +249,7 @@ public class BoardStoreImpl implements BoardStore {
         recipient.parentID = null;
       }
 
+      // FIXME - does not deal with MTA's lowercasing of addresses
       Persistent board = database.getTable("board").
                              getColumn("name").firstWhereEq(boardName);
 
@@ -331,11 +330,11 @@ public class BoardStoreImpl implements BoardStore {
   /**
    * Stick a message into the messageboards
    *
-   * @param text            the raw (un-decoded) data of the message
+   * @param text           the raw (un-decoded) data of the message
    *
-   * @throws Exception            because the routines it call do ...
+   * @throws Exception     because the routines it calls do ...
    *
-   * @return                   a message ID for the message
+   * @return               a message ID for the message
    */
 
   public Integer messageAccept(final InputStream text) throws Exception {

@@ -76,10 +76,10 @@ public class DotTerminatedInputStream extends FilterInputStream {
 
   /**
    * @param in          the underlying stream: must be a
-   *                            <TT>PushbackInputStream</TT> because
-   *                            it's theoretically possible to end up
-   *                            with a character that has to be pushed
-   *                            back
+   *                    <TT>PushbackInputStream</TT> because
+   *                    it's theoretically possible to end up
+   *                    with a character that has to be pushed
+   *                    back
    */
   public DotTerminatedInputStream(PushbackInputStream in) {
     super(in);
@@ -133,7 +133,7 @@ public class DotTerminatedInputStream extends FilterInputStream {
       switch (b = superRead()) {
         case '\r': state = FIRSTCR; pushBack((byte)13); break;
         case '\n': state = FIRSTNL; pushBack((byte)10); break;
-            case -1:   state = POP; state1 = TERMINATED; break;
+        case   -1: state = POP; state1 = TERMINATED; break;
         default:   return b;
       }
       break;
@@ -142,17 +142,17 @@ public class DotTerminatedInputStream extends FilterInputStream {
       switch (b = superRead()) {
         case '\n': state = FIRSTNL; pushBack((byte)10); break;
         case '\r': state = POP; state1 = TEXT; byte1 = '\r'; break;
-            case -1:   state = POP; state1 = TERMINATED; break;
+        case   -1: state = POP; state1 = TERMINATED; break;
         default:   state = POP; state1 = TEXT; byte1 = b; break;
       }
       break;
 
     case FIRSTNL:
       switch (b = superRead()) {
-        case '.': state = DOT; pushBack((byte)46); break;
+        case  '.': state = DOT; pushBack((byte)46); break;
         case '\n': state = POP; state1 = TEXT; byte1 = '\n'; break;
         case '\r': state = POP; state1 = TEXT; byte1 = '\r'; break;
-            case -1:   state = POP; state1 = TERMINATED; break;
+        case   -1: state = POP; state1 = TERMINATED; break;
         default:   state = POP; state1 = TEXT; byte1 = b; break;
       }
       break;
@@ -161,7 +161,7 @@ public class DotTerminatedInputStream extends FilterInputStream {
       switch (b = superRead()) {
         case '\n': state = TERMINATED; break;
         case '\r': state = SECONDCR; break;
-            case -1:   state = POP; state1 = TERMINATED; break;
+        case   -1: state = POP; state1 = TERMINATED; break;
         default:   state = POP; state1 = TEXT; byte1 = b; break;
       }
       break;
@@ -205,6 +205,13 @@ public class DotTerminatedInputStream extends FilterInputStream {
     return i;
   }
 
+  
+  /**
+   * Skip forward a number of characters.
+   * 
+   * @return the actual number of characters skipped 
+   * @see java.io.InputStream#skip(long)
+   */
   public synchronized long skip(long n) throws IOException {
     while (n > 0L && read() != -1) --n;
     return n;
