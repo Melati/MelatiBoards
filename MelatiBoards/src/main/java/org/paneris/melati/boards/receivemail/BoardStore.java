@@ -152,7 +152,7 @@ class BoardStore {
                                               throws MessagingException {
 
     sender = (org.melati.poem.User)database.getTable("user").
-                getColumn("email").firstWhereEq(email.getAddress());
+                getColumn("email").firstWhereEq(email.getAddress().toLowerCase());
 
     if (sender == null)
       throw new MessagingException(
