@@ -234,7 +234,7 @@ table Message
         (displaylevel = record)
         (searchability = yes);
 
-    String body (size = unlimited) (width = 70) (height = 20) (nullable)
+    String body (size = unlimited) (width = 70) (height = 20)
         (description = "The main content of this message")
         (displaylevel = record)
         (searchability = yes);

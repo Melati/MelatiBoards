@@ -309,6 +309,10 @@ public class MessageTableBase extends Table {
             return "Author of this message";
           }
 
+          protected String defaultRenderinfo() {
+            return "SelectionWindow";
+          }
+
           public Object getRaw_unsafe(Persistent g)
               throws AccessPoemException {
             return ((Message)g).getAuthor_unsafe();
@@ -392,7 +396,7 @@ public class MessageTableBase extends Table {
         });
 
     defineColumn(col_body =
-        new Column(this, "body", new StringPoemType(true, -1), DefinitionSource.dsd) { 
+        new Column(this, "body", new StringPoemType(false, -1), DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
               throws AccessPoemException, PoemException {
             return ((Message)g).getBody();
