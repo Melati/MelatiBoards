@@ -7,17 +7,6 @@ import javax.servlet.ServletException;
 
 import org.paneris.melati.boards.receivemail.Log;
 
-/*
-class RunHSQL implements Runnable {
-
-  public void run() {
-    String[] args = new String[2];
-    args[0] = "-port";
-    args[1] = "9002";
-    org.hsqldb.Server.main(args);
-  }
-}
-*/
 public class NNTPServer implements Runnable {
 
   private String identifier = null;
