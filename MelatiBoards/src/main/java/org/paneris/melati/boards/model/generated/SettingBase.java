@@ -3,15 +3,17 @@
 package org.paneris.melati.boards.model.generated;
 
 
+import org.melati.poem.Setting;
 import org.paneris.melati.boards.model.BoardsDatabaseTables;
 import org.paneris.melati.boards.model.SettingTable;
+
 
 /**
  * Melati POEM generated base class for persistent Setting.
  * Field summary for SQL table setting:
  *
  */
-public abstract class SettingBase extends org.melati.poem.Setting {
+public abstract class SettingBase extends Setting {
 
   public BoardsDatabaseTables getBoardsDatabaseTables() {
     return (BoardsDatabaseTables)getDatabase();

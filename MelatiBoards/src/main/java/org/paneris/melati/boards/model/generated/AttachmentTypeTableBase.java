@@ -2,23 +2,21 @@
 
 package org.paneris.melati.boards.model.generated;
 
-
+import org.melati.poem.AccessPoemException;
+import org.melati.poem.Column;
 import org.melati.poem.Database;
 import org.melati.poem.DefinitionSource;
-import org.melati.poem.Column;
-import org.melati.poem.Persistent;
-import org.melati.poem.Field;
-import org.melati.poem.PoemException;
-import org.melati.poem.AccessPoemException;
-import org.melati.poem.ValidationPoemException;
-import org.melati.poem.Table;
-import org.paneris.melati.boards.model.BoardsDatabaseTables;
-
-import org.melati.poem.StringPoemType;
-import org.melati.poem.Searchability;
-import org.paneris.melati.boards.model.AttachmentType;
-import org.melati.poem.TroidPoemType;
 import org.melati.poem.DisplayLevel;
+import org.melati.poem.Field;
+import org.melati.poem.Persistent;
+import org.melati.poem.PoemException;
+import org.melati.poem.Searchability;
+import org.melati.poem.StringPoemType;
+import org.melati.poem.Table;
+import org.melati.poem.TroidPoemType;
+import org.melati.poem.ValidationPoemException;
+import org.paneris.melati.boards.model.AttachmentType;
+import org.paneris.melati.boards.model.BoardsDatabaseTables;
 
 
 /**
@@ -28,6 +26,7 @@ import org.melati.poem.DisplayLevel;
  *   type
  *
  */
+
 public class AttachmentTypeTableBase extends Table {
 
   private Column col_id = null;

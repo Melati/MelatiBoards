@@ -3,15 +3,14 @@
 package org.paneris.melati.boards.model.generated;
 
 
+import org.melati.poem.AccessPoemException;
 import org.melati.poem.Column;
 import org.melati.poem.Field;
 import org.melati.poem.Persistent;
-import org.melati.poem.AccessPoemException;
 import org.melati.poem.ValidationPoemException;
-
-
-import org.paneris.melati.boards.model.MembershipStatusTable;
 import org.paneris.melati.boards.model.BoardsDatabaseTables;
+import org.paneris.melati.boards.model.MembershipStatusTable;
+
 
 /**
  * Melati POEM generated base class for persistent MembershipStatus.
