@@ -87,13 +87,13 @@ public class User extends UserBase {
     // no name - try email
     if (loginid == null) loginid = getEmail();
     // ahhh - still none - randomise
-    if (loginid == null) loginid = StringUtils.randomString(6);
+    if (loginid == null) return StringUtils.randomString(6);
     
     int space = loginid.indexOf(' ');
     if (space > 0) {
-      loginid = name.substring(0,space);
+      loginid = loginid.substring(0,space);
       space ++;
-      if (space < name.length()) loginid += name.charAt(space);
+      if (space < loginid.length()) loginid += loginid.charAt(space);
     } else {
       // try and make the best of it if we have a name that is actually an email address
       int at = loginid.indexOf('@');
