@@ -76,7 +76,7 @@ class BoardStore {
   private Database database;
   private Log log;
 
-  private org.melati.poem.User sender = null;
+  private org.paneris.melati.boards.model.User sender = null;
   private Recipient recipient = null;
 
   /**
@@ -93,8 +93,8 @@ class BoardStore {
       throws IOException, MessagingException {
     this.database = database;
     this.log = log;
-    sender = senderOfAddress(senderAddr);
     recipient = recipientOfAddress(messAddr);
+    sender = senderOfAddress(recipient,senderAddr);
 
     if (!recipient.board.canPost((org.paneris.melati.boards.model.User)sender)) {
       throw new MessagingException(
@@ -148,22 +148,32 @@ class BoardStore {
    * @see #messageAccept
    */
 
-  private org.melati.poem.User senderOfAddress(InternetAddress email)
+  private org.paneris.melati.boards.model.User senderOfAddress(Recipient recipient,
+                                               InternetAddress email)
                                               throws MessagingException {
 
 /*
     sender = (org.melati.poem.User)database.getTable("user").
                 getColumn("email").firstWhereEq(email.getAddress());
 */
-    sender = (org.melati.poem.User)database.getTable("user").
+    sender = (org.paneris.melati.boards.model.User)database.getTable("user").
                firstSelection(
                  "UPPER(email) = '" + email.getAddress().toUpperCase() + "'");
 
-    if (sender == null)
-      throw new MessagingException(
+    if (sender == null) {
+      
+      //TTJ add option for annonymous posting - create a user record
+      if (!recipient.board.getAnonymousposting().booleanValue()) {
+        throw new MessagingException(
             "user `" + email + "' " +
             "not authorised to post on this message board");
-
+      } else {
+        sender = (org.paneris.melati.boards.model.User)database.getUserTable().newPersistent();
+        sender.setEmail(email.getAddress());
+        sender.generateDefaults();
+        database.getUserTable().create(sender);
+      }
+    }
     return sender;
   }
 
