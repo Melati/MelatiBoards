@@ -142,6 +142,10 @@ public class SubscriptionTableBase extends Table {
               throws AccessPoemException {
             ((Subscription)g).setUserTroid((Integer)raw);
           }
+
+          public StandardIntegrityFix defaultIntegrityFix() {
+            return StandardIntegrityFix.delete;
+          }
         });
 
     defineColumn(col_board =
@@ -194,6 +198,10 @@ public class SubscriptionTableBase extends Table {
           public void setRaw(Persistent g, Object raw)
               throws AccessPoemException {
             ((Subscription)g).setBoardTroid((Integer)raw);
+          }
+
+          public StandardIntegrityFix defaultIntegrityFix() {
+            return StandardIntegrityFix.delete;
           }
         });
 
