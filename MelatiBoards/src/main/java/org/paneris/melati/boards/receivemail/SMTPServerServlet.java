@@ -162,7 +162,7 @@ public class SMTPServerServlet implements Servlet {
       "                --log " + logPathDefault;
 
   /**
-   * Servlet initialisation
+   * Servlet initialisation.
    * <p>
    * Get parameters from the config file and launch a Warden thread
    *
@@ -186,19 +186,19 @@ public class SMTPServerServlet implements Servlet {
     String logP = config.getInitParameter("log");
     if (logP != null && !logP.equals("")) {
       logPath = logP;
-//	  try {
-	    log.setTarget(logPath);
-//	  }
-//	  catch (IOException e) {
-//	    System.err.println(e);
-//	    System.exit(1);
-//	  }
+//    try {
+        log.setTarget(logPath);
+//    }
+//    catch (IOException e) {
+//      System.err.println(e);
+//      System.exit(1);
+//    }
     }
 
     try {
       if (logPath == null) {
         // not set on command line
-    	log.setTarget(logPathDefault);
+        log.setTarget(logPathDefault);
       }
 
       Properties databaseNameOfDomain =
@@ -213,7 +213,7 @@ public class SMTPServerServlet implements Servlet {
                        databaseNameOfDomain,
                        65536, log), "board smtpserver");
         smtpserver.start();
-	log.debug("Started SMTP server servlet");
+    log.debug("Started SMTP server servlet");
       }
     }
     catch (Exception e) {

@@ -134,19 +134,16 @@ public class BoardStoreImpl implements BoardStore {
     close();
   }
 
-
   /**
-   * To whom this may concern...
-   * 
-   */ 
-
+   * Return type of {@link #recipientOfAddress(InternetAddress)}.
+   */
   public class Recipient {
     public Board board;
     public Integer parentID;
   }
-  
+
   /**
-   * Return the user (poster) ID with a given email address
+   * Return the user (poster) ID with a given email address.
    * <P>
    * This is called in the constructor, and need to be called within
    * database.inSession()
@@ -156,7 +153,7 @@ public class BoardStoreImpl implements BoardStore {
    * @throws MessagingException e.g. if the user doesn't exist
    * @throws SQLException       if something fails
    *
-   * @returns                   any object which will be recognised later by
+   * @return                   any object which will be recognised later by
    *                            <TT>messageAccept</TT>
    *
    * @see #messageAccept
@@ -195,11 +192,9 @@ public class BoardStoreImpl implements BoardStore {
     return sender;
   }
 
-
-
   /**
    * Return the message board (and parent message) ID with a given email
-   * address
+   * address.
    * <P>
    * This is called in the constructor, and need to be called within
    * database.inSession()
@@ -212,7 +207,7 @@ public class BoardStoreImpl implements BoardStore {
    * @throws MessagingException e.g. if the board doesn't exist
    * @throws SQLException       if something fails
    *
-   * @returns                   any object which will be recognised later by
+   * @return                   any object which will be recognised later by
    *                            <TT>messageAccept</TT>
    *
    * @see #messageAccept
@@ -256,7 +251,7 @@ public class BoardStoreImpl implements BoardStore {
   }
 
   /**
-   * Write an attachment into the attachment table and filesystem
+   * Write an attachment into the attachment table and filesystem.
    * <P>
    * This is called from within messageAccept, and so is within 
    * database.inSession()
@@ -328,7 +323,7 @@ public class BoardStoreImpl implements BoardStore {
    *
    * @throws Exception            because the routines it call do ...
    *
-   * @returns                   a message ID for the message
+   * @return                   a message ID for the message
    */
 
   public Integer messageAccept(final InputStream text) throws Exception {
@@ -341,7 +336,7 @@ public class BoardStoreImpl implements BoardStore {
 
     if (subject.toUpperCase().indexOf("BAN") == 0) {
         if (recipient.board.isManager(sender)) {
-	    recipient.board.ban(parent.getAuthor());
+        recipient.board.ban(parent.getAuthor());
             parent.setDeleted(Boolean.TRUE);
           return null;
         }
