@@ -61,46 +61,61 @@ import org.paneris.melati.boards.model.generated.SettingTableBase;
 
 public class SettingTable extends SettingTableBase {
 
-    String[] names = {"SMTPServer",         // FIXME should be Email.SMTPSERVER,
-                    "BoardsEmailDomain",
-                    "BoardsSystemURL",
-                    "BoardsEmailTemplates",
-                    "BoardsAttachmentsPath",
-                    "BoardsAttachmentsURL",
-                    "BoardsStylesheetURL",
-                    "LogicalDatabase"};
+  String[] names = 
+     {"SMTPServer",         // FIXME should be Email.SMTPSERVER,
+      "BoardsEmailDomain",
+      "BoardsSystemURL",
+      "BoardsEmailTemplates",
+      "BoardsAttachmentsPath",
+      "BoardsAttachmentsURL",
+      "BoardsStylesheetURL",
+      "LogicalDatabase"};
 
-  String[] displaynames = {"SMTP server",
-                           "Boards email domain",
-                           "Boards system URL",
-                           "Boards email templates",
-                           "Boards attachments Path",
-                           "Boards attachments URL",
-                           "Boards stylesheet URL",
-                           "Logical database"};
+    // At least two of these need to be set by hand, 
+    // the other defaults need to be reviewed for each installation
+  String[] values = 
+   {"SMTP server",
+    "", // Boards email domain
+    "/BoardAdmin",
+    "/dist/MelatiBoards/src/org/paneris/melati/boards/emailtemplates",
+    "/dist/MelatiBoards/attachments",
+    "/attachments/",
+    "/css/boards.css", 
+    ""}; //Logical database
 
-  String[] descriptions = {"The SMTP server for outgoing mail",
-                           "The domain which receives mail for this database. " +
-                           "Note that this must be the same as that defined " +
-                           "in smtpServer.properties (or equivalent, if you " +
-                           "set a different name when starting SMTPServerServlet) " +
-                           "(e.g. boards.testapp.co.uk)",
-                           "the URL to the BoardAdmin handler for this database " +
-                           "(e.g. http://www.testapp.co.uk/testapp/org.paneris.melati.boards.BoardAdmin)",
-                           "The directory containing the templates for sending " +
-                           "out email. This is relative to WM's TemplatePath " +
-                           "(e.g. testapp/boards/emailtemplates)",
-                           "A directory which will contain one directory for " +
-                           "each board (named after the board) in which to " +
-                           "store attachments for this board " +
-                           "(e.g. /usr/httpd/testapp/board_attachments)",
-                           "A URL to the directory defined by BoardsAttachmentsPath " +
-                           "(e.g. http://www.testapp.co.uk/board_attachments)",
-                           "A URL to a stylesheet for all board pages",
-                           "The name of the database (note this must agree with " +
-                           "the entry in org.melati.LogicalDatabase.properties " +
-                           "(e.g. testdb)"
-                          };
+  String[] displaynames = 
+   {"SMTP server",
+    "Boards email domain",
+    "Boards system URL",
+    "Boards email templates",
+    "Boards attachments Path",
+    "Boards attachments URL",
+    "Boards stylesheet URL",
+    "Logical database"};
+
+  String[] descriptions = 
+   {"The SMTP server for outgoing mail",
+    "The domain which receives mail for this database. " +
+    "Note that this must be the same as that defined " +
+    "in smtpServer.properties (or equivalent, if you " +
+    "set a different name when starting SMTPServerServlet) " +
+    "(e.g. boards.testapp.co.uk)",
+    "the URL to the BoardAdmin handler for this database " +
+    "(e.g. http://www.testapp.co.uk/testapp/org.paneris.melati.boards.BoardAdmin)",
+    "The directory containing the templates for sending " +
+    "out email. This is relative to WM's TemplatePath " +
+    "(e.g. testapp/boards/emailtemplates)",
+    "A directory which will contain one directory for " +
+    "each board (named after the board) in which to " +
+    "store attachments for this board " +
+    "(e.g. /usr/httpd/testapp/board_attachments)",
+    "A URL to the directory defined by BoardsAttachmentsPath " +
+    "(e.g. http://www.testapp.co.uk/board_attachments)",
+    "A URL to a stylesheet for all board pages",
+    "The name of the database (note this must agree with " +
+    "the entry in org.melati.LogicalDatabase.properties " +
+    "(e.g. testdb)"
+   };
 
   public SettingTable(
       Database database, String name,
