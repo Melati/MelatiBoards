@@ -129,7 +129,7 @@ public class SettingTable extends SettingTableBase {
     super.unifyWithDB(colDescs);
 
     for (int i = 0; i < names.length; i++) {
-       ensure(names[i], PoemTypeFactory.STRING, "",
+       ensure(names[i], PoemTypeFactory.STRING, values[i],
               displaynames[i], descriptions[i]);
     }
 
