@@ -2,42 +2,41 @@
 
 package org.paneris.melati.boards.model.generated;
 
-
 // 19 tables in database
-import org.melati.poem.CapabilityTable;
-import org.melati.poem.ColumnInfoTable;
-import org.melati.poem.GroupCapabilityTable;
-import org.melati.poem.GroupMembershipTable;
 import org.melati.poem.GroupTable;
+import org.melati.poem.CapabilityTable;
+import org.melati.poem.GroupMembershipTable;
+import org.melati.poem.GroupCapabilityTable;
 import org.melati.poem.TableCategoryTable;
 import org.melati.poem.TableInfoTable;
-import org.paneris.melati.boards.model.AttachmentTable;
-import org.paneris.melati.boards.model.AttachmentTypeTable;
-import org.paneris.melati.boards.model.BoardTable;
+import org.melati.poem.ColumnInfoTable;
 import org.paneris.melati.boards.model.BoardTypeTable;
+import org.paneris.melati.boards.model.BoardTable;
 import org.paneris.melati.boards.model.MembershipStatusTable;
-import org.paneris.melati.boards.model.MessageTable;
 import org.paneris.melati.boards.model.SubscriptionTable;
+import org.paneris.melati.boards.model.MessageTable;
+import org.paneris.melati.boards.model.AttachmentTypeTable;
+import org.paneris.melati.boards.model.AttachmentTable;
 
 /**
  * Melati POEM generated interface
  */
 public interface BoardsDatabaseTablesBase {
 
-GroupTable getGroupTable();
-CapabilityTable getCapabilityTable();
-GroupMembershipTable getGroupMembershipTable();
-GroupCapabilityTable getGroupCapabilityTable();
-TableCategoryTable getTableCategoryTable();
-TableInfoTable getTableInfoTable();
-ColumnInfoTable getColumnInfoTable();
-BoardTypeTable getBoardTypeTable();
-BoardTable getBoardTable();
-org.melati.poem.UserTable getUserTable();
-MembershipStatusTable getMembershipStatusTable();
-SubscriptionTable getSubscriptionTable();
-MessageTable getMessageTable();
-AttachmentTypeTable getAttachmentTypeTable();
-AttachmentTable getAttachmentTable();
-org.melati.poem.SettingTable getSettingTable();
+  GroupTable getGroupTable();
+  CapabilityTable getCapabilityTable();
+  GroupMembershipTable getGroupMembershipTable();
+  GroupCapabilityTable getGroupCapabilityTable();
+  TableCategoryTable getTableCategoryTable();
+  TableInfoTable getTableInfoTable();
+  ColumnInfoTable getColumnInfoTable();
+  BoardTypeTable getBoardTypeTable();
+  BoardTable getBoardTable();
+  org.melati.poem.UserTable getUserTable();
+  MembershipStatusTable getMembershipStatusTable();
+  SubscriptionTable getSubscriptionTable();
+  MessageTable getMessageTable();
+  AttachmentTypeTable getAttachmentTypeTable();
+  AttachmentTable getAttachmentTable();
+  org.melati.poem.SettingTable getSettingTable();
 }

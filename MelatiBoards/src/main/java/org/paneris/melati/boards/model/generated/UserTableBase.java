@@ -2,7 +2,6 @@
 
 package org.paneris.melati.boards.model.generated;
 
-
 import org.melati.poem.AccessPoemException;
 import org.melati.poem.Column;
 import org.melati.poem.Database;
@@ -13,6 +12,7 @@ import org.melati.poem.Persistent;
 import org.melati.poem.PoemException;
 import org.melati.poem.Searchability;
 import org.melati.poem.StringPoemType;
+import org.melati.poem.UserTable;
 import org.melati.poem.ValidationPoemException;
 import org.paneris.melati.boards.model.BoardsDatabaseTables;
 import org.paneris.melati.boards.model.User;
@@ -24,7 +24,8 @@ import org.paneris.melati.boards.model.User;
  *   email
  *
  */
-public class UserTableBase extends org.melati.poem.UserTable {
+
+public class UserTableBase extends UserTable {
 
   private Column col_email = null;
 

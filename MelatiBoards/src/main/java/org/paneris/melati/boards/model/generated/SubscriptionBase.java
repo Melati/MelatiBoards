@@ -3,19 +3,18 @@
 package org.paneris.melati.boards.model.generated;
 
 
+import org.melati.poem.AccessPoemException;
 import org.melati.poem.Column;
 import org.melati.poem.Field;
-import org.melati.poem.Persistent;
-import org.melati.poem.AccessPoemException;
-import org.melati.poem.ValidationPoemException;
-
-import org.paneris.melati.boards.model.MembershipStatus;
 import org.melati.poem.NoSuchRowPoemException;
-import org.paneris.melati.boards.model.User;
+import org.melati.poem.Persistent;
+import org.melati.poem.ValidationPoemException;
 import org.paneris.melati.boards.model.Board;
-
-import org.paneris.melati.boards.model.SubscriptionTable;
 import org.paneris.melati.boards.model.BoardsDatabaseTables;
+import org.paneris.melati.boards.model.MembershipStatus;
+import org.paneris.melati.boards.model.SubscriptionTable;
+import org.paneris.melati.boards.model.User;
+
 
 /**
  * Melati POEM generated base class for persistent Subscription.

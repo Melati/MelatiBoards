@@ -2,11 +2,11 @@
 
 package org.paneris.melati.boards.model.generated;
 
-
 import org.melati.poem.Database;
 import org.melati.poem.DefinitionSource;
 import org.melati.poem.Persistent;
 import org.melati.poem.PoemException;
+import org.melati.poem.SettingTable;
 import org.paneris.melati.boards.model.BoardsDatabaseTables;
 import org.paneris.melati.boards.model.Setting;
 
@@ -16,7 +16,8 @@ import org.paneris.melati.boards.model.Setting;
  * Field summary for SQL table setting:
  *
  */
-public class SettingTableBase extends org.melati.poem.SettingTable {
+
+public class SettingTableBase extends SettingTable {
 
 
   public SettingTableBase(
