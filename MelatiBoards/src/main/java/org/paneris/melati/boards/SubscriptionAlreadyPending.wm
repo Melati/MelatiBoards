@@ -1,0 +1,22 @@
+#set $Response.ContentType = "text/html"
+#set $ml = $melati.HTMLMarkupLanguage
+#set $board = $melati.Object
+
+<html>
+<head>
+<title>Subscribe to board: $ml.rendered($board)</title>
+</head>
+
+<body>
+<h1>Board: $ml.rendered($board)</h1>
+
+#parse "melati/boards/Menu.wm"
+
+<h2>Subscribe</h2>
+
+<p>You have already asked to be subscribed to this board. A manager is reviewing
+your application.</p>
+
+</body>
+</html>
+

@@ -1,0 +1,3 @@
+#parse $board.templatePath("ThisOrganisation")
+Board: $board.Name
+Purpose: $board.Purpose
