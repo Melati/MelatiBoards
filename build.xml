@@ -109,6 +109,18 @@
       <arg line="etc/jetty.xml"/>
     </java>
   </target>
+    <!-- ============================================================== -->
+    <!-- run Jetty with Maven generated .war                -->
+    <!-- ============================================================== -->
+
+  <target name="jetty_war" description="Launch Jetty">
+    <java classname="org.mortbay.jetty.Server"
+          classpathref="classpath.jetty"
+          fork="yes"
+          failonerror="yes">
+      <arg line="etc/jetty_maven_war.xml"/>
+    </java>
+  </target>
 
 
 </project>
