@@ -3,7 +3,7 @@
   <pomVersion>3</pomVersion>
   <id>MelatiBoards</id>
   <name>MelatiBoards</name>
-  <currentVersion>1.1.2-SNAPSHOT</currentVersion>
+  <currentVersion>1.2</currentVersion>
   <organization>
     <name>PanEris</name>
     <url>http://www.paneris.org/</url>
@@ -178,33 +178,43 @@ http://sourceforge.net/mailarchive/forum.php?forum=melati-users
   <dependencies>
     <dependency>
       <id>melati</id>
-      <version>0.7.2</version>
+      <version>0.7.2.2</version>
       <url>http://www.melati.org/</url>
-    </dependency>
-    <dependency>
-      <id>webmacro</id>
-      <version>1.0</version>
-      <url>http://www.webmacro.org/</url>
+      <properties>
+         <war.bundle>false</war.bundle>
+      </properties>
     </dependency>
     <dependency>
       <id>javamail</id>
       <version>1.2</version>
       <url>http://java.sun.com/</url>
+      <properties>
+         <war.bundle>true</war.bundle>
+      </properties>
     </dependency>
     <dependency>
       <id>oro</id>
       <version>2.0.6</version>
       <url>http://jakarta.apache.org/oro/</url>
+      <properties>
+         <war.bundle>true</war.bundle>
+      </properties>
     </dependency>
     <dependency>
       <id>servlet</id>
       <version>2.2</version>
       <url>http://java.sun.com/</url>
+      <properties>
+         <war.bundle>false</war.bundle>
+      </properties>
     </dependency>
     <dependency>
       <id>hsqldb</id>
       <version>1.7.1</version>
       <url>http://www.hslqldb.org/</url>
+      <properties>
+         <war.bundle>false</war.bundle>
+      </properties>
     </dependency>
   </dependencies>
 
@@ -253,11 +263,6 @@ http://sourceforge.net/mailarchive/forum.php?forum=melati-users
       </excludes>
     </resources>
 
-<!-- 
-    <jars>
-     /inst/melati-cvs/build/dist/melati_0.7.0/lib/melati.jar
-    </jars>
--->
   </build>
   <reports>
      |
