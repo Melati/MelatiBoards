@@ -1,5 +1,11 @@
-Welcome to the YYY board.
-[You were subscribed by XXXX (xxxx@xxxx.com) [who is the board manager]]
-[You are a manager]
+#parse $board.templatePath("BoardHeader")
+You are now subscribed to this board.
+#if ($board.canManage($user)) #begin You are a manager of this board. #end
 
-#include BoardInfo
+#parse $board.templatePath("UsageInstructions")
+#if $board.canManage($user) #begin
+#parse $board.templatePath("ManageInstructions")
+#end
+
+#parse $board.templatePath("BoardFooter")
+

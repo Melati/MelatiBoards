@@ -1,2 +1,5 @@
-View the board at ..............
-Change your subscription/unsubscribe at .............
+-----------------------------------------------------------
+View the board at
+$board.BoardURL
+To change your subscription or unsubscribe, visit the URL
+above, log in and click "Your options".

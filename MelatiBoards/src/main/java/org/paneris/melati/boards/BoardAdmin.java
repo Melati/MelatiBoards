@@ -80,9 +80,8 @@ public class BoardAdmin extends TemplateServlet {
         });
   }
 
-  protected String boardTemplate(TemplateContext context, String name)
-       {
-        return "melati/boards/" + name;
+  protected String boardTemplate(TemplateContext context, String name) {
+    return "melati/boards/" + name;
   }
 
   /*****************************
@@ -120,6 +119,10 @@ public class BoardAdmin extends TemplateServlet {
    * Board Actions
    ***************/
   
+  /**
+   * List a page of messages for this board, starting at a particular
+   * message (as determined by the "start" parameter).
+   */
   protected String boardTemplate(TemplateContext context, Melati melati)
       throws PoemException {
 
@@ -160,6 +163,9 @@ public class BoardAdmin extends TemplateServlet {
     return boardTemplate(context, "Members");
   }
 
+  /**
+   * Present a form for a user to enter a new message
+   */
   protected String messageNewTemplate(TemplateContext context, Melati melati)
       throws PoemException {
 
@@ -186,12 +192,30 @@ public class BoardAdmin extends TemplateServlet {
     return boardTemplate(context, "Message");
   }
 
+  /**
+   * Create a new message
+   * <p>
+   * If we need approval from a manager, we send the user an email notifying
+   * them. Otherwise, we distribute the message to the members of the board
+   */
   protected String messageCreateTemplate(TemplateContext context, Melati melati)
       throws PoemException {
-    Persistent newMessage = create(((BoardTable)melati.getTable()).
+    Message newMessage = (Message)create(((BoardTable)melati.getTable()).
                               getBoardsDatabaseTables().getMessageTable(), context);
-    ((Message)newMessage).distribute();
-    return boardTemplate(context, "MessageCreate");
+    if ("".equals(newMessage.getSubject())) {
+      newMessage.setSubject("(no subject)");
+    }
+    if (newMessage.getApproved().booleanValue() == true) {
+      newMessage.distribute();
+      return boardTemplate(context, "MessageCreate");
+    }
+    else {
+      emailNotification(melati,
+                        newMessage.getBoard(),
+                        (org.paneris.melati.boards.model.User)melati.getUser(),
+                        "MessageReceived");
+      return boardTemplate(context, "MessageNeedsModerating");
+    }
   }
 
   protected String pendingMessagesTemplate(TemplateContext context, Melati melati)
@@ -206,7 +230,7 @@ public class BoardAdmin extends TemplateServlet {
       String approve = context.getForm(messages[i]);
       if (approve != null && approve.equals("yes")) {
         Message message = (Message)
-                            ((BoardsDatabase)melati.getDatabase()).
+                            ((BoardsDatabaseTables)melati.getDatabase()).
                           getMessageTable().getObject(new Integer(messages[i]));
         message.approve();
       }
@@ -219,17 +243,51 @@ public class BoardAdmin extends TemplateServlet {
    * Subscriptions
    *****************************/
   
+  /**
+   * Process a user's request to be subscribed to a board.
+   * <p>
+   * If the user is already subscribed (or has asked to be subscribed)
+   * we decline their request.
+   * <p>
+   * Otherwise, we look to see if their request needs to be approved by
+   * a manager. If so, we let the user and the managers know by email,
+   * otherwise we subscribe them to the board.
+   */
   protected String subscribeTemplate(TemplateContext context, Melati melati)
       throws PoemException {
     Board board = (Board)melati.getObject();
     User user = (User)melati.getUser();
-    if (!board.canSubscribe(user))
-      context.put("managersubscribe", Boolean.TRUE);
-    else if (!board.isMember(user))
+
+    if (!board.canSubscribe(user)) {
+      return boardTemplate(context, "SubscribeByManager");
+    }
+    else if (board.isMember(user)) {
+      return boardTemplate(context, "SubscribedAlready");
+    }
+    else if ( ((BoardsDatabaseTables)melati.getDatabase()).getSubscriptionTable().
+                getUserSubscription(user, board) != null) {
+      return boardTemplate(context, "SubscriptionAlreadyPending");
+    }
+    else if (board.getModeratedsubscription().booleanValue() == true) {
+      board.subscribe(user,
+                      ((BoardsDatabaseTables)melati.getDatabase()).
+                        getMembershipStatusTable().getNormal(),
+                      Boolean.FALSE,             // not a manager
+                      Boolean.FALSE);            // not approved
+      emailNotification(melati,
+                        board,
+                        (org.paneris.melati.boards.model.User)melati.getUser(),
+                        "SubscriptionRequestReceived");
+      return boardTemplate(context, "SubscribeApprovalRequired");
+    }
+    else {
       board.subscribe(user);
-    else
-      context.put("alreadysubscribed", Boolean.TRUE);
-    return boardTemplate(context, "Subscribe");
+      emailNotification(melati,
+                        board,
+                        (org.paneris.melati.boards.model.User)melati.getUser(),
+                        "Subscribed");
+      return boardTemplate(context, "Subscribe");
+    }
   }
 
   protected String unsubscribeTemplate(TemplateContext context, Melati melati)
@@ -238,8 +296,16 @@ public class BoardAdmin extends TemplateServlet {
     return boardTemplate(context, "Unsubscribe");
   }
 
+  /**
+   * Update the members subscriptions.
+   * <p>
+   * A manager can alter a member's subscription type, whether they
+   * are a manager and can delete the user from the board.
+   */
   protected String membersEditTemplate(TemplateContext context, Melati melati)
       throws PoemException {
+
+    // Read in the new settings, if any. Otherwise, return the form
     String[] subscriptions = melati.getRequest().
                                getParameterValues("subscription");
     if (subscriptions == null || subscriptions.length == 0)
@@ -251,6 +317,7 @@ public class BoardAdmin extends TemplateServlet {
         ((Board)melati.getObject()).getBoardsDatabaseTables().
           getSubscriptionTable().
             getSubscriptionObject(new Integer(subscriptions[i]));
+
       String delete = context.getForm("delete-" + subscriptions[i]);
       if ("true".equals(delete))
       {
@@ -274,6 +341,10 @@ public class BoardAdmin extends TemplateServlet {
     return boardTemplate(context, "MembersEdit");
   }
 
+  /**
+   * A manager can subscribe users to a board. We notify the user and the
+   * managers by email.
+   */
   protected String subscribeOthersTemplate(TemplateContext context, Melati melati)
       throws PoemException {
 
@@ -293,8 +364,13 @@ public class BoardAdmin extends TemplateServlet {
       User newUser = (User)
         ((Board)melati.getObject()).getBoardsDatabaseTables().
           getUserTable().getUserObject(new Integer(others[i]));
-      ((Board)melati.getObject()).
-        subscribe(newUser, normal, manager, Boolean.TRUE);
+
+      Board board = (Board)melati.getObject();
+      board.subscribe(newUser, normal, manager, Boolean.TRUE);
+      emailNotification(melati,
+                        board,
+                        newUser,
+                        "Subscribed");
     }
     return boardTemplate(context, "MembersEdit");
   }
@@ -304,20 +380,36 @@ public class BoardAdmin extends TemplateServlet {
     return boardTemplate(context, "PendingSubscriptions");
   }
 
+  /**
+   * A manager can approve a user's request to be subscribed to a board
+   * or can decline it.
+   */
   protected String approveSubscriptionsTemplate(TemplateContext context, Melati melati)
       throws PoemException {
+
     String[] subscriptions = melati.getRequest().getParameterValues("subscription");
+
     for(int i=0; i < subscriptions.length; i++) {
+      // Get this subscription
       Subscription subscription =
-        (Subscription) ((BoardsDatabase)melati.getDatabase()).
+        (Subscription) ((BoardsDatabaseTables)melati.getDatabase()).
            getSubscriptionTable().getObject(new Integer(subscriptions[i]));
       String action = context.getForm(subscriptions[i]);
-      if (action.equals("normal")) {
+
+      if (action.equals("normal") || action.equals("manager")) {
+        if (action.equals("manager"))
+          subscription.setIsmanager(Boolean.TRUE);
         subscription.approve();
-      } else if (action.equals("manager")) {
-        subscription.setIsmanager(Boolean.TRUE);
-        subscription.approve();
-      } else if (action.equals("remove")) {
+        emailNotification(melati,
+                          subscription.getBoard(),
+                          (org.paneris.melati.boards.model.User)melati.getUser(),
+                          "SubscriptionRequestApproved");
+      }
+      else if (action.equals("remove")) {
+        emailNotification(melati,
+                          subscription.getBoard(),
+                          (org.paneris.melati.boards.model.User)melati.getUser(),
+                          "SubscriptionRequestDeclined");
         subscription.deleteAndCommit();
       }
     }
@@ -335,28 +427,68 @@ public class BoardAdmin extends TemplateServlet {
     return boardTemplate(context, "SubscriptionUpdate");
   }
 
-  protected String subscriptionTemplate(Melati melati, String name) throws
-                                TemplateEngineException, IOException {
-    // construct a Melati with a StringWriter instead of a servlet
-    // request and response
-    MelatiWriter sw = 
-           templateEngine.getStringWriter(melati.getEncoding());
-    Melati melati2 = new Melati(melati.getConfig(), sw);
-    TemplateContext templateContext2 = 
-                      templateEngine.getTemplateContext(melati2);
-    templateContext2.put("melati",melati2);
-    templateEngine.expandTemplate(melati2.getWriter(), 
-                                  name,
-                                  templateContext2);
-    // write to the StringWriter
-    return sw.asString();
+  /***********************************
+   * Send emails to users and managers
+   ***********************************/
+  
+  public void emailNotification(Melati melati, Board board, User user,
+                                String templateName) {
+
+    try {
+      String message = evalTemplate(melati, user, templateName, board);
+
+      // Send email to user
+      Email.send(board.getDatabase(),
+                 "admin."+board.getEmailAddress(),       // From
+                 user.getEmail(),      // To
+                 "",                   // reply to
+                 "["+board.getName()+"]: Admin message",
+                 message);
+
+      Vector managers = EnumUtils.vectorOf(
+                          new MappedEnumeration(board.getManagers()) {
+                            public Object mapped(Object manager) {
+                              return ((User)manager).getEmail();
+                            }
+                          });
+      String[] emailArray = new String[managers.size()];
+      managers.copyInto(emailArray);
+
+      // Send email to managers
+      Email.sendToList(board.getDatabase(),
+                       "admin."+board.getEmailAddress(),       // From
+                       emailArray,           // To
+                       user.getEmail(),     // Apparently to
+                       "",                   // reply to
+                       "["+board.getName()+"]: Admin message",
+                       "The following message has been sent to " +
+                       user.getEmail() + " (" + user.getName() + ") \n\n" +
+                       message);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 
+  public String evalTemplate(Melati melati, User user, String template, Board board)
+                                throws IOException, TemplateEngineException {
+
+      // templateEngine comes from TemplateServlet
+      MelatiWriter sw = templateEngine.getStringWriter(melati.getEncoding());
+      Melati melati2 = new Melati(melati.getConfig(), sw);
+      TemplateContext context = templateEngine.getTemplateContext(melati2);
+      context.put("melati", melati2);
+      context.put("board", board);
+      context.put("user", user);
+      templateEngine.expandTemplate(melati2.getWriter(),
+                                    board.templatePath(template),
+                                    context);
+      return sw.asString();
+  }
 
   /*****************************
    * Handler
    *****************************/
-  
+
   protected String doTemplateRequest( 
                    Melati melati, TemplateContext context) 
                    throws Exception {

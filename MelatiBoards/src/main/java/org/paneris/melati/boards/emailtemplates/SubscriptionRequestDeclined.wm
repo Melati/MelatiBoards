@@ -1,3 +1,6 @@
-Unfortunately, your request to join the YYY board has been declined
-by the manager YYYY.
+#parse $board.templatePath("BoardHeader")
+Unfortunately, your request to join the board has been declined
+by a manager. You might like to contact a manager of this board
+directly #parse $board.templatePath("ManagerList")
+#parse $board.templatePath("BoardFooter")
 
