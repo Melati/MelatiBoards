@@ -4,7 +4,7 @@
 # incoming mail to a particular domain to a particular database
 
 # Mail sent to ....@boards.dgroup.co.uk will be sent to the `dgroup' database
-org.paneris.melati.board.receivemail.database.boards.dgroup.co.uk=dgroup
+org.paneris.melati.boards.receivemail.database.boards.dgroup.co.uk=dgroup
 
 # Mail sent to ....@messageboards.betrothed.co.uk will be sent to the `betrothed' database
-org.paneris.melati.board.receivemail.database.messageboards.betrothed.co.uk=betrothed
+org.paneris.melati.boards.receivemail.database.messageboards.betrothed.co.uk=betrothed
