@@ -270,13 +270,17 @@ public class BoardAdmin extends TemplateServlet {
       throws PoemException {
     String[] messages = melati.getRequest().getParameterValues("message");
     for(int i=0; i < messages.length; i++) {
-      String approve = context.getForm(messages[i]);
-      if (approve != null && approve.equals("yes")) {
+      String action = MelatiUtil.getFormNulled(context,messages[i]);
+      if (action != null) {
         Message message = (Message)
                             ((BoardsDatabaseTables)melati.getDatabase()).
                           getMessageTable().getObject(new Integer(messages[i]));
-        message.approve();
-        message.distribute();
+        if (action.equals("approve")) {
+          message.approve();
+          message.distribute();
+        } else {
+          message.setDeleted(true);
+        }
       }
     }
     return boardTemplate(context, "ApproveMessages");
