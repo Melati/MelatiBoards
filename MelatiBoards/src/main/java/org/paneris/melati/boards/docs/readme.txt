@@ -212,8 +212,10 @@ c) You now need to direct messages addressed to boards to the SMTP server
  *
  * (see also <TT>smtpServer.properties.example</TT>).
  *
- * Mail can be funelled into the server either by having it listen on
- * port 25 in place of sendmail, or by configuring the locally running
+ * Mail can be funelled into the server by having it listen on
+ * port 25 in place of sendmail, but this would require your httpd to run
+ * as root (in ordr to access ports below 1024), so is not advisable.  
+ * The prefered mechanism is to configure the locally running
  * sendmail to forward appropriately addressed email to the server on
  * a different port.  The only way I can see to do the latter is to
  * edit <TT>sendmail.cf</TT> to define a new mailer.  Where it says
