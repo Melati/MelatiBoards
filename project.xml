@@ -1,0 +1,255 @@
+<?xml version="1.0"?>
+<project>
+  <pomVersion>3</pomVersion>
+  <id>boards</id>
+  <name>Boards</name>
+  <currentVersion>1.2.0</currentVersion>
+  <organization>
+    <name>PanEris</name>
+    <url>http://www.paneris.org/</url>
+    <logo>http://www.paneris.org/images/corporate/pelogo.png</logo>
+  </organization>
+  <inceptionYear>1997</inceptionYear>
+  <package>org.paneris.melati.boards</package>
+  <!-- Should be boards logo -->
+  <logo>http://www.paneris.org/images/corporate/pelogo.png</logo> 
+
+  <shortDescription>PanEris Melati Boards System</shortDescription>
+
+  <!-- Gump integration 
+  <gumpRepositoryId>jakarta</gumpRepositoryId>
+  -->
+
+  <description>
+   A message board system using a Melati SQL database as the message store.
+  </description>
+
+  <url>http://boards.paneris.net/</url>
+  <siteAddress>boards.paneris.net</siteAddress>
+  <siteDirectory>/www/boards.paneris.net</siteDirectory>
+  <issueTrackingUrl>
+<!--    http://nagoya.apache.org/scarab/servlet/scarab/ -->
+   http://www.paneris.org/webmacro/MessageBoard?db=paneris&amp;messageboard=364
+  </issueTrackingUrl>
+  <distributionDirectory>
+    /inst/boards/
+  </distributionDirectory>
+
+  <repository>
+    <connection>
+      scm:cvs:pserver:anon@paneris.org:/usr/cvsroot/:boards
+    </connection>
+    <developerConnection>scm:cvs:ext:${maven.username}@paneris.org:/usr/cvsroot:boards</developerConnection>
+
+    <url>
+      http://ganesh.paneris.org/cgi-bin/cvsweb.cgi/boards/
+    </url>
+  </repository>
+
+  <versions>
+    <version>
+      <id>b3</id>
+      <name>1.0-b3</name>
+      <tag>MAVEN_1_0_B3</tag>
+    </version>
+    <version>
+      <id>b4</id>
+      <name>1.0-b4</name>
+      <tag>HEAD</tag>
+    </version>
+  </versions>
+
+  <mailingLists>
+    <mailingList>
+      <name>Financial Training Partner List</name>
+      <subscribe>
+        subscribe.financial-training@messageboards.paneris.org
+      </subscribe>
+      <unsubscribe>
+        unsubscribe.financial-training@messageboards.paneris.org
+      </unsubscribe>
+      <archive>
+       http://www.paneris.org/webmacro/MessageBoard?db=paneris&amp;messageboard=369
+      </archive>
+    </mailingList>
+    <mailingList>
+      <name>FTC Project List</name>
+      <subscribe>
+       subscribe.ftc@messageboards.paneris.org
+      </subscribe>
+      <unsubscribe>
+       unsubscribe.ftc@messageboards.paneris.org
+      </unsubscribe>
+      <archive>
+       http://www.paneris.org/webmacro/MessageBoard?db=paneris&amp;messageboard=370
+      </archive>
+    </mailingList>
+    <mailingList>
+      <name>FTC Unix Gurus List</name>
+      <subscribe>
+        subscribe.ftc_tech@messageboards.paneris.org
+      </subscribe>
+      <unsubscribe>
+        unsubscribe.ftc_tech@messageboards.paneris.org
+      </unsubscribe>
+      <archive>
+       http://www.paneris.org/webmacro/MessageBoard?db=paneris&amp;messageboard=371
+      </archive>
+    </mailingList>
+    <mailingList>
+      <name>FTC CVS commit List</name>
+      <subscribe>
+        subscribe.ftc-qa@messageboards.paneris.org
+      </subscribe>
+      <unsubscribe>
+        unsubscribe.ftc-qa@messageboards.paneris.org
+      </unsubscribe>
+      <archive>
+       http://www.paneris.org/webmacro/MessageBoard?db=paneris&amp;messageboard=364
+      </archive>
+    </mailingList>
+  </mailingLists>
+
+  <developers>
+
+    <developer>
+      <name>Tim Pizey</name>
+      <id>timp</id>
+      <email>timp@paneris.org</email>
+      <organization>Context Computing</organization>
+      <roles>
+        <role>Project Lead</role>
+        <role>Architect</role>
+        <role>Release Manager</role>
+        <role>Java Developer</role>
+      </roles>
+    </developer>
+
+    <developer>
+      <name>Andriy Korud</name>
+      <id>akorud</id>
+      <email>akorud@paneris.org</email>
+      <organization/>
+      <roles>
+        <role>Unix Guru</role>
+      </roles>
+    </developer>
+  </developers>
+
+  <contributors>
+    <contributor>
+      <name>Tim Joyce</name>
+      <email>timj@paneris.org</email>
+      <organization>Hoop (defunct)</organization>
+      <roles>
+        <role>Original author</role>
+      </roles>
+    </contributor>
+  </contributors>
+
+
+  <dependencies>
+    <dependency>
+      <id>melati</id>
+      <version>0.7.0</version>
+      <url>http://www.melati.org/</url>
+    </dependency>
+    <dependency>
+      <id>webmacro</id>
+      <version>1.0</version>
+      <url>http://www.webmacro.org/</url>
+    </dependency>
+    <dependency>
+      <id>melatiShopping</id>
+      <version>1.0</version>
+      <url>http://www.melati.org/</url>
+    </dependency>
+    <dependency>
+      <id>melatiBoards</id>
+      <version>1.0</version>
+      <url>http://www.melati.org/</url>
+    </dependency>
+    <dependency>
+      <id>javamail</id>
+      <version>1.2</version>
+      <url>http://java.sun.com/</url>
+    </dependency>
+    <dependency>
+      <id>servlet</id>
+      <version>2.2</version>
+      <url>http://java.sun.com/</url>
+    </dependency>
+    <dependency>
+      <id>activation</id>
+      <version>1.0</version>
+      <url>http://java.sun.com/</url>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <nagEmailAddress>
+      timp@paneris.org
+    </nagEmailAddress>
+
+    <sourceDirectory>src/java</sourceDirectory>
+
+    <unitTestSourceDirectory>src/test/java</unitTestSourceDirectory>
+    <integrationUnitTestSourceDirectory/>
+
+    <aspectSourceDirectory/>
+
+    <!-- Unit test cases -->
+    <unitTest>
+      <includes>
+        <include>**/*Test.java</include>
+      </includes>
+      <excludes>
+        <exclude>**/RepositoryTest.java</exclude>
+      </excludes>
+    </unitTest>
+
+    <!-- J A R  R E S O U R C E S -->
+    <!-- Resources that are packaged up inside the JAR file -->
+
+    <resources>
+      <includes>
+        <include>*.wm</include>
+        <include>*.properties</include>
+      </includes>
+      <excludes>
+           **/melati-static/**/*.*
+      </excludes>
+    </resources>
+
+    <!-- Integration unit test cases -->
+    <integrationUnitTest/>
+
+<!-- 
+    <jars>
+     /inst/melati-cvs/build/dist/melati_0.7.0/lib/melati.jar
+    </jars>
+-->
+  </build>
+  <reports>
+     |
+     | These should all be completely self contained. You should be able
+     | to generate each of them individually without needing the final
+     | xdoc transformation.
+     |
+     | Each report plugin with it's POM and plugin.jelly logic should
+     | contain everything needed to produced the report.
+     |
+
+    <report>maven-jdepend-plugin</report>
+    <report>maven-checkstyle-plugin</report>
+    <report>maven-changelog-plugin</report>
+    <report>maven-file-activity-plugin</report>
+    <report>maven-developer-activity-plugin</report>
+    <report>maven-javadoc-plugin</report>
+    <report>maven-jxr-plugin</report>
+    <report>maven-junit-report-plugin</report>
+    <report>maven-tasklist-plugin</report>
+    <report>maven-jellydoc-plugin</report>
+  </reports>
+</project>
+
