@@ -59,10 +59,11 @@ import java.sql.*;
 import java.sql.Date;
 import java.sql.Timestamp;
 import org.melati.poem.*;
+import org.melati.util.Email;
 
 public class SettingTable extends SettingTableBase {
 
-  String[] names = {"smtpserver",
+  String[] names = {SMTPSERVER,
                     "BoardsEmailDomain",
                     "BoardsSystemURL",
                     "BoardsEmailTemplates",
@@ -129,7 +130,7 @@ public class SettingTable extends SettingTableBase {
     }
 
 /*
-    ensure("smtpserver", PoemTypeFactory.STRING, "",
+    ensure("SMTPServer", PoemTypeFactory.STRING, "",
            "SMTP server",  "The SMTP server for outgoing mail",
                            "The domain which receives mail for this database. " +
                            "Note that this must be the same as that defined " +
