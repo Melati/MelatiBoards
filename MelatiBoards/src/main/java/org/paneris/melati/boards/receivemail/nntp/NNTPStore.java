@@ -401,7 +401,7 @@ public class NNTPStore {
 
 
   /**
-   * @see org.paneris.melati.boards.receivemail.BoardStoreImpl#attachmentWrite()
+   * @see org.paneris.melati.boards.receivemail.BoardStoreImpl#attachmentWrite
    */
   protected String attachmentWrite(final Message message,
                                    final String fileName, 
@@ -451,7 +451,7 @@ public class NNTPStore {
   }
 
   /**
-   * @see org.paneris.melati.boards.receivemail.BoardStoreImpl#messageAccept()
+   * @see org.paneris.melati.boards.receivemail.BoardStoreImpl#messageAccept
    */
   public void postMessage(final MimeMessage message, final User sender)
     throws Exception {

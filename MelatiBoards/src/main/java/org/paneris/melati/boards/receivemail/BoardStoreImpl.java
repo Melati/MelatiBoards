@@ -95,13 +95,15 @@ public class BoardStoreImpl implements BoardStore {
   /**
    * A wrapper for the messageboards in a given database
    *
-   * @param connMgr      our handle to the DBMS
-   * @param database     the name of the database
-   * @param log          where to log trouble
    */
-  
   public BoardStoreImpl() {}
 
+  /**
+   * @param database     the name of the database
+   * @param log          where to log trouble
+   * @param senderAddr   senders address
+   * @param messAddr     message address
+   */
   public void init(Database database, Log log,
                     final InternetAddress senderAddr,
                     final InternetAddress messAddr)
@@ -264,8 +266,8 @@ public class BoardStoreImpl implements BoardStore {
   /**
    * Write an attachment into the attachment table and filesystem.
    * <P>
-   * This is called from within messageAccept, and so is within 
-   * database.inSession()
+   * This is called from within <code>messageAccept</code>, and so is within 
+   * <code>database.inSession()</code>.
    */
 
   protected String attachmentWrite(final Message message, final String fileName,
