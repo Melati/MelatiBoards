@@ -54,7 +54,7 @@ import java.io.*;
 
 /**
  * A stream comprising everything in an underlying stream up to the
- * first line containing only a `<TT>.</TT>'
+ * first line containing only a fullstop.
  *
  * Once the <TT>DotTerminatedInputStream</TT> has reported
  * end-of-file, the underlying stream can be used again to read the
@@ -74,7 +74,7 @@ class DotTerminatedInputStream extends FilterInputStream {
   private int pushedBackOut = 0;
 
   /**
-   * @param in 			the underlying stream: must be a
+   * @param in          the underlying stream: must be a
    *                            <TT>PushbackInputStream</TT> because
    *                            it's theoretically possible to end up
    *                            with a character that has to be pushed
@@ -109,63 +109,63 @@ class DotTerminatedInputStream extends FilterInputStream {
     int b;
     for (;;) {
       switch (state) {
-	case TERMINATED:
-	  pushedBack = null;
-	  return -1;
+    case TERMINATED:
+      pushedBack = null;
+      return -1;
 
-	case POP:
-	  if (pushedBackOut < pushedBackIn) {
-	    return pushedBack[pushedBackOut++];
-	  }
-	  else {
-	    pushedBackOut = 0;
-	    pushedBackIn = 0;
-	    state = state1;
-	  }
-	  break;
+    case POP:
+      if (pushedBackOut < pushedBackIn) {
+        return pushedBack[pushedBackOut++];
+      }
+      else {
+        pushedBackOut = 0;
+        pushedBackIn = 0;
+        state = state1;
+      }
+      break;
 
-	case TEXT:
-	  switch (b = superRead()) {
-	    case '\r': state = FIRSTCR; pushBack((byte)13); break;
-	    case '\n': state = FIRSTNL; pushBack((byte)10); break;
+    case TEXT:
+      switch (b = superRead()) {
+        case '\r': state = FIRSTCR; pushBack((byte)13); break;
+        case '\n': state = FIRSTNL; pushBack((byte)10); break;
             case -1:   state = POP; state1 = TERMINATED; break;
-	    default:   return b;
-	  }
-	  break;
+        default:   return b;
+      }
+      break;
 
-	case FIRSTCR:
-	  switch (b = superRead()) {
-	    case '\n': state = FIRSTNL; pushBack((byte)10); break;
-	    case '\r': state = POP; state1 = TEXT; byte1 = '\r'; break;
+    case FIRSTCR:
+      switch (b = superRead()) {
+        case '\n': state = FIRSTNL; pushBack((byte)10); break;
+        case '\r': state = POP; state1 = TEXT; byte1 = '\r'; break;
             case -1:   state = POP; state1 = TERMINATED; break;
-	    default:   state = POP; state1 = TEXT; byte1 = b; break;
-	  }
-	  break;
+        default:   state = POP; state1 = TEXT; byte1 = b; break;
+      }
+      break;
 
-	case FIRSTNL:
-	  switch (b = superRead()) {
-	    case '.': state = DOT; pushBack((byte)46); break;
-	    case '\n': state = POP; state1 = TEXT; byte1 = '\n'; break;
-	    case '\r': state = POP; state1 = TEXT; byte1 = '\r'; break;
+    case FIRSTNL:
+      switch (b = superRead()) {
+        case '.': state = DOT; pushBack((byte)46); break;
+        case '\n': state = POP; state1 = TEXT; byte1 = '\n'; break;
+        case '\r': state = POP; state1 = TEXT; byte1 = '\r'; break;
             case -1:   state = POP; state1 = TERMINATED; break;
-	    default:   state = POP; state1 = TEXT; byte1 = b; break;
-	  }
-	  break;
+        default:   state = POP; state1 = TEXT; byte1 = b; break;
+      }
+      break;
 
-	case DOT:
-	  switch (b = superRead()) {
-	    case '\n': state = TERMINATED; break;
-	    case '\r': state = SECONDCR; break;
+    case DOT:
+      switch (b = superRead()) {
+        case '\n': state = TERMINATED; break;
+        case '\r': state = SECONDCR; break;
             case -1:   state = POP; state1 = TERMINATED; break;
-	    default:   state = POP; state1 = TEXT; byte1 = b; break;
-	  }
-	  break;
+        default:   state = POP; state1 = TEXT; byte1 = b; break;
+      }
+      break;
 
-	case SECONDCR:
-	  if ((b = superRead()) != '\n')
-	    ((PushbackInputStream)in).unread(b);
-	  state = TERMINATED;
-	  break;
+    case SECONDCR:
+      if ((b = superRead()) != '\n')
+        ((PushbackInputStream)in).unread(b);
+      state = TERMINATED;
+      break;
       }
     }
   }
@@ -184,13 +184,13 @@ class DotTerminatedInputStream extends FilterInputStream {
     int i = 1;
     try {
       for (; i < len ; i++) {
-	c = read();
-	if (c == -1) {
-	  break;
-	}
-	if (b != null) {
-	  b[off + i] = (byte)c;
-	}
+    c = read();
+    if (c == -1) {
+      break;
+    }
+    if (b != null) {
+      b[off + i] = (byte)c;
+    }
       }
     } catch (IOException ee) {
     }
