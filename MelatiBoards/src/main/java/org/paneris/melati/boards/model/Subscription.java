@@ -109,17 +109,7 @@ public class Subscription extends SubscriptionBase {
    * setMembershipStatus(MembershipStatus status)
    */
   public void assertCanWrite(AccessToken token) throws AccessPoemException {
-    if (token == AccessToken.root) return;
-    try {
-      Board b = getBoardsDatabaseTables().getBoardTable().
-                    getBoardObject(getBoard_unsafe());
-      if (!b.canManage((User)token))
-        throw new AccessPoemException(token,
-                                      new Capability("Logged In or Manager"));
-    } catch (ClassCastException e) {
-        throw new AccessPoemException(token,
-                                      new Capability("Logged In or Manager"));
-    }
+    assertCanRead(token);
   }
 
 
