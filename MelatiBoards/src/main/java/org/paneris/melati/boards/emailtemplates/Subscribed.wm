@@ -1,6 +1,7 @@
 #include as template "$board.templatePath("BoardHeader")"
 You are now subscribed to this board.
-#if ($board.canManage($user)) #begin You are a manager of this board. #end
+#if ($board.canManage($user)) #begin 
+You are a manager of this board. #end
 
 #include as template "$board.templatePath("UsageInstructions")"
 #if ($board.canManage($user)) #begin
