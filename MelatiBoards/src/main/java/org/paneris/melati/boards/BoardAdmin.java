@@ -150,8 +150,11 @@ public class BoardAdmin extends TemplateServlet {
                         if (p != null) 
                           it.troid = p.troid();
                         else 
-                         throw new PathInfoException(
-                                       melati.getRequest().getPathInfo());
+                         throw new RuntimeException(
+                                       "'" +value + "'" + 
+                                       " not found in column " + 
+                                       db.getTable(parts[1]).
+                                             displayColumn().getDisplayName());
                     }
                  });
           } catch (Exception e1) {
