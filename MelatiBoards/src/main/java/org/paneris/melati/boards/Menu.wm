@@ -18,18 +18,16 @@
     <!-- User -->
 
     #if ($melati.User.isGuest()) #begin
-     <b>Not logged in:</b> <a href="$boardutils.LoginURL($board)">Log in</a> |
-     <a href="$boardutils.UnsubscribeURL($board)">Unsubscribe</a> 
+     <b>Not logged in:</b> <a href="$boardutils.LoginURL($board)">Log in</a> 
     #end #else #begin
+     <a href="$melati.LogoutURL?returnURL=$boardutils.BoardURL($board, $start)">Log out</a> |
      #if ($board.isMember($melati.User)) #begin
       <b>$melati.User.Name</b> 
         (Subscribed)  :
-     <a href="$melati.LogoutURL?returnURL=$boardutils.BoardURL($board,$start)">Log out</a> | 
       <a href="$boardutils.UnsubscribeURL($board)">Unsubscribe</a> | 
       <a href="$boardutils.SubscriptionEditURL($board.getUserSubscription($melati.User))">Your options</a>
      #end #else #begin
       <b>$melati.User.Name</b> (Not subscribed) :
-     <a href="$melati.LogoutURL?returnURL=$boardutils.BoardURL($board, $start)">Log out</a> |
      <a href="$boardutils.SubscribeURL($board)">Subscribe</a>
      #end
     #end
