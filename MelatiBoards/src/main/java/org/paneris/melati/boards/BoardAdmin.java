@@ -507,7 +507,7 @@ public class BoardAdmin extends TemplateServlet {
                    throws Exception {
 
     context.put("boardutils",
-        new BoardUtils(melati.getRequest().getServletPath(),
+        new BoardUtils(melati.getZoneURL()+melati.getRequest().getServletPath(),
                        melati.getContext().logicalDatabase));
 
     Board board = null;
