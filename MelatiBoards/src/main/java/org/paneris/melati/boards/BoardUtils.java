@@ -50,7 +50,6 @@
 
 package org.paneris.melati.boards;
 
-import org.webmacro.WebMacroException;
 import org.paneris.melati.boards.model.*;
 import org.melati.poem.*;
 import org.melati.*;

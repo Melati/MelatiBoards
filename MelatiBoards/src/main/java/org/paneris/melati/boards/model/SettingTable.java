@@ -127,5 +127,15 @@ public class SettingTable extends SettingTableBase {
       _new.setDescription(descriptions[i]);
       getNameColumn().ensure(_new);
     }
+
+/*
+    ensure("smtpserver", PoemTypeFactory.STRING, "",
+           "SMTP server",  "The SMTP server for outgoing mail",
+                           "The domain which receives mail for this database. " +
+                           "Note that this must be the same as that defined " +
+                           "in smtpServer.properties (or equivalent, if you " +
+                           "set a different name when starting SMTPServerServlet) " +
+                           "(e.g. boards.testapp.co.uk)");
+*/
   }
 }
