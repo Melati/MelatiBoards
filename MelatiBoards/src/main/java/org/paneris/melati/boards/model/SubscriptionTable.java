@@ -50,7 +50,10 @@
 
 package org.paneris.melati.boards.model;
 
+import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.List;
+import java.util.Iterator;
 
 import org.melati.poem.AccessPoemException;
 import org.melati.poem.AccessToken;
@@ -94,11 +97,18 @@ public class SubscriptionTable extends SubscriptionTableBase {
   }
 
   public void unsubscribe(User user, Board board) {
-    Enumeration e = selection(
-                      getUserColumn().eqClause(user.troid()) + " AND " +
-                      getBoardColumn().eqClause(board.troid()));
-    while (e.hasMoreElements())
-      ((Subscription)e.nextElement()).deleteAndCommit();
+    List toDelete = new ArrayList();
+    for (Enumeration e = selection(
+                             getUserColumn().eqClause(user.troid()) + 
+                             " AND " +
+                             getBoardColumn().eqClause(board.troid()));
+       e.hasMoreElements();) {
+       toDelete.add(e.nextElement());
+    }
+    for (Iterator it = toDelete.iterator(); it.hasNext();) {
+      Subscription s = (Subscription)it.next();
+      s.deleteAndCommit();
+    }
   }
 
   public Subscription getUserSubscription(User user, Board board) {
