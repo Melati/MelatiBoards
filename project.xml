@@ -191,7 +191,7 @@
       timp@paneris.org
     </nagEmailAddress>
 
-    <sourceDirectory>src/java</sourceDirectory>
+    <sourceDirectory>src</sourceDirectory>
 
     <unitTestSourceDirectory>src/test/java</unitTestSourceDirectory>
     <integrationUnitTestSourceDirectory/>
