@@ -63,7 +63,7 @@ import org.melati.util.Email;
 
 public class SettingTable extends SettingTableBase {
 
-  String[] names = {SMTPSERVER,
+    String[] names = {"SMTPServer",         // FIXME should be Email.SMTPSERVER,
                     "BoardsEmailDomain",
                     "BoardsSystemURL",
                     "BoardsEmailTemplates",
