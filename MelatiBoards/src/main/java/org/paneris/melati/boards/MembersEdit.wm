@@ -27,7 +27,8 @@
   <td>$ml.rendered($sub.User.Name_unsafe)</td>
   <td align=center>
    <input type=checkbox name=manager-$sub.Troid value=true
-   #if ($sub.Ismanager) #begin checked #end>
+   #if ($sub.Ismanager) #begin 
+   checked #end>
   <td>
 <SELECT NAME="status-$sub.Troid">
   #foreach $poss in $sub.StatusField.First1000Possibilities #begin
