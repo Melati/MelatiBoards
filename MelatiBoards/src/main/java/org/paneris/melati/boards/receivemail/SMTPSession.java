@@ -93,6 +93,7 @@ class SMTPSession extends Thread {
   private String sender = null;
   private Database database = null;
   private BoardStore store = null;
+  private boolean debug = true;
 
   /**
    * A handler for a session with <TT>sendmail</TT>
@@ -145,6 +146,12 @@ class SMTPSession extends Thread {
     store = null;
   }
 
+  private void output(String s) {
+    toClient.println(s);
+    if (debug) 
+      System.err.println(s);
+  }
+  
   /**
    * Handle an SMTP <TT>MAIL FROM:</TT> command
    * 
@@ -160,7 +167,7 @@ class SMTPSession extends Thread {
 
     // at this stage we don't have a database name so we can't verify
     sender = address;
-    toClient.println("250 " + address + "... Sender provisionally OK");
+    output("250 " + address + "... Sender provisionally OK");
   }
 
   /**
@@ -206,13 +213,13 @@ class SMTPSession extends Thread {
 
   private void rcptTo(String address) throws Exception {
     if (sender == null)
-      toClient.println("503 Need MAIL before RCPT");
+      output("503 Need MAIL before RCPT");
 
     else if (database != null) {
       // FIXME actually the logic of this could be worked out, but for now ...
 
-      toClient.println("553 a message can only appear on one board, "
-          + "but this one was copied to several");
+      output("553 a message can only appear on one board, "
+           + "but this one was copied to several");
     } else {
       if (address.charAt(0) == '<') {
         // hmm, not sure this actually happens
@@ -225,7 +232,7 @@ class SMTPSession extends Thread {
       try {
         database = databaseForAddress(address1);
       } catch (MessagingException e) {
-        toClient.println("550 " + // RFC 821: "not found"
+        output("550 " + // RFC 821: "not found"
             StringUtils.tr(e.getMessage(), "\n\r", "  "));
         log.warning("board address `" + address1 + "' rejected: " + e);
         return;
@@ -257,16 +264,15 @@ class SMTPSession extends Thread {
             store.init(database, log, new InternetAddress(sender1),
                 new InternetAddress(address1));
 
-            toClient.println("250 Recipient OK");
+            output("250 Recipient OK");
           } catch (MessagingException e) {
-            toClient.println("550 " + // RFC 821: "not found"
-                StringUtils.tr(e.getMessage(), "\n\r", "  "));
+            output("550 " + // RFC 821: "not found"
+                   StringUtils.tr(e.getMessage(), "\n\r", "  "));
             log.warning("board address `" + address1 + "' rejected: " + e);
             database = null;
           } catch (Exception e) {
-            toClient
-                .println("554 Sorry: something is wrong with this server---"
-                    + StringUtils.tr(e.toString(), "\n\r", "  "));
+            output("554 Sorry: something is wrong with this server---"
+                 + StringUtils.tr(e.toString(), "\n\r", "  "));
             log.error("post of message from `" + sender1 + "' failed:\n"
                 + ExceptionUtils.stackTrace(e));
             database = null;
@@ -284,9 +290,9 @@ class SMTPSession extends Thread {
 
   private void data() {
     if (store == null)
-      toClient.println("503 Need MAIL command");
+      output("503 Need MAIL command");
     else {
-      toClient.println("354 Enter mail, end with \".\" on a line by itself");
+      output("354 Enter mail, end with \".\" on a line by itself");
 
       database.inSession(store.getSender(), new PoemTask() {
         public void run() {
@@ -294,25 +300,23 @@ class SMTPSession extends Thread {
           try {
             Integer messageID = store
                 .messageAccept(new DotTerminatedInputStream(fromClientPushBack));
-            toClient.println("250 " + messageID
-                + " Message accepted for delivery");
+            output("250 " + messageID
+                 + " Message accepted for delivery");
           } catch (SQLException e) {
             if (e.getMessage().startsWith("SQL Statement too long")) {
-              toClient.println("552 Your message message is too long---"
-                  + "can you split it up?");
+              output("552 Your message message is too long---"
+                   + "can you split it up?");
               reset();
             } else {
-              toClient
-                  .println("554 Sorry: something is wrong with this server---"
-                      + StringUtils.tr(e.toString(), "\n\r", "  "));
+              output("554 Sorry: something is wrong with this server---"
+                   + StringUtils.tr(e.toString(), "\n\r", "  "));
               log.error("Exception trying to store a message:"
                   + ExceptionUtils.stackTrace(e));
               reset();
             }
           } catch (Exception e) {
-            toClient
-                .println("554 Sorry!!!: something is wrong with this server---"
-                    + StringUtils.tr(e.toString(), "\n\r", "  "));
+            output("554 Sorry!!!: something is wrong with this server---"
+                 + StringUtils.tr(e.toString(), "\n\r", "  "));
             log.error("Exception trying to store a message:"
                 + ExceptionUtils.stackTrace(e));
             reset();
@@ -330,12 +334,12 @@ class SMTPSession extends Thread {
 
   public void run() {
     try {
-      toClient.println("220 " + smtpIdentifier + " SMTP");
+      output("220 " + smtpIdentifier + " SMTP");
       for (;;) {
         String command = fromClient.readLine().trim();
 
         if (command.regionMatches(true, 0, "HELO", 0, 4))
-          toClient.println("250 " + smtpIdentifier);
+          output("250 " + smtpIdentifier);
 
         else if (command.regionMatches(true, 0, "MAIL FROM:", 0, 10))
           mailFrom(command.substring(10).trim());
@@ -348,20 +352,20 @@ class SMTPSession extends Thread {
 
         else if (command.regionMatches(true, 0, "RSET", 0, 4)) {
           reset();
-          toClient.println("250 Reset state");
+          output("250 Reset state");
         } else if (command.regionMatches(true, 0, "QUIT", 0, 4)) {
-          toClient.println("221 " + smtpIdentifier + " closing connection");
+          output("221 " + smtpIdentifier + " closing connection");
           break;
         }
 
         // does it matter that we don't do VRFY?
 
         else
-          toClient.println("500 Command unrecognized: \"" + command + "\"");
+          output("500 Command unrecognized: \"" + command + "\"");
       }
     } catch (Exception e) {
-      toClient.println("554 Sorry: something is wrong with this server---"
-          + StringUtils.tr(e.toString(), "\n\r", "  "));
+      output("554 Sorry: something is wrong with this server---"
+           + StringUtils.tr(e.toString(), "\n\r", "  "));
       log.error("post of message from `" + sender + "' failed:\n"
           + ExceptionUtils.stackTrace(e));
     } finally {
