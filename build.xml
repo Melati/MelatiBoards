@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project basedir="." default="build" name="boards">
+  <property file="build.ant.properties"/>
+  <property name="app.name" value="boards"/>
+  <property name="build.home" value="build"/>
+  <property name="build.dist" value="${build.home}/${app.name}"/>
+  <property name="build.compiled" value="${build.home}/compiled"/>
+  <property name="dist.src" value="${app.name}.src.jar"/>
+  <property name="dist.war" value="${app.name}.war"/>
+  <property name="javadoc.home" value="${build.home}/javadoc"/>
+
+  <target name="prepare">
+    <mkdir dir="${build.compiled}"/>
+    <mkdir dir="${build.dist}"/>
+    <mkdir dir="${build.dist}/WEB-INF"/>
+    <mkdir dir="${build.dist}/WEB-INF/classes"/>
+    <mkdir dir="${build.dist}/WEB-INF/classes/org/melati"/>
+    <mkdir dir="${build.dist}/WEB-INF/lib"/>
+    <copy file="etc/web.xml" tofile="${build.dist}/WEB-INF/web.xml"/>
+    <copy todir="${build.dist}/WEB-INF/lib">
+	  <fileset dir="lib" includes="hsqldb.jar, webmacro.jar, jakarta-oro-2.0.jar, melati.jar"/>
+    </copy>
+    <copy todir="${build.dist}/WEB-INF/classes">
+      <fileset dir="etc/properties"/>
+      <fileset dir="src" includes="**/*.wm"/>
+    </copy>
+    <copy todir="${build.dist}">
+	  <fileset dir="web"/>
+    </copy>
+  </target>
+
+  <target name="clean">
+    <delete dir="${build.home}"/>
+  </target>
+
+  <target depends="prepare" name="compile">
+    <javac  classpath="${class.path}" debug="on" deprecation="off" destdir="${build.compiled}" 
+       optimize="off" srcdir="src">
+    </javac>
+  </target>
+
+  <target depends="pack" name="all"/>
+  
+  <target depends="compile" name="build">
+    <jar basedir="${build.compiled}" includes="**/*.*" jarfile="${build.dist}/WEB-INF/lib/${app.name}.jar"/>
+  </target>
+  
+  <target depends="build" description="Packaging" name="pack">
+    <jar basedir="${build.dist}" jarfile="${dist.war}"/>
+  </target>
+
+</project>
