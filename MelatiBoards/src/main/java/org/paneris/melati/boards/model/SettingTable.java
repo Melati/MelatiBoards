@@ -107,7 +107,7 @@ public class SettingTable extends SettingTableBase {
       DefinitionSource definitionSource) throws PoemException {
     super(database, name, definitionSource);
   }
-
+    
   public synchronized void unifyWithDB(ResultSet colDescs)
       throws SQLException, PoemException {
 
