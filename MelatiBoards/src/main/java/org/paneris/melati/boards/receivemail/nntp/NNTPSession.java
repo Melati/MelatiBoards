@@ -1,6 +1,7 @@
 package org.paneris.melati.boards.receivemail.nntp;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -315,43 +316,46 @@ public class NNTPSession extends Thread {
           Enumeration attachments = message.getAttachments();
           int i = 1;
           while (attachments.hasMoreElements()) {
-            writer.println();
             Attachment element = (Attachment)attachments.nextElement();
-            //todo: determine content type more accurately (using JAF or Servlet API)
-            String contentType = "application/octet-stream";
-            String transferEncoding = "base64";
-            if (element.getType().getType().equalsIgnoreCase("truncation")) {
-              contentType = "text/plain";
-              transferEncoding = "8bit";
-            }
-            writer.println("--" + boundary);
-            writer.println(
-              "Content-Type: "
-                + contentType
-                + "; name=\""
-                + element.getFilename()
-                + "\"\t");
-            writer.println(
-              "Content-Transfer-Encoding: " + transferEncoding + "\t");
-            writer.println(
-              "Content-Disposition: inline; filename=\""
-                + element.getFilename()
-                + "\"\t");
-            writer.println();
-            writer.flush();
-            //todo: use buffering?
-            OutputStream out =
-              MimeUtility.encode(socket.getOutputStream(), transferEncoding);
-            FileInputStream in = new FileInputStream(element.getPath());
-            byte[] buffer = new byte[512];
-            while (true) {
-              int c = in.read(buffer);
-              if (c == -1) {
-                break;
+            File f = new File(element.getPath());
+            if (f.exists()) {
+              //todo: determine content type more accurately (using JAF or Servlet API)
+              String contentType = "application/octet-stream";
+              String transferEncoding = "base64";
+              if (element.getType().getType().equalsIgnoreCase("truncation")) {
+                contentType = "text/plain";
+                transferEncoding = "8bit";
               }
-              out.write(buffer, 0, c);
+              writer.println();
+              writer.println("--" + boundary);
+              writer.println(
+                "Content-Type: "
+                  + contentType
+                  + "; name=\""
+                  + element.getFilename()
+                  + "\"\t");
+              writer.println(
+                "Content-Transfer-Encoding: " + transferEncoding + "\t");
+              writer.println(
+                "Content-Disposition: inline; filename=\""
+                  + element.getFilename()
+                  + "\"\t");
+              writer.println();
+              writer.flush();
+              //todo: use buffering?
+              OutputStream out =
+                MimeUtility.encode(socket.getOutputStream(), transferEncoding);
+              FileInputStream in = new FileInputStream(element.getPath());
+              byte[] buffer = new byte[512];
+              while (true) {
+                int c = in.read(buffer);
+                if (c == -1) {
+                  break;
+                }
+                out.write(buffer, 0, c);
+              }
+              out.flush();
             }
-            out.flush();
           }
           writer.println("\r\n--" + boundary + "--");
         }
@@ -364,6 +368,7 @@ public class NNTPSession extends Thread {
       writer.println("502 no permission");
     } catch (Exception e) {
       e.printStackTrace();
+      writer.println("503 program error function not performed");
     }
 
   }
