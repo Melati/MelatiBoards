@@ -32,7 +32,7 @@
    http://www.paneris.org/webmacro/MessageBoard?db=paneris&amp;messageboard=381
   </issueTrackingUrl>
   <distributionDirectory>
-    /inst/MelatiBoards/
+    /inst/MelatiBoards/target/distributions/
   </distributionDirectory>
 
   <repository>
@@ -266,9 +266,11 @@ http://sourceforge.net/mailarchive/forum.php?forum=melati-users
     <report>maven-developer-activity-plugin</report>
     <report>maven-javadoc-plugin</report>
     <report>maven-jxr-plugin</report>
-    <report>maven-junit-report-plugin</report>
     <report>maven-tasklist-plugin</report>
+<--
+    <report>maven-junit-report-plugin</report>
     <report>maven-jellydoc-plugin</report>
+-->
   </reports>
 </project>
 
