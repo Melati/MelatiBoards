@@ -476,7 +476,13 @@ public class NNTPSession extends Thread {
           while (boards.hasMoreElements()) {
             Board board = (Board)boards.nextElement();
             writer.println(
-              store.prefix + "." + board.getName() + " " + board.getPurpose());
+              store.prefix
+                + "."
+                + board.getName()
+                + " "
+                + board.getDisplayname()
+                + " "
+                + board.getPurpose());
           }
         }
       } else if (param.equalsIgnoreCase("ACTIVE")) {
@@ -490,7 +496,7 @@ public class NNTPSession extends Thread {
                 + "."
                 + board.getName()
                 + " "
-                + (board.getModeratedposting().booleanValue() ? "y" : "n"));
+                + (board.getModeratedposting().booleanValue() ? "n" : "y"));
           }
         }
       }
@@ -505,7 +511,7 @@ public class NNTPSession extends Thread {
               + "."
               + board.getName()
               + " "
-              + (board.getModeratedposting().booleanValue() ? "y" : "n"));
+              + (board.getModeratedposting().booleanValue() ? "n" : "y"));
           /*
           writer.println(
             store.prefix
