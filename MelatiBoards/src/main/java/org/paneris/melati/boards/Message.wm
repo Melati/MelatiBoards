@@ -45,13 +45,10 @@
 </table>
 
 <P>
-#if ($melati.User.isGuest()) #begin
- You need to <a href="$boardutils.LoginURL($board)">Log in</a> to reply to this message.
-#end
-#else #begin
- #if ($board.canPost($melati.User)) #begin
+#if ($board.canPost($melati.User)) #begin
   <a href="$boardutils.MessageNewURL($board)?parent=$message.Troid">Reply to this message</a>\ 
- #end
+#end #else #begin
+  You need to <a href="$boardutils.LoginURL($board)">Log in</a> to reply to this message.
 #end
 </P>
 
