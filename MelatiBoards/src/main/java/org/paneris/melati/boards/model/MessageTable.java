@@ -72,11 +72,14 @@ public class MessageTable extends MessageTableBase {
                 getBoardObject(((Message)persistent).getBoard_unsafe());
     AccessToken token = PoemThread.accessToken();
 
+    if ("".equals(((Message)persistent).getSubject_unsafe())) {
+      persistent.setRaw("subject", "(no subject)");
+    }
     Timestamp now = new Timestamp(new java.util.Date().getTime());
     persistent.setRaw("date", now);
     persistent.setRaw("author", ((User)token).troid());
     boolean approved = !b.getModeratedposting_unsafe().booleanValue() ||
-                       b.canManage((User)token) ;
+                       b.canManage((User)token);
     persistent.setRaw("approved", new Boolean(approved));
 
     super.create(persistent);
