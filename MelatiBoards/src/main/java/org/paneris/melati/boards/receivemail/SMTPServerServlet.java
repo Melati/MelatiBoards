@@ -178,9 +178,9 @@ public class SMTPServerServlet implements Servlet {
    *
    * @see SMTPServer
    */
-  public void init(ServletConfig config) throws ServletException {
+  public void init(ServletConfig configP) throws ServletException {
 
-    this.config = config;
+    this.config = configP;
 
     Log log = new Log("ReceiveMail");
 

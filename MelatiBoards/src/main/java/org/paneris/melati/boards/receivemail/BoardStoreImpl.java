@@ -99,17 +99,17 @@ public class BoardStoreImpl implements BoardStore {
   public BoardStoreImpl() {}
 
   /**
-   * @param database     the name of the database
-   * @param log          where to log trouble
+   * @param db           the name of the database
+   * @param logP         where to log trouble
    * @param senderAddr   senders address
    * @param messAddr     message address
    */
-  public void init(Database database, Log log,
+  public void init(Database db, Log logP,
                     final InternetAddress senderAddr,
                     final InternetAddress messAddr)
       throws IOException, MessagingException {
-    this.database = database;
-    this.log = log;
+    this.database = db;
+    this.log = logP;
     recipient = recipientOfAddress(messAddr);
     sender = senderOfAddress(recipient, senderAddr);
 
@@ -128,7 +128,7 @@ public class BoardStoreImpl implements BoardStore {
                 "parent message `" + recipient.parentID + "' " + "not found");
         }
 
-        if (!((Message)parent).getBoard_unsafe().equals(
+        if (!parent.getBoard_unsafe().equals(
                                                  recipient.board.troid())) {
           throw new MessagingException(
                 "parent message `" + recipient.parentID + "' " +
@@ -148,7 +148,7 @@ public class BoardStoreImpl implements BoardStore {
   }
 
  /**
-  * Return type of {@link #recipientOfAddress(InternetAddress)}.
+  * Return type of {@link BoardStoreImpl#recipientOfAddress(InternetAddress)}.
   */
   public class Recipient {
     public Board board;
@@ -172,7 +172,7 @@ public class BoardStoreImpl implements BoardStore {
    * @see #messageAccept
    */
   private org.paneris.melati.boards.model.User 
-      senderOfAddress(Recipient recipient,
+      senderOfAddress(Recipient to,
                       InternetAddress email)
       throws MessagingException {
 
@@ -192,16 +192,15 @@ public class BoardStoreImpl implements BoardStore {
     if (sender == null) {
       
       //TTJ add option for annonymous posting - create a user record
-      if (!recipient.board.getAnonymousposting().booleanValue()) {
+      if (!to.board.getAnonymousposting().booleanValue()) {
         throw new MessagingException(
             "user `" + email + "' " +
             "not authorised to post on this message board");
-      } else {
-        sender = (org.paneris.melati.boards.model.User)database.getUserTable().newPersistent();
-        sender.setEmail(email.getAddress());
-        sender.generateDefaults();
-        database.getUserTable().create(sender);
-      }
+      } 
+      sender = (org.paneris.melati.boards.model.User)database.getUserTable().newPersistent();
+      sender.setEmail(email.getAddress());
+      sender.generateDefaults();
+      database.getUserTable().create(sender);
     }
     return sender;
   }
@@ -223,7 +222,6 @@ public class BoardStoreImpl implements BoardStore {
    *                            identifies both the board and the parent message
    *
    * @throws MessagingException e.g. if the board doesn't exist
-   * @throws SQLException       if something fails
    *
    * @return                   any object which will be recognised later by
    *                            <TT>messageAccept</TT>
@@ -236,7 +234,7 @@ public class BoardStoreImpl implements BoardStore {
 
       String to = email.getAddress();
 
-      Recipient recipient = new Recipient();
+      Recipient rec = new Recipient();
       String boardName;
 
       int atIndex = to.indexOf('@');
@@ -245,7 +243,7 @@ public class BoardStoreImpl implements BoardStore {
       if (dotIndex > 0 && dotIndex < atIndex) {
         boardName = to.substring(dotIndex + 1, atIndex);
         try {
-          recipient.parentID = Integer.valueOf(to.substring(0, dotIndex));
+          rec.parentID = Integer.valueOf(to.substring(0, dotIndex));
         }
         catch (NumberFormatException e) {
           throw new MessagingException("illegal parent message ID `" +
@@ -254,7 +252,7 @@ public class BoardStoreImpl implements BoardStore {
       }
       else {
         boardName = to.substring(0, atIndex);
-        recipient.parentID = null;
+        rec.parentID = null;
       }
 
       // FIXME - does not deal with MTA's lowercasing of addresses
@@ -265,8 +263,8 @@ public class BoardStoreImpl implements BoardStore {
         throw new MessagingException("unknown messageboard `" +
                                      boardName + "'");
       
-      recipient.board = (Board)board;
-      return recipient;
+      rec.board = (Board)board;
+      return rec;
   }
 
   /**

@@ -106,8 +106,8 @@ public class Subscription extends SubscriptionBase {
   * Check user against another.
   * 
   */
-  public boolean isUsersDetails(User user) {
-    return getUser_unsafe().equals(user.troid());
+  public boolean isUsersDetails(User userP) {
+    return getUser_unsafe().equals(userP.troid());
   }
 
  /**
@@ -198,11 +198,11 @@ public class Subscription extends SubscriptionBase {
     try {
       Board b = getBoardsDatabaseTables().getBoardTable().
                     getBoardObject(getBoard_unsafe());
-      User user = (User)token;
-      if (!b.canManage(user) && !isUsersDetails(user))
+      User u = (User)token;
+      if (!b.canManage(u) && !isUsersDetails(u))
         throw new AccessPoemException(token,
                                       new Capability("Logged In or Manager"));
-      if (b.isBanned(user))
+      if (b.isBanned(u))
         throw new AccessPoemException(token,
                                       new Capability("Not Banned"));
     } catch (ClassCastException e) {

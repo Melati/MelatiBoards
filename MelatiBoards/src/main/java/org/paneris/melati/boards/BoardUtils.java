@@ -63,6 +63,12 @@ public class BoardUtils {
   private String boardURL;
   private String logicalDatabase;
 
+  /**
+   * Constructor. 
+   * 
+   * @param boardURL the whole URL for the board, used in emails
+   * @param logicalDatabase the name of the db
+   */
   public BoardUtils(String boardURL, String logicalDatabase) {
     this.boardURL = boardURL;
     this.logicalDatabase = logicalDatabase;
@@ -199,6 +205,13 @@ public class BoardUtils {
            "/DeleteMessages";
   }
 
+  /**
+   * Utility to calculate message indentation
+   * 
+   * @param space the number of spaces in a tab
+   * @param depth the depth within a tree where the top is zero
+   * @return a number (of spaces) to insert 
+   */
   public static int indent(int space, int depth) {
     return space*depth+1;
   }
