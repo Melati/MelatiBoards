@@ -117,7 +117,7 @@ E.g. go to /testapp/org.melati.admin.Admin/testdb/Main and
 
 The values that you must set up in the Settings table (they are all Strings):
 
-smtpserver            - the SMTP server for outgoing mail
+SMTPServer            - the SMTP server for outgoing mail
     (e.g. testapp.co.uk) 
 BoardsEmailDomain     - the domain which receives mail for this database.
                         Note that this must be the same as that defined
@@ -143,7 +143,7 @@ LogicalDatabase       - the name of the database (note this must agree with
 3) Set up the outgoing email part of the system
 -----------------------------------------------
 
-You need to create an entry in the Settings table called `smtpserver'. Set
+You need to create an entry in the Settings table called `SMTPServer'. Set
 it to the SMTP server you wish to use for outgoing mail. Add this through
 the Melati admin system, e.g. go to:
 
