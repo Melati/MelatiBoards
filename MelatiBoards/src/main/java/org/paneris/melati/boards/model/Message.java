@@ -101,10 +101,11 @@ public class Message extends MessageBase implements Treeable {
     return lines; 
   }
   public String IndentBody(String indent) {
+    String[] lines = getLines();
     StringBuffer ret = new StringBuffer(
                     getBody_unsafe().length() +
-                    lines.length*indent.length());
-    for(int i=0; i<lines.length; i++) {
+                    lines.length * indent.length());
+    for(int i = 0; i < lines.length; i++) {
       ret.append(indent);
       ret.append(lines[i]);
     }
