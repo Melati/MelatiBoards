@@ -77,9 +77,12 @@ public class MessageTable extends MessageTableBase {
     }
     Timestamp now = new Timestamp(new java.util.Date().getTime());
     persistent.setRaw("date", now);
-    persistent.setRaw("author", ((User)token).troid());
+    
+    // you don't need to be logged in to author a message!
+    // persistent.setRaw("author", ((User)token).troid());
+    
     boolean approved = !b.getModeratedposting_unsafe().booleanValue() ||
-                       b.canManage((User)token);
+                       b.canManage(((Message)persistent).getAuthor());
     persistent.setRaw("approved", new Boolean(approved));
 
     super.create(persistent);
