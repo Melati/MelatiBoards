@@ -76,7 +76,7 @@ table Board
 
     Boolean openposting
         (displayname = "Open Posting")
-        (description = "With open posting anyone can post a message to this list. Otherwise, only members can post")
+        (description = "With open posting anyone with a user account can post a message to this list. Otherwise, only members can post")
         (displaylevel = record)
         (searchability = no);
 
@@ -101,6 +101,12 @@ table Board
     Boolean attachmentsallowed
         (displayname = "Attachments Allowed")
         (description = "Can attachments be sent with messages. If not, attachments are ignored")
+        (displaylevel = record)
+        (searchability = no);
+
+    Boolean anonymousposting
+        (displayname = "Anonymous Posting Allowed")
+        (description = "Can people without user accounts post to this messageboard. If so, a user account is created for them when they post.")
         (displaylevel = record)
         (searchability = no);
 
