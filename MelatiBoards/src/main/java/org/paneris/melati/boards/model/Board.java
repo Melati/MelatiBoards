@@ -65,6 +65,7 @@ import org.melati.poem.AccessToken;
 import org.melati.poem.CachedCount;
 import org.melati.poem.CachedSelection;
 import org.melati.poem.Capability;
+import org.melati.poem.ValidationPoemException;
 import org.melati.util.ChildrenDrivenMutableTree;
 import org.melati.util.Email;
 import org.melati.util.EnumUtils;
@@ -651,6 +652,16 @@ public class Board extends BoardBase {
   public String templatePath(String templateName) {
     return getBoardTable().getBoardsEmailTemplates() + File.separator +
     templateName + ".wm";
+  }
+
+  /**
+   * MTAs such as qmail set email addresses all lowercase, 
+   * so we have to. 
+   */
+  public void setName(String name)
+      throws AccessPoemException, ValidationPoemException {
+    String lName = name.toLowerCase();
+    super.setName(lName);
   }
   
 }
