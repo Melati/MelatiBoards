@@ -1,0 +1,25 @@
+#set $Response.ContentType = "text/html"
+#set $ml = $melati.HTMLMarkupLanguage
+#set $board = $melati.Object
+
+<html>
+<head>
+<title>New message on board: $ml.rendered($board)</title>
+</head>
+
+<body>
+<h1>Board: $ml.rendered($board)</h1>
+
+#parse "melati/boards/Menu.wm"
+
+<h2>New Message</h2>
+
+#if ($board.Openposting || $board.canManage($melati.User)) #begin
+ <p>Your message has been posted to the board</p>
+#end #else #begin
+ <p>Your message will be posted to the board when it has been approved by a manager</p>
+#end
+
+</body>
+</html>
+

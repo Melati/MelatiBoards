@@ -1,11 +1,21 @@
 #set $Response.ContentType = "text/html"
+#set $ml = $melati.HTMLMarkupLanguage
+#set $board = $melati.Object
 
 <html>
 <head>
+<title>Unsubscribe from $ml.rendered($board)</title>
 </head>
 
 <body>
-Not implemented
+<h1>Unsubscribe from $ml.rendered($board)</h1>
+
+#parse "melati/boards/Menu.wm"
+
+<h2>Subscribe</h2>
+
+<p>You have been unsubscribed</p>
+
 </body>
 </html>
 

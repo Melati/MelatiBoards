@@ -1,0 +1,60 @@
+#set $Response.ContentType = "text/html"
+#set $ml = $melati.HTMLMarkupLanguage
+#set $board = $melati.Object
+
+<html>
+<head>
+<title>Settings for board: $ml.rendered($board)</title>
+</head>
+
+<body>
+<h1>Board: $ml.rendered($board)</h1>
+
+#parse "melati/boards/Menu.wm"
+
+<h2>Settings</h2>
+
+<!-- Start Board Settings -->
+<P>
+#if ($board.Openmessageviewing) #begin
+ Anyone can view messages
+#end #else #begin
+ Only members can view messages
+#end
+<br>
+#if ($board.Openposting) #begin
+ Anyone can post a message
+#end #else #begin
+ Only members can post messages
+#end
+<br>
+#if ($board.Moderatedposting) #begin
+ New messages must be approved by a manager before they go on the board<br>
+#end
+#if ($board.Openmemberlist) #begin
+ Anyone can view the list of members
+#end #else #begin
+ Only members can view the list of members
+#end
+<br>
+#if ($board.Opensubscription) #begin
+ Anyone can subscribe
+ #if ($board.Moderatedsubscription) #begin
+  but a manager needs to approve your subscription
+ #end
+#end #else #begin
+ Members must be subscribed by a Manager
+#end
+<br>
+#if ($board.Attachmentsallowed) #begin
+ Attachments are allowed
+#end #else #begin
+ Attachments are not allowed
+#end
+</P>
+<!-- End Board Settings -->
+
+</body>
+
+</html>
+

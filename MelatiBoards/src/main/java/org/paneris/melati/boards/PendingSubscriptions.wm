@@ -1,0 +1,46 @@
+#set $Response.ContentType = "text/html"
+#set $ml = $melati.HTMLMarkupLanguage
+#set $board = $melati.Object
+
+<html>
+<head>
+<title>Pending subscriptions for board: $ml.rendered($board)</title>
+</head>
+
+<body>
+<h1>Board: $ml.rendered($board)</h1>
+
+#parse "melati/boards/Menu.wm"
+
+<h2>Pending subscriptions</h2>
+
+<form action=$utils.ApproveSubscriptionsURL($board) method=post>
+<table>
+#foreach $subscription in $board.PendingSubscriptions #begin
+ <tr>
+  <td>
+   <select name=$subscription.Troid>
+     <option>-- Actions --</option>
+     <option value="normal">Subscribe as normal</option>
+     <option value="manager">Subscribe as manager</option>
+     <option value="remove">Decline subscription</option>
+   </select>
+   <input type=hidden name=subscription value=$subscription.Troid>
+  </td>
+  <td>$ml.rendered($subscription.User)</td>
+ </tr>
+#end
+ <tr>
+  <td colspan=2 align=center>
+    <input type=submit value="Approve checked subscriptions">
+  </td>
+ </tr>
+</table>
+<p>
+</p>
+</form>
+
+</body>
+
+</html>
+

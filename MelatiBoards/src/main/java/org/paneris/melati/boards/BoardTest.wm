@@ -1,0 +1,27 @@
+#set $Response.ContentType = "text/html"
+
+<h2>Board test</h2>
+
+<p>
+JVM has total memory: $total1<br>
+Currently free: $free1<br>
+</P>
+
+<h3>Sucked in ASDF</h3>
+<p>
+JVM has total memory: $total2<br>
+Currently free: $free2<br>
+</P>
+
+<h3>Sucked in Wobby</h3>
+<p>
+JVM has total memory: $total3<br>
+Currently free: $free3<br>
+</P>
+
+<h3>gc (if done)</h3>
+<P>
+JVM has total memory: $total4<br>
+Currently free: $free4<br>
+</P>
+

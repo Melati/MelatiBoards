@@ -1,0 +1,66 @@
+#set $Response.ContentType = "text/html"
+#set $ml = $melati.HTMLMarkupLanguage
+#set $board = $melati.Object
+
+<html>
+<head>
+<title>Settings for board: $ml.rendered($board)</title>
+</head>
+
+<body>
+<h1>Board: $ml.rendered($melati.Object)</h1>
+
+#parse "melati/boards/Menu.wm"
+
+<h2>Edit settings</h2>
+
+<form action="$utils.SettingsUpdateURL($board)" method=post>
+<table>
+ <tr>
+  <td>Archived</td>
+  <td>$ml.input($board.ArchivedField)</td>
+  <td>$ml.rendered($board.ArchivedField.Description)</td>
+ </tr>
+ <tr>
+  <td>Open Subscription</td>
+  <td>$ml.input($board.OpensubscriptionField)</td>
+  <td>$ml.rendered($board.OpensubscriptionField.Description)</td>
+ </tr>
+ <tr>
+  <td>Moderated Subscription</td>
+  <td>$ml.input($board.ModeratedsubscriptionField)</td>
+  <td>$ml.rendered($board.ModeratedsubscriptionField.Description)</td>
+ </tr>
+ <tr>
+  <td>Open Posting</td>
+  <td>$ml.input($board.OpenpostingField)</td>
+  <td>$ml.rendered($board.OpenpostingField.Description)</td>
+ </tr>
+ <tr>
+  <td>Moderated Posting</td>
+  <td>$ml.input($board.ModeratedpostingField)</td>
+  <td>$ml.rendered($board.ModeratedpostingField.Description)</td>
+ </tr>
+ <tr>
+  <td>Open Message Viewing</td>
+  <td>$ml.input($board.OpenmessageviewingField)</td>
+  <td>$ml.rendered($board.OpenmessageviewingField.Description)</td>
+ </tr>
+ <tr>
+  <td>Open Member List</td>
+  <td>$ml.input($board.OpenmemberlistField)</td>
+  <td>$ml.rendered($board.OpenmemberlistField.Description)</td>
+ </tr>
+ <tr>
+  <td>Attachments Allowed</td>
+  <td>$ml.input($board.AttachmentsallowedField)</td>
+  <td>$ml.rendered($board.AttachmentsallowedField.Description)</td>
+ </tr>
+</table>
+<p>
+<input type=submit value="Update settings">
+</p>
+</form>
+</body>
+</html>
+

@@ -1,0 +1,36 @@
+#set $Response.ContentType = "text/html"
+#set $ml = $melati.HTMLMarkupLanguage
+#set $board = $melati.Object
+
+<html>
+<head>
+<title>Members of board: $ml.rendered($board)</title>
+</head>
+
+<body>
+<h1>Board: $ml.rendered($board)</h1>
+
+#parse "melati/boards/Menu.wm"
+
+<h2>Members</h2>
+
+<!-- Start Member List -->
+<P>
+#if ($board.canViewMembers($melati.User)) #begin
+ #foreach $member in $board.Members #begin
+  <a href="mailto:$ml.rendered($member.Email)">$ml.rendered($member.Name)</a>
+  #if ($board.isManager($member)) #begin
+   <i>(Manager)</i>
+  #end
+  <br>
+ #end
+#end #else #begin
+  You must be subscribed to this board to view its members
+#end
+</P>
+<!-- End Member List -->
+
+</body>
+
+</html>
+

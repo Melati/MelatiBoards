@@ -1,0 +1,53 @@
+#set $Response.ContentType = "text/html"
+#set $ml = $melati.HTMLMarkupLanguage
+#set $board = $melati.Object
+
+<html>
+<head>
+<script language="Javascript">
+function selectAll(form) {
+  var inputs = form.elements;
+  for(i=0;i<inputs.length;i++)
+    if (inputs[i].type == "checkbox") {
+      inputs[i].checked = true;
+  }
+}
+</script>
+<title>Pending messages for board: $ml.rendered($board)</title>
+</head>
+
+<body>
+<h1>Board: $ml.rendered($board)</h1>
+
+#parse "melati/boards/Menu.wm"
+
+<h2>Pending messages</h2>
+
+<form action=$utils.ApproveMessagesURL($board) method=post>
+<table>
+#foreach $message in $board.PendingMessages #begin
+ <tr>
+  <td>
+   <input type=checkbox name=$message.Troid value=yes>
+   <input type=hidden name=message value=$message.Troid>
+  </td>
+  <td><a href="$utils.MessageNoThreadURL($message, $start)">$ml.rendered($message)</a></td>
+  <td>$ml.rendered($message.Author)</td>
+  <td>$ml.rendered($message.Date)</td>
+ </tr>
+#end
+ <tr>
+  <td colspan=4 align=center>
+    <input type=button value="Check all messages" onClick="selectAll(this.form)">
+    <input type=submit value="Approve checked messages">
+  </td>
+ </tr>
+</table>
+<p>
+</p>
+</form>
+
+</body>
+
+</html>
+

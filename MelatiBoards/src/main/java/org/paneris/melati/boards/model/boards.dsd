@@ -313,4 +313,8 @@ table Attachment
         (searchability = yes);
 }
 
+table Setting extends Setting
+    (displayorder = 3040)  {
+  // So we can add boards-specific settings
+}
 

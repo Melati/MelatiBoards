@@ -1,0 +1,22 @@
+#set $Response.ContentType = "text/html"
+#set $ml = $melati.HTMLMarkupLanguage
+#set $board = $melati.Object
+
+<html>
+<head>
+<title>Updated settings for board: $ml.rendered($board)</title>
+</head>
+
+<body>
+<h1>Board: $ml.rendered($melati.Object)</h1>
+
+#parse "melati/boards/Menu.wm"
+
+<h2>Settings Updated</h2>
+
+<p>The settings have been updated.</p>
+
+</body>
+
+</html>
+

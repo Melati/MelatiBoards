@@ -1,5 +1,57 @@
+/*
+ * $Source$
+ * $Revision$
+ *
+ * Copyright (C) 2000 Myles Chippendale
+ *
+ * Part of a Melati application. This application is free software;
+ * Permission is granted to copy, distribute and/or modify this
+ * software under the same terms as those set out for Melati, below.
+ *
+ * Melati (http://melati.org) is a framework for the rapid
+ * development of clean, maintainable web applications.
+ *
+ * Melati is free software; Permission is granted to copy, distribute
+ * and/or modify this software under the terms either:
+ *
+ * a) the GNU General Public License as published by the Free Software
+ *    Foundation; either version 2 of the License, or (at your option)
+ *    any later version,
+ *
+ *    or
+ *
+ * b) any version of the Melati Software License, as published
+ *    at http://melati.org
+ *
+ * You should have received a copy of the GNU General Public License and
+ * the Melati Software License along with this program;
+ * if not, write to the Free Software Foundation, Inc.,
+ * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA to obtain the
+ * GNU General Public License and visit http://melati.org to obtain the
+ * Melati Software License.
+ *
+ * Feel free to contact the Developers of Melati (http://melati.org),
+ * if you would like to work out a different arrangement than the options
+ * outlined here.  It is our intention to allow Melati to be used by as
+ * wide an audience as possible.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * Contact details for copyright holder:
+ *
+ *     Mylesc Chippendale <mylesc@paneris.org>
+ *     http://paneris.org/
+ *     29 Stanley Road, Oxford, OX4 1QY, UK
+ */
+
+
 package org.paneris.melati.boards.model;
 
+import org.paneris.melati.boards.model.User;
+import org.paneris.melati.boards.model.UserTable;
 import org.paneris.melati.boards.model.generated.*;
 import java.io.*;
 import java.util.*;
@@ -20,50 +72,48 @@ public class Board extends BoardBase {
 
   public boolean isAdmin(User user) {
     return ((AccessToken)user).givesCapability(
-           getTable().getDatabase().getCapabilityTable().get("_administer_"));
+                                 getDatabase().administerCapability());
   }
 
   public boolean isManager(User user) {
-    return getBoardsDatabase().getSubscriptionTable().isManager(user, this);
+    return getBoardsDatabaseTables().getSubscriptionTable().
+             isManager(user, this);
   }
 
   public boolean isMember(User user) {
-    return getBoardsDatabase().getSubscriptionTable().isMember(user, this);
-  }
-
-  private CachedSelection managers = null;
-  
-  public Enumeration getManagers() {
-    if (managers == null)
-      managers =
-        getBoardsDatabase().getSubscriptionTable().cachedManagers(this);
-    return managers.objects();
+    return getBoardsDatabaseTables().getSubscriptionTable().
+             isMember(user, this);
   }
 
   /***************************
    * List users
    ****************************/
 
-  private CachedSelection members = null;
-  
-  public Enumeration getMembers() {
-    if (members == null)
-      members =
-        getBoardsDatabase().getSubscriptionTable().cachedMembers(this);
-    return new MappedEnumeration(members.objects()) {
-             public Object mapped(Object subscription) {
-               return ((Subscription)subscription).getUser();
-             }
-           };
-  }
-
   private CachedCount managerCount = null;
   
   public int getManagerCount() {
     if (managerCount == null)
       managerCount =
-        getBoardsDatabase().getSubscriptionTable().cachedManagerCount(this);
+        getBoardsDatabaseTables().getSubscriptionTable().
+          cachedManagerCount(this);
     return managerCount.count();
+  }
+
+  private CachedSelection managersubs = null;
+  
+  public Enumeration getManagersSubscriptions() {
+    if (managersubs == null)
+      managersubs =
+        getBoardsDatabaseTables().getSubscriptionTable().cachedManagers(this);
+    return managersubs.objects();
+  }
+
+  public Enumeration getManagers() {
+    return new MappedEnumeration(getManagersSubscriptions()) {
+             public Object mapped(Object subscription) {
+               return ((Subscription)subscription).getUser();
+             }
+           };
   }
 
   private CachedCount memberCount = null;
@@ -71,17 +121,35 @@ public class Board extends BoardBase {
   public int getMemberCount() {
     if (memberCount == null)
       memberCount =
-        getBoardsDatabase().getSubscriptionTable().cachedMemberCount(this);
+        getBoardsDatabaseTables().getSubscriptionTable().
+                                    cachedMemberCount(this);
     return memberCount.count();
   }
 
+  private CachedSelection membersubs = null;
+  
+  public Enumeration getMembersSubscriptions() {
+    if (membersubs == null)
+      membersubs =
+        getBoardsDatabaseTables().getSubscriptionTable().cachedMembers(this);
+    return membersubs.objects();
+  }
+
+  public Enumeration getMembers() {
+    return new MappedEnumeration(getMembersSubscriptions()) {
+             public Object mapped(Object subscription) {
+               return ((Subscription)subscription).getUser();
+             }
+           };
+  }
+
   public Enumeration getNormalDistributionList() {
-    return getBoardsDatabase().getSubscriptionTable().
+    return getBoardsDatabaseTables().getSubscriptionTable().
                              getNormalDistributionList(this);
   }
 
   public Enumeration getDigestDistributionList() {
-    return getBoardsDatabase().getSubscriptionTable().
+    return getBoardsDatabaseTables().getSubscriptionTable().
                              getDigestDistributionList(this);
   }
 
@@ -102,17 +170,20 @@ public class Board extends BoardBase {
   }
 
   public boolean canViewMessages(User user) {
-    return getOpenmessageviewing().booleanValue() || isMember(user) ||
+    return getOpenmessageviewing().booleanValue() ||
+           isMember(user) ||
            isAdmin(user);
   }
 
   public boolean canViewMembers(User user) {
-    return getOpenmemberlist().booleanValue() || isMember(user) ||
+    return getOpenmemberlist().booleanValue() ||
+           isMember(user) ||
            isAdmin(user);
   }
 
   public boolean canManage(User user) {
-    return isManager(user) || isAdmin(user);
+    return isManager(user) ||
+           isAdmin(user);
   }
 
 
@@ -149,7 +220,7 @@ public class Board extends BoardBase {
   public void subscribe(User user, MembershipStatus status,
                         Boolean ismanager, Boolean approved) {
     Subscription sub =
-      getBoardsDatabase().getSubscriptionTable().
+      getBoardsDatabaseTables().getSubscriptionTable().
         subscribe(user, this, status, ismanager, approved);
 
     if (sub.getApproved_unsafe() == Boolean.FALSE) {
@@ -158,11 +229,23 @@ public class Board extends BoardBase {
     }
   }
 
-  public void unsubscribe(User user) {
-    getBoardsDatabase().getSubscriptionTable().unsubscribe(user, this);
+  public void subscribe(User user) {
+    subscribe(user,
+              getBoardsDatabaseTables().getMembershipStatusTable().
+                getNormal(),
+              Boolean.FALSE,
+              new Boolean(!getModeratedsubscription_unsafe().booleanValue()));
   }
 
- 
+  public void unsubscribe(User user) {
+    getBoardsDatabaseTables().getSubscriptionTable().unsubscribe(user, this);
+  }
+
+  public Subscription getUserSubscription(User user) {
+    return getBoardsDatabaseTables().getSubscriptionTable().
+                             getUserSubscription(user, this);
+  }
+
 
   /****************************************
    * Distribute
@@ -174,7 +257,7 @@ public class Board extends BoardBase {
     Vector members = EnumUtils.vectorOf(
                        new MappedEnumeration(getMembers()) {
                          public Object mapped(Object member) {
-            return ((org.paneris.melati.boards.model.User)member).getEmail();
+                           return ((User)member).getEmail();
                          }
                        });
 
@@ -198,8 +281,6 @@ public class Board extends BoardBase {
       body += " (has "+message.getAttachmentCount()+" attachments)";
     body += ":\n";
     body += getMessageURL(message) + "\n";
-
-//    System.err.println("About to distribute `"+message.getSubject_unsafe()+"' to "+toString);
 
     try {
         Email.sendToList(
@@ -226,7 +307,8 @@ public class Board extends BoardBase {
   // Enumeration of Messages
   private Enumeration threadsRoots() {
     if (roots == null)
-      roots = getBoardsDatabase().getMessageTable().cachedBoardRoots(this);
+      roots = getBoardsDatabaseTables().getMessageTable().
+                                          cachedBoardRoots(this);
     return roots.objects();
   }
 
@@ -260,7 +342,7 @@ public class Board extends BoardBase {
   }
 
   void addToParent(Message mess, Message parent) {
-    if (threadTrees == null)  // Don't bother is we haven't built the trees
+    if (threadTrees == null)  // Don't bother if we haven't built the trees
       return;                 // (They will be built when we try to access them)
     DefaultMutableTreeNode messNode = new DefaultMutableTreeNode(mess);
     DefaultMutableTreeNode parentNode = getTreeNode(parent);
@@ -318,7 +400,7 @@ public class Board extends BoardBase {
   public int getMessageCount() {
     if (messageCount == null)
       messageCount =
-        getBoardsDatabase().getMessageTable().cachedMessageCount(this);
+        getBoardsDatabaseTables().getMessageTable().cachedMessageCount(this);
     return messageCount.count();
   }
 
@@ -336,14 +418,16 @@ public class Board extends BoardBase {
   public int getPendingMessageCount() {
     if (pendingMessageCount == null)
       pendingMessageCount =
-        getBoardsDatabase().getMessageTable().cachedPendingMessageCount(this);
+        getBoardsDatabaseTables().getMessageTable().
+                                    cachedPendingMessageCount(this);
     return pendingMessageCount.count();
   }
 
   public Enumeration getPendingMessages() {
     if (pendingMessages == null)
       pendingMessages =
-        getBoardsDatabase().getMessageTable().cachedPendingMessages(this);
+        getBoardsDatabaseTables().getMessageTable().
+                                    cachedPendingMessages(this);
     return pendingMessages.objects();
   }
 
@@ -357,16 +441,16 @@ public class Board extends BoardBase {
   public int getPendingSubscriptionCount() {
     if (pendingSubscriptionCount == null)
       pendingSubscriptionCount =
-        getBoardsDatabase().getSubscriptionTable().
-          cachedPendingSubscriptionCount(this);
+        getBoardsDatabaseTables().getSubscriptionTable().
+                                    cachedPendingSubscriptionCount(this);
     return pendingSubscriptionCount.count();
   }
 
   public Enumeration getPendingSubscriptions() {
     if (pendingSubscriptions == null)
       pendingSubscriptions =
-        getBoardsDatabase().getSubscriptionTable().
-          cachedPendingSubscriptions(this);
+        getBoardsDatabaseTables().getSubscriptionTable().
+                                    cachedPendingSubscriptions(this);
     return pendingSubscriptions.objects();
   }
 
@@ -393,10 +477,30 @@ public class Board extends BoardBase {
   public String getMessageURL(Message m) throws SettingNotFoundException {
     return getBoardTable().getBoardsSystemURL() + "/" +
            getBoardTable().getLogicalDatabase() + "/message/" +
-           m.troid()+"/ShowMessage";
+           m.troid()+"/Message";
   }
 
-  public String getSubscribedNote() {
+  public String templatePath(String templateName) {
+    return getBoardTable().getBoardsEmailTemplates() + File.separator +
+             templateName + ".wm";
+  }
+/*
+  public String evalTemplate(Melati melati, String template) {
+    // construct a Melati with a StringWriter instead of a servlet
+    // request and response
+    TemplateEngine = melati.getTemplateEngine();
+    MelatiWriter sw = TemplateEngine.getStringWriter(melati.getEncoding());
+    Melati melati2 = new Melati(melati.getConfig(), sw);
+    TemplateContext context = templateEngine.getTemplateContext(melati2);
+    context.put("melati", melati2);
+    templateEngine.expandTemplate(melati2.getWriter(),
+                                  templatePath(template),
+                                  context);
+    return sw.asString();
+  }
+
+  public String getSubscribedNote(Melati melati) {
+    return evalTemplate(melati, "SubscribedNote");
     return "You are now subscribed to the "+getDisplayname()+
            " board. Please post messages to "+getEmailAddress(); // FIXME
   }
@@ -429,7 +533,7 @@ public class Board extends BoardBase {
     return "You should visit the web site to do most stuff " +
            "or just reply to messages"; //FIXME
   }
-
+*/
   public String getManageInstructionsNote() {
     return "You should visit the web site to do most stuff " +
            "or just reply to messages"; //FIXME

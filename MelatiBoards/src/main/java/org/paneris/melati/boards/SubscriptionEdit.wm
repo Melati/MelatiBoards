@@ -1,0 +1,35 @@
+#set $Response.ContentType = "text/html"
+#set $ml = $melati.HTMLMarkupLanguage
+#set $subscription = $melati.Object
+#set $board = $subscription.Board
+
+<html>
+<head>
+<title>Your subscription to board: $ml.rendered($board)</title>
+</head>
+
+<body>
+<h1>Board: $ml.rendered($board)</h1>
+
+#parse "melati/boards/Menu.wm"
+
+<h2>Your options</h2>
+
+<form action="$utils.SubscriptionUpdateURL($subscription)" method=post>
+<p>
+Please select how often you would like to receive email:
+$ml.input($subscription.StatusField)
+<p>
+<ul>
+ <li><b>Normal:</b> you are sent each message by email as it is posted
+ <li><b>Digest:</b> you are sent one email each day containing a copy of all messages posted
+     in that day
+ <li><b>Suspended:</b> you are not sent any emails
+</ul>
+<p>
+<input type=submit value="Update Options">
+</p>
+</form>
+</body>
+</html>
+
