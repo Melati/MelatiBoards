@@ -149,7 +149,7 @@ class SMTPSession extends Thread {
   private void output(String s) {
     toClient.println(s);
     if (debug) 
-      System.err.println(s);
+      log.debug(s);
   }
   
   /**
@@ -329,7 +329,9 @@ class SMTPSession extends Thread {
   }
 
   /**
-   * Do the business
+   * Run the interpretter.
+   * 
+   * @TODO Handle EHLO (also HELP for debugging)
    */
 
   public void run() {
@@ -366,8 +368,13 @@ class SMTPSession extends Thread {
     } catch (Exception e) {
       output("554 Sorry: something is wrong with this server---"
            + StringUtils.tr(e.toString(), "\n\r", "  "));
-      log.error("post of message from `" + sender + "' failed:\n"
-          + ExceptionUtils.stackTrace(e));
+      if (sender != null) {
+        log.error("post of message from `" + sender + "' failed:\n"
+            + ExceptionUtils.stackTrace(e));
+      } else {
+        log.error("post of message failed before user established:\n"
+            + ExceptionUtils.stackTrace(e));
+      }
     } finally {
       try {
         reset();
