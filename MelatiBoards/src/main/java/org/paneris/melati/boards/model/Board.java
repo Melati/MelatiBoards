@@ -86,6 +86,14 @@ public class Board extends BoardBase {
     isMember(user, this);
   }
   
+  public boolean isBanned(User user) {
+    Subscription subscription = getUserSubscription(user);
+    if (subscription != null && subscription.getStatus() == 
+        getBoardsDatabaseTables().getMembershipStatusTable().getBanned()) 
+           return true;
+    return false;
+  }
+  
   /***************************
    * List users
    ****************************/
@@ -159,24 +167,34 @@ public class Board extends BoardBase {
    **************************/
   
   public boolean canSubscribe(User user) {
+    if (isBanned(user)) return false;
     return  getOpensubscription().booleanValue() ||
     isManager(user) ||
     isAdmin(user);
   }
   
+  // banned people can't unsubscribe
+  public boolean canUnSubscribe(User user) {
+    if (isBanned(user)) return false;
+    return true;
+  }
+  
   public boolean canPost(User user) {
+    if (isBanned(user)) return false;
     return getOpenposting().booleanValue() ||
     isMember(user) ||
     isAdmin(user);
   }
   
   public boolean canViewMessages(User user) {
+    if (isBanned(user)) return false;
     return getOpenmessageviewing().booleanValue() ||
     isMember(user) ||
     isAdmin(user);
   }
   
   public boolean canViewMembers(User user) {
+    if (isBanned(user)) return false;
     return getOpenmemberlist().booleanValue() ||
     isMember(user) ||
     isAdmin(user);
