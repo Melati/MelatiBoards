@@ -243,6 +243,10 @@ public class Board extends BoardBase {
               Boolean.FALSE,
               new Boolean(!getModeratedsubscription_unsafe().booleanValue()));
   }
+  
+  public boolean isSubscribed(User user) {
+    return getBoardsDatabaseTables().getSubscriptionTable().isMember(user, this);
+  }
 
   public void unsubscribe(User user) {
     getBoardsDatabaseTables().getSubscriptionTable().unsubscribe(user, this);
@@ -281,6 +285,11 @@ public class Board extends BoardBase {
 */
 
     String toString = getEmailAddress(message);
+    // include sender in replyto it they are not subscribed to this board
+    // (ie board allows open posting)
+    String replyTo = toString;
+    if (!isSubscribed(message.getAuthor()))
+      replyTo += "," + message.getAuthor().getEmail();
     String body = message.getBody();
     body += "\n\n-----------------------------------------------------------------------\n";
     body += "From the " + getDisplayname() + " board:\n";
@@ -298,7 +307,7 @@ public class Board extends BoardBase {
           message.getAuthor().getEmail(),   // From
           emailArray,                       // To list
           toString,                         // apparently to
-          getEmailAddress(message),         // reply to
+          replyTo,                          // reply to
           "["+getName()+"] " + message.getSubject(),    // subject
           body);
     } catch (Exception e) {
