@@ -78,6 +78,7 @@ public class BoardStoreImpl implements BoardStore {
 
   protected org.paneris.melati.boards.model.User sender = null;
   protected Recipient recipient = null;
+  protected Message parent = null;
 
   /**
    * A wrapper for the messageboards in a given database
@@ -105,16 +106,16 @@ public class BoardStoreImpl implements BoardStore {
     }
 
     if (recipient.parentID != null) {
-        Persistent parent=null;
         try {
-          parent = database.getTable("message").getObject(recipient.parentID);
+          parent = (Message)database.getTable("message").getObject(recipient.parentID);
         }
         catch (NoSuchRowPoemException e) {
           throw new MessagingException(
                 "parent message `" + recipient.parentID + "' " + "not found");
         }
 
-        if (!((Message)parent).getBoard_unsafe().equals(recipient.board.troid())) {
+        if (!((Message)parent).getBoard_unsafe().equals(
+                                                 recipient.board.troid())) {
           throw new MessagingException(
                 "parent message `" + recipient.parentID + "' " +
                 "is not on this board `"+ recipient.board.getName_unsafe() +"'");
@@ -133,6 +134,17 @@ public class BoardStoreImpl implements BoardStore {
     close();
   }
 
+
+  /**
+   * To whom this may concern...
+   * 
+   */ 
+
+  public class Recipient {
+    public Board board;
+    public Integer parentID;
+  }
+  
   /**
    * Return the user (poster) ID with a given email address
    * <P>
@@ -206,11 +218,6 @@ public class BoardStoreImpl implements BoardStore {
    * @see #messageAccept
    */
 
-  public class Recipient {
-    public Board board;
-    public Integer parentID;
-  }
-  
   public Recipient recipientOfAddress(InternetAddress email)
                                   throws MessagingException {
 
@@ -331,6 +338,15 @@ public class BoardStoreImpl implements BoardStore {
       text);
 
     final String subject = message.getSubject() == null ? "" : message.getSubject();
+
+    if (subject.toUpperCase().indexOf("BAN") == 0) {
+        if (recipient.board.isManager(sender)) {
+	    recipient.board.ban(parent.getAuthor());
+            parent.setDeleted(Boolean.TRUE);
+          return null;
+        }
+    }
+
 
     // write the record straight away in order to get an id number for the
     // attachments (if any)
