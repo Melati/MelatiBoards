@@ -309,10 +309,6 @@ public class MessageTableBase extends Table {
             return "Author of this message";
           }
 
-          protected String defaultRenderinfo() {
-            return "SelectionWindow";
-          }
-
           public Object getRaw_unsafe(Persistent g)
               throws AccessPoemException {
             return ((Message)g).getAuthor_unsafe();

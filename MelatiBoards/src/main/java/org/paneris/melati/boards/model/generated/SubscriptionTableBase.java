@@ -123,10 +123,6 @@ public class SubscriptionTableBase extends Table {
             return "The user";
           }
 
-          protected String defaultRenderinfo() {
-            return "SelectionWindow";
-          }
-
           public Object getRaw_unsafe(Persistent g)
               throws AccessPoemException {
             return ((Subscription)g).getUser_unsafe();
