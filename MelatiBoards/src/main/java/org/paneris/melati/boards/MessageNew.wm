@@ -47,7 +47,7 @@
 ## if we are the guest, then we must collect an email address
  #if ($melati.User.isGuest()) #begin
 
- <p>Email:<br>
+ <p>Your Email:<br>
   <input type=text name=field_email class="textn12"
   
     #if ($Form.field_email) #begin value="$Form.field_email" #end 
