@@ -1,6 +1,10 @@
-Reply to messages: 1234.xxxx@messageboards.wah.paneris.house
-(don't reply to all)
-New messages go to xxxx@messageboards.wah.paneris.house
+To send a new message to the board, send an email to
+$board.EmailAddress
 
-#include BoardFooter
+To reply to a message, send an email to
+1234.$board.EmailAddress, where 1234 is the number
+of the message. You can do this easily by using your email
+client's "Reply to" button. You should not use "Reply to all"
+because you will send an email to each user yourself, and then
+the board will send them a second copy.
 

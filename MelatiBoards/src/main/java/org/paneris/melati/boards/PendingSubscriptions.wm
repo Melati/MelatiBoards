@@ -27,12 +27,12 @@
    </select>
    <input type=hidden name=subscription value=$subscription.Troid>
   </td>
-  <td>$ml.rendered($subscription.User)</td>
+  <td>$ml.rendered($subscription.User) ($ml.rendered($subscription.User.Email))</td>
  </tr>
 #end
  <tr>
   <td colspan=2 align=center>
-    <input type=submit value="Approve checked subscriptions">
+    <input type=submit value="Approve subscriptions">
   </td>
  </tr>
 </table>

@@ -1,5 +1,6 @@
-We have received your message on the YYY board.
-A manager will either approve or delete your message.
-
-Managers for this board are: xxxx, yyyy & zzzz.
+#parse $board.templatePath("BoardHeader")
+We have received your message for this board. A manager needs
+to approve your message before it appears on the board.
+#parse $board.templatePath("ManagerList")
+#parse $board.templatePath("BoardFooter")
 

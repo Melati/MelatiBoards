@@ -1,4 +1,10 @@
-Your request to join the YYY board has been approved.
-[You are a manager]
+#parse $board.templatePath("BoardHeader")
+Your request to join the board has been approved.
+#if ($board.canManage($user)) #begin You are a manager of this board. #end
 
-#include BoardInfo
+#parse $board.templatePath("UsageInstructions")
+#if $board.canManage($user) #begin
+#parse $board.templatePath("ManageInstructions")
+#end
+#parse $board.templatePath("BoardFooter")
+

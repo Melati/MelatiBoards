@@ -14,11 +14,7 @@
 
 <h2>New Message</h2>
 
-#if ($board.Moderatedposting) #begin
- <p>Your message will be posted to the board when it has been approved by a manager</p>
-#end #else #begin
- <p>Your message has been posted to the board</p>
-#end
+<p>Your message has been posted to the board</p>
 
 </body>
 </html>
