@@ -59,6 +59,7 @@ import javax.mail.Address;
 import javax.mail.Session;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.InternetAddress;
+import org.paneris.melati.boards.*;
 import org.paneris.melati.boards.model.*;
 import org.melati.poem.*;
 import org.melati.util.*;
@@ -310,13 +311,10 @@ class BoardStore {
       Session.getDefaultInstance(System.getProperties(), null),
       text);
 
+    final String subject = message.getSubject() == null ? "" : message.getSubject();
+
     // write the record straight away in order to get an id number for the
     // attachments (if any)
-
-    final String subject = message.getSubject() == null ?
-                                     "(no subject)" :
-                                     message.getSubject();
-
     Message m = (Message)((MessageTable)database.getTable("message")).create(
       new Initialiser() {
         public void init(Persistent object)
@@ -378,7 +376,15 @@ class BoardStore {
     }
 
     m.setBody(messageText);
-    m.distribute();
+
+    if (m.getApproved().booleanValue() == true) {
+      m.distribute();
+    }
+    else {
+      BoardAdmin.emailNotification(m.getBoard(),
+                                   (org.paneris.melati.boards.model.User)sender,
+                                   "MessageReceived");
+    }
 
     return m.troid();
   }
