@@ -565,6 +565,15 @@ public class Board extends BoardBase {
     return result;
   }
   
+  public Message getLastMessage() {
+    try {
+      return (Message)getDatabase().getTable("message").getObject(getLastMessageId());
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return null;
+  }
+  
   /********************
    * Management stuff
    ********************/
