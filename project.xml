@@ -338,22 +338,13 @@ http://sourceforge.net/mailarchive/forum.php?forum=melati-users
 
   </build>
   <reports>
-     |
-     | These should all be completely self contained. You should be able
-     | to generate each of them individually without needing the final
-     | xdoc transformation.
-     |
-     | Each report plugin with it's POM and plugin.jelly logic should
-     | contain everything needed to produced the report.
-     |
-
-    <report>maven-jdepend-plugin</report>
     <report>maven-checkstyle-plugin</report>
+    <report>maven-jxr-plugin</report>
+    <report>maven-jdepend-plugin</report>
     <report>maven-changelog-plugin</report>
     <report>maven-file-activity-plugin</report>
     <report>maven-developer-activity-plugin</report>
     <report>maven-javadoc-plugin</report>
-    <report>maven-jxr-plugin</report>
     <report>maven-tasklist-plugin</report>
 <!--
     <report>maven-junit-report-plugin</report>
