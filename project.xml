@@ -254,13 +254,21 @@ http://sourceforge.net/mailarchive/forum.php?forum=melati-users
     <!-- Resources that are packaged up inside the JAR file -->
 
     <resources>
+     <resource>
+      <directory>src/org/paneris</directory>
       <includes>
-        <include>*.wm</include>
+       <include>**/*.wm</include>
+      </includes>
+     </resource>
+     <resource>
+      <directory>src</directory>
+      <includes>
         <include>*.properties</include>
       </includes>
       <excludes>
            **/melati-static/**/*.*
       </excludes>
+     </resource>
     </resources>
 
   </build>
