@@ -360,8 +360,9 @@ class BoardStore {
     }
     else {
       // message is one, non-text item
-      bodyText.append(attachmentWrite(m, null, message.getContentType(),
-                      IoUtils.slurp(message.getInputStream(), 100)));
+//      bodyText.append(attachmentWrite(m, null, message.getContentType(),
+//                      IoUtils.slurp(message.getInputStream(), 100)));
+        bodyText.append(new String(IoUtils.slurp(message.getInputStream(), 100)));
     }
 
     // write the message down and email it out
