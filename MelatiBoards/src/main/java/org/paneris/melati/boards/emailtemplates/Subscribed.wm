@@ -1,11 +1,11 @@
-#parse $board.templatePath("BoardHeader")
+#include as template "$board.templatePath("BoardHeader")"
 You are now subscribed to this board.
 #if ($board.canManage($user)) #begin You are a manager of this board. #end
 
-#parse $board.templatePath("UsageInstructions")
+#include as template "$board.templatePath("UsageInstructions")"
 #if $board.canManage($user) #begin
-#parse $board.templatePath("ManageInstructions")
+#include as template "$board.templatePath("ManageInstructions")"
 #end
 
-#parse $board.templatePath("BoardFooter")
+#include as template "$board.templatePath("BoardFooter")"
 
