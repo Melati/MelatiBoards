@@ -15,7 +15,7 @@
     </menu>
     <menu name="Demonstration">
       <item name="Boards"              href="db/Boards/boardsdemo/Types"/>
-      <item name="News Server"         href="news://boards/"/>
+      <item name="News Server"         href="news://boards.paneris.org"/>
       <item name="Admin system"        href="db/Admin/boardsdemo/Main"/>
     </menu>
   </body>
