@@ -66,9 +66,9 @@ public class SMTPServer implements Runnable {
   /**
    * A handler for a session with <TT>sendmail</TT>
    *
-   * @param launcher 	        A handle to the servlet which started us.
+   * @param launcher            A handle to the servlet which started us.
    *
-   * @param smtpIdentifier	what we should report our hostname as:
+   * @param smtpIdentifier      what we should report our hostname as:
    *                            this must be different from what
    *                            <TT>sendmail</TT> thinks it is called,
    *                            or it will fail with a loopback error
