@@ -1,6 +1,8 @@
 #set $Response.ContentType = "text/html"
 <html>
 <head>
+<title>not implemeneted</title>
+<link rel="stylesheet" type="text/css" href="$melati.Database.BoardTable.BoardsStylesheetURL">
 </head>
 <body>
 Not implemented

@@ -6,8 +6,8 @@
 <html>
 <head>
 <title>Your subscription to board: $ml.rendered($board)</title>
+<link rel="stylesheet" type="text/css" href="$board.StylesheetURL">
 </head>
-
 <body>
 <h1>Board: $ml.rendered($board)</h1>
 

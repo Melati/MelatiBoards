@@ -1,5 +1,10 @@
 #set $Response.ContentType = "text/html"
-
+<html>
+<head>
+<title>Board Test</title>
+<link rel="stylesheet" type="text/css" href="$melati.Database.BoardTable.BoardsStylesheetURL">
+</head>
+<body>
 <h2>Board test</h2>
 
 <p>
@@ -24,4 +29,5 @@ Currently free: $free3<br>
 JVM has total memory: $total4<br>
 Currently free: $free4<br>
 </P>
-
+</body>
+</html>

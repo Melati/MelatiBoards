@@ -6,8 +6,8 @@
 <html>
 <head>
 <title>Members of board: $ml.rendered($board)</title>
+<link rel="stylesheet" type="text/css" href="$board.StylesheetURL">
 </head>
-
 <body>
 <h1>Board: $ml.rendered($board)</h1>
 
@@ -33,6 +33,5 @@
 <!-- End Member List -->
 
 </body>
-
 </html>
 

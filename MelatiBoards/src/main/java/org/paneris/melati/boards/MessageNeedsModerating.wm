@@ -5,8 +5,8 @@
 <html>
 <head>
 <title>New message on board: $ml.rendered($board)</title>
+<link rel="stylesheet" type="text/css" href="$board.StylesheetURL">
 </head>
-
 <body>
 <h1>Board: $ml.rendered($board)</h1>
 
@@ -14,7 +14,10 @@
 
 <h2>New Message</h2>
 
-<p>Your message will be posted to the board when it has been approved by a manager</p>
+<p>
+ Your message will be posted to the board when it has been approved by a
+ manager.
+</p>
 
 </body>
 </html>
