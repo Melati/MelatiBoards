@@ -132,6 +132,10 @@ public class BoardTableBase extends Table {
             return "The type of this messageboard";
           }
 
+          protected boolean defaultIndexed() {
+            return true;
+          }
+
           public Object getRaw_unsafe(Persistent g)
               throws AccessPoemException {
             return ((Board)g).getType_unsafe();

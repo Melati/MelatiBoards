@@ -34,7 +34,7 @@ table Board
 
     (primary) Integer id;
 
-    BoardType type
+    (indexed) BoardType type
         (description = "The type of this messageboard")
         (displayorderpriority = 0)
         (displaylevel = summary)
@@ -160,19 +160,19 @@ table Subscription
     (primary) Integer id
         (displaylevel = primary);
 
-    User user
+    (indexed) User user
         (description = "The user")
         (displaylevel = summary)
         (searchability = yes)
         (integrityfix = delete);
 
-    Board board
+    (indexed) Board board
         (description = "The board to which this user belongs")
         (displaylevel = summary)
         (searchability = primary)
         (integrityfix = delete);
 
-    MembershipStatus status
+    (indexed) MembershipStatus status
         (description = "How users would like to receive emails from this board")
         (displaylevel = summary)
         (searchability = yes);
@@ -199,7 +199,7 @@ table Message
 
     (primary) Integer id;
 
-    Board board
+    (indexed) Board board
         (description = "The board this message belongs to")
         (displaylevel = summary)
         (displayorderpriority = 0)
@@ -226,7 +226,7 @@ table Message
         (searchability = yes)
         (integrityfix = delete);
 
-    Message parent (nullable)
+    (indexed) Message parent (nullable)
         (displayname = "Parent")
         (description = "The message to which this message is a follow-up")
         (displaylevel = record)
@@ -278,7 +278,7 @@ table Attachment
 
     (primary) Integer id;
 
-    Message message
+    (indexed) Message message
         (description = "The message this attachment belongs to")
         (displaylevel = summary)
         (displayorderpriority = 0)

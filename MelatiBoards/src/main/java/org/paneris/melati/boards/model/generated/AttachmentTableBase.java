@@ -124,6 +124,10 @@ public class AttachmentTableBase extends Table {
             return "The message this attachment belongs to";
           }
 
+          protected boolean defaultIndexed() {
+            return true;
+          }
+
           public Object getRaw_unsafe(Persistent g)
               throws AccessPoemException {
             return ((Attachment)g).getMessage_unsafe();
