@@ -60,9 +60,4 @@ import org.melati.poem.*;
 public class User extends UserBase {
   public User() {}
 
-  // Store emails in lower case
-  public void setEmail_unsafe(String cooked) {
-    email = cooked.toLowerCase();
-  }
-
 }
