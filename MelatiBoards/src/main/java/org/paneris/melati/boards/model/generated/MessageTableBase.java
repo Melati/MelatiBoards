@@ -130,6 +130,10 @@ public class MessageTableBase extends Table {
             return true;
           }
 
+          protected String defaultRenderinfo() {
+            return "SelectionWindow";
+          }
+
           public Object getRaw_unsafe(Persistent g)
               throws AccessPoemException {
             return ((Message)g).getBoard_unsafe();
@@ -313,6 +317,10 @@ public class MessageTableBase extends Table {
             return "Author of this message";
           }
 
+          protected String defaultRenderinfo() {
+            return "SelectionWindow";
+          }
+
           public Object getRaw_unsafe(Persistent g)
               throws AccessPoemException {
             return ((Message)g).getAuthor_unsafe();
@@ -376,6 +384,10 @@ public class MessageTableBase extends Table {
 
           protected boolean defaultIndexed() {
             return true;
+          }
+
+          protected String defaultRenderinfo() {
+            return "SelectionWindow";
           }
 
           public Object getRaw_unsafe(Persistent g)

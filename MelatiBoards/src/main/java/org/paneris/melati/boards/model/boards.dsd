@@ -161,12 +161,14 @@ table Subscription
         (displaylevel = primary);
 
     (indexed) User user
+        (renderinfo = "SelectionWindow")
         (description = "The user")
         (displaylevel = summary)
         (searchability = yes)
         (integrityfix = delete);
 
     (indexed) Board board
+        (renderinfo = "SelectionWindow")
         (description = "The board to which this user belongs")
         (displaylevel = summary)
         (searchability = primary)
@@ -200,6 +202,7 @@ table Message
     (primary) Integer id;
 
     (indexed) Board board
+       (renderinfo = "SelectionWindow")
         (description = "The board this message belongs to")
         (displaylevel = summary)
         (displayorderpriority = 0)
@@ -221,12 +224,14 @@ table Message
         (searchability = yes);
 
     User author
+        (renderinfo = "SelectionWindow")
         (description = "Author of this message")
         (displaylevel = summary)
         (searchability = yes)
         (integrityfix = delete);
 
     (indexed) Message parent (nullable)
+        (renderinfo = "SelectionWindow")
         (displayname = "Parent")
         (description = "The message to which this message is a follow-up")
         (displaylevel = record)
@@ -279,6 +284,7 @@ table Attachment
     (primary) Integer id;
 
     (indexed) Message message
+        (renderinfo = "SelectionWindow")
         (description = "The message this attachment belongs to")
         (displaylevel = summary)
         (displayorderpriority = 0)
