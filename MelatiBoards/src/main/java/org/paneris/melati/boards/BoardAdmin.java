@@ -147,7 +147,11 @@ public class BoardAdmin extends TemplateServlet {
                         Persistent p = db.getTable(parts[1]).
                                            displayColumn().
                                                firstWhereEq(value);
-                        it.troid = p.troid();
+                        if (p != null) 
+                          it.troid = p.troid();
+                        else 
+                         throw new PathInfoException(
+                                       melati.getRequest().getPathInfo());
                     }
                  });
           } catch (Exception e1) {
