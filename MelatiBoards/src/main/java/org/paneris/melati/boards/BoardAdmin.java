@@ -226,7 +226,7 @@ public class BoardAdmin extends TemplateServlet {
   }
 
   /**
-   * Create a new message
+   * Create a new message.
    * <p>
    * If we need approval from a manager, we send the user an email notifying
    * them. Otherwise, we distribute the message to the members of the board
