@@ -116,7 +116,7 @@ public class BoardAdmin extends TemplateServlet {
   * @todo move this to Melati proper
   * @see org.melati.servlet.PoemServlet
   */
-  protected MelatiContext melatiContext(Melati melati)
+  protected MelatiContext melatiContext(final Melati melati)
       throws PathInfoException {
 
     final MelatiContext it = new MelatiContext();
