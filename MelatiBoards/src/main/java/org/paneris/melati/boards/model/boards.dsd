@@ -66,49 +66,49 @@ table Board
         (displayname = "Open Subscription")
         (description = "With open subscription anyone can subscribe to the board. Otherwise a board manager must subscribe members")
         (displaylevel = record)
-        (searchability = no);
+        (searchability = yes);
 
     Boolean moderatedsubscription
         (displayname = "Moderated Subscription")
         (description = "With moderated subscription the manager must approve all requests to be subscribed")
         (displaylevel = record)
-        (searchability = no);
+        (searchability = yes);
 
     Boolean openposting
         (displayname = "Open Posting")
         (description = "With open posting anyone with a user account can post a message to this list. Otherwise, only members can post")
         (displaylevel = record)
-        (searchability = no);
+        (searchability = yes);
 
     Boolean moderatedposting
         (displayname = "Moderated Posting")
         (description = "With moderated posting all messages must be approved by a manager")
         (displaylevel = record)
-        (searchability = no);
+        (searchability = yes);
 
     Boolean openmessageviewing
         (displayname = "Open Message Viewing")
         (description = "With open message viewing anyone can view messages in a board. Otherwise, only members can see messages")
         (displaylevel = record)
-        (searchability = no);
+        (searchability = yes);
 
     Boolean openmemberlist
         (displayname = "Open Member List")
         (description = "With open member list anyone can see the members of the list. Otherwise, only members can see who else is subscribed")
         (displaylevel = record)
-        (searchability = no);
+        (searchability = yes);
 
     Boolean attachmentsallowed
         (displayname = "Attachments Allowed")
         (description = "Can attachments be sent with messages. If not, attachments are ignored")
         (displaylevel = record)
-        (searchability = no);
+        (searchability = yes);
 
     Boolean anonymousposting
         (displayname = "Anonymous Posting Allowed")
         (description = "Can people without user accounts post to this messageboard. If so, a user account is created for them when they post.")
         (displaylevel = record)
-        (searchability = no);
+        (searchability = yes);
 
     String attachmentspath (size = unlimited) (width = 70)
         (displayname = "Attachments Path")
