@@ -47,15 +47,24 @@
     </p>
 
     <table cellpadding=0 cellspacing=0>
+    #if ($board.canManage($melati.User)) #begin
+      <tr><td>Delete?</td><td colspan=4><form action=$boardutils.DeleteMessagesURL($board)></td></tr>
+    #end
     #foreach $messageNode in $messages #begin
     <tr>
-     <td>
+      #if ($board.canManage($melati.User)) #begin
+        <td>
+	    <input type=checkbox name=delete-$messageNode.UserObject.Troid>
+		<input type=hidden name=messages value=$messageNode.UserObject.Troid>
+	    </td>
+	  #end
+	  <td>
         <img src="$melati.Config.StaticURL/admin/plus.gif" height=1 width=$boardutils.indent(20, $messageNode.Level)>
         <A href="$boardutils.MessageURL($messageNode.UserObject, "$messages.PageStart")">$ml.rendered($messageNode.UserObject.Subject)</a>
      </td>
 	 <td>&nbsp;</td>
      <td>
-        <a href="mailto:$messageNode.UserObject.Author.Email_unsafe">$ml.rendered($messageNode.UserObject.Author.Name_unsafe)</a>
+        <a href="mailto:$messageNode.UserObject.Author.Email">$ml.rendered($messageNode.UserObject.Author.Name)</a>
      </td>
      <td>
         $ml.renderedShort($messageNode.UserObject.DateField)
@@ -66,6 +75,10 @@
     </tr>
     #end
 </table>
+  #if ($board.canManage($melati.User)) #begin
+   <p><input type=submit name=delete value="Delete Selected Messages"></p>
+   </form>
+  #end
 #end #else #begin
  You must be subscribed to this board to view its messages
 #end

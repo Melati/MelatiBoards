@@ -386,6 +386,28 @@ public class BoardAdmin extends TemplateServlet {
     return boardTemplate(context, "MembersEdit");
   }
 
+
+  /**
+   * Delete messages
+   * A manager can delete messages from a board.  
+   */
+  protected String deleteMessagesTemplate(TemplateContext context, Melati melati, Board board)
+      throws PoemException {
+
+    // Read in the new settings, if any. Otherwise, return the form
+    String[] messages = melati.getRequest().getParameterValues("messages");
+    if (messages == null || messages.length == 0)
+      return boardTemplate(context, melati);
+
+    for (int i = 0; i < messages.length; i++) {
+      Message mess = ((Board)melati.getObject()).getBoardsDatabaseTables().
+                     getMessageTable().getMessageObject(new Integer(messages[i]));
+      String delete = context.getForm("delete-" + messages[i]);
+      if (delete != null) mess.setDeleted(Boolean.TRUE);
+    }
+    return boardTemplate(context, melati);
+  }
+  
   /**
    * A manager can subscribe users to a board. We notify the user and the
    * managers by email.
@@ -535,6 +557,8 @@ public class BoardAdmin extends TemplateServlet {
         return pendingSubscriptionsTemplate(context,melati,board);
       if (melati.getMethod().equals("ApproveMessages"))
         return approveMessagesTemplate(context,melati,board);
+      if (melati.getMethod().equals("DeleteMessages"))
+        return deleteMessagesTemplate(context,melati,board);
       if (melati.getMethod().equals("ApproveSubscriptions"))
         return approveSubscriptionsTemplate(context,melati,board);
     }

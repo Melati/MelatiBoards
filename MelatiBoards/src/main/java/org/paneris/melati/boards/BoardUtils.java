@@ -190,6 +190,11 @@ public class BoardUtils {
            "/SettingsEdit";
   }
 
+  public String DeleteMessagesURL(Board board) {
+    return boardURL + "/" + logicalDatabase + "/board/" + board.troid() +
+           "/DeleteMessages";
+  }
+
   public static int indent(int space, int depth) {
     return space*depth+1;
   }
