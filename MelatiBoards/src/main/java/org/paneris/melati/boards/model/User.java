@@ -56,8 +56,59 @@ import java.util.*;
 import java.sql.Date;
 import java.sql.Timestamp;
 import org.melati.poem.*;
+import org.melati.util.StringUtils;
 
 public class User extends UserBase {
   public User() {}
+  
+  public void generateDefaults() {
+    if (getPassword() == null) setPassword(StringUtils.randomString(6));
+    // we must have a name!
+    if (getName() == null) setName(getEmail());
+    if (getLogin() == null) generateLogin();
+  }
+  
+  /*
+   * this calculates the login id from the user name.  the string before the 
+   * 1st ' ', '@' or '.' is extracted, and then made unique.
+   * 
+   * override this to do your own thing
+   */
+  public void generateLogin() {
+    String loginid = getName();
+    
+    // no email - randomise
+    if (loginid == null) loginid = StringUtils.randomString(6);
+    
+    int space = loginid.indexOf(' ');
+    if (space > 0) {
+      loginid = name.substring(0,space);
+      space ++;
+      if (space < name.length()) loginid += name.charAt(space);
+    } else {
+      // try and make the best of it if we have a name that is actually an email address
+      int at = loginid.indexOf('@');
+      int dot = loginid.indexOf('.');
+      if (dot != -1 && dot < at) at = dot;
+      if (at > 0) loginid = loginid.substring(0,at);
+    }
+    
+    // check to see if we already have this login id
+    Column loginColumn = getBoardsDatabaseTables().getUserTable().getLoginColumn();
+    boolean found = loginColumn.selectionWhereEq(loginid).hasMoreElements();
+    String testId = new String(loginid);
+    int count = 0;
+    while (found) {
+      count++;
+      testId = new String(loginid);
+      String testIdString = "" + count;
+      for (int i=0; i < (2 - testIdString.length()); i++) {
+	testId += "0";
+      }
+      testId += count;
+      found = loginColumn.selectionWhereEq(testId).hasMoreElements();
+    }
+    setLogin(testId.trim());
+  }
 
 }
