@@ -72,11 +72,11 @@ import org.melati.util.ExceptionUtils;
 import org.melati.util.StringUtils;
 
 /**
- * An SMTP session for receiving one or more incoming emails from a
- * client (in fact typically <TT>sendmail</TT>).
- *
- * One of these threads is spawned each time <TT>sendmail</TT>
- * connects to our server socket to forward some message(s) to us.
+ * An SMTP session for receiving one or more incoming emails from a client (in
+ * fact typically <TT>sendmail</TT>).
+ * 
+ * One of these threads is spawned each time <TT>sendmail</TT> connects to our
+ * server socket to forward some message(s) to us.
  */
 
 class SMTPSession extends Thread {
@@ -96,49 +96,43 @@ class SMTPSession extends Thread {
 
   /**
    * A handler for a session with <TT>sendmail</TT>
-   *
-   * @param smtpIdentifier  what we should report our hostname as:
-   *                            this must be different from what
-   *                            <TT>sendmail</TT> thinks it is called,
-   *                            or it will fail with a loopback error
-   *
-   * @param withClient          the socket on which <TT>sendmail</TT>
-   *                            has just connected
-   *
-   * @param databaseNameOfDomain the mapping of each mail domain we handle
-   *                            to the database in which the
-   *                            corresponding messageboard lives (see
-   *                            <TT>smtpServer.properties.example</TT>)
-   *
-   * @param bufSize             how much to buffer the IPC stream coming from <TT>sendmail</TT>
-   *                            (non-critical, say 64k)
-   *
-   * @param log                 where to report errors
+   * 
+   * @param smtpIdentifier
+   *          what we should report our hostname as: this must be different from
+   *          what <TT>sendmail</TT> thinks it is called, or it will fail with
+   *          a loopback error
+   * 
+   * @param withClient
+   *          the socket on which <TT>sendmail</TT> has just connected
+   * 
+   * @param databaseNameOfDomain
+   *          the mapping of each mail domain we handle to the database in which
+   *          the corresponding messageboard lives (see <TT>
+   *          smtpServer.properties.example</TT>)
+   * 
+   * @param bufSize
+   *          how much to buffer the IPC stream coming from <TT>sendmail</TT>
+   *          (non-critical, say 64k)
+   * 
+   * @param log
+   *          where to report errors
    */
 
-  SMTPSession(
-    String smtpIdentifier,
-    Socket withClient,
-    Properties databaseNameOfDomain,
-    int bufSize,
-    Log log)
-    throws IOException {
+  SMTPSession(String smtpIdentifier, Socket withClient,
+      Properties databaseNameOfDomain, int bufSize, Log log) throws IOException {
     this.smtpIdentifier = smtpIdentifier;
     this.withClient = withClient;
     this.databaseNameOfDomain = databaseNameOfDomain;
     this.bufSize = bufSize;
     this.log = log;
 
-    fromClientPushBack =
-      new PushbackInputStream(
-        new BufferedInputStream(withClient.getInputStream(), bufSize));
+    fromClientPushBack = new PushbackInputStream(new BufferedInputStream(
+        withClient.getInputStream(), bufSize));
 
     fromClient = new BufferedReader(new InputStreamReader(fromClientPushBack));
 
-    toClient =
-      new PrintWriter(
-        new OutputStreamWriter(withClient.getOutputStream(), "8859_1"),
-        true);
+    toClient = new PrintWriter(new OutputStreamWriter(withClient
+        .getOutputStream(), "8859_1"), true);
   }
 
   /**
@@ -153,8 +147,9 @@ class SMTPSession extends Thread {
 
   /**
    * Handle an SMTP <TT>MAIL FROM:</TT> command
-   *
-   * @param address     the address after the colon
+   * 
+   * @param address
+   *          the address after the colon
    */
 
   private void mailFrom(String address) {
@@ -177,47 +172,36 @@ class SMTPSession extends Thread {
    */
 
   private Database databaseForAddress(String address)
-    throws MessagingException, IOException {
+      throws MessagingException, IOException {
     int atIndex = address.indexOf('@');
     if (atIndex == -1)
-      throw new MessagingException(
-        "`"
-          + address
-          + "': missing domain, "
+      throw new MessagingException("`" + address + "': missing domain, "
           + "so can't determine which database to use");
 
     String domain = address.substring(atIndex + 1);
-    String propertyName =
-      "org.paneris.melati.boards.receivemail.database." + domain;
+    String propertyName = "org.paneris.melati.boards.receivemail.database."
+        + domain;
 
     String databaseName = databaseNameOfDomain.getProperty(propertyName);
 
     if (databaseName == null)
-      throw new MessagingException(
-        "`"
-          + domain
-          + "' is not a board mail domain "
-          + "(no entry `"
-          + propertyName
+      throw new MessagingException("`" + domain
+          + "' is not a board mail domain " + "(no entry `" + propertyName
           + "' in properties)");
 
     try {
       return LogicalDatabase.getDatabase(databaseName);
     } catch (DatabaseInitException e) {
-      throw new IOException(
-        "failed to open database `"
-          + domain
-          + "' -> `"
-          + databaseName
-          + "': "
-          + e);
+      throw new IOException("failed to open database `" + domain + "' -> `"
+          + databaseName + "': " + e);
     }
   }
 
   /**
    * Handle an SMTP <TT>RCPT TO:</TT> command
-   *
-   * @param address     the address after the colon
+   * 
+   * @param address
+   *          the address after the colon
    */
 
   private void rcptTo(String address) throws Exception {
@@ -227,8 +211,7 @@ class SMTPSession extends Thread {
     else if (database != null) {
       // FIXME actually the logic of this could be worked out, but for now ...
 
-      toClient.println(
-        "553 a message can only appear on one board, "
+      toClient.println("553 a message can only appear on one board, "
           + "but this one was copied to several");
     } else {
       if (address.charAt(0) == '<') {
@@ -243,7 +226,7 @@ class SMTPSession extends Thread {
         database = databaseForAddress(address1);
       } catch (MessagingException e) {
         toClient.println("550 " + // RFC 821: "not found"
-        StringUtils.tr(e.getMessage(), "\n\r", "  "));
+            StringUtils.tr(e.getMessage(), "\n\r", "  "));
         log.warning("board address `" + address1 + "' rejected: " + e);
         return;
       }
@@ -256,44 +239,35 @@ class SMTPSession extends Thread {
             // now we know which database we are concerned with, we can
             // validate the sender and recipient
             /*
-             store = new BoardStore(database, log,
-                                   new InternetAddress(sender1),
-                                   new InternetAddress(address1));
-            */
-            String boardStoreImpl =
-              databaseNameOfDomain.getProperty(
-                "org.paneris.melati.boards.receivemail.BoardStoreImpl");
+             * store = new BoardStore(database, log, new
+             * InternetAddress(sender1), new InternetAddress(address1));
+             */
+            String boardStoreImpl = databaseNameOfDomain
+                .getProperty("org.paneris.melati.boards.receivemail.BoardStoreImpl");
             Class clazz = null;
             try {
               clazz = Class.forName(boardStoreImpl);
             } catch (Exception e) {
               log.error("Unable to load board store: " + boardStoreImpl);
               log.exception(e);
-              clazz =
-                Class.forName(
-                  "org.paneris.melati.boards.receivemail.BoardStoreImpl");
+              clazz = Class
+                  .forName("org.paneris.melati.boards.receivemail.BoardStoreImpl");
             }
             store = (BoardStore) clazz.newInstance();
-            store.init(
-              database,
-              log,
-              new InternetAddress(sender1),
-              new InternetAddress(address1));
+            store.init(database, log, new InternetAddress(sender1),
+                new InternetAddress(address1));
 
             toClient.println("250 Recipient OK");
           } catch (MessagingException e) {
             toClient.println("550 " + // RFC 821: "not found"
-            StringUtils.tr(e.getMessage(), "\n\r", "  "));
+                StringUtils.tr(e.getMessage(), "\n\r", "  "));
             log.warning("board address `" + address1 + "' rejected: " + e);
             database = null;
           } catch (Exception e) {
-            toClient.println(
-              "554 Sorry: something is wrong with this server---"
-                + StringUtils.tr(e.toString(), "\n\r", "  "));
-            log.error(
-              "post of message from `"
-                + sender1
-                + "' failed:\n"
+            toClient
+                .println("554 Sorry: something is wrong with this server---"
+                    + StringUtils.tr(e.toString(), "\n\r", "  "));
+            log.error("post of message from `" + sender1 + "' failed:\n"
                 + ExceptionUtils.stackTrace(e));
             database = null;
           }
@@ -318,32 +292,28 @@ class SMTPSession extends Thread {
         public void run() {
 
           try {
-            Integer messageID =
-              store.messageAccept(
-                new DotTerminatedInputStream(fromClientPushBack));
-            toClient.println(
-              "250 " + messageID + " Message accepted for delivery");
+            Integer messageID = store
+                .messageAccept(new DotTerminatedInputStream(fromClientPushBack));
+            toClient.println("250 " + messageID
+                + " Message accepted for delivery");
           } catch (SQLException e) {
             if (e.getMessage().startsWith("SQL Statement too long")) {
-              toClient.println(
-                "552 Your message message is too long---"
+              toClient.println("552 Your message message is too long---"
                   + "can you split it up?");
               reset();
             } else {
-              toClient.println(
-                "554 Sorry: something is wrong with this server---"
-                  + StringUtils.tr(e.toString(), "\n\r", "  "));
-              log.error(
-                "Exception trying to store a message:"
+              toClient
+                  .println("554 Sorry: something is wrong with this server---"
+                      + StringUtils.tr(e.toString(), "\n\r", "  "));
+              log.error("Exception trying to store a message:"
                   + ExceptionUtils.stackTrace(e));
               reset();
             }
           } catch (Exception e) {
-            toClient.println(
-              "554 Sorry!!!: something is wrong with this server---"
-                + StringUtils.tr(e.toString(), "\n\r", "  "));
-            log.error(
-              "Exception trying to store a message:"
+            toClient
+                .println("554 Sorry!!!: something is wrong with this server---"
+                    + StringUtils.tr(e.toString(), "\n\r", "  "));
+            log.error("Exception trying to store a message:"
                 + ExceptionUtils.stackTrace(e));
             reset();
           }
@@ -390,13 +360,9 @@ class SMTPSession extends Thread {
           toClient.println("500 Command unrecognized: \"" + command + "\"");
       }
     } catch (Exception e) {
-      toClient.println(
-        "554 Sorry: something is wrong with this server---"
+      toClient.println("554 Sorry: something is wrong with this server---"
           + StringUtils.tr(e.toString(), "\n\r", "  "));
-      log.error(
-        "post of message from `"
-          + sender
-          + "' failed:\n"
+      log.error("post of message from `" + sender + "' failed:\n"
           + ExceptionUtils.stackTrace(e));
     } finally {
       try {
