@@ -555,7 +555,7 @@ public class BoardAdmin extends TemplateServlet {
     if (tEngine == null) {
       tEngine = mConfig.getTemplateEngine();
       if (tEngine != null)
-        tEngine.init();
+        tEngine.init(mConfig);
     }
     MelatiWriter sw = tEngine.getStringWriter("UTF8");
     Melati melati = new Melati(mConfig, sw);
