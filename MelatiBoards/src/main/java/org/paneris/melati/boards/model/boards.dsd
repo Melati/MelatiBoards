@@ -164,6 +164,7 @@ table Subscription
         (description = "The user")
         (displaylevel = summary)
         (searchability = yes)
+        (renderinfo = "SelectionWindow")
         (integrityfix = delete);
 
     Board board
@@ -224,6 +225,7 @@ table Message
         (description = "Author of this message")
         (displaylevel = summary)
         (searchability = yes)
+        (renderinfo = "SelectionWindow")
         (integrityfix = delete);
 
     Message parent (nullable)
@@ -322,6 +324,7 @@ table Setting extends Setting
     (displayorder = 3040)  {
   // So we can add boards-specific settings
 }
+
 
 
 
