@@ -138,30 +138,40 @@ public class BoardAdmin extends TemplateServlet {
 
     return boardTemplate(context, "Board");
   }
+  
+  private void checkBanned(Board board, org.melati.poem.User user) {
+    if (board.isBanned((User)user))
+      throw new AccessPoemException(user, new Capability("Not Banned"));
+  }
 
-  protected String searchBoardTemplate(TemplateContext context, Melati melati)
+  protected String searchBoardTemplate(TemplateContext context, Melati melati, Board board)
       throws PoemException {
+    checkBanned(board,melati.getUser());
     return boardTemplate(context, "SearchBoard");
   }
 
-  protected String settingsTemplate(TemplateContext context, Melati melati)
+  protected String settingsTemplate(TemplateContext context, Melati melati, Board board)
       throws PoemException {
+    checkBanned(board,melati.getUser());
     return boardTemplate(context, "Settings");
   }
 
-  protected String settingsUpdateTemplate(TemplateContext context, Melati melati)
+  protected String settingsUpdateTemplate(TemplateContext context, Melati melati, Board board)
       throws PoemException {
+    checkBanned(board,melati.getUser());
     MelatiUtil.extractFields(context, melati.getObject());
     return boardTemplate(context, "SettingsUpdate");
   }
 
-  protected String settingsEditTemplate(TemplateContext context, Melati melati)
+  protected String settingsEditTemplate(TemplateContext context, Melati melati, Board board)
       throws PoemException {
+    checkBanned(board,melati.getUser());
     return boardTemplate(context, "SettingsEdit");
   }
 
-  protected String membersTemplate(TemplateContext context, Melati melati)
+  protected String membersTemplate(TemplateContext context, Melati melati, Board board)
       throws PoemException {
+    checkBanned(board,melati.getUser());
     return boardTemplate(context, "Members");
   }
 
@@ -171,6 +181,7 @@ public class BoardAdmin extends TemplateServlet {
   protected String messageNewTemplate(TemplateContext context, Melati melati, Board board)
       throws PoemException {
 
+    checkBanned(board,melati.getUser());
     if (melati.getUser().isGuest() && !board.getAnonymousposting().booleanValue())
       throw new AccessPoemException(melati.getUser(), new Capability("Logged In"));
 
@@ -188,9 +199,10 @@ public class BoardAdmin extends TemplateServlet {
    * Message Actions
    *****************/
   
-  protected String messageTemplate(TemplateContext context, Melati melati,
+  protected String messageTemplate(TemplateContext context, Melati melati, Board board,
                                    boolean withThread)
       throws PoemException {
+    checkBanned(board,melati.getUser());
     context.put("withThread", new Boolean(withThread));
     return boardTemplate(context, "Message");
   }
@@ -204,6 +216,7 @@ public class BoardAdmin extends TemplateServlet {
   protected String messageCreateTemplate(TemplateContext context, final Melati melati, Board board)
       throws PoemException {
         
+    checkBanned(board,melati.getUser());
     User user = (User)melati.getUser();
     if (user.isGuest() && board.getAnonymousposting().booleanValue()) {
       
@@ -248,12 +261,12 @@ public class BoardAdmin extends TemplateServlet {
     }
   }
 
-  protected String pendingMessagesTemplate(TemplateContext context, Melati melati)
+  protected String pendingMessagesTemplate(TemplateContext context, Melati melati, Board board)
       throws PoemException {
     return boardTemplate(context, "PendingMessages");
   }
 
-  protected String approveMessagesTemplate(TemplateContext context, Melati melati)
+  protected String approveMessagesTemplate(TemplateContext context, Melati melati, Board board)
       throws PoemException {
     String[] messages = melati.getRequest().getParameterValues("message");
     for(int i=0; i < messages.length; i++) {
@@ -284,9 +297,9 @@ public class BoardAdmin extends TemplateServlet {
    * a manager. If so, we let the user and the managers know by email,
    * otherwise we subscribe them to the board.
    */
-  protected String subscribeTemplate(TemplateContext context, Melati melati)
+  protected String subscribeTemplate(TemplateContext context, Melati melati, Board board)
       throws PoemException {
-    Board board = (Board)melati.getObject();
+    checkBanned(board,melati.getUser());
     User user = (User)melati.getUser();
 
     if (!board.canSubscribe(user)) {
@@ -319,9 +332,12 @@ public class BoardAdmin extends TemplateServlet {
     }
   }
 
-  protected String unsubscribeTemplate(TemplateContext context, Melati melati)
+  protected String unsubscribeTemplate(TemplateContext context, Melati melati, Board board)
       throws PoemException {
-    ((Board)melati.getObject()).unsubscribe((User)melati.getUser());
+    if (board.canUnSubscribe((User)melati.getUser()))
+      throw new AccessPoemException(melati.getUser(), new Capability("Not Banned"));
+    checkBanned(board,melati.getUser());
+    board.unsubscribe((User)melati.getUser());
     return boardTemplate(context, "Unsubscribe");
   }
 
@@ -331,7 +347,7 @@ public class BoardAdmin extends TemplateServlet {
    * A manager can alter a member's subscription type, whether they
    * are a manager and can delete the user from the board.
    */
-  protected String membersEditTemplate(TemplateContext context, Melati melati)
+  protected String membersEditTemplate(TemplateContext context, Melati melati, Board board)
       throws PoemException {
 
     // Read in the new settings, if any. Otherwise, return the form
@@ -374,7 +390,7 @@ public class BoardAdmin extends TemplateServlet {
    * A manager can subscribe users to a board. We notify the user and the
    * managers by email.
    */
-  protected String subscribeOthersTemplate(TemplateContext context, Melati melati)
+  protected String subscribeOthersTemplate(TemplateContext context, Melati melati, Board board)
       throws PoemException {
 
     String[] others = melati.getRequest().getParameterValues("others");
@@ -394,14 +410,13 @@ public class BoardAdmin extends TemplateServlet {
         ((Board)melati.getObject()).getBoardsDatabaseTables().
           getUserTable().getUserObject(new Integer(others[i]));
 
-      Board board = (Board)melati.getObject();
       board.subscribe(newUser, normal, manager, Boolean.TRUE);
       emailNotification(board, newUser, "Subscribed");
     }
     return boardTemplate(context, "MembersEdit");
   }
 
-  protected String pendingSubscriptionsTemplate(TemplateContext context, Melati melati)
+  protected String pendingSubscriptionsTemplate(TemplateContext context, Melati melati, Board board)
       throws PoemException {
     return boardTemplate(context, "PendingSubscriptions");
   }
@@ -410,7 +425,7 @@ public class BoardAdmin extends TemplateServlet {
    * A manager can approve a user's request to be subscribed to a board
    * or can decline it.
    */
-  protected String approveSubscriptionsTemplate(TemplateContext context, Melati melati)
+  protected String approveSubscriptionsTemplate(TemplateContext context, Melati melati, Board board)
       throws PoemException {
 
     String[] subscriptions = melati.getRequest().getParameterValues("subscription");
@@ -440,13 +455,15 @@ public class BoardAdmin extends TemplateServlet {
     return boardTemplate(context, "ApproveSubscriptions");
   }
 
-  protected String subscriptionEditTemplate(TemplateContext context, Melati melati)
+  protected String subscriptionEditTemplate(TemplateContext context, Melati melati, Board board)
       throws PoemException {
+    checkBanned(board,melati.getUser());
     return boardTemplate(context, "SubscriptionEdit");
   }
 
-  protected String subscriptionUpdateTemplate(TemplateContext context, Melati melati)
+  protected String subscriptionUpdateTemplate(TemplateContext context, Melati melati, Board board)
       throws PoemException {
+    checkBanned(board,melati.getUser());
     MelatiUtil.extractFields(context, melati.getObject());
     return boardTemplate(context, "SubscriptionUpdate");
   }
@@ -495,38 +512,38 @@ public class BoardAdmin extends TemplateServlet {
       if (melati.getMethod().equals("MessageCreate"))
         return messageCreateTemplate(context,melati,board);
       if (melati.getMethod().equals("SearchBoard"))
-        return searchBoardTemplate(context,melati);
+        return searchBoardTemplate(context,melati,board);
       if (melati.getMethod().equals("Settings"))
-        return settingsTemplate(context,melati);
+        return settingsTemplate(context,melati,board);
       if (melati.getMethod().equals("SettingsEdit"))
-        return settingsEditTemplate(context,melati);
+        return settingsEditTemplate(context,melati,board);
       if (melati.getMethod().equals("SettingsUpdate"))
-        return settingsUpdateTemplate(context,melati);
+        return settingsUpdateTemplate(context,melati,board);
       if (melati.getMethod().equals("Members"))
-        return membersTemplate(context,melati);
+        return membersTemplate(context,melati,board);
       if (melati.getMethod().equals("Subscribe"))
-        return subscribeTemplate(context,melati);
+        return subscribeTemplate(context,melati,board);
       if (melati.getMethod().equals("Unsubscribe"))
-        return unsubscribeTemplate(context,melati);
+        return unsubscribeTemplate(context,melati,board);
       if (melati.getMethod().equals("SubscribeOthers"))
-        return subscribeOthersTemplate(context,melati);
+        return subscribeOthersTemplate(context,melati,board);
       if (melati.getMethod().equals("MembersEdit"))
-        return membersEditTemplate(context,melati);
+        return membersEditTemplate(context,melati,board);
       if (melati.getMethod().equals("PendingMessages"))
-        return pendingMessagesTemplate(context,melati);
+        return pendingMessagesTemplate(context,melati,board);
       if (melati.getMethod().equals("PendingSubscriptions"))
-        return pendingSubscriptionsTemplate(context,melati);
+        return pendingSubscriptionsTemplate(context,melati,board);
       if (melati.getMethod().equals("ApproveMessages"))
-        return approveMessagesTemplate(context,melati);
+        return approveMessagesTemplate(context,melati,board);
       if (melati.getMethod().equals("ApproveSubscriptions"))
-        return approveSubscriptionsTemplate(context,melati);
+        return approveSubscriptionsTemplate(context,melati,board);
     }
     else if (melati.getTable().getName().equals("message") &&
                                          melati.getObject() != null) {
       if (melati.getMethod().equals("Message"))
-        return messageTemplate(context,melati, true);
+        return messageTemplate(context,melati,board, true);
       if (melati.getMethod().equals("MessageNoThread"))
-        return messageTemplate(context,melati, false);
+        return messageTemplate(context,melati,board, false);
     }
     else if (melati.getTable().getName().equals("boardtype") &&
                                          melati.getObject() != null) {
@@ -536,9 +553,9 @@ public class BoardAdmin extends TemplateServlet {
     else if (melati.getTable().getName().equals("subscription") &&
                                              melati.getObject() != null) {
       if (melati.getMethod().equals("SubscriptionEdit"))
-        return subscriptionEditTemplate(context,melati);
+        return subscriptionEditTemplate(context,melati,board);
       if (melati.getMethod().equals("SubscriptionUpdate"))
-        return subscriptionUpdateTemplate(context,melati);
+        return subscriptionUpdateTemplate(context,melati,board);
     }
 
     throw new InvalidUsageException(this, melati.getContext());
