@@ -87,13 +87,10 @@ http://java.sun.com/products/javamail/
 1) Set up your database to include the boards tables
 ----------------------------------------------------
 
-The notes below are for the future. At present you must change the following
-line in your XXXXDatabaseBase.java:
-
 In your .dsd file, include the following line after the `package ...' line
 but before the first table definition:
 
-import org.paneris.melati.boards.model.dgroup.dsd
+import org.paneris.melati.boards.model.boards.dsd;
 
 This will include all tables used by the boards system and adds an `email'
 field to the user table.
