@@ -334,9 +334,12 @@ public class BoardAdmin extends TemplateServlet {
 
   protected String unsubscribeTemplate(TemplateContext context, Melati melati, Board board)
       throws PoemException {
-    if (board.canUnSubscribe((User)melati.getUser()))
+    // ensure we are logged in
+    if (melati.getUser().isGuest())
+      throw new AccessPoemException(melati.getUser(), new Capability("Logged In"));
+    // and not banned
+    if (!board.canUnSubscribe((User)melati.getUser()))
       throw new AccessPoemException(melati.getUser(), new Capability("Not Banned"));
-    checkBanned(board,melati.getUser());
     board.unsubscribe((User)melati.getUser());
     return boardTemplate(context, "Unsubscribe");
   }
