@@ -39,6 +39,7 @@ public abstract class BoardBase extends Persistent {
   protected Boolean openmessageviewing;
   protected Boolean openmemberlist;
   protected Boolean attachmentsallowed;
+  protected Boolean anonymousposting;
   protected String attachmentspath;
   protected String attachmentsurl;
 
@@ -440,6 +441,37 @@ public abstract class BoardBase extends Persistent {
 
   public Field getAttachmentsallowedField() throws AccessPoemException {
     Column c = _getBoardTable().getAttachmentsallowedColumn();
+    return new Field(c.getRaw(this), c);
+  }
+
+  public Boolean getAnonymousposting_unsafe() {
+    return anonymousposting;
+  }
+
+  public void setAnonymousposting_unsafe(Boolean cooked) {
+    anonymousposting = cooked;
+  }
+
+  public Boolean getAnonymousposting()
+      throws AccessPoemException {
+    readLock();
+    return getAnonymousposting_unsafe();
+  }
+
+  public void setAnonymousposting(Boolean cooked)
+      throws AccessPoemException, ValidationPoemException {
+    _getBoardTable().getAnonymouspostingColumn().getType().assertValidCooked(cooked);
+    writeLock();
+    setAnonymousposting_unsafe(cooked);
+  }
+
+  public final void setAnonymousposting(boolean cooked)
+      throws AccessPoemException, ValidationPoemException {
+    setAnonymousposting(cooked ? Boolean.TRUE : Boolean.FALSE);
+  }
+
+  public Field getAnonymouspostingField() throws AccessPoemException {
+    Column c = _getBoardTable().getAnonymouspostingColumn();
     return new Field(c.getRaw(this), c);
   }
 
