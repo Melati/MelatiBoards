@@ -47,7 +47,7 @@
 #if ($board.Opensubscription) #begin
  Anyone can subscribe
  #if ($board.Moderatedsubscription) #begin
-  but a manager needs to approve your subscription
+  but a manager needs to approve the subscription
  #end
 #end #else #begin
  Members must be subscribed by a Manager
