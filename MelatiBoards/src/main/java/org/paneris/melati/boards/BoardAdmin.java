@@ -164,13 +164,11 @@ public class BoardAdmin extends TemplateServlet {
 
   protected String searchBoardTemplate(TemplateContext context, Melati melati, Board board)
       throws PoemException {
-    checkBanned(board,melati.getUser());
     return boardTemplate(context, "SearchBoard");
   }
 
   protected String settingsTemplate(TemplateContext context, Melati melati, Board board)
       throws PoemException {
-    checkBanned(board,melati.getUser());
     return boardTemplate(context, "Settings");
   }
 
@@ -189,7 +187,6 @@ public class BoardAdmin extends TemplateServlet {
 
   protected String membersTemplate(TemplateContext context, Melati melati, Board board)
       throws PoemException {
-    checkBanned(board,melati.getUser());
     return boardTemplate(context, "Members");
   }
 
@@ -220,7 +217,6 @@ public class BoardAdmin extends TemplateServlet {
   protected String messageTemplate(TemplateContext context, Melati melati, Board board,
                                    boolean withThread)
       throws PoemException {
-    checkBanned(board,melati.getUser());
     context.put("withThread", new Boolean(withThread));
     return boardTemplate(context, "Message");
   }
