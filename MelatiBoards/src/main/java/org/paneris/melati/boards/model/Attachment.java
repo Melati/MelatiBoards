@@ -47,7 +47,6 @@
  *     29 Stanley Road, Oxford, OX4 1QY, UK
  */
 
-
 package org.paneris.melati.boards.model;
 
 import org.paneris.melati.boards.model.generated.*;
@@ -57,6 +56,7 @@ import java.net.*;
 import java.sql.Date;
 import java.sql.Timestamp;
 import org.melati.poem.*;
+import org.melati.util.UnexpectedExceptionException;
 
 public class Attachment extends AttachmentBase {
   public Attachment() {}
@@ -93,11 +93,24 @@ public class Attachment extends AttachmentBase {
   }
 
   public String makeUnique(String filename) {
+    // there are some situations where the messageboard has to deal with 
+    // attachments that don't have a filename!  I have no idea why, but it is 
+    // bound to be microsoft's fault.
+    // if we have null, than set it to a default string.  perhaps this
+    // should be stored in the setting table, but perhaps it's not worthwhile
+    if (filename == null) filename = "attachment";
     Message message = (Message)getDatabase().getTable("message").
                         getObject(getMessage_unsafe());
     Board board = (Board)getDatabase().getTable("board").
                         getObject(message.getBoard_unsafe());
-    File testFile = new File(board.getAttachmentspath_unsafe(), filename);
+    File testFile;
+    // throw nicer exception if it goes tits up
+    try {
+      testFile = new File(board.getAttachmentspath_unsafe(), filename);
+    } catch (Exception e) {
+      throw new UnexpectedExceptionException("Failed to create a file in directory:" +
+                            board.getAttachmentspath_unsafe() + " filename:" + filename, e);
+    }
     int dot = filename.lastIndexOf(".");
     String start = (dot != -1) ? filename.substring(0,dot) : filename;
     String extension = (dot != -1)
