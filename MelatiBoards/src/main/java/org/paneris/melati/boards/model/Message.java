@@ -47,11 +47,9 @@
  *     29 Stanley Road, Oxford, OX4 1QY, UK
  */
 
-
 package org.paneris.melati.boards.model;
 
 import org.melati.util.*;
-
 import org.paneris.melati.boards.model.generated.*;
 import java.text.*;
 import java.util.*;
@@ -59,8 +57,8 @@ import java.sql.Date;
 import java.sql.Timestamp;
 import org.melati.poem.*;
 
-
 public class Message extends MessageBase implements Treeable {
+
   public Message() {}
 
   private static DateFormat localeFormatter =
@@ -100,7 +98,6 @@ public class Message extends MessageBase implements Treeable {
     return IndentBody(">");
   }
 
-
   public Enumeration getAttachments() {
     return getBoardsDatabaseTables().getAttachmentTable().getColumn("message").
              referencesTo(this);
@@ -109,6 +106,7 @@ public class Message extends MessageBase implements Treeable {
   CachedCount attachments = null;
 
   public int getAttachmentCount() {
+
     if (attachments == null)
       attachments = getBoardsDatabaseTables().getAttachmentTable().
          cachedCount(getBoardsDatabaseTables().getAttachmentTable().
@@ -120,11 +118,9 @@ public class Message extends MessageBase implements Treeable {
     return getAttachmentCount() > 0;
   }
 
-
   /**
    * Tree stuff
    */
-
   public Treeable[] getChildren() {
     Enumeration kidsEnum = getTable().
       selection(getMessageTable().getParentColumn().eqClause(troid())
@@ -154,8 +150,9 @@ public class Message extends MessageBase implements Treeable {
    * A user can read a message if they can read messages on the
    * relevant board
    */
+
   public void assertCanRead(AccessToken token)
-      throws AccessPoemException {
+     throws AccessPoemException {
     if (token == AccessToken.root) return;
     try {
       Board b = getBoardsDatabaseTables().getBoardTable().
@@ -183,6 +180,7 @@ public class Message extends MessageBase implements Treeable {
     } catch (ClassCastException e) {
         throw new AccessPoemException(token, new Capability("Logged In"));
     }
+
   }
 
   /**
@@ -195,23 +193,20 @@ public class Message extends MessageBase implements Treeable {
     try {
       Board b = getBoardsDatabaseTables().getBoardTable().
                     getBoardObject(getBoard_unsafe());
-      if (((User)token).isGuest())
+     if (!b.canPost((User)token))
         throw new CreationAccessPoemException(getTable(), token,
                                             new Capability("Logged in"));
-      if (!b.canPost((User)token))
-        throw new CreationAccessPoemException(getTable(), token,
-                                            new Capability("Manager"));
      } catch (ClassCastException e) {
         throw new CreationAccessPoemException(getTable(), token,
                                             new Capability("Member"));
     }
   }
 
-
   public void setParentTroid(Integer raw)
       throws AccessPoemException {
     getMessageTable().getParentColumn().getType().assertValidRaw(raw);
     writeLock();
+
 
     // A message has to be on the same board as it's parent, if one is
     // set
@@ -231,7 +226,6 @@ public class Message extends MessageBase implements Treeable {
 
 class DistributeThread extends Thread {
   private Message message;
-
   public DistributeThread(Message message) {
     this.message = message;
   }
@@ -255,4 +249,3 @@ class DistributeThread extends Thread {
       });
   }
 }
-
