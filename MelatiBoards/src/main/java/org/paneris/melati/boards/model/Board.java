@@ -271,16 +271,19 @@ public class Board extends BoardBase {
     String[] emailArray = new String[members.size()];
     members.copyInto(emailArray);
 
+/*
     String toString = "";
     for(int i=0; i<emailArray.length; i++) {
       toString += emailArray[i] + ", ";
     }
     if (toString.length() != 0)
       toString = toString.substring(0, toString.length() - 2);
+*/
 
+    String toString = getEmailAddress(message);
     String body = message.getBody();
     body += "\n\n-----------------------------------------------------------------------\n";
-    body += "From the "+getDisplayname()+" board:\n";
+    body += "From the " + getDisplayname() + " board:\n";
     body += "To unsubscribe, see the list of members or other messages, go to:\n";
     body += getBoardURL() + "\n\n";
     body += "This message";
@@ -292,11 +295,11 @@ public class Board extends BoardBase {
     try {
         Email.sendToList(
           getDatabase(),
-          message.getAuthor().getEmail(),
-          emailArray,
-          toString,
-          getEmailAddress(message),
-          "["+getName()+"] " + message.getSubject(),
+          message.getAuthor().getEmail(),   // From
+          emailArray,                       // To list
+          toString,                         // apparently to
+          getEmailAddress(message),         // reply to
+          "["+getName()+"] " + message.getSubject(),    // subject
           body);
     } catch (Exception e) {
       e.printStackTrace();
