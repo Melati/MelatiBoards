@@ -248,6 +248,9 @@ class DistributeThread extends Thread {
             e.printStackTrace();
           }
         }
+        public String toString() {
+          return "Distributing message (" + message + ") to board (" + message.getBoard() + ")";
+        }
       });
   }
 }

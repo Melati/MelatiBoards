@@ -138,6 +138,10 @@ public class BoardTable extends BoardTableBase {
               Boolean.TRUE,
               Boolean.TRUE);
         }
+
+        public String toString() {
+          return "Subscribing the user " + manager + " to this board";
+        }
       });
   }
 
