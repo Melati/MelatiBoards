@@ -62,11 +62,10 @@ import java.io.PushbackInputStream;
  * end-of-file, the underlying stream can be used again to read the
  * data from the dot-line up to its own end-of-file.
  */
-
-class DotTerminatedInputStream extends FilterInputStream {
+public class DotTerminatedInputStream extends FilterInputStream {
   private static final int
-      TEXT = 0, FIRSTCR = 1, FIRSTNL = 2, DOT = 3, SECONDCR = 4, TERMINATED = 5,
-      POP = 6;
+    TEXT = 0, FIRSTCR = 1, FIRSTNL = 2, DOT = 3, SECONDCR = 4, TERMINATED = 5,
+    POP = 6;
 
   private int state = FIRSTNL;
   private int state1 = -1;
@@ -82,7 +81,6 @@ class DotTerminatedInputStream extends FilterInputStream {
    *                            with a character that has to be pushed
    *                            back
    */
-
   public DotTerminatedInputStream(PushbackInputStream in) {
     super(in);
   }
@@ -107,6 +105,11 @@ class DotTerminatedInputStream extends FilterInputStream {
     pushedBack[pushedBackIn++] = b;
   }
 
+ /**
+  * Read a character.
+  *
+  * @return a character or -1 if terminated.
+  */
   public synchronized int read() throws IOException {
     int b;
     for (;;) {
