@@ -471,7 +471,7 @@ public class NNTPSession extends Thread {
       writer.println("411 no such newsgroup");
       //writer.println("502 no permission");
     } catch (Exception e) {
-      writer.println("411 no such newsgroup");
+      writer.println("503 program fault - command not performed: " + e.toString());
     }
   }
 
