@@ -23,9 +23,15 @@
 #end
 <br>
 #if ($board.Openposting) #begin
- Anyone can post a message
+ Anyone can post a message if they are a registered user
 #end #else #begin
  Only members can post messages
+#end
+<br>
+#if ($board.Anonymousposting) #begin
+ Anyone can post a message even if they are not a registered user
+#end #else #begin
+ Only registered users can post messages
 #end
 <br>
 #if ($board.Moderatedposting) #begin

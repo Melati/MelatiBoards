@@ -27,6 +27,7 @@ public class BoardTableBase extends Table {
   private Column col_openmessageviewing = null;
   private Column col_openmemberlist = null;
   private Column col_attachmentsallowed = null;
+  private Column col_anonymousposting = null;
   private Column col_attachmentspath = null;
   private Column col_attachmentsurl = null;
 
@@ -548,7 +549,7 @@ public class BoardTableBase extends Table {
           }
 
           protected String defaultDescription() {
-            return "With open posting anyone can post a message to this list. Otherwise, only members can post";
+            return "With open posting anyone with a user account can post a message to this list. Otherwise, only members can post";
           }
 
           public Object getRaw_unsafe(Persistent g)
@@ -800,6 +801,63 @@ public class BoardTableBase extends Table {
           }
         });
 
+    defineColumn(col_anonymousposting =
+        new Column(this, "anonymousposting", new BooleanPoemType(false), DefinitionSource.dsd) { 
+          public Object getCooked(Persistent g)
+              throws AccessPoemException, PoemException {
+            return ((Board)g).getAnonymousposting();
+          }
+
+          public void setCooked(Persistent g, Object cooked)
+              throws AccessPoemException, ValidationPoemException {
+            ((Board)g).setAnonymousposting((Boolean)cooked);
+          }
+
+          public Field asField(Persistent g) {
+            return ((Board)g).getAnonymouspostingField();
+          }
+
+          protected DisplayLevel defaultDisplayLevel() {
+            return DisplayLevel.record;
+          }
+
+          protected Searchability defaultSearchability() {
+            return Searchability.no;
+          }
+
+          protected String defaultDisplayName() {
+            return "Anonymous Posting Allowed";
+          }
+
+          protected int defaultDisplayOrder() {
+            return 13;
+          }
+
+          protected String defaultDescription() {
+            return "Can people without user accounts post to this messageboard. If so, a user account is created for them when they post.";
+          }
+
+          public Object getRaw_unsafe(Persistent g)
+              throws AccessPoemException {
+            return ((Board)g).getAnonymousposting_unsafe();
+          }
+
+          public void setRaw_unsafe(Persistent g, Object raw)
+              throws AccessPoemException {
+            ((Board)g).setAnonymousposting_unsafe((Boolean)raw);
+          }
+
+          public Object getRaw(Persistent g)
+              throws AccessPoemException {
+            return ((Board)g).getAnonymousposting();
+          }
+
+          public void setRaw(Persistent g, Object raw)
+              throws AccessPoemException {
+            ((Board)g).setAnonymousposting((Boolean)raw);
+          }
+        });
+
     defineColumn(col_attachmentspath =
         new Column(this, "attachmentspath", new StringPoemType(false, -1), DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
@@ -833,7 +891,7 @@ public class BoardTableBase extends Table {
           }
 
           protected int defaultDisplayOrder() {
-            return 13;
+            return 14;
           }
 
           protected String defaultDescription() {
@@ -898,7 +956,7 @@ public class BoardTableBase extends Table {
           }
 
           protected int defaultDisplayOrder() {
-            return 14;
+            return 15;
           }
 
           protected String defaultDescription() {
@@ -981,6 +1039,10 @@ public class BoardTableBase extends Table {
 
   public final Column getAttachmentsallowedColumn() {
     return col_attachmentsallowed;
+  }
+
+  public final Column getAnonymouspostingColumn() {
+    return col_anonymousposting;
   }
 
   public final Column getAttachmentspathColumn() {
