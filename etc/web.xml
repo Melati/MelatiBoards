@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.2//EN" "http://java.sun.com/j2ee/dtds/web-app_2.2.dtd">
+
+<web-app>
+  <servlet>
+    <servlet-name>org.melati.admin.Admin</servlet-name>
+    <servlet-class>org.melati.admin.Admin</servlet-class>
+  </servlet>
+  
+  <servlet>
+    <servlet-name>org.melati.poem.SessionAnalysisServlet</servlet-name>
+    <servlet-class>org.melati.poem.SessionAnalysisServlet</servlet-class>
+  </servlet>
+  
+  <servlet>
+    <servlet-name>org.melati.test.ConfigServletTest</servlet-name>
+    <servlet-class>org.melati.test.ConfigServletTest</servlet-class>
+  </servlet>
+  
+  <servlet>
+    <servlet-name>org.melati.test.PoemServletTest</servlet-name>
+    <servlet-class>org.melati.test.PoemServletTest</servlet-class>
+  </servlet>
+  
+  <servlet>
+    <servlet-name>org.melati.login.Login</servlet-name>
+    <servlet-class>org.melati.login.Login</servlet-class>
+  </servlet>
+  
+  <servlet>
+    <servlet-name>org.melati.login.Logout</servlet-name>
+    <servlet-class>org.melati.login.Logout</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>
+        hsqlRunner
+    </servlet-name>
+    <servlet-class>
+        hsqlRunnerServlet
+    </servlet-class>
+    <load-on-startup>1000</load-on-startup> 
+  </servlet>
+  <servlet>
+    <servlet-name>
+        hsql
+    </servlet-name>
+    <servlet-class>
+        hsqlServlet
+    </servlet-class>
+    <load-on-startup>110</load-on-startup> 
+  </servlet>
+  <servlet>
+    <servlet-name>
+        SMTPServer
+    </servlet-name>
+    <servlet-class>
+        org.paneris.melati.boards.receivemail.SMTPServerServlet
+    </servlet-class>
+    <init-param>
+     <param-name>port</param-name>
+     <param-value>1616</param-value>
+    </init-param>
+    <init-param>
+     <param-name>properties</param-name>
+     <param-value>smtpServer.properties</param-value>
+    </init-param>
+    <init-param>
+     <param-name>log</param-name>
+     <param-value>/usr/local/apache/log/smtpserver.log</param-value>
+    </init-param>
+    <!-- <load-on-startup>100</load-on-startup>  -->
+  </servlet>
+<servlet>
+        <servlet-name>
+            BoardAdmin
+        </servlet-name>
+        <servlet-class>
+            org.paneris.melati.boards.BoardAdmin
+        </servlet-class>
+</servlet>
+  
+  <servlet>
+    <servlet-name>
+        NNTPServer
+    </servlet-name>
+    <servlet-class>
+        org.paneris.melati.boards.receivemail.nntp.NNTPServerServlet
+    </servlet-class>
+    <init-param>
+     <param-name>database</param-name>
+     <param-value>paneris</param-value>
+    </init-param>
+    <init-param>
+     <param-name>prefix</param-name>
+     <param-value>org.paneris</param-value>
+    </init-param>
+    <init-param>
+     <param-name>log</param-name>
+     <param-value>/usr/local/apache/log/nntpserver.log</param-value>
+    </init-param>
+    <init-param>
+     <param-name>port</param-name>
+     <param-value>119</param-value>
+    </init-param>
+    <init-param>
+     <param-name>identifier</param-name>
+     <param-value>paneris.org</param-value>
+    </init-param>
+    <load-on-startup>100</load-on-startup>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>org.melati.admin.Admin</servlet-name>
+    <url-pattern>/melati/org.melati.admin.Admin/*</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>org.melati.admin.Admin</servlet-name>
+    <url-pattern>/Admin/*</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>org.melati.admin.Admin</servlet-name>
+    <url-pattern>/melati/Admin/*</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>org.melati.poem.SessionAnalysisServlet</servlet-name>
+    <url-pattern>/melati/org.melati.poem.SessionAnalysisServlet/*</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>org.melati.test.ConfigServletTest</servlet-name>
+    <url-pattern>/melati/org.melati.test.ConfigServletTest/*</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>org.melati.test.PoemServletTest</servlet-name>
+    <url-pattern>/melati/org.melati.test.PoemServletTest/*</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>org.melati.login.Login</servlet-name>
+    <url-pattern>/melati/org.melati.login.Login/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>org.melati.login.Logout</servlet-name>
+    <url-pattern>/melati/org.melati.login.Logout/*</url-pattern>
+  </servlet-mapping>
+  
+<servlet-mapping>
+    <servlet-name>
+        hsql
+    </servlet-name>
+    <url-pattern>
+        /hsql/*
+    </url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+    <servlet-name>
+        BoardAdmin
+    </servlet-name>
+    <url-pattern>
+        /boardadmin/*
+    </url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+    <servlet-name>
+        NNTPServer
+    </servlet-name>
+    <url-pattern>
+        /nntpserver/*
+    </url-pattern>
+</servlet-mapping>
+</web-app>
