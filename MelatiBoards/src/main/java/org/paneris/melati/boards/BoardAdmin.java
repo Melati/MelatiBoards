@@ -12,49 +12,52 @@ import org.webmacro.resource.*;
 import org.webmacro.broker.*;
 import org.melati.*;
 import org.melati.util.*;
+import org.melati.servlet.*;
+import org.melati.template.*;
 import org.melati.poem.*;
+import org.melati.servlet.InvalidUsageException;
 import org.paneris.melati.boards.model.*;
 
 
-public class BoardAdmin extends MelatiServlet {
+public class BoardAdmin extends TemplateServlet {
 
   static private int MAX_HITS = 2000;
   static private int HITS_PER_PAGE = 20;
 
-  protected Persistent create(final Table table, final WebContext context) {
+  protected Persistent create(final Table table, final TemplateContext context) {
     return table.create(
         new Initialiser() {
           public void init(Persistent object)
               throws AccessPoemException, ValidationPoemException {
-            Melati.extractFields(context, object);
+            MelatiUtil.extractFields(context, object);
           }
         });
   }
 
-  protected Template boardTemplate(WebContext context, String name)
-      throws NotFoundException, InvalidTypeException {
-        return getTemplate("melati/boards/" + name);
+  protected String boardTemplate(TemplateContext context, String name)
+      throws InvalidTypeException {
+        return "melati/boards/" + name;
   }
 
   /*****************************
    * System Actions
    *****************************/
   
-  protected Template loginTemplate(WebContext context, Melati melati)
-      throws NotFoundException, InvalidTypeException, PoemException {
+  protected String loginTemplate(TemplateContext context, Melati melati)
+      throws InvalidTypeException, PoemException {
     org.melati.poem.User token = (org.melati.poem.User)PoemThread.accessToken();
     if (token.isGuest())
       throw new AccessPoemException(token, new Capability("Logged In"));
     return listBoardTemplate(context, melati);
   }
 
-  protected Template listTypesTemplate(WebContext context, Melati melati)
-      throws NotFoundException, InvalidTypeException, PoemException {
+  protected String listTypesTemplate(TemplateContext context, Melati melati)
+      throws InvalidTypeException, PoemException {
     return boardTemplate(context, "ListTypes.wm");
   }
 
-  protected Template searchForBoardTemplate(WebContext context, Melati melati)
-      throws NotFoundException, InvalidTypeException, PoemException {
+  protected String searchForBoardTemplate(TemplateContext context, Melati melati)
+      throws InvalidTypeException, PoemException {
     return boardTemplate(context, "SearchForBoard.wm");
   }
 
@@ -62,8 +65,8 @@ public class BoardAdmin extends MelatiServlet {
    * BoardType Actions
    *******************/
   
-  protected Template listBoardsTemplate(WebContext context, Melati melati)
-      throws NotFoundException, InvalidTypeException, PoemException {
+  protected String listBoardsTemplate(TemplateContext context, Melati melati)
+      throws InvalidTypeException, PoemException {
     return boardTemplate(context, "ListBoards.wm");
   }
 
@@ -71,15 +74,15 @@ public class BoardAdmin extends MelatiServlet {
    * Board Actions
    ***************/
   
-  protected Template createBoardTemplate(WebContext context, Melati melati)
-      throws NotFoundException, InvalidTypeException, PoemException {
+  protected String createBoardTemplate(TemplateContext context, Melati melati)
+      throws InvalidTypeException, PoemException {
     create(melati.getTable(), context);
     // Create attachment, if necessary
     return boardTemplate(context, "CreateBoard.wm");
   }
 
-  protected Template listBoardTemplate(WebContext context, Melati melati)
-      throws NotFoundException, InvalidTypeException, PoemException {
+  protected String listBoardTemplate(TemplateContext context, Melati melati)
+      throws InvalidTypeException, PoemException {
 
     // Find the start page
     int s = 0;
@@ -95,28 +98,28 @@ public class BoardAdmin extends MelatiServlet {
     return boardTemplate(context, "Board.wm");
   }
 
-  protected Template subscribeTemplate(WebContext context, Melati melati)
-      throws NotFoundException, InvalidTypeException, PoemException {
+  protected String subscribeTemplate(TemplateContext context, Melati melati)
+      throws InvalidTypeException, PoemException {
     return boardTemplate(context, "Subscribe.wm");
   }
 
-  protected Template unsubscribeTemplate(WebContext context, Melati melati)
-      throws NotFoundException, InvalidTypeException, PoemException {
+  protected String unsubscribeTemplate(TemplateContext context, Melati melati)
+      throws InvalidTypeException, PoemException {
     return boardTemplate(context, "Unsubscribe.wm");
   }
 
-  protected Template subscriptionOptionsTemplate(WebContext context, Melati melati)
-      throws NotFoundException, InvalidTypeException, PoemException {
+  protected String subscriptionOptionsTemplate(TemplateContext context, Melati melati)
+      throws InvalidTypeException, PoemException {
     return boardTemplate(context, "SubscriptionOptions.wm");
   }
 
-  protected Template searchBoardTemplate(WebContext context, Melati melati)
-      throws NotFoundException, InvalidTypeException, PoemException {
+  protected String searchBoardTemplate(TemplateContext context, Melati melati)
+      throws InvalidTypeException, PoemException {
     return boardTemplate(context, "SearchBoard.wm");
   }
 
-  protected Template newMessageTemplate(WebContext context, Melati melati)
-      throws NotFoundException, InvalidTypeException, PoemException {
+  protected String newMessageTemplate(TemplateContext context, Melati melati)
+      throws InvalidTypeException, PoemException {
 
     if (melati.getUser().isGuest())
       throw new AccessPoemException(melati.getUser(), new Capability("Logged In"));
@@ -130,18 +133,18 @@ public class BoardAdmin extends MelatiServlet {
     return boardTemplate(context, "NewMessage.wm");
   }
 
-  protected Template listPendingMessagesTemplate(WebContext context, Melati melati)
-      throws NotFoundException, InvalidTypeException, PoemException {
+  protected String listPendingMessagesTemplate(TemplateContext context, Melati melati)
+      throws InvalidTypeException, PoemException {
     return boardTemplate(context, "ListPendingMessages.wm");
   }
 
-  protected Template listPendingSubscriptionsTemplate(WebContext context, Melati melati)
-      throws NotFoundException, InvalidTypeException, PoemException {
+  protected String listPendingSubscriptionsTemplate(TemplateContext context, Melati melati)
+      throws InvalidTypeException, PoemException {
     return boardTemplate(context, "ListPendingSubsciptions.wm");
   }
 
-  protected Template manageTemplate(WebContext context, Melati melati)
-      throws NotFoundException, InvalidTypeException, PoemException {
+  protected String manageTemplate(TemplateContext context, Melati melati)
+      throws InvalidTypeException, PoemException {
     return boardTemplate(context, "Manage.wm");
   }
 
@@ -149,13 +152,13 @@ public class BoardAdmin extends MelatiServlet {
    * Message Actions
    *****************/
   
-  protected Template showMessageTemplate(WebContext context, Melati melati)
-      throws NotFoundException, InvalidTypeException, PoemException {
+  protected String showMessageTemplate(TemplateContext context, Melati melati)
+      throws InvalidTypeException, PoemException {
     return boardTemplate(context, "ShowMessage.wm");
   }
 
-  protected Template createMessageTemplate(WebContext context, Melati melati)
-      throws NotFoundException, InvalidTypeException, PoemException {
+  protected String createMessageTemplate(TemplateContext context, Melati melati)
+      throws InvalidTypeException, PoemException {
     Persistent newMessage = create(((BoardTable)melati.getTable()).
                               getBoardsDatabase().getMessageTable(), context);
     ((Message)newMessage).distribute();
@@ -167,13 +170,13 @@ public class BoardAdmin extends MelatiServlet {
    * Approve
    *****************************/
   
-  protected Template approveSubscriptionTemplate(WebContext context, Melati melati)
-      throws NotFoundException, InvalidTypeException, PoemException {
+  protected String approveSubscriptionTemplate(TemplateContext context, Melati melati)
+      throws InvalidTypeException, PoemException {
     return boardTemplate(context, "ApproveSubscription.wm");
   }
 
-  protected Template approveMessageTemplate(WebContext context, Melati melati)
-      throws NotFoundException, InvalidTypeException, PoemException {
+  protected String approveMessageTemplate(TemplateContext context, Melati melati)
+      throws InvalidTypeException, PoemException {
     return boardTemplate(context, "ApproveMessage.wm");
   }
 
@@ -183,12 +186,13 @@ public class BoardAdmin extends MelatiServlet {
    * Handler
    *****************************/
   
-  protected Template handle(WebContext context, Melati melati)
-      throws Exception {
+  protected String doTemplateRequest( 
+                   Melati melati, TemplateContext context) 
+                   throws Exception {
 
     context.put("utils",
-        new BoardUtils(context.getRequest().getServletPath(),
-                       melati.getLogicalDatabaseName()));
+        new BoardUtils(melati.getRequest().getServletPath(),
+                       melati.getContext().logicalDatabase));
 
     String start = context.getForm("start");
     if (start != null)
