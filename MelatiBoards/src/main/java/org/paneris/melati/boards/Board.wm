@@ -178,7 +178,7 @@ Purpose: $ml.rendered($board.Purpose)
       <a href="mailto:$messageNode.UserObject.Author.Email">$ml.rendered($messageNode.UserObject.Author)</a>
      </td>
      <td>
-      $ml.renderedMedium($messageNode.UserObject.DateField)
+      $messageNode.UserObject.DateField.LondonDate - HI
       #if ($messageNode.UserObject.hasAttachments()) #begin
        $messageNode.UserObject.AttachmentCount attachments
       #end
