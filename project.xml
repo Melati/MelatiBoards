@@ -2,8 +2,8 @@
 <project>
   <pomVersion>3</pomVersion>
   <id>boards</id>
-  <name>Boards</name>
-  <currentVersion>1.2.0</currentVersion>
+  <name>MelatiBoards</name>
+  <currentVersion>1.1.1</currentVersion>
   <organization>
     <name>PanEris</name>
     <url>http://www.paneris.org/</url>
@@ -29,7 +29,7 @@
   <siteDirectory>/inst/MelatiBoards/target/docs</siteDirectory>
   <issueTrackingUrl>
 <!--    http://nagoya.apache.org/scarab/servlet/scarab/ -->
-   http://www.paneris.org/webmacro/MessageBoard?db=paneris&amp;messageboard=364
+   http://www.paneris.org/webmacro/MessageBoard?db=paneris&amp;messageboard=381
   </issueTrackingUrl>
   <distributionDirectory>
     /inst/MelatiBoards/
@@ -61,51 +61,63 @@
 
   <mailingLists>
     <mailingList>
-      <name>Financial Training Partner List</name>
+      <name>MelatiBoards Development</name>
       <subscribe>
-        subscribe.financial-training@messageboards.paneris.org
+        subscribe.melatiboards@messageboards.paneris.org
       </subscribe>
       <unsubscribe>
-        unsubscribe.financial-training@messageboards.paneris.org
+        unsubscribe.melatiboards@messageboards.paneris.org
       </unsubscribe>
       <archive>
-       http://www.paneris.org/webmacro/MessageBoard?db=paneris&amp;messageboard=369
+       http://www.paneris.org/webmacro/MessageBoard?db=paneris&amp;messageboard=380
       </archive>
     </mailingList>
     <mailingList>
-      <name>FTC Project List</name>
+      <name>MelatiBoards CVS Notifications</name>
       <subscribe>
-       subscribe.ftc@messageboards.paneris.org
+        subscribe.melatiboards-qa@messageboards.paneris.org
       </subscribe>
       <unsubscribe>
-       unsubscribe.ftc@messageboards.paneris.org
+        unsubscribe.melatiboards-qa@messageboards.paneris.org
       </unsubscribe>
       <archive>
-       http://www.paneris.org/webmacro/MessageBoard?db=paneris&amp;messageboard=370
+       http://www.paneris.org/webmacro/MessageBoard?db=paneris&amp;messageboard=381
       </archive>
     </mailingList>
     <mailingList>
-      <name>FTC Unix Gurus List</name>
+      <name>Melati Announce</name>
       <subscribe>
-        subscribe.ftc_tech@messageboards.paneris.org
+http://lists.sourceforge.net/lists/listinfo/melati-announce
       </subscribe>
       <unsubscribe>
-        unsubscribe.ftc_tech@messageboards.paneris.org
+http://lists.sourceforge.net/lists/listinfo/melati-announce
       </unsubscribe>
       <archive>
-       http://www.paneris.org/webmacro/MessageBoard?db=paneris&amp;messageboard=371
+http://sourceforge.net/mailarchive/forum.php?forum=melati-announce
       </archive>
     </mailingList>
     <mailingList>
-      <name>FTC CVS commit List</name>
+      <name>Melati Developers</name>
       <subscribe>
-        subscribe.ftc-qa@messageboards.paneris.org
+http://lists.sourceforge.net/lists/listinfo/melati-developers
       </subscribe>
       <unsubscribe>
-        unsubscribe.ftc-qa@messageboards.paneris.org
+http://lists.sourceforge.net/lists/listinfo/melati-developers
       </unsubscribe>
       <archive>
-       http://www.paneris.org/webmacro/MessageBoard?db=paneris&amp;messageboard=364
+http://sourceforge.net/mailarchive/forum.php?forum=melati-developers
+      </archive>
+    </mailingList>
+    <mailingList>
+      <name>Melati Users</name>
+      <subscribe>
+http://lists.sourceforge.net/lists/listinfo/melati-users
+      </subscribe>
+      <unsubscribe>
+http://lists.sourceforge.net/lists/listinfo/melati-users
+      </unsubscribe>
+      <archive>
+http://sourceforge.net/mailarchive/forum.php?forum=melati-users
       </archive>
     </mailingList>
   </mailingLists>
@@ -175,16 +187,6 @@
       <url>http://www.webmacro.org/</url>
     </dependency>
     <dependency>
-      <id>melatiShopping</id>
-      <version>1.0</version>
-      <url>http://www.melati.org/</url>
-    </dependency>
-    <dependency>
-      <id>melatiBoards</id>
-      <version>1.0</version>
-      <url>http://www.melati.org/</url>
-    </dependency>
-    <dependency>
       <id>javamail</id>
       <version>1.2</version>
       <url>http://java.sun.com/</url>
@@ -194,11 +196,13 @@
       <version>2.2</version>
       <url>http://java.sun.com/</url>
     </dependency>
+<!--
     <dependency>
       <id>activation</id>
       <version>1.0</version>
       <url>http://java.sun.com/</url>
     </dependency>
+-->
   </dependencies>
 
   <build>
