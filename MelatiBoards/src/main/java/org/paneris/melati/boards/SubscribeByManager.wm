@@ -21,8 +21,8 @@ A manager of this board must subscribe you.
   managers listed below and ask them to subscribe you:
   <ul>
     #foreach $subscription in $board.ManagersSubscriptions #begin
-    <li>$ml.rendered($subscription.User) :
-        <a href="mailto:$ml.Attr.rendered($subscription.User.Email)">$ml.rendered($subscription.User.Email)</a>
+    <li>$ml.rendered($subscription.User.Name_unsafe) :
+        <a href="mailto:$ml.Attr.rendered($subscription.User.Email_unsafe)">$ml.rendered($subscription.User.Email_unsafe)</a>
     #end
   </ul>
 #end #else #begin

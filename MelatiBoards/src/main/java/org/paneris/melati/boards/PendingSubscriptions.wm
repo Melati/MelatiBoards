@@ -27,7 +27,7 @@
    </select>
    <input type=hidden name=subscription value=$subscription.Troid>
   </td>
-  <td>$ml.rendered($subscription.User) ($ml.rendered($subscription.User.Email))</td>
+  <td>$ml.rendered($subscription.User.Name_unsafe) ($ml.rendered($subscription.User.Email_unsafe))</td>
  </tr>
 #end
  <tr>
