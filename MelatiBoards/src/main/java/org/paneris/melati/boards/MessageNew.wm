@@ -29,7 +29,7 @@
   Subject:<br>
    <input type=text name=field_subject
     #if ($parent) #begin 
-	  value="Re: $parent.Subject" #end
+       value="Re: $parent.Subject" #end
           size=80>
  </p>
 
