@@ -250,6 +250,7 @@ class SMTPSession extends Thread {
         try {
           clazz=Class.forName(boardStoreImpl);
         } catch (Exception e) {
+          log.exception(e);
           clazz=Class.forName("org.paneris.melati.boards.receivemail.BoardStoreImpl");
         }
         store = (BoardStore)clazz.newInstance();
