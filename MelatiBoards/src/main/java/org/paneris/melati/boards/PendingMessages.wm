@@ -23,7 +23,7 @@ function selectAll(form) {
 
 <h2>Pending messages</h2>
 
-<form action=$utils.ApproveMessagesURL($board) method=post>
+<form action=$boardutils.ApproveMessagesURL($board) method=post>
 <table>
 #foreach $message in $board.PendingMessages #begin
  <tr>
@@ -31,7 +31,7 @@ function selectAll(form) {
    <input type=checkbox name=$message.Troid value=yes>
    <input type=hidden name=message value=$message.Troid>
   </td>
-  <td><a href="$utils.MessageNoThreadURL($message, $start)">$ml.rendered($message)</a></td>
+  <td><a href="$boardutils.MessageNoThreadURL($message, $start)">$ml.rendered($message)</a></td>
   <td>$ml.rendered($message.Author)</td>
   <td>$ml.rendered($message.Date)</td>
  </tr>

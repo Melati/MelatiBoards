@@ -11,7 +11,7 @@
 Please select one of the following boards to view it:
 <blockquote>
 #foreach $board in $melati.Database.BoardTable.TypeColumn.referencesTo($melati.Object) #begin
-  <a href="$utils.BoardURL($board, "0")">$ml.rendered($board)</a>
+  <a href="$boardutils.BoardURL($board, "0")">$ml.rendered($board)</a>
   <a href="mailto:$board.EmailAddress">$board.EmailAddress</a>
   ($board.MessageCount message, $board.MemberCount subscribers)
   <br>

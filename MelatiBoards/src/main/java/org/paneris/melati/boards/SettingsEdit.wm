@@ -14,7 +14,7 @@
 
 <h2>Edit settings</h2>
 
-<form action="$utils.SettingsUpdateURL($board)" method=post>
+<form action="$boardutils.SettingsUpdateURL($board)" method=post>
 <table>
  <tr>
   <td>Archived</td>

@@ -44,11 +44,11 @@
 
 <P>
 #if ($melati.User.isGuest()) #begin
- You need to <a href="$utils.LoginURL($board)">Log in</a> to reply to this message.
+ You need to <a href="$boardutils.LoginURL($board)">Log in</a> to reply to this message.
 #end
 #else #begin
  #if ($board.canPost($melati.User)) #begin
-  <a href="$utils.MessageNewURL($board)?parent=$message.Troid">Reply to this message</a>\ 
+  <a href="$boardutils.MessageNewURL($board)?parent=$message.Troid">Reply to this message</a>\ 
  #end
 #end
 </P>
@@ -59,8 +59,8 @@
     #foreach $messageNode in $message.Thread.preorderEnumeration() #begin
     <tr\ #if ($messageNode.UserObject == $message) #begin bgcolor=lightyellow #end>
      <td>
-      <img src="$melati.Config.StaticURL/admin/plus.gif" height=1 width=$utils.indent(20, $messageNode.Level)>
-      <A href="$utils.MessageURL($messageNode.UserObject, $start)">$ml.rendered($messageNode.UserObject)</a>
+      <img src="$melati.Config.StaticURL/admin/plus.gif" height=1 width=$boardutils.indent(20, $messageNode.Level)>
+      <A href="$boardutils.MessageURL($messageNode.UserObject, $start)">$ml.rendered($messageNode.UserObject)</a>
      </td>
      <td>
       <a href="mailto:$messageNode.UserObject.Author.Email">$ml.rendered($messageNode.UserObject.Author.Name_unsafe)</a>
