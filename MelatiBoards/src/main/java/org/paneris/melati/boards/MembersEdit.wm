@@ -24,7 +24,7 @@
  </tr>
  #foreach $sub in $board.MembersSubscriptions #begin
  <tr>
-  <td>$ml.rendered($sub.User.Name)</td>
+  <td>$ml.rendered($sub.User.Name_unsafe)</td>
   <td align=center>
    <input type=checkbox name=manager-$sub.Troid value=true
    #if ($sub.Ismanager) #begin checked #end>
@@ -65,7 +65,7 @@ Please select the users to subscribe to this board:<br>
    #if (!$user.isGuest()) #begin
      #if (!$board.isMember($user)) #begin
        #if ($user != $melati.Database.UserTable.administratorUser()) #begin
-         <option value=$user.Troid>$ml.rendered($user)</option>
+         <option value=$user.Troid>$ml.rendered($user.Name_unsafe)</option>
        #end
      #end
    #end
