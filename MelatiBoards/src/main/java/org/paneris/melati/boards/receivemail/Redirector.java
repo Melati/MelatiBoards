@@ -70,10 +70,11 @@ public class Redirector extends Thread {
       ServerSocketChannel ssc = ServerSocketChannel.open();
       ssc.configureBlocking(false);
       InetAddress local = InetAddress.getLocalHost();
-      InetSocketAddress isa = new InetSocketAddress(local, port);
+      InetSocketAddress isa = new InetSocketAddress(port);
       ssc.socket().bind(isa);
       ssc.register(selector, SelectionKey.OP_ACCEPT);
       while (true) {
+        try {
         selector.select();
         Set readyKeys = selector.selectedKeys();
         Iterator i = readyKeys.iterator();
@@ -111,6 +112,9 @@ public class Redirector extends Thread {
               removePair(another);
             }
           }
+        }
+        } catch (Exception e) {
+          //todo
         }
       }
     } catch (Exception e) {
