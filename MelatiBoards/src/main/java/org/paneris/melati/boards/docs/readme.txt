@@ -279,6 +279,7 @@ default handler and templates thus:
 
     package com.somecompany.testapp.boards;
 
+    import org.webmacro.*;
     import org.webmacro.servlet.*;
     import org.melati.*;
     import org.melati.util.*;
@@ -357,3 +358,4 @@ You will need to ensure that your User[Table] extends
 org.paneris.melati.boards.model.User[Table]
 
 --EOF--
+
