@@ -32,7 +32,6 @@ public class NNTPServer implements Runnable {
   }
 
   public void run() {
-    //new Thread(new RunHSQL()).start();
     myThread = Thread.currentThread();
 
     try {
