@@ -1,6 +1,8 @@
 #include as template "$board.templatePath("BoardHeader")"
-We have received your request to join the board. A manager will either
-approve or decline your request. You will be notified either way.
+We have received your request to join the board. 
+A manager will either approve or decline your request. 
+You will be notified either way.
+
 #include as template "$board.templatePath("ManagerList")"
 #include as template "$board.templatePath("BoardFooter")"
 
