@@ -26,23 +26,23 @@
 
   <url>http://boards.paneris.net/</url>
   <siteAddress>boards.paneris.net</siteAddress>
-  <siteDirectory>/www/boards.paneris.net</siteDirectory>
+  <siteDirectory>/inst/MelatiBoards/target/docs</siteDirectory>
   <issueTrackingUrl>
 <!--    http://nagoya.apache.org/scarab/servlet/scarab/ -->
    http://www.paneris.org/webmacro/MessageBoard?db=paneris&amp;messageboard=364
   </issueTrackingUrl>
   <distributionDirectory>
-    /inst/boards/
+    /inst/MelatiBoards/
   </distributionDirectory>
 
   <repository>
     <connection>
-      scm:cvs:pserver:anon@paneris.org:/usr/cvsroot/:boards
+      scm:cvs:pserver:anon@melati.org:/usr/cvsroot:MelatiBoards
     </connection>
-    <developerConnection>scm:cvs:ext:${maven.username}@paneris.org:/usr/cvsroot:boards</developerConnection>
+<developerConnection>scm:cvs:ext:anon@melati.org:/usr/cvsroot:MelatiBoards</developerConnection>
 
     <url>
-      http://ganesh.paneris.org/cgi-bin/cvsweb.cgi/boards/
+      http://ganesh.paneris.org/cgi-bin/cvsweb.cgi/MelatiBoards/
     </url>
   </repository>
 
@@ -113,40 +113,55 @@
   <developers>
 
     <developer>
+      <name>Myles Chippendale</name>
+      <id>mylesc</id>
+      <email>mylesc@paneris.org</email>
+      <organization>MJC Solutions</organization>
+      <roles>
+        <role>Original Author</role>
+      </roles>
+    </developer>
+
+    <developer>
       <name>Tim Pizey</name>
       <id>timp</id>
       <email>timp@paneris.org</email>
       <organization>Context Computing</organization>
       <roles>
-        <role>Project Lead</role>
-        <role>Architect</role>
-        <role>Release Manager</role>
         <role>Java Developer</role>
+        <role>Documenter</role>
+        <role>Release Manager</role>
       </roles>
     </developer>
 
     <developer>
-      <name>Andriy Korud</name>
-      <id>akorud</id>
-      <email>akorud@paneris.org</email>
+      <name>Tim Joyce</name>
+      <id>timj</id>
+      <email>timj@paneris.org</email>
       <organization/>
       <roles>
-        <role>Unix Guru</role>
+        <role>Java Developer</role>
+      </roles>
+    </developer>
+    <developer>
+      <name>Vasily Pozhidaev</name>
+      <id>vasilyp</id>
+      <email>vasilyp@paneris.org</email>
+      <organization/>
+      <roles>
+        <role>Java Developer</role>
+      </roles>
+    </developer>
+    <developer>
+      <name>Karl Zilles</name>
+      <id>karlz</id>
+      <email>karlz@paneris.org</email>
+      <organization/>
+      <roles>
+        <role>Java Developer</role>
       </roles>
     </developer>
   </developers>
-
-  <contributors>
-    <contributor>
-      <name>Tim Joyce</name>
-      <email>timj@paneris.org</email>
-      <organization>Hoop (defunct)</organization>
-      <roles>
-        <role>Original author</role>
-      </roles>
-    </contributor>
-  </contributors>
-
 
   <dependencies>
     <dependency>
