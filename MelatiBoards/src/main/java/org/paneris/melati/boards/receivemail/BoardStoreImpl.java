@@ -396,7 +396,7 @@ public class BoardStoreImpl implements BoardStore {
         // Deal with HTML format emails
         if (part.getContentType().toLowerCase().indexOf("text/html") != -1 && 
             part.getFileName() == null)
-          part.setFileName("asHTML.html");
+          part.setFileName("message-" + m.troid() + ".html");
 
         // Can it go inline?
         Object partContent = getContent(message, part);
