@@ -1,9 +1,18 @@
 /*
- * NNTPStore.java
+ * $Source$
+ * $Revision$
  *
- * Created on Nov 3, 2002, 6:56 PM
+ * Copyright (C) 2003 Vasily Pozhidaev 
+ *
+ * Part of a Melati application. This application is free software;
+ * Permission is granted to copy, distribute and/or modify this
+ * software under the same terms as those set out for Melati at 
+ * http://melati.org.
+ *
+ * Contact details for copyright holder:
+ *
+ *     Vasily Pozhidaev  <vasilyp@paneris.org>
  */
-
 package org.paneris.melati.boards.receivemail.nntp;
 
 import java.io.PrintWriter;
@@ -40,7 +49,8 @@ import org.paneris.melati.boards.model.User;
 import org.paneris.melati.boards.receivemail.Log;
 
 /**
- * Boards database broker for particular session
+ * Boards database broker for a particular session.
+ *
  * @author  Vasily Pozhidaev <vasilyp@paneris.org>
  * @todo generalize and make an interface (like BoardStore)
  */
@@ -49,14 +59,17 @@ public class NNTPStore {
   private Log log;
   public BoardsDatabase db = null;
   String prefix = null;
-  String msgIDSuffix = null;
+  String msgIdSuffix = null;
 
+  private NNTPStore() {
+  }
+  
   public NNTPStore(String database, String prefix, String nntpIdentifier)
     throws Exception {
     db = (BoardsDatabase)LogicalDatabase.getDatabase(database);
     db.setLogSQL(false);
     this.prefix = prefix;
-    msgIDSuffix = "$msg@" + nntpIdentifier;
+    msgIdSuffix = "$msg@" + nntpIdentifier;
   }
 
   /**
@@ -92,13 +105,13 @@ public class NNTPStore {
   }
 
   /**
-   *  Return boards : either all boards, those containing messages more 
+   * Return boards : either all boards, those containing messages more 
    * recent than the <code>from</code> date or whose names match the 
-   * regexp psssed in.  
+   * regexp passed in.  
    * 
-   * @param from
-   * @param wildmat
-   * @return
+   * @param from     Earliest date
+   * @param wildmat  Regular Expression to match
+   * @return an Enumeration of Board objects
    * @todo there should be a way to display newly created empty boards
    * 
    */
@@ -148,7 +161,8 @@ public class NNTPStore {
   }
 
  /**
-  * @todo implement ranges starting with the character "&lt;" 
+  * @todo implement ranges starting with the character "&lt;"
+  * @return an Enumeration of Messages 
   */
   private Enumeration getRange(String range, Board selectedBoard)
     throws SQLException {
@@ -184,15 +198,21 @@ public class NNTPStore {
     return result;
   }
 
-  String getReferences(Message msg, String suffix) {
+  /**
+   * Retrieve the messages References.
+   * 
+   * @param msg the Message 
+   * @return a string of references in NNTP format
+   */
+  String getReferences(Message msg) {
     String references = "";
     /*
     assembling list of references, seems not actually required...
     Stack refs = new Stack();
     //assembling reference list
-    Message parent = msg;
-    while((parent=parent.getParent())!=null) {
-      refs.push("<"+String.valueOf(parent.getTroid().intValue()+1)+suffix+">");
+    NNTPMessage parent = new NNTPMessage(msg);
+    while((parent = parent.getParent())!=null) {
+      refs.push(parent.getArticleId());
     }
     while(!refs.empty()) {
       references += " "+(String)refs.pop();
@@ -203,36 +223,35 @@ public class NNTPStore {
     Message parent = msg.getParent();
     if (parent != null) {
       references =
-        "<" + String.valueOf(parent.getTroid().intValue() + 1) + suffix + ">";
+          getArticleId(new NNTPMessage(parent).getNntpIdInt());
     }
     return references;
   }
 
  /**
+  * @see NNTPSession#xover
   * @todo move to NNTPSession
   */
-  public void printOverview(
-    String range,
-    PrintWriter writer,
-    String selectedBoard) {
+  public void printOverview(String range, PrintWriter writer,
+                            String selectedBoard) {
     try {
       Board brd = resolveTargetBoard(selectedBoard);
       Enumeration messages = getRange(range, brd);
-      if (messages != null) {
+      if (messages == null) {
+        writer.println("420 No article(s) selected");
+      } else {
         writer.println("224 Overview information follows");
         while (messages.hasMoreElements()) {
           Message msg = (Message)messages.nextElement();
-          long byteCount = -1;
-          long lineCount = -1;
-          int id = (msg.getTroid().intValue() + 1);
-          String msgID = "<" + id + msgIDSuffix + ">";
-          String references = getReferences(msg, msgIDSuffix);
+          NNTPMessage nntpMsg = new NNTPMessage(msg);
+          long byteCount = msg.getBody().length();
+          long lineCount = msg.getLines().length;
+          int id = nntpMsg.getNntpIdInt();
+          String msgID = getArticleId(new NNTPMessage(msg).getNntpIdInt());
+          String references = getReferences(msg);
           String reply = id + "\t";
           reply += msg.getSubject() + "\t";
-          reply += msg.getAuthor().getName()
-            + "<"
-            + msg.getAuthor().getEmail()
-            + ">\t";
+          reply += nntpMsg.getFrom()+ "\t";
           reply += NNTPSession.nntpDateFormat.format(msg.getDate()) + "\t";
           reply += msgID + "\t";
           reply += references + "\t";
@@ -241,8 +260,6 @@ public class NNTPStore {
           writer.println(reply);
         }
         writer.println(".");
-      } else {
-        writer.println("420 No article(s) selected");
       }
     } catch (AccessPoemException e) {
       writer.println("502 No permission");
@@ -252,13 +269,17 @@ public class NNTPStore {
   }
 
   /**
-   * sending 430 response (no such article) seems not required (checked with 
-   * Mozilla and news4.fido7.ru)
-   * Mozilla shows error message, but if no headers has been founded Mozilla 
-   * and 221 response sent Mozilla says that no messages found
+   * 
+   * 
+   * Sending 430 response (no such article) seems not to be 
+   * required (checked with Mozilla and news4.fido7.ru)
+   * Mozilla shows error message, but if no headers have been 
+   * found Mozilla sends a 221 response.
+   * Mozilla says that no messages found.
    *
    * @todo check with other clients
    * @todo move to NNTPSession
+   * @see NNTPSession#xpat
    */
   public void xpat(
     String header,
@@ -273,9 +294,10 @@ public class NNTPStore {
       Enumeration messages = getRange(range, brd);
       writer.println("221 " + header + " matches follow");
       if (messages != null) {
-        boolean hasMatches = false;
+//        boolean hasMatches = false;
         while (messages.hasMoreElements()) {
           Message msg = (Message)messages.nextElement();
+          NNTPMessage nntpMsg = new NNTPMessage(msg);
           boolean matched = false;
           String matchedHeader = null;
           if ("subject".equalsIgnoreCase(header)) {
@@ -283,7 +305,7 @@ public class NNTPStore {
             matched = matcher.matches(matchedHeader, p);
           } else if ("from".equalsIgnoreCase(header)) {
             matchedHeader =
-              msg.getAuthor().getName() + " " + msg.getAuthor().getEmail();
+              nntpMsg.getFrom();
             matched = matcher.matches(matchedHeader, p);
           } else {
             matched = false;
@@ -294,7 +316,7 @@ public class NNTPStore {
               hasMatches = true;
             }*/
             writer.println(
-              (msg.getTroid().intValue() + 1) + " " + matchedHeader);
+              nntpMsg.getNntpId() + " " + matchedHeader);
           }
         }
         /*if(hasMatches)
@@ -314,12 +336,25 @@ public class NNTPStore {
     }
   }
 
+  /**
+   * Retrieve a Board given a newsgroup name for it.
+   * 
+   * @param newsGroup name in org.paneris.test format
+   * @return the corresponding Board
+   */
   private Board resolveTargetBoard(String newsGroup) {
-    String boardName = newsGroup.substring(prefix.length() + 1);
+    String boardName = newsGroup.substring(prefix.length() + 1).trim();
     return (Board)db.getTable("board").getColumn("name").firstWhereEq(
       boardName);
   }
 
+ /**
+  * Fill in the <code>User</code>.
+  * Note that the User is already initialised to Guest, 
+  * so will bever be null. 
+  * 
+  * @param authInfo the initialised authinfo collected from commands
+  */
   public void establishUser(NNTPSession.AuthInfo authInfo) {
     User user = null;
     try {
@@ -337,26 +372,39 @@ public class NNTPStore {
   }
 
  /**
+  * Return a NNTPMessage given its NNTP id.
+  * 
   * @todo output attachments
   */
-  public Message getArticle(int id) throws AccessPoemException {
+  public NNTPMessage getArticle(int id) throws AccessPoemException {
+    int troid = id - 1;
     Message message = null;
     try {
-      message = (Message)db.getTable("message").firstSelection("\"id\"=" + id);
+      message = (Message)db.getTable("message").firstSelection("\"id\"=" + troid);
     } catch (Exception e) {
       e.printStackTrace();
     }
-    return message;
+    return new NNTPMessage(message);
   }
+
+  /**
+   * Return a full Article Id given its NNTP id.
+   * 
+   * @return the NNTP Article Id
+   */
+  public String getArticleId(int id) {
+    return "<" + id + msgIdSuffix + ">";
+
+  }
+
 
   /**
    * @see org.paneris.melati.boards.receivemail.BoardStoreImpl#attachmentWrite()
    */
-  protected String attachmentWrite(
-    final Message message,
-    final String fileName,
-    String contentType,
-    final byte[] content)
+  protected String attachmentWrite(final Message message,
+                                   final String fileName, 
+                                   String contentType, 
+                                   final byte[] content)
     throws Exception {
 
     if (!((Board)db.getTable("board").getObject(message.getBoard_unsafe()))
