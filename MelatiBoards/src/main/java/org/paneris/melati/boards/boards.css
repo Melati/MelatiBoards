@@ -1,241 +1,29 @@
 BODY { 
-scrollbar-face-color: #DEEAFE; 
-scrollbar-shadow-color: #31659C; 
-scrollbar-highlight-color: #DEEAFE; 
-scrollbar-3dlight-color: #DEEAFE; 
-scrollbar-darkshadow-color: #DEEAFE; 
-scrollbar-track-color: #103C73; 
-scrollbar-arrow-color: #31659C#
-FONT-SIZE: 8pt; 
-COLOR: #666666; 
-FONT-FAMILY: Verdana, Arial;
-}
-
-h1 { 
- font-family : Verdana, Arial, Helvetica, sans-serif;
+ scrollbar-face-color: #DEEAFE; 
+ scrollbar-shadow-color: #31659C; 
+ scrollbar-highlight-color: #DEEAFE; 
+ scrollbar-3dlight-color: #DEEAFE; 
+ scrollbar-darkshadow-color: #DEEAFE; 
+ scrollbar-track-color: #103C73; 
+ scrollbar-arrow-color: #31659C;
  font-size: 10pt;
- font-weight: bold;
- COLOR: #666666; 
-}
-
-p {
- font-family : Verdana, Arial, Helvetica, sans-serif;
- font-size: 10pt;
-}
-input {
- font-family : Verdana, Arial, Helvetica, sans-serif;
- font-size: 10pt;
-}
-option {
- font-family : Verdana, Arial, Helvetica, sans-serif;
- font-size: 10pt;
-}
-select {
- font-family : Verdana, Arial, Helvetica, sans-serif;
- font-size: 10pt;
-}
-form {
- font-family : Verdana, Arial, Helvetica, sans-serif;
- font-size: 10pt;
-}
-
-TD { 
- FONT-SIZE: 8pt; 
- COLOR: #666666; 
+ line-height: 11pt;
+ color: #333333; 
  font-family : Verdana, Arial, Helvetica, sans-serif;
 }
 
-LI { 
- FONT-SIZE: 8pt; 
- COLOR: #666666; 
- font-family : Verdana, Arial, Helvetica, sans-serif;
-}
-
-DL 
-{ 
- FONT-SIZE: 8pt; 
- COLOR: #666666; 
- font-family : Verdana, Arial, Helvetica, sans-serif;
-}
-
-DT { 
- FONT-SIZE: 8pt; 
- COLOR: #666666; 
- font-family : Verdana, Arial, Helvetica, sans-serif;
-}
-
-DD { 
- FONT-SIZE: 8pt; 
- COLOR: #666666; 
- font-family : Verdana, Arial, Helvetica, sans-serif;
-}
-
-DIV { 
- FONT-SIZE: 8pt; 
- COLOR: #666666; 
- font-family : Verdana, Arial, Helvetica, sans-serif;
-}
 
 A {
- font-size:10pt;
- COLOR: #31659C;
- font-family : Verdana, Arial, Helvetica, sans-serif;
- TEXT-DECORATION: none;
+ color: #3366AA;
+ text-decoration: none;
+}
+PRE {
+ line-height: 5pt;
+ margin: 15pt;
 }
 
-a.Link1:link { 
- COLOR: white; 
- TEXT-DECORATION: none; 
- font-family : Verdana, Arial, Helvetica, sans-serif;
- font-size:8pt; 
-}
 
-a.Link1:visited { 
- COLOR: white; 
- TEXT-DECORATION: none ; 
- font-family : Verdana, Arial, Helvetica, sans-serif;
- font-size:8pt ;
-}
 
-a.Link1:active { 
- COLOR: white; 
- TEXT-DECORATION: none ; 
- font-family : Verdana, Arial, Helvetica, sans-serif;
- font-size:8pt;
-}
-
-a.Link1:hover { 
- COLOR: white; 
- TEXT-DECORATION: none ; 
- font-family : Verdana, Arial, Helvetica, sans-serif;
- font-size:8pt; 
-}
-			
-/* Link2 = Content text links - (has Dark Blue links) */
-a.Link2:link { 
- COLOR: #0000ff; 
- TEXT-DECORATION: none ; 
- font-family : Verdana, Arial, Helvetica, sans-serif;
- font-size:8pt ;
-}
-
-a.Link2:visited { 
- COLOR: #0000ff; 
- TEXT-DECORATION: none ; 
- font-family : Verdana, Arial, Helvetica, sans-serif;
- font-size:8pt ;
-}
-
-a.Link2:active { 
- COLOR: #0000ff; 
- TEXT-DECORATION: none ; 
- font-family : Verdana, Arial, Helvetica, sans-serif;
- font-size:8pt ;
-}
-
-a.Link2:hover { 
- COLOR: #0000ff; 
- TEXT-DECORATION: underline ; 
- font-family : Verdana, Arial, Helvetica, sans-serif;
- font-size:8pt ;
-}
-			
-/* Link3 = Right Navigation text links - (has white Links)*/
-a.Link3:link { 
- COLOR: #FFFFFF; 
- TEXT-DECORATION: none ; 
- font-family : Verdana, Arial, Helvetica, sans-serif;
- font-size:8pt ;
-}
-
-a.Link3:visited { 
- COLOR: #FFFFFF; 
- TEXT-DECORATION: none ; 
- font-family : Verdana, Arial, Helvetica, sans-serif;
- font-size:8pt ;
-}
-
-a.Link3:active { 
- COLOR: #FFFFFF; 
- TEXT-DECORATION: none ; 
- font-family : Verdana, Arial, Helvetica, sans-serif;
- font-size:8pt ;
-}
-
-a.Link3:hover { 
- COLOR: #31659C; 
- TEXT-DECORATION: none ; 
- font-family : Verdana, Arial, Helvetica, sans-serif;
- font-size:8pt; 
-}
-
-/* Link4 = Links with NO decoration etc.. */
-a.Link4:link { 
- FONT-SIZE: 8pt; 
- COLOR: #666666; 
- font-family : Verdana, Arial, Helvetica, sans-serif;
-}
-
-a.Link4:visited 
-{ 
- FONT-SIZE: 8pt; 
- COLOR: #666666; 
- font-family : Verdana, Arial, Helvetica, sans-serif;
-}
-
-a.Link4:active 
-{ 
- FONT-SIZE: 8pt; 
- COLOR: #666666; 
- font-family : Verdana, Arial, Helvetica, sans-serif;
-}
-
-a.Link4:hover 
-{ 
- FONT-SIZE: 8pt; 
- COLOR: #666666; 
- font-family : Verdana, Arial, Helvetica, sans-serif;
-}
-
-			
-/* For the Search Box */
-.FormStyle 
-{ 
- font-family : Verdana, Arial, Helvetica, sans-serif;
- border-style: none; 
- border-color: #000000; 
- font-size: 8pt;
- background: #DEEAFE; 
- color: black; 
- width: 100px; 
-}
-
-	
-.FormGo 
-{ 
- font-family : Verdana, Arial, Helvetica, sans-serif;
- border-style: none; 
- border-color: #000000; 
- font-size: 8pt; 
- background: #DEEAFE; 
- color: black; 
- width: 23px; 
-}
-
-DIV.Menu1 { 
- FONT-WEIGHT: none;
- COLOR: #666666;
- font-size:8pt;
- CURSOR: hand;
- COLOR: #0000ff;
- font-family : Verdana, Arial, Helvetica, sans-serif;
-}
-
-DIV.Menu2 {
- font-size:8pt;
- COLOR: #666666;
- font-family : Verdana, Arial, Helvetica, sans-serif;
-}
 
 
 
