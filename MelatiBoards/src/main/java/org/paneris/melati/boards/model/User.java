@@ -108,7 +108,7 @@ public class User extends UserBase {
       testId = new String(loginid);
       String testIdString = "" + count;
       for (int i=0; i < (2 - testIdString.length()); i++) {
-	testId += "0";
+        testId += "0";
       }
       testId += count;
       found = loginColumn.selectionWhereEq(testId).hasMoreElements();
