@@ -505,14 +505,43 @@ public class Board extends BoardBase {
   
   /**
    * Retrieve the firt message Id.
+   * <p>
+   * SQL Issues here.
+   * </p>
+   * <p>
+   * Originally Myles had:
+   * <pre>
+   * SELECT MIN("id"), "id" FROM "message" 
+   * WHERE "board"="+getTroid().intValue()
+   * </pre>
+   * this was presumably a hack to work around a Postgresql 
+   * feature that min(id) is dependant upon id.
+   * </p>
+   * <p>
+   * As of Postgresql 7.1 this issue has been cleared up and the 
+   * above syntax is wrong as it should now be:
+   * <pre>
+   * SELECT MIN("id"), "id" FROM "message" 
+   * WHERE "board"="+getTroid().intValue() GROUP BY "id"
+   * </pre>
    * 
-   * @todo Why do we need to select ID too?
+   * </p>
+   * <p>
+   * But now we can use the original sensible syntax:
+   * <pre>
+   * SELECT MIN("id") FROM "message" 
+   * WHERE "board"="+getTroid().intValue()
+   * </pre>
+   * 
+   * </p>
+   *
+   * 
    * @return the min message table id
    * @throws SQLException if anything goes wrong at the SQL level
    */
   public int getFirstMessageId() throws SQLException {
     int result = -1;
-    ResultSet rs = getDatabase().sqlQuery("SELECT MIN(\"id\"), \"id\" FROM \"message\" WHERE \"board\"="+getTroid().intValue());
+    ResultSet rs = getDatabase().sqlQuery("SELECT MIN(\"id\") FROM \"message\" WHERE \"board\"="+getTroid().intValue());
     if(rs.next())
       result = rs.getInt(1);
     rs.close();
@@ -522,13 +551,13 @@ public class Board extends BoardBase {
   /**
    * Retrieve the last message Id.
    * 
-   * @todo Why do we need to select ID too?
+   * @see #getFirstMessage
    * @return the max message table id
    * @throws SQLException if anything goes wrong at the SQL level
    */
   public int getLastMessageId() throws SQLException {
     int result = -1;
-    ResultSet rs = getDatabase().sqlQuery("SELECT MAX(\"id\"), \"id\" FROM \"message\" WHERE \"board\"="+getTroid().intValue());
+    ResultSet rs = getDatabase().sqlQuery("SELECT MAX(\"id\") FROM \"message\" WHERE \"board\"="+getTroid().intValue());
     if(rs.next())
       result = rs.getInt(1);
     rs.close();
