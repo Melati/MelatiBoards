@@ -3,7 +3,7 @@ You are now subscribed to this board.
 #if ($board.canManage($user)) #begin You are a manager of this board. #end
 
 #include as template "$board.templatePath("UsageInstructions")"
-#if $board.canManage($user) #begin
+#if ($board.canManage($user)) #begin
 #include as template "$board.templatePath("ManageInstructions")"
 #end
 
