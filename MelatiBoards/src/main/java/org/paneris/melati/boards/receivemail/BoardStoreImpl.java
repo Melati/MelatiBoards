@@ -1,4 +1,4 @@
- /*
+/*
  * $Source$
  * $Revision$
  *
@@ -392,11 +392,16 @@ public class BoardStoreImpl implements BoardStore {
       for (int p = 0; p < parts.getCount(); ++p) {
         Part part = parts.getBodyPart(p);
 
-        // can it go in line?
 
+        // Deal with HTML format emails
+        if (part.getContentType().toLowerCase().indexOf("text/html") != -1 && 
+            part.getFileName() == null)
+          part.setFileName("asHTML.html");
+
+        // Can it go inline?
         Object partContent = getContent(message, part);
 
-        if (partContent instanceof String && part.getFileName() == null)
+        if (partContent instanceof String && part.getFileName() == null) 
           bodyText.append((String)partContent);
         else
           bodyText.append(attachmentWrite(m, part.getFileName(),
