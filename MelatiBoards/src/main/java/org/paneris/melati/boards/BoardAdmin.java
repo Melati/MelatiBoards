@@ -1,101 +1,51 @@
 /*
-
  * $Source$
-
  * $Revision$
-
  *
-
  * Copyright (C) 2000 Myles Chippendale
-
  *
-
  * Part of a Melati application. This application is free software;
-
  * Permission is granted to copy, distribute and/or modify this
-
  * software under the same terms as those set out for Melati, below.
-
  *
-
  * Melati (http://melati.org) is a framework for the rapid
-
  * development of clean, maintainable web applications.
-
  *
-
  * Melati is free software; Permission is granted to copy, distribute
-
  * and/or modify this software under the terms either:
-
  *
-
  * a) the GNU General Public License as published by the Free Software
-
  *    Foundation; either version 2 of the License, or (at your option)
-
  *    any later version,
-
  *
-
  *    or
-
  *
-
  * b) any version of the Melati Software License, as published
-
  *    at http://melati.org
-
  *
-
  * You should have received a copy of the GNU General Public License and
-
  * the Melati Software License along with this program;
-
  * if not, write to the Free Software Foundation, Inc.,
-
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA to obtain the
-
  * GNU General Public License and visit http://melati.org to obtain the
-
  * Melati Software License.
-
  *
-
  * Feel free to contact the Developers of Melati (http://melati.org),
-
  * if you would like to work out a different arrangement than the options
-
  * outlined here.  It is our intention to allow Melati to be used by as
-
  * wide an audience as possible.
-
  *
-
  * This program is distributed in the hope that it will be useful,
-
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
-
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-
  * GNU General Public License for more details.
-
  *
-
  * Contact details for copyright holder:
-
  *
-
  *     Mylesc Chippendale <mylesc@paneris.org>
-
  *     http://paneris.org/
-
  *     29 Stanley Road, Oxford, OX4 1QY, UK
-
  */
-
-
-
 
 
 package org.paneris.melati.boards;
@@ -105,11 +55,6 @@ import java.util.*;
 import java.net.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
-import org.webmacro.*;
-import org.webmacro.util.*;
-import org.webmacro.servlet.*;
-import org.webmacro.engine.*;
-import org.webmacro.resource.*;
 import org.melati.*;
 import org.melati.util.*;
 import org.melati.servlet.*;
@@ -136,7 +81,7 @@ public class BoardAdmin extends TemplateServlet {
   }
 
   protected String boardTemplate(TemplateContext context, String name)
-      throws InvalidTypeException {
+       {
         return "melati/boards/" + name;
   }
 
@@ -145,7 +90,7 @@ public class BoardAdmin extends TemplateServlet {
    *****************************/
   
   protected String loginTemplate(TemplateContext context, Melati melati)
-      throws InvalidTypeException, PoemException {
+      throws PoemException {
     org.melati.poem.User token = (org.melati.poem.User)PoemThread.accessToken();
     if (token.isGuest())
       throw new AccessPoemException(token, new Capability("Logged In"));
@@ -153,12 +98,12 @@ public class BoardAdmin extends TemplateServlet {
   }
 
   protected String typesTemplate(TemplateContext context, Melati melati)
-      throws InvalidTypeException, PoemException {
+      throws PoemException {
     return boardTemplate(context, "Types");
   }
 
   protected String searchForBoardTemplate(TemplateContext context, Melati melati)
-      throws InvalidTypeException, PoemException {
+      throws PoemException {
     return boardTemplate(context, "SearchForBoard");
   }
 
@@ -167,7 +112,7 @@ public class BoardAdmin extends TemplateServlet {
    *******************/
   
   protected String listBoardsTemplate(TemplateContext context, Melati melati)
-      throws InvalidTypeException, PoemException {
+      throws PoemException {
     return boardTemplate(context, "ListBoards");
   }
 
@@ -176,7 +121,7 @@ public class BoardAdmin extends TemplateServlet {
    ***************/
   
   protected String boardTemplate(TemplateContext context, Melati melati)
-      throws InvalidTypeException, PoemException {
+      throws PoemException {
 
     // The start parameter is set in the main handler function
     int s = new Integer((String)context.get("start")).intValue();
@@ -190,33 +135,33 @@ public class BoardAdmin extends TemplateServlet {
   }
 
   protected String searchBoardTemplate(TemplateContext context, Melati melati)
-      throws InvalidTypeException, PoemException {
+      throws PoemException {
     return boardTemplate(context, "SearchBoard");
   }
 
   protected String settingsTemplate(TemplateContext context, Melati melati)
-      throws InvalidTypeException, PoemException {
+      throws PoemException {
     return boardTemplate(context, "Settings");
   }
 
   protected String settingsUpdateTemplate(TemplateContext context, Melati melati)
-      throws InvalidTypeException, PoemException {
+      throws PoemException {
     MelatiUtil.extractFields(context, melati.getObject());
     return boardTemplate(context, "SettingsUpdate");
   }
 
   protected String settingsEditTemplate(TemplateContext context, Melati melati)
-      throws InvalidTypeException, PoemException {
+      throws PoemException {
     return boardTemplate(context, "SettingsEdit");
   }
 
   protected String membersTemplate(TemplateContext context, Melati melati)
-      throws InvalidTypeException, PoemException {
+      throws PoemException {
     return boardTemplate(context, "Members");
   }
 
   protected String messageNewTemplate(TemplateContext context, Melati melati)
-      throws InvalidTypeException, PoemException {
+      throws PoemException {
 
     if (melati.getUser().isGuest())
       throw new AccessPoemException(melati.getUser(), new Capability("Logged In"));
@@ -236,13 +181,13 @@ public class BoardAdmin extends TemplateServlet {
   
   protected String messageTemplate(TemplateContext context, Melati melati,
                                    boolean withThread)
-      throws InvalidTypeException, PoemException {
+      throws PoemException {
     context.put("withThread", new Boolean(withThread));
     return boardTemplate(context, "Message");
   }
 
   protected String messageCreateTemplate(TemplateContext context, Melati melati)
-      throws InvalidTypeException, PoemException {
+      throws PoemException {
     Persistent newMessage = create(((BoardTable)melati.getTable()).
                               getBoardsDatabaseTables().getMessageTable(), context);
     ((Message)newMessage).distribute();
@@ -250,12 +195,12 @@ public class BoardAdmin extends TemplateServlet {
   }
 
   protected String pendingMessagesTemplate(TemplateContext context, Melati melati)
-      throws InvalidTypeException, PoemException {
+      throws PoemException {
     return boardTemplate(context, "PendingMessages");
   }
 
   protected String approveMessagesTemplate(TemplateContext context, Melati melati)
-      throws InvalidTypeException, PoemException {
+      throws PoemException {
     String[] messages = melati.getRequest().getParameterValues("message");
     for(int i=0; i < messages.length; i++) {
       String approve = context.getForm(messages[i]);
@@ -275,7 +220,7 @@ public class BoardAdmin extends TemplateServlet {
    *****************************/
   
   protected String subscribeTemplate(TemplateContext context, Melati melati)
-      throws InvalidTypeException, PoemException {
+      throws PoemException {
     Board board = (Board)melati.getObject();
     User user = (User)melati.getUser();
     if (!board.canSubscribe(user))
@@ -288,13 +233,13 @@ public class BoardAdmin extends TemplateServlet {
   }
 
   protected String unsubscribeTemplate(TemplateContext context, Melati melati)
-      throws InvalidTypeException, PoemException {
+      throws PoemException {
     ((Board)melati.getObject()).unsubscribe((User)melati.getUser());
     return boardTemplate(context, "Unsubscribe");
   }
 
   protected String membersEditTemplate(TemplateContext context, Melati melati)
-      throws InvalidTypeException, PoemException {
+      throws PoemException {
     String[] subscriptions = melati.getRequest().
                                getParameterValues("subscription");
     if (subscriptions == null || subscriptions.length == 0)
@@ -330,7 +275,7 @@ public class BoardAdmin extends TemplateServlet {
   }
 
   protected String subscribeOthersTemplate(TemplateContext context, Melati melati)
-      throws InvalidTypeException, PoemException {
+      throws PoemException {
 
     String[] others = melati.getRequest().getParameterValues("others");
     if (others == null || others.length == 0)
@@ -355,12 +300,12 @@ public class BoardAdmin extends TemplateServlet {
   }
 
   protected String pendingSubscriptionsTemplate(TemplateContext context, Melati melati)
-      throws InvalidTypeException, PoemException {
+      throws PoemException {
     return boardTemplate(context, "PendingSubscriptions");
   }
 
   protected String approveSubscriptionsTemplate(TemplateContext context, Melati melati)
-      throws InvalidTypeException, PoemException {
+      throws PoemException {
     String[] subscriptions = melati.getRequest().getParameterValues("subscription");
     for(int i=0; i < subscriptions.length; i++) {
       Subscription subscription =
@@ -380,12 +325,12 @@ public class BoardAdmin extends TemplateServlet {
   }
 
   protected String subscriptionEditTemplate(TemplateContext context, Melati melati)
-      throws InvalidTypeException, PoemException {
+      throws PoemException {
     return boardTemplate(context, "SubscriptionEdit");
   }
 
   protected String subscriptionUpdateTemplate(TemplateContext context, Melati melati)
-      throws InvalidTypeException, PoemException {
+      throws PoemException {
     MelatiUtil.extractFields(context, melati.getObject());
     return boardTemplate(context, "SubscriptionUpdate");
   }
@@ -519,3 +464,4 @@ public class BoardAdmin extends TemplateServlet {
     return (start != null) ? start : "0";
   }
 }
+

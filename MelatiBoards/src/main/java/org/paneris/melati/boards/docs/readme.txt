@@ -285,7 +285,7 @@ add your own line of the form
 
 You can see the default UI to the boards by pointing your browser at
 
-/testapp/org.paneris.melati.boards.BoardAdmin/testdb/ListType
+/testapp/org.paneris.melati.boards.BoardAdmin/testdb/Type
 
 If you want to customise this, one way to do it is to override the
 default handler and templates thus:
@@ -295,8 +295,6 @@ default handler and templates thus:
 
     package com.somecompany.testapp.boards;
 
-    import org.webmacro.*;
-    import org.webmacro.servlet.*;
     import org.melati.*;
     import org.melati.util.*;
     import org.melati.poem.*;
