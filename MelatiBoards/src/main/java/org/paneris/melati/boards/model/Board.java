@@ -503,6 +503,13 @@ public class Board extends BoardBase {
     return messageCount.count();
   }
   
+  /**
+   * Retrieve the firt message Id.
+   * 
+   * @todo Why do we need to select ID too?
+   * @return the min message table id
+   * @throws SQLException if anything goes wrong at the SQL level
+   */
   public int getFirstMessageId() throws SQLException {
     int result = -1;
     ResultSet rs = getDatabase().sqlQuery("SELECT MIN(\"id\"), \"id\" FROM \"message\" WHERE \"board\"="+getTroid().intValue());
@@ -512,6 +519,13 @@ public class Board extends BoardBase {
     return result;
   }
   
+  /**
+   * Retrieve the last message Id.
+   * 
+   * @todo Why do we need to select ID too?
+   * @return the max message table id
+   * @throws SQLException if anything goes wrong at the SQL level
+   */
   public int getLastMessageId() throws SQLException {
     int result = -1;
     ResultSet rs = getDatabase().sqlQuery("SELECT MAX(\"id\"), \"id\" FROM \"message\" WHERE \"board\"="+getTroid().intValue());
