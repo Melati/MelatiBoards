@@ -161,11 +161,15 @@ public class SMTPServerServlet implements Servlet {
   private static final String logPathDefault =
       "/usr/local/apache/log/messageboard-receivemail.log";
 
-  private static final String usage =
+/*
+ * This can't be right as we don't have a main method.
+
+    private static final String usage =
       "Usage: ... [--port <port>] [--properties <resource>] [--log <file>]\n" +
       "       defaults --port " + portDefault + "\n" +
       "                --properties " + propertiesNameDefault + "\n" +
       "                --log " + logPathDefault;
+ */
 
   /**
    * Servlet initialisation.
@@ -234,16 +238,22 @@ public class SMTPServerServlet implements Servlet {
    * 
    * Clean up our smtpserver. Its run method checks that it's own
    * thread is the one pointed to by smtpserver, so setting it
-   * to null means it exits
+   * to null means it exits.
    */
   public void destroy() {
     smtpserver = null;
   }
 
+  /* 
+   * @see javax.servlet.Servlet#getServletConfig()
+   */
   public ServletConfig getServletConfig() {
     return config;
   }
 
+  /* 
+   * @see javax.servlet.Servlet#getServletInfo()
+   */
   public String getServletInfo() {
     return "A servlet to launch an SMTP server which receives emails for the boards system.";
   }
@@ -251,7 +261,9 @@ public class SMTPServerServlet implements Servlet {
   /**
    * Service the servlet's request. This should always report that
    * the thread is launched because the only way of stopping it
-   * is through this servlet's destroy method
+   * is through this servlet's destroy method.
+   *
+   * @see javax.servlet.Servlet#service(javax.servlet.ServletRequest, javax.servlet.ServletResponse)
    */
   public void service(ServletRequest req, ServletResponse resp)
     throws ServletException, IOException {

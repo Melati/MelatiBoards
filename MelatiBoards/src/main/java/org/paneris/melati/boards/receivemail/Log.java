@@ -69,7 +69,7 @@ public class Log {
     }
 
     public void setTarget(PrintWriter target) {
-      this.target = target;
+      Log.target = target;
       target.println("*** BEGIN: " + dateFormat.format(new Date())
                      + " : " + module + " ***");
     }

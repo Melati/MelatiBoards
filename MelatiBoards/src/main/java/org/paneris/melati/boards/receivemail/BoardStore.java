@@ -62,7 +62,7 @@ import org.melati.poem.Database;
 
 /**
  * A wrapper to make a handy interface to the database tables comprising
- * a set of messageboards
+ * a set of messageboards.
  */
 
 public interface BoardStore {
