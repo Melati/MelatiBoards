@@ -42,7 +42,7 @@ import org.paneris.melati.boards.receivemail.Log;
 /**
  * Boards database broker for particular session
  * @author  Vasily Pozhidaev <vasilyp@paneris.org>
- * TODO: generalize and make an interface (like BoardStore)
+ * @todo generalize and make an interface (like BoardStore)
  */
 public class NNTPStore {
 
@@ -497,9 +497,11 @@ public class NNTPStore {
     }
   }
 
+/*
   public static void main(String[] args) {
     Date date = new Date(2003, 7, 9);
     System.err.println(date.getTime());
     System.err.println(new java.sql.Date(date.getTime()).getTime());
   }
+*/
 }
