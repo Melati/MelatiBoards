@@ -124,6 +124,7 @@ public class SettingTable extends SettingTableBase {
       Setting _new = (Setting)blank.duplicatedFloating();
       _new.setName(names[i]);
       _new.setValue("");
+      _new.setRawString("title", "");
       _new.setDisplayname(displaynames[i]);
       _new.setDescription(descriptions[i]);
       getNameColumn().ensure(_new);
