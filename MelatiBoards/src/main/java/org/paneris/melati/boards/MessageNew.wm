@@ -17,7 +17,7 @@
 
 #if ($board.canPost($melati.User)) #begin
 
- <form action="$utils.MessageCreateURL($board)" method=post>
+ <form action="$boardutils.MessageCreateURL($board)" method=post>
  <input type=hidden name=field_board value=$board.Troid>
  <input type=hidden name=field_deleted value=false>
  #if ($parent) #begin <input type=hidden name=field_parent value=$parent.Troid> #end

@@ -14,7 +14,7 @@
 
 <h2>Edit members</h2>
 
-<form action="$utils.MembersEditURL($board)" method=post>
+<form action="$boardutils.MembersEditURL($board)" method=post>
 <table>
  <tr>
   <td><b>User</b></td>
@@ -56,7 +56,7 @@
 
 <h3>Subscribe new members</h3>
 
-<form action="$utils.SubscribeOthersURL($board)" method=post>
+<form action="$boardutils.SubscribeOthersURL($board)" method=post>
 <p>
 Please select the users to subscribe to this board:<br>
 <select name=others multiple>

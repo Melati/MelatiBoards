@@ -15,7 +15,7 @@
 
 <h2>Your options</h2>
 
-<form action="$utils.SubscriptionUpdateURL($subscription)" method=post>
+<form action="$boardutils.SubscriptionUpdateURL($subscription)" method=post>
 <p>
 Please select how often you would like to receive email:
 $ml.input($subscription.StatusField)

@@ -11,7 +11,7 @@
 Choose one of the board types below to see a list of boards:
 <blockquote>
 #foreach $type in $melati.Database.BoardTypeTable.selection() #begin
-  <a href="$utils.ListBoardsURL($type)">$ml.rendered($type)</a>
+  <a href="$boardutils.ListBoardsURL($type)">$ml.rendered($type)</a>
    $ml.rendered($type.Description)<br>
 #end
 </blockquote>

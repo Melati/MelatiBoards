@@ -15,7 +15,7 @@
 
 <h2>Pending subscriptions</h2>
 
-<form action=$utils.ApproveSubscriptionsURL($board) method=post>
+<form action=$boardutils.ApproveSubscriptionsURL($board) method=post>
 <table>
 #foreach $subscription in $board.PendingSubscriptions #begin
  <tr>

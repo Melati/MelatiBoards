@@ -27,7 +27,7 @@
     </b>
     <br>
     #if ($messages.PrevPageStart) #begin
-     <a href="$utils.BoardURL($board, "$messages.PrevPageStart")"><< Previous</a>
+     <a href="$boardutils.BoardURL($board, "$messages.PrevPageStart")"><< Previous</a>
     #end #else #begin
      << Previous
     #end
@@ -35,11 +35,11 @@
      #if ($page.Start == $messages.PageStart) #begin
       <b>$page.Number</b>
      #end #else #begin
-      <a href="$utils.BoardURL($board, "$page.Start")">$page.Number</a>
+      <a href="$boardutils.BoardURL($board, "$page.Start")">$page.Number</a>
      #end
     #end
     #if ($messages.NextPageStart) #begin
-     <a href="$utils.BoardURL($board, "$messages.NextPageStart")">Next >></a>
+     <a href="$boardutils.BoardURL($board, "$messages.NextPageStart")">Next >></a>
     #end #else #begin
      Next >>
     #end
@@ -49,8 +49,8 @@
     #foreach $messageNode in $messages #begin
     <tr>
      <td>
-      <img src="$melati.Config.StaticURL/admin/plus.gif" height=1 width=$utils.indent(20, $messageNode.Level)>
-      <A href="$utils.MessageURL($messageNode.UserObject, "$messages.PageStart")">$ml.rendered($messageNode.UserObject)</a>
+      <img src="$melati.Config.StaticURL/admin/plus.gif" height=1 width=$boardutils.indent(20, $messageNode.Level)>
+      <A href="$boardutils.MessageURL($messageNode.UserObject, "$messages.PageStart")">$ml.rendered($messageNode.UserObject)</a>
      </td>
      <td>
       <a href="mailto:$messageNode.UserObject.Author.Email">$ml.rendered($messageNode.UserObject.Author.Name_unsafe)</a>

@@ -427,7 +427,7 @@ public class BoardAdmin extends TemplateServlet {
                    Melati melati, TemplateContext context) 
                    throws Exception {
 
-    context.put("utils",
+    context.put("boardutils",
         new BoardUtils(melati.getRequest().getServletPath(),
                        melati.getContext().logicalDatabase));
 
