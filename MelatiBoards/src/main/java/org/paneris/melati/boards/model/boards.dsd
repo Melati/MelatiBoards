@@ -70,7 +70,7 @@ table Board
 
     Boolean moderatedsubscription
         (displayname = "Moderated Subscription")
-        (description = "With moderated subscription the manager must approved all requests to be subscribed")
+        (description = "With moderated subscription the manager must approve all requests to be subscribed")
         (displaylevel = record)
         (searchability = no);
 
