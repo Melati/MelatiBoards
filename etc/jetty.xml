@@ -34,7 +34,7 @@
   <!-- _____________________________________________________________ -->
 
   <Call name="addWebApplication">
-    <Arg>/</Arg>
+    <Arg>mb/</Arg>
     <Arg>boards/</Arg>
   </Call>
 
