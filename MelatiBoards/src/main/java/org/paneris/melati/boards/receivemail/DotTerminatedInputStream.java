@@ -176,7 +176,7 @@ public class DotTerminatedInputStream extends FilterInputStream {
   }
 
   /**
-   *  @todo Fix empty catch block
+   *  Read some characters.
    */
   public synchronized int read(byte[] b, int off, int len) throws IOException {
     if (len <= 0) {
@@ -190,7 +190,7 @@ public class DotTerminatedInputStream extends FilterInputStream {
     b[off] = (byte) c;
 
     int i = 1;
-    try {
+//    try {
       for (; i < len; i++) {
         c = read();
         if (c == -1) {
@@ -200,8 +200,8 @@ public class DotTerminatedInputStream extends FilterInputStream {
           b[off + i] = (byte) c;
         }
       }
-    } catch (IOException ee) {
-    }
+//    } catch (IOException ee) {
+//    }
     return i;
   }
 
