@@ -239,7 +239,9 @@ public class BoardAdmin extends TemplateServlet {
       // boards, but i guess this is the nature of anonymous posting
       String email = MelatiUtil.getFormNulled(context,"field_email");
       user = (User)melati.getDatabase().getUserTable().firstSelection(
-                        "UPPER(email) = '" + email.toUpperCase() + "'");
+                        "UPPER(" +
+                        melati.getDatabase().getDbms().getQuotedName("email") +
+                        ") = '" + email.toUpperCase() + "'");
       if (user == null) {
         user = (User)melati.getDatabase().getUserTable().newPersistent();
         user.setEmail(email);
