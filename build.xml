@@ -17,9 +17,9 @@
   <path id="classpath.compile">
     <pathelement path="./WEB-INF/classes"/>
     <pathelement path="${build.lib}/melati.jar"/>
-    <pathelement path="${build.lib}/mail.jar"/>
+    <pathelement path="${build.lib}/javamail-1.2.jar"/>
     <pathelement path="${build.lib}/jakarta-oro-2.0.jar"/>
-    <pathelement path="${build.lib}/servlet.jar"/>
+    <pathelement path="${build.lib}/servlet-2.2.jar"/>
     <pathelement path="${build.lib}/webmacro-1.0.jar"/>
     <pathelement path="${build.lib}/hsqldb.jar"/>
   </path>
