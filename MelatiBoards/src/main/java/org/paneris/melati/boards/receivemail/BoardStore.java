@@ -67,7 +67,7 @@ import org.melati.poem.Database;
 
 public interface BoardStore {
 
-  public void init (Database database, Log log,
+  void init (Database database, Log log,
                     final InternetAddress senderAddr,
                     final InternetAddress messAddr) 
                     throws IOException, MessagingException;
