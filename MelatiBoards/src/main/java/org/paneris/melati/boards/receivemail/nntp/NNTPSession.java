@@ -53,7 +53,7 @@ abstract class BoardPoemTask implements PoemTask {
 
 public class NNTPSession extends Thread {
 
-  public static SimpleDateFormat nntpDateFormat =
+  public static final SimpleDateFormat nntpDateFormat =
     new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss z", Locale.US);
 
   public static final DateFormat longRFC977DateFormat =
@@ -165,7 +165,9 @@ public class NNTPSession extends Thread {
         writer.close();
         reader.close();
         socket.close();
-      } catch (Exception e) {}
+      } catch (Exception e) {
+        log.exception(e);
+      }
     }
   }
 
@@ -409,7 +411,9 @@ public class NNTPSession extends Thread {
     try {
       socket.close();
       socket = null;
-    } catch (Exception e) {}
+    } catch (Exception e) {
+      log.exception(e);
+    }
     reset();
   }
 
