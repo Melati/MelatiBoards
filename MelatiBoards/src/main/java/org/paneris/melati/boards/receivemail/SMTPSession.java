@@ -39,7 +39,7 @@ class SMTPSession extends Thread {
   /**
    * A handler for a session with <TT>sendmail</TT>
    *
-   * @param smtpIdentifier	what we should report our hostname as:
+   * @param smtpIdentifier  what we should report our hostname as:
    *                            this must be different from what
    *                            <TT>sendmail</TT> thinks it is called,
    *                            or it will fail with a loopback error
@@ -60,7 +60,7 @@ class SMTPSession extends Thread {
 
   SMTPSession(String smtpIdentifier,
               Socket withClient,
-	          Properties databaseNameOfDomain,
+              Properties databaseNameOfDomain,
               int bufSize,
               Log log)
       throws IOException {
@@ -73,7 +73,7 @@ class SMTPSession extends Thread {
     fromClientPushBack =
       new PushbackInputStream(new BufferedInputStream(
                                     withClient.getInputStream(),
-						            bufSize));
+                                    bufSize));
 
     fromClient = new DataInputStream(fromClientPushBack);
 
@@ -96,7 +96,7 @@ class SMTPSession extends Thread {
   /**
    * Handle an SMTP <TT>MAIL FROM:</TT> command
    *
-   * @param address		the address after the colon
+   * @param address     the address after the colon
    */
 
   private void mailFrom(String address) {
@@ -113,7 +113,7 @@ class SMTPSession extends Thread {
   /**
    * The board associated with a given email address
    *
-   * @param address		the email address in question; the domain
+   * @param address     the email address in question; the domain
    *                            part after the <TT>@</TT> is looked up in
    *                            the domain-to-database properties map
    */
@@ -123,7 +123,7 @@ class SMTPSession extends Thread {
     int atIndex = address.indexOf('@');
     if (atIndex == -1)
       throw new MessagingException("`" + address + "': missing domain, " +
-                				   "so can't determine which database to use");
+                                   "so can't determine which database to use");
 
     String domain = address.substring(atIndex + 1);
     String propertyName =
@@ -149,7 +149,7 @@ class SMTPSession extends Thread {
   /**
    * Handle an SMTP <TT>RCPT TO:</TT> command
    *
-   * @param address		the address after the colon
+   * @param address     the address after the colon
    */
 
   private void rcptTo(String address) throws Exception {
@@ -177,7 +177,7 @@ class SMTPSession extends Thread {
       }
       catch (MessagingException e) {
         toClient.println("550 " + // RFC 821: "not found"
-		    StringUtils.tr(e.getMessage(), "\n\r", "  "));
+                         StringUtils.tr(e.getMessage(), "\n\r", "  "));
         log.warning("board address `" + address1 + "' rejected: " + e);
         return;
       }
@@ -199,7 +199,7 @@ class SMTPSession extends Thread {
       }
       catch (MessagingException e) {
         toClient.println("550 " + // RFC 821: "not found"
-		    StringUtils.tr(e.getMessage(), "\n\r", "  "));
+                             StringUtils.tr(e.getMessage(), "\n\r", "  "));
         log.warning("board address `" + address1 + "' rejected: " + e);
         database = null;
       }
@@ -207,7 +207,7 @@ class SMTPSession extends Thread {
         toClient.println("554 Sorry: something is wrong with this server---" +
 	                      StringUtils.tr(e.toString(), "\n\r", "  "));
         log.error("post of message from `" + sender1 + "' failed:\n" +
-                  ExceptionUtils.stackTrace(e));
+                      ExceptionUtils.stackTrace(e));
         database = null;
       }
 
@@ -272,41 +272,41 @@ class SMTPSession extends Thread {
     try {
       toClient.println("220 " + smtpIdentifier + " SMTP");
       for (;;) {
-	String command = fromClient.readLine().trim();
+        String command = fromClient.readLine().trim();
 
-	if (command.regionMatches(true, 0, "HELO", 0, 4))
-	  toClient.println("250 " + smtpIdentifier);
+        if (command.regionMatches(true, 0, "HELO", 0, 4))
+          toClient.println("250 " + smtpIdentifier);
 
-	else if (command.regionMatches(true, 0, "MAIL FROM:", 0, 10))
-	  mailFrom(command.substring(10).trim());
+        else if (command.regionMatches(true, 0, "MAIL FROM:", 0, 10))
+          mailFrom(command.substring(10).trim());
 
-	else if (command.regionMatches(true, 0, "RCPT TO:", 0, 8))
-	  rcptTo(command.substring(8).trim());
+        else if (command.regionMatches(true, 0, "RCPT TO:", 0, 8))
+          rcptTo(command.substring(8).trim());
 
-	else if (command.regionMatches(true, 0, "DATA", 0, 4))
-	  data();
+        else if (command.regionMatches(true, 0, "DATA", 0, 4))
+          data();
 
-	else if (command.regionMatches(true, 0, "RSET", 0, 4)) {
-	  reset();
-	  toClient.println("250 Reset state");
-	}
+        else if (command.regionMatches(true, 0, "RSET", 0, 4)) {
+          reset();
+          toClient.println("250 Reset state");
+        }
 
-	else if (command.regionMatches(true, 0, "QUIT", 0, 4)) {
-	  toClient.println("221 " + smtpIdentifier + " closing connection");
-	  break;
-	}
+        else if (command.regionMatches(true, 0, "QUIT", 0, 4)) {
+          toClient.println("221 " + smtpIdentifier + " closing connection");
+          break;
+        }
 
         // does it matter that we don't do VRFY?
 
-	else
-	  toClient.println("500 Command unrecognized: \"" + command + "\"");
+        else
+          toClient.println("500 Command unrecognized: \"" + command + "\"");
       }
     }
     catch (Exception e) {
       toClient.println("554 Sorry: something is wrong with this server---" +
-		       StringUtils.tr(e.toString(), "\n\r", "  "));
+                       StringUtils.tr(e.toString(), "\n\r", "  "));
       log.error("post of message from `" + sender + "' failed:\n" +
-	            ExceptionUtils.stackTrace(e));
+                    ExceptionUtils.stackTrace(e));
     }
     finally {
       try {
