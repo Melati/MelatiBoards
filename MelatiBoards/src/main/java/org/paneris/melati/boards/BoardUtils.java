@@ -50,9 +50,10 @@
 
 package org.paneris.melati.boards;
 
-import org.paneris.melati.boards.model.*;
-import org.melati.poem.*;
-import org.melati.*;
+import org.paneris.melati.boards.model.Board;
+import org.paneris.melati.boards.model.BoardType;
+import org.paneris.melati.boards.model.Message;
+import org.paneris.melati.boards.model.Subscription;
 
 public class BoardUtils {
 
