@@ -118,7 +118,7 @@ class NNTPMessage {
    * @return the message Id number
    */
   static int parseId (String messageId) {
-    char s[] = messageId.toCharArray();
+    char[] s = messageId.toCharArray();
     StringBuffer n = new StringBuffer();
     for (int i = 1; i < s.length && s[i] != '$'; i++){
       n.append(s[i]);
