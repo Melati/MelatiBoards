@@ -5,6 +5,7 @@
 <html>
 <head>
 <title>Post message to board: $ml.rendered($board)</title>
+<SCRIPT src="$melati.JavascriptLibraryURL/validation.js"></SCRIPT>
 </head>
 
 <body>
@@ -25,12 +26,17 @@
    <input type=text name=field_subject
     #if ($parent) #begin value="Re: $parent.Subject" #end size=80>
  </p>
- <p>
+
+<SCRIPT LANGUAGE=JavaScript1.2>add_rule("field_subject", "Subject", true)</SCRIPT> <p>
+
   Message:<br>
    <textarea name=field_body rows=20 cols=80>#if ($parent) #begin $ml.rendered($parent.IndentBody()) #end</textarea>
  </p>
+
+<SCRIPT LANGUAGE=JavaScript1.2>add_rule("field_body", "Body", true)</SCRIPT> <p>
+
   <p>
-   <input type=submit value="Send Message">
+   <input type=submit value="Send Message" ONCLICK="return validate(this.form);">
   </p>
  </form>
 #end #else #begin
