@@ -487,7 +487,7 @@ public class BoardTableBase extends Table {
           }
 
           protected String defaultDescription() {
-            return "With moderated subscription the manager must approved all requests to be subscribed";
+            return "With moderated subscription the manager must approve all requests to be subscribed";
           }
 
           public Object getRaw_unsafe(Persistent g)

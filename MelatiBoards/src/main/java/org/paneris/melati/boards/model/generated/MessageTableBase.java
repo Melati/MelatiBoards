@@ -145,6 +145,10 @@ public class MessageTableBase extends Table {
               throws AccessPoemException {
             ((Message)g).setBoardTroid((Integer)raw);
           }
+
+          public StandardIntegrityFix defaultIntegrityFix() {
+            return StandardIntegrityFix.delete;
+          }
         });
 
     defineColumn(col_date =
@@ -323,6 +327,10 @@ public class MessageTableBase extends Table {
           public void setRaw(Persistent g, Object raw)
               throws AccessPoemException {
             ((Message)g).setAuthorTroid((Integer)raw);
+          }
+
+          public StandardIntegrityFix defaultIntegrityFix() {
+            return StandardIntegrityFix.delete;
           }
         });
 

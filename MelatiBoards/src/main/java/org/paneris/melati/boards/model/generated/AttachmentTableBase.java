@@ -143,6 +143,10 @@ public class AttachmentTableBase extends Table {
               throws AccessPoemException {
             ((Attachment)g).setMessageTroid((Integer)raw);
           }
+
+          public StandardIntegrityFix defaultIntegrityFix() {
+            return StandardIntegrityFix.delete;
+          }
         });
 
     defineColumn(col_filename =

@@ -63,10 +63,6 @@ public class BoardTypeTableBase extends Table {
             return DisplayLevel.record;
           }
 
-          protected Integer defaultDisplayOrderPriority() {
-            return new Integer(0);
-          }
-
           protected int defaultDisplayOrder() {
             return 0;
           }
@@ -114,6 +110,10 @@ public class BoardTypeTableBase extends Table {
 
           protected Searchability defaultSearchability() {
             return Searchability.yes;
+          }
+
+          protected Integer defaultDisplayOrderPriority() {
+            return new Integer(0);
           }
 
           protected int defaultDisplayOrder() {
