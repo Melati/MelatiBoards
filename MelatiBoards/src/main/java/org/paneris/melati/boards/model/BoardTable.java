@@ -108,7 +108,6 @@ public class BoardTable extends BoardTableBase {
     Setting setting =
       (Setting)getDatabase().getSettingTable().getNameColumn().
                   firstWhereEq(settingName);
-//    if (setting == null)
     if (setting.getValue_unsafe().equals(""))
       throw new SettingNotFoundException(settingName);
     return setting.getValue_unsafe();

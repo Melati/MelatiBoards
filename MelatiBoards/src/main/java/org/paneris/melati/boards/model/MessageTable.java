@@ -75,21 +75,20 @@ public class MessageTable extends MessageTableBase {
     Timestamp now = new Timestamp(new java.util.Date().getTime());
     persistent.setRaw("date", now);
     persistent.setRaw("author", ((User)token).troid());
-    persistent.setRaw("approved",
-                 new Boolean(
-                   !b.getModeratedposting_unsafe().booleanValue() ||
-                   b.canManage((User)token)));
+    boolean approved = !b.getModeratedposting_unsafe().booleanValue() ||
+                       b.canManage((User)token) ;
+    persistent.setRaw("approved", new Boolean(approved));
 
     super.create(persistent);
 
-    System.err.println("About to add this new message to the board");
-    
-    // Update the message trees for the relevant board
-    Integer parent = ((Message)persistent).getParent_unsafe();
-    if (parent == null)
-      b.addThread((Message)persistent, true);
-    else
-      b.addToParent((Message)persistent, getMessageObject(parent));
+    if (approved) {    
+      // Update the message trees for the relevant board
+      Integer parent = ((Message)persistent).getParent_unsafe();
+      if (parent == null)
+        b.addThread((Message)persistent, true);
+      else
+        b.addToParent((Message)persistent, getMessageObject(parent));
+    }
   }
 
   /**

@@ -69,7 +69,6 @@ public class Subscription extends SubscriptionBase {
 
   public void approve() {
     setApproved(Boolean.TRUE);
-//    PoemThread.commit();
   }
 
   /*
