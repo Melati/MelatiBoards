@@ -70,12 +70,14 @@ public class BoardAdmin extends TemplateServlet {
   static private int MAX_HITS = 2000;
   static private int HITS_PER_PAGE = 20;
 
-  protected Persistent create(final Table table, final TemplateContext context) {
+  protected Persistent create(final MessageTable table, 
+                              final TemplateContext context, final User user) {
     return table.create(
         new Initialiser() {
           public void init(Persistent object)
               throws AccessPoemException, ValidationPoemException {
             MelatiUtil.extractFields(context, object);
+            ((Message)object).setAuthor(user);
           }
         });
   }
@@ -166,10 +168,10 @@ public class BoardAdmin extends TemplateServlet {
   /**
    * Present a form for a user to enter a new message
    */
-  protected String messageNewTemplate(TemplateContext context, Melati melati)
+  protected String messageNewTemplate(TemplateContext context, Melati melati, Board board)
       throws PoemException {
 
-    if (melati.getUser().isGuest())
+    if (melati.getUser().isGuest() && !board.getAnonymousposting().booleanValue())
       throw new AccessPoemException(melati.getUser(), new Capability("Logged In"));
 
     String parent = context.getForm("parent");
@@ -199,17 +201,48 @@ public class BoardAdmin extends TemplateServlet {
    * If we need approval from a manager, we send the user an email notifying
    * them. Otherwise, we distribute the message to the members of the board
    */
-  protected String messageCreateTemplate(TemplateContext context, Melati melati)
+  protected String messageCreateTemplate(TemplateContext context, final Melati melati, Board board)
       throws PoemException {
-    Message newMessage = (Message)create(((BoardTable)melati.getTable()).
-                              getBoardsDatabaseTables().getMessageTable(), context);
+        
+    User user = (User)melati.getUser();
+    if (user.isGuest() && board.getAnonymousposting().booleanValue()) {
+      
+      // fair play, i am not logged in, but do i already exist?
+      // note that this can mean that people can fake posts to 'anonymous posting'
+      // boards, but i guess this is the nature of anonymous posting
+      String email = MelatiUtil.getFormNulled(context,"field_email");
+      user = (User)melati.getDatabase().getUserTable().firstSelection(
+                        "UPPER(email) = '" + email.toUpperCase() + "'");
+      if (user == null) {
+        user = (User)melati.getDatabase().getUserTable().newPersistent();
+        user.setEmail(email);
+        user.generateDefaults();
+        // inSession as root to create me
+        final User thisuser = user;
+        board.getDatabase().inSession(
+          AccessToken.root,
+          new PoemTask() {
+            public void run() {
+              melati.getDatabase().getUserTable().create(thisuser);
+            }
+            public String toString() {
+              return "Creating a user doing anonymous posting.";
+            }
+          }
+        );
+      }
+    }
+    
+    Message newMessage = (Message)create(((BoardTable)melati.getTable())
+                                   .getBoardsDatabaseTables().getMessageTable(), 
+                                   context, user);
     if (newMessage.getApproved().booleanValue() == true) {
       newMessage.distribute();
       return boardTemplate(context, "MessageCreate");
     }
     else {
       emailNotification(newMessage.getBoard(),
-                        (org.paneris.melati.boards.model.User)melati.getUser(),
+                        user,
                         "MessageReceived");
       return boardTemplate(context, "MessageNeedsModerating");
     }
@@ -458,9 +491,9 @@ public class BoardAdmin extends TemplateServlet {
       if (melati.getMethod().equals("Login"))
         return loginTemplate(context,melati);
       if (melati.getMethod().equals("MessageNew"))
-        return messageNewTemplate(context,melati);
+        return messageNewTemplate(context,melati,board);
       if (melati.getMethod().equals("MessageCreate"))
-        return messageCreateTemplate(context,melati);
+        return messageCreateTemplate(context,melati,board);
       if (melati.getMethod().equals("SearchBoard"))
         return searchBoardTemplate(context,melati);
       if (melati.getMethod().equals("Settings"))
