@@ -42,7 +42,7 @@
 <developerConnection>scm:cvs:ext:anon@melati.org:/usr/cvsroot:MelatiBoards</developerConnection>
 
     <url>
-      http://ganesh.paneris.org/cgi-bin/cvsweb.cgi/MelatiBoards/
+      http://paneris.net/cgi-bin/cvsweb.cgi/MelatiBoards/
     </url>
   </repository>
 
