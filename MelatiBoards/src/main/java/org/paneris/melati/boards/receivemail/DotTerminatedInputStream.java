@@ -6,7 +6,7 @@
  *
  * Part of a Melati application. This application is free software;
  * Permission is granted to copy, distribute and/or modify this
- * software under the same terms as those set out for Melati, below.
+ * software under the same terms as those set out for Melati below.
  *
  * Melati (http://melati.org) is a framework for the rapid
  * development of clean, maintainable web applications.
@@ -171,6 +171,7 @@ public class DotTerminatedInputStream extends FilterInputStream {
         ((PushbackInputStream)in).unread(b);
       state = TERMINATED;
       break;
+    default:  break; // do nothing ?? 
       }
     }
   }

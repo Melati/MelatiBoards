@@ -6,7 +6,7 @@
  *
  * Part of a Melati application. This application is free software;
  * Permission is granted to copy, distribute and/or modify this
- * software under the same terms as those set out for Melati, below.
+ * software under the same terms as those set out for Melati below.
  *
  * Melati (http://melati.org) is a framework for the rapid
  * development of clean, maintainable web applications.
@@ -55,13 +55,16 @@ import java.util.Date;
 
 
 
+/**
+ * Log incoming mail.
+ */
 public class Log {
 
     private static PrintWriter target =
 //         new PrintWriter(new OutputStreamWriter(System.err));
          new PrintWriter(System.err);
     private static DateFormat dateFormat =
-      DateFormat.getDateTimeInstance(DateFormat.SHORT,DateFormat.SHORT);
+      DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT);
     private String module = null;
 
     public Log(String module) {

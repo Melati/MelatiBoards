@@ -6,7 +6,7 @@
  *
  * Part of a Melati application. This application is free software;
  * Permission is granted to copy, distribute and/or modify this
- * software under the same terms as those set out for Melati, below.
+ * software under the same terms as those set out for Melati below.
  *
  * Melati (http://melati.org) is a framework for the rapid
  * development of clean, maintainable web applications.
@@ -59,7 +59,38 @@ import org.melati.poem.PoemException;
 import org.melati.poem.PoemTypeFactory;
 import org.paneris.melati.boards.model.generated.SettingTableBase;
 
+/**
+ * Melati POEM generated, programmer modifiable stub 
+ * for a <code>SettingTable</code> object.
+ *
+ * 
+ * <table> 
+ * <tr><th colspan='3'>
+ * Field summary for SQL table <code>Setting</code>
+ * </th></tr>
+ * <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+ * </table> 
+ * 
+ * @generator  org.melati.poem.prepro.TableDef#generateTableMainJava 
+ */
 public class SettingTable extends SettingTableBase {
+
+ /**
+  * Constructor.
+  * 
+  * @generator org.melati.poem.prepro.TableDef#generateTableMainJava 
+  * @param database          the POEM database we are using
+  * @param name              the name of this <code>Table</code>
+  * @param definitionSource  which definition is being used
+  * @throws PoemException    if anything goes wrong
+  */
+  public SettingTable(
+      Database database, String name,
+      DefinitionSource definitionSource) throws PoemException {
+    super(database, name, definitionSource);
+  }
+
+  // programmer's domain-specific code here
 
   String[] names = 
      {"SMTPServer",         // FIXME should be Email.SMTPSERVER,
@@ -117,12 +148,10 @@ public class SettingTable extends SettingTableBase {
     "(e.g. testdb)"
    };
 
-  public SettingTable(
-      Database database, String name,
-      DefinitionSource definitionSource) throws PoemException {
-    super(database, name, definitionSource);
-  }
-
+ /**
+  * Ensure that default settings are present.
+  * 
+  */
   public synchronized void unifyWithDB(ResultSet colDescs)
       throws SQLException, PoemException {
 
@@ -144,3 +173,18 @@ public class SettingTable extends SettingTableBase {
 */
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

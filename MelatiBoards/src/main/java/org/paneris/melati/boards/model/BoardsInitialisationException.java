@@ -6,7 +6,7 @@
  *
  * Part of a Melati application. This application is free software;
  * Permission is granted to copy, distribute and/or modify this
- * software under the same terms as those set out for Melati, below.
+ * software under the same terms as those set out for Melati below.
  *
  * Melati (http://melati.org) is a framework for the rapid
  * development of clean, maintainable web applications.
@@ -51,6 +51,10 @@ package org.paneris.melati.boards.model;
 
 import org.melati.poem.PoemException;
 
+/**
+ * Thrown when a problem occurs during initialisation of 
+ * the Boards system.
+ */
 public class BoardsInitialisationException extends PoemException {
   public String message;
 
@@ -60,6 +64,6 @@ public class BoardsInitialisationException extends PoemException {
 
   public String getMessage() {
     return
-        "Something went wrong trying to start a boards database: "+message;
+        "Something went wrong trying to start a boards database: " + message;
   }
 }

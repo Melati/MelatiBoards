@@ -6,7 +6,7 @@
  *
  * Part of a Melati application. This application is free software;
  * Permission is granted to copy, distribute and/or modify this
- * software under the same terms as those set out for Melati, below.
+ * software under the same terms as those set out for Melati below.
  *
  * Melati (http://melati.org) is a framework for the rapid
  * development of clean, maintainable web applications.
@@ -111,7 +111,7 @@ public class BoardStoreImpl implements BoardStore {
     this.database = database;
     this.log = log;
     recipient = recipientOfAddress(messAddr);
-    sender = senderOfAddress(recipient,senderAddr);
+    sender = senderOfAddress(recipient, senderAddr);
 
     if (!recipient.board.canPost((org.paneris.melati.boards.model.User)sender)) {
       throw new MessagingException(
@@ -186,7 +186,8 @@ public class BoardStoreImpl implements BoardStore {
 
     sender = (org.paneris.melati.boards.model.User)database.getTable("user").
                firstSelection(
-                 "UPPER(" + database.getDbms().getQuotedName("email") + ") = '" + email.getAddress().toUpperCase() + "'");
+                 "UPPER(" + database.getDbms().getQuotedName("email") + 
+                 ") = '" + email.getAddress().toUpperCase() + "'");
 
     if (sender == null) {
       
@@ -422,7 +423,7 @@ public class BoardStoreImpl implements BoardStore {
     if (messageText.length() > 7168) {
       String attachmentString = attachmentWrite(m, "", "truncation",
                                                 messageText.getBytes());
-      messageText = messageText.substring(0,7168);
+      messageText = messageText.substring(0, 7168);
       messageText += "\n\nThis message has been truncated, the complete "+
                      "message has been stored as an attachment.\n" +
                      attachmentString;
@@ -442,3 +443,4 @@ public class BoardStoreImpl implements BoardStore {
     return m.troid();
   }
 }
+

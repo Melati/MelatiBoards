@@ -6,7 +6,7 @@
  *
  * Part of a Melati application. This application is free software;
  * Permission is granted to copy, distribute and/or modify this
- * software under the same terms as those set out for Melati, below.
+ * software under the same terms as those set out for Melati below.
  *
  * Melati (http://melati.org) is a framework for the rapid
  * development of clean, maintainable web applications.
@@ -65,13 +65,79 @@ import org.melati.poem.PoemThread;
 import org.melati.poem.ValidationPoemException;
 import org.paneris.melati.boards.model.generated.BoardTableBase;
 
+/**
+ * Melati POEM generated, programmer modifiable stub 
+ * for a <code>BoardTable</code> object.
+ * <p>
+ * Description: 
+ *   A board for messages. 
+ * </p>
+ *
+ * 
+ * <table> 
+ * <tr><th colspan='3'>
+ * Field summary for SQL table <code>Board</code>
+ * </th></tr>
+ * <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+ * <tr><td> id </td><td> Integer </td><td> &nbsp; </td></tr> 
+ * <tr><td> type </td><td> BoardType </td><td> The type of this messageboard 
+ * </td></tr> 
+ * <tr><td> name </td><td> String </td><td> A code-name for this board 
+ * </td></tr> 
+ * <tr><td> displayname </td><td> String </td><td> A user-friendly name of 
+ * this board </td></tr> 
+ * <tr><td> purpose </td><td> String </td><td> The purpose of this message 
+ * board </td></tr> 
+ * <tr><td> archived </td><td> Boolean </td><td> If a board is archived then 
+ * it cannot be viewed and is not displayed on lists by default </td></tr> 
+ * <tr><td> opensubscription </td><td> Boolean </td><td> With open 
+ * subscription anyone can subscribe to the board. Otherwise a board manager 
+ * must subscribe members </td></tr> 
+ * <tr><td> moderatedsubscription </td><td> Boolean </td><td> With moderated 
+ * subscription the manager must approve all requests to be subscribed 
+ * </td></tr> 
+ * <tr><td> openposting </td><td> Boolean </td><td> With open posting anyone 
+ * with a user account can post a message to this list. Otherwise, only 
+ * members can post </td></tr> 
+ * <tr><td> moderatedposting </td><td> Boolean </td><td> With moderated 
+ * posting all messages must be approved by a manager </td></tr> 
+ * <tr><td> openmessageviewing </td><td> Boolean </td><td> With open message 
+ * viewing anyone can view messages in a board. Otherwise, only members can 
+ * see messages </td></tr> 
+ * <tr><td> openmemberlist </td><td> Boolean </td><td> With open member list 
+ * anyone can see the members of the list. Otherwise, only members can see 
+ * who else is subscribed </td></tr> 
+ * <tr><td> attachmentsallowed </td><td> Boolean </td><td> Can attachments be 
+ * sent with messages. If not, attachments are ignored </td></tr> 
+ * <tr><td> anonymousposting </td><td> Boolean </td><td> Can people without 
+ * user accounts post to this messageboard. If so, a user account is created 
+ * for them when they post. </td></tr> 
+ * <tr><td> attachmentspath </td><td> String </td><td> A path to the 
+ * directory containing attachments for this board </td></tr> 
+ * <tr><td> attachmentsurl </td><td> String </td><td> A URL to the directory 
+ * containing attachments for this board </td></tr> 
+ * </table> 
+ * 
+ * @generator  org.melati.poem.prepro.TableDef#generateTableMainJava 
+ */
 public class BoardTable extends BoardTableBase {
 
+ /**
+  * Constructor.
+  * 
+  * @generator org.melati.poem.prepro.TableDef#generateTableMainJava 
+  * @param database          the POEM database we are using
+  * @param name              the name of this <code>Table</code>
+  * @param definitionSource  which definition is being used
+  * @throws PoemException    if anything goes wrong
+  */
   public BoardTable(
       Database database, String name,
       DefinitionSource definitionSource) throws PoemException {
     super(database, name, definitionSource);
   }
+
+  // programmer's domain-specific code here
 
   protected void init() throws PoemException {
     super.init();
@@ -125,7 +191,7 @@ public class BoardTable extends BoardTableBase {
 
 
   public void create(Persistent persistent) {
-    create(persistent,null);
+    create(persistent, null);
   }
 
   public void create(Persistent persistent, User manager)

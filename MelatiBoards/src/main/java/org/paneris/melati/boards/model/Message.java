@@ -6,7 +6,7 @@
  *
  * Part of a Melati application. This application is free software;
  * Permission is granted to copy, distribute and/or modify this
- * software under the same terms as those set out for Melati, below.
+ * software under the same terms as those set out for Melati below.
  *
  * Melati (http://melati.org) is a framework for the rapid
  * development of clean, maintainable web applications.
@@ -68,9 +68,57 @@ import org.melati.util.StringUtils;
 import org.melati.util.Treeable;
 import org.paneris.melati.boards.model.generated.MessageBase;
 
+/**
+ * Melati POEM generated, programmer modifiable stub 
+ * for a <code>Persistent</code> <code>Message</code> object.
+ * 
+ * <p> 
+ * Description: 
+ *   A message posted to a message board. 
+ * </p>
+ * 
+ * <table> 
+ * <tr><th colspan='3'>
+ * Field summary for SQL table <code>Message</code>
+ * </th></tr>
+ * <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+ * <tr><td> id </td><td> Integer </td><td> &nbsp; </td></tr> 
+ * <tr><td> board </td><td> Board </td><td> The board this message belongs to 
+ * </td></tr> 
+ * <tr><td> date </td><td> Timestamp </td><td> The date and time at which 
+ * this message was posted </td></tr> 
+ * <tr><td> subject </td><td> String </td><td> The subject line of this 
+ * message </td></tr> 
+ * <tr><td> author </td><td> User </td><td> Author of this message </td></tr> 
+ * <tr><td> parent </td><td> Message </td><td> The message to which this 
+ * message is a follow-up </td></tr> 
+ * <tr><td> body </td><td> String </td><td> The main content of this message 
+ * </td></tr> 
+ * <tr><td> deleted </td><td> Boolean </td><td> A deleted message cannot be 
+ * viewed or displayed on lists </td></tr> 
+ * <tr><td> approved </td><td> Boolean </td><td> A message must be approved 
+ * by a manager of the board before it can be viewed (if the board has 
+ * moderated postings) </td></tr> 
+ * </table> 
+ * 
+ * @generator org.melati.poem.prepro.TableDef#generateMainJava 
+ */
 public class Message extends MessageBase implements Treeable {
 
-  public Message() {}
+ /**
+  * Constructor 
+  * for a <code>Persistent</code> <code>Message</code> object.
+  * <p>
+  * Description: 
+  *   A message posted to a message board. 
+  * </p>
+  * 
+  * @generator org.melati.poem.prepro.TableDef#generateMainJava 
+  */
+
+  public Message() { }
+
+  // programmer's domain-specific code here
 
   private static DateFormat localeFormatter =
     new SimpleDateFormat("dd MMM yyyy HH:mm:ss");
@@ -211,7 +259,7 @@ public class Message extends MessageBase implements Treeable {
       Board b = getBoardsDatabaseTables().getBoardTable().
                    getBoardObject(getBoard_unsafe());
       if (!b.canManage((User)token) &&
-          !getAuthor_unsafe().equals(((User)token).troid()) )
+          !getAuthor_unsafe().equals(((User)token).troid()))
         throw new AccessPoemException(token, new Capability("Logged In"));
     } catch (ClassCastException e) {
         throw new AccessPoemException(token, new Capability("Logged In"));

@@ -6,7 +6,7 @@
  *
  * Part of a Melati application. This application is free software;
  * Permission is granted to copy, distribute and/or modify this
- * software under the same terms as those set out for Melati, below.
+ * software under the same terms as those set out for Melati below.
  *
  * Melati (http://melati.org) is a framework for the rapid
  * development of clean, maintainable web applications.
@@ -60,6 +60,9 @@ import org.melati.poem.ValidationPoemException;
 import org.melati.util.UnexpectedExceptionException;
 import org.paneris.melati.boards.model.generated.AttachmentBase;
 
+/**
+ * An Attachment. 
+ */
 public class Attachment extends AttachmentBase {
   public Attachment() {}
 
@@ -114,9 +117,9 @@ public class Attachment extends AttachmentBase {
                             board.getAttachmentspath_unsafe() + " filename:" + filename, e);
     }
     int dot = filename.lastIndexOf(".");
-    String start = (dot != -1) ? filename.substring(0,dot) : filename;
+    String start = (dot != -1) ? filename.substring(0, dot) : filename;
     String extension = (dot != -1)
-                        ? filename.substring(dot,filename.length()) : "";
+                        ? filename.substring(dot, filename.length()) : "";
     int count = 0;
     while (testFile.exists()) {
       filename = start + (count++) + extension;

@@ -6,7 +6,7 @@
  *
  * Part of a Melati application. This application is free software;
  * Permission is granted to copy, distribute and/or modify this
- * software under the same terms as those set out for Melati, below.
+ * software under the same terms as those set out for Melati below.
  *
  * Melati (http://melati.org) is a framework for the rapid
  * development of clean, maintainable web applications.
@@ -52,7 +52,44 @@ package org.paneris.melati.boards.model;
 
 import org.paneris.melati.boards.model.generated.AttachmentTypeBase;
 
-public class AttachmentType extends AttachmentTypeBase {
-  public AttachmentType() {}
 
+/**
+ * Melati POEM generated, programmer modifiable stub 
+ * for a <code>Persistent</code> <code>AttachmentType</code> object.
+ * 
+ * <p> 
+ * Description: 
+ *   A type of an attachment. 
+ * </p>
+ * 
+ * <table> 
+ * <tr><th colspan='3'>
+ * Field summary for SQL table <code>AttachmentType</code>
+ * </th></tr>
+ * <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+ * <tr><td> id </td><td> Integer </td><td> &nbsp; </td></tr> 
+ * <tr><td> type </td><td> String </td><td> The name of a type </td></tr> 
+ * </table> 
+ * 
+ * @generator org.melati.poem.prepro.TableDef#generateMainJava 
+ */
+public class AttachmentType extends AttachmentTypeBase {
+
+ /**
+  * Constructor 
+  * for a <code>Persistent</code> <code>AttachmentType</code> object.
+  * <p>
+  * Description: 
+  *   A type of an attachment. 
+  * </p>
+  * 
+  * @generator org.melati.poem.prepro.TableDef#generateMainJava 
+  */
+  public AttachmentType() { }
+
+  // programmer's domain-specific code here
 }
+
+
+
+
