@@ -1,5 +1,8 @@
-We have received your request to join the YYY board.
+#include as template "$board.templatePath("BoardHeader")"
+We have received your request to join this board.
 A manager will either approve or decline your request.
 
-Managers for this board are: xxxx, yyyy & zzzz.
+Managers for this board are:
+#include as template "$board.templatePath("ManagerList")"
+#include as template "$board.templatePath("BoardFooter")"
 

@@ -1,10 +1,10 @@
-#parse $board.templatePath("BoardHeader")
+#include as template "$board.templatePath("BoardHeader")"
 Your request to join the board has been approved.
 #if ($board.canManage($user)) #begin You are a manager of this board. #end
 
-#parse $board.templatePath("UsageInstructions")
-#if $board.canManage($user) #begin
-#parse $board.templatePath("ManageInstructions")
+#include as template "$board.templatePath("UsageInstructions")"
+#if ($board.canManage($user)) #begin
+#include as template "$board.templatePath("ManageInstructions")"
 #end
-#parse $board.templatePath("BoardFooter")
+#include as template "$board.templatePath("BoardFooter")"
 

@@ -1,5 +1,5 @@
 It's purpose is ...
 
-#include UsageInstructions
-[#include ManageInstructions]
+#include as template "UsageInstructions.wm"
+[#include as template "ManageInstructions.wm"]
 

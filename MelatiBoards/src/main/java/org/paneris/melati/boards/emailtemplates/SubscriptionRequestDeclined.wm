@@ -1,6 +1,7 @@
-#parse $board.templatePath("BoardHeader")
+#include as template "$board.templatePath("BoardHeader")"
 Unfortunately, your request to join the board has been declined
 by a manager. You might like to contact a manager of this board
-directly #parse $board.templatePath("ManagerList")
-#parse $board.templatePath("BoardFooter")
+directly:
+#include as template "$board.templatePath("ManagerList")"
+#include as template "$board.templatePath("BoardFooter")"
 
