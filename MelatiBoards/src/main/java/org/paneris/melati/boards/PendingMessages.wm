@@ -1,17 +1,10 @@
 #set $Response.ContentType = "text/html"
-
 #set $ml = $melati.HTMLMarkupLanguage
-
 #set $board = $melati.Object
 
-
-
 <html>
-
 <head>
-
 <script language="Javascript">
-
 function selectAll(form) {
   var inputs = form.elements;
   for(i=0;i<inputs.length;i++) {
@@ -20,37 +13,21 @@ function selectAll(form) {
     }
   }
 }
-
 </script>
-
 <title>Pending messages for board: $ml.rendered($board)</title>
-
 </head>
 
-
-
 <body>
-
 <h1>Board: $ml.rendered($board)</h1>
-
-
 
 #parse "melati/boards/Menu.wm"
 
-
-
 <h2>Pending messages</h2>
 
-
-
 <form action=$boardutils.ApproveMessagesURL($board) method=post>
-
 <table>
-
 #foreach $message in $board.PendingMessages #begin
-
  <tr>
-
   <td>
    <select name=$message.Troid>
    <option value=''></option>
@@ -59,40 +36,20 @@ function selectAll(form) {
    </select>
    <input type=hidden name=message value=$message.Troid>
   </td>
-
   <td><a href="$boardutils.MessageNoThreadURL($message, $start)">$ml.rendered($message)</a></td>
-
   <td>$ml.rendered($message.Author)</td>
-
   <td>$ml.rendered($message.Date)</td>
-
  </tr>
-
 #end
-
  <tr>
-
   <td colspan=4 align=center>
     <input type=button value="Mark all messages as approved" onClick="selectAll(this.form)">
     <input type=submit value="Approve/Delete messages">
   </td>
-
  </tr>
-
 </table>
-
-<p>
-
-</p>
-
 </form>
-
-
-
 </body>
-
-
-
 </html>
 
 

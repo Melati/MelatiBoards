@@ -53,15 +53,15 @@
     <tr>
       #if ($board.canManage($melati.User)) #begin
         <td>
-	    <input type=checkbox name=delete-$messageNode.UserObject.Troid>
-		<input type=hidden name=messages value=$messageNode.UserObject.Troid>
-	    </td>
-	  #end
-	  <td>
+         <input type=checkbox name=delete-$messageNode.UserObject.Troid>
+         <input type=hidden name=messages value=$messageNode.UserObject.Troid>
+       </td>
+      #end
+       <td>
         <img src="$melati.Config.StaticURL/admin/plus.gif" height=1 width=$boardutils.indent(20, $messageNode.Level)>
         <A href="$boardutils.MessageURL($messageNode.UserObject, "$messages.PageStart")">$ml.rendered($messageNode.UserObject.Subject)</a>
      </td>
-	 <td>&nbsp;</td>
+     <td>&nbsp;</td>
      <td>
         <a href="mailto:$messageNode.UserObject.Author.Email">$ml.rendered($messageNode.UserObject.Author.Name)</a>
      </td>
