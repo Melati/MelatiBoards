@@ -94,6 +94,12 @@ public class Board extends BoardBase {
     return false;
   }
 
+  public void ban(User user) {
+    Subscription subscription = getUserSubscription(user);
+    subscription.setStatus(
+        getBoardsDatabaseTables().getMembershipStatusTable().getBanned());
+  }
+  
   /***************************
    * List users
    ****************************/
