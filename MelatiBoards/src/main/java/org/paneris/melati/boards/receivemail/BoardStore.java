@@ -151,8 +151,13 @@ class BoardStore {
   private org.melati.poem.User senderOfAddress(InternetAddress email)
                                               throws MessagingException {
 
+/*
     sender = (org.melati.poem.User)database.getTable("user").
                 getColumn("email").firstWhereEq(email.getAddress());
+*/
+    sender = (org.melati.poem.User)database.getTable("user").
+               firstSelection(
+                 "UPPER(email) = '" + email.getAddress().toUpperCase() + "'");
 
     if (sender == null)
       throw new MessagingException(
