@@ -164,7 +164,6 @@ table Subscription
         (description = "The user")
         (displaylevel = summary)
         (searchability = yes)
-        (renderinfo = "SelectionWindow")
         (integrityfix = delete);
 
     Board board
@@ -225,7 +224,6 @@ table Message
         (description = "Author of this message")
         (displaylevel = summary)
         (searchability = yes)
-        (renderinfo = "SelectionWindow")
         (integrityfix = delete);
 
     Message parent (nullable)
