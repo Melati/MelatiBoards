@@ -1,6 +1,10 @@
 #include as template "$board.templatePath("BoardHeader")"
 We have received your message for this board. A manager needs
 to approve your message before it appears on the board.
+
+#if ($board.Openmemberlist) #begin
+Managers for this board are:
 #include as template "$board.templatePath("ManagerList")"
+#end
 #include as template "$board.templatePath("BoardFooter")"
 

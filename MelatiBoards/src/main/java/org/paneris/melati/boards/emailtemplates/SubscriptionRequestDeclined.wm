@@ -1,7 +1,10 @@
 #include as template "$board.templatePath("BoardHeader")"
 Unfortunately, your request to join the board has been declined
-by a manager. You might like to contact a manager of this board
+by a manager. 
+#if ($board.Openmemberlist) #begin
+You might like to contact a manager of this board
 directly:
 #include as template "$board.templatePath("ManagerList")"
+#end
 #include as template "$board.templatePath("BoardFooter")"
 
