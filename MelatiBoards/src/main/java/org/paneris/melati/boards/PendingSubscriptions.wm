@@ -1,5 +1,6 @@
 #set $Response.ContentType = "text/html"
 #set $ml = $melati.HTMLMarkupLanguage
+#set $onVariableException = $melati.PassbackVariableExceptionHandler
 #set $board = $melati.Object
 
 <html>
@@ -27,7 +28,7 @@
    </select>
    <input type=hidden name=subscription value=$subscription.Troid>
   </td>
-  <td>$ml.rendered($subscription.User.Name_unsafe) ($ml.rendered($subscription.User.Email_unsafe))</td>
+  <td>$ml.rendered($subscription.User.Name_unsafe) ($ml.rendered($subscription.User.Email))</td>
  </tr>
 #end
  <tr>
@@ -43,5 +44,4 @@
 </body>
 
 </html>
-
 

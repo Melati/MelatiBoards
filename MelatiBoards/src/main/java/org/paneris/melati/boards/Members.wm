@@ -1,5 +1,6 @@
 #set $Response.ContentType = "text/html"
 #set $ml = $melati.HTMLMarkupLanguage
+#set $onVariableException = $melati.PassbackVariableExceptionHandler
 #set $board = $melati.Object
 
 <html>
@@ -18,7 +19,7 @@
 <P>
 #if ($board.canViewMembers($melati.User)) #begin
  #foreach $member in $board.Members #begin
-  <a href="mailto:$ml.rendered($member.Email_unsafe)">$ml.rendered($member.Name_unsafe)</a>
+  <a href="mailto:$ml.rendered($member.Email)">$ml.rendered($member.Name_unsafe)</a>
   #if ($board.isManager($member)) #begin
    <i>(Manager)</i>
   #end

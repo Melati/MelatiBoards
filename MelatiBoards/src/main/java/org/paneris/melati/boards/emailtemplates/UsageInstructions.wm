@@ -1,3 +1,4 @@
+#set $onVariableException = $melati.PassbackVariableExceptionHandler
 To send a new message to the board, send an email to
 $board.EmailAddress
 
