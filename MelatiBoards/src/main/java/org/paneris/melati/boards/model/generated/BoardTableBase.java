@@ -423,7 +423,7 @@ public class BoardTableBase extends Table {
           }
 
           protected Searchability defaultSearchability() {
-            return Searchability.no;
+            return Searchability.yes;
           }
 
           protected String defaultDisplayName() {
@@ -480,7 +480,7 @@ public class BoardTableBase extends Table {
           }
 
           protected Searchability defaultSearchability() {
-            return Searchability.no;
+            return Searchability.yes;
           }
 
           protected String defaultDisplayName() {
@@ -537,7 +537,7 @@ public class BoardTableBase extends Table {
           }
 
           protected Searchability defaultSearchability() {
-            return Searchability.no;
+            return Searchability.yes;
           }
 
           protected String defaultDisplayName() {
@@ -594,7 +594,7 @@ public class BoardTableBase extends Table {
           }
 
           protected Searchability defaultSearchability() {
-            return Searchability.no;
+            return Searchability.yes;
           }
 
           protected String defaultDisplayName() {
@@ -651,7 +651,7 @@ public class BoardTableBase extends Table {
           }
 
           protected Searchability defaultSearchability() {
-            return Searchability.no;
+            return Searchability.yes;
           }
 
           protected String defaultDisplayName() {
@@ -708,7 +708,7 @@ public class BoardTableBase extends Table {
           }
 
           protected Searchability defaultSearchability() {
-            return Searchability.no;
+            return Searchability.yes;
           }
 
           protected String defaultDisplayName() {
@@ -765,7 +765,7 @@ public class BoardTableBase extends Table {
           }
 
           protected Searchability defaultSearchability() {
-            return Searchability.no;
+            return Searchability.yes;
           }
 
           protected String defaultDisplayName() {
@@ -822,7 +822,7 @@ public class BoardTableBase extends Table {
           }
 
           protected Searchability defaultSearchability() {
-            return Searchability.no;
+            return Searchability.yes;
           }
 
           protected String defaultDisplayName() {
