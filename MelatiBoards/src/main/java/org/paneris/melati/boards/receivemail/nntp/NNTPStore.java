@@ -131,7 +131,7 @@ public class NNTPStore {
   }
 
  /**
-  * @todo implement ranges starting with "<"
+  * @todo implement ranges starting with the character "&lt;" 
   */
   private Enumeration getRange(String range, Board selectedBoard)
     throws SQLException {
