@@ -4,8 +4,8 @@
 <html>
 <head>
 <title>Board Types</title>
+<link rel="stylesheet" type="text/css" href="$melati.Database.BoardTable.BoardsStylesheetURL">
 </head>
-
 <body>
 <h1>Board Types</h1>
 Choose one of the board types below to see a list of boards:

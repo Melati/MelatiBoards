@@ -4,8 +4,8 @@
 <html>
 <head>
 <title>List of Boards</title>
+<link rel="stylesheet" type="text/css" href="$melati.Database.BoardTable.BoardsStylesheetURL">
 </head>
-
 <body>
 <h1>Boards of type $ml.rendered($melati.Object.Type)</h1>
 Please select one of the following boards to view it:
@@ -18,6 +18,5 @@ Please select one of the following boards to view it:
 #end
 </blockquote>
 </body>
-
 </html>
 

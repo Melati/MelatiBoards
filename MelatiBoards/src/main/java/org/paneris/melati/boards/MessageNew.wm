@@ -4,6 +4,7 @@
 <html>
 <head>
 <title>Post message to board: $ml.rendered($board)</title>
+<link rel="stylesheet" type="text/css" href="$board.StylesheetURL">
 <SCRIPT src="$melati.JavascriptLibraryURL/validation.js"></SCRIPT>
 </head>
 <body>
