@@ -106,8 +106,7 @@ public class Subscription extends SubscriptionBase {
   }
 
   public void setUser_unsafe(Integer cooked) {
-    if (getDatabase().getUserTable().guestUser().troid() == cooked ||
-        getDatabase().getUserTable().administratorUser().troid() == cooked)
+    if (getDatabase().getUserTable().guestUser().troid() == cooked)
       throw new SubscribingGuestException(
         "You cannot subscribe the guest or admin user to a board");
    super.setUser_unsafe(cooked);

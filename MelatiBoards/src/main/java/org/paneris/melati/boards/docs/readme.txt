@@ -259,12 +259,9 @@ You need to enter some data in your database in order to create your system.
 E.g. go to /testapp/org.melati.admin.Admin/testdb/Main and
 
   a) Create one or more `Board Type' entries
-  b) Create at least one User for the boards (see c) below)
-  c) Create one or more `Boards'. Note that when someone creates a board then
+  b) Create one or more `Boards'. Note that when someone creates a board then
      the User as which they are logged-in will be subscribed to the list as
-     a manager. Since the _guest_ and _administrator_ users cannot be
-     subscribed to a board you will need to log in as the user you created in
-     b).
+     a manager. The _guest_ user cannot be subscribed to a board
 
 
 5) Customise the UI
