@@ -12,5 +12,7 @@
 6) There seems to be a bug in the upload code (not ours) which truncates
    files and double-spaces them :-(
 
-7) Docs and comments
+7) Make the display of User Email addresses a Setting option
+
+8) Docs and comments
 
