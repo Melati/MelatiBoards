@@ -126,6 +126,10 @@ public class MessageTableBase extends Table {
             return "The board this message belongs to";
           }
 
+          protected boolean defaultIndexed() {
+            return true;
+          }
+
           public Object getRaw_unsafe(Persistent g)
               throws AccessPoemException {
             return ((Message)g).getBoard_unsafe();
@@ -368,6 +372,10 @@ public class MessageTableBase extends Table {
 
           protected String defaultDescription() {
             return "The message to which this message is a follow-up";
+          }
+
+          protected boolean defaultIndexed() {
+            return true;
           }
 
           public Object getRaw_unsafe(Persistent g)

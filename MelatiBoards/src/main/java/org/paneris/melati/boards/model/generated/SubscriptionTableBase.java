@@ -123,6 +123,10 @@ public class SubscriptionTableBase extends Table {
             return "The user";
           }
 
+          protected boolean defaultIndexed() {
+            return true;
+          }
+
           public Object getRaw_unsafe(Persistent g)
               throws AccessPoemException {
             return ((Subscription)g).getUser_unsafe();
@@ -180,6 +184,10 @@ public class SubscriptionTableBase extends Table {
             return "The board to which this user belongs";
           }
 
+          protected boolean defaultIndexed() {
+            return true;
+          }
+
           public Object getRaw_unsafe(Persistent g)
               throws AccessPoemException {
             return ((Subscription)g).getBoard_unsafe();
@@ -235,6 +243,10 @@ public class SubscriptionTableBase extends Table {
 
           protected String defaultDescription() {
             return "How users would like to receive emails from this board";
+          }
+
+          protected boolean defaultIndexed() {
+            return true;
           }
 
           public Object getRaw_unsafe(Persistent g)
