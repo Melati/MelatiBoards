@@ -75,44 +75,51 @@ public class Redirector extends Thread {
       ssc.register(selector, SelectionKey.OP_ACCEPT);
       while (true) {
         try {
-        selector.select();
-        Set readyKeys = selector.selectedKeys();
-        Iterator i = readyKeys.iterator();
-        while (i.hasNext()) {
-          SelectionKey sk = (SelectionKey)i.next();
-          i.remove();
-          Channel nextReady = (Channel)sk.channel();
-          if (sk.isAcceptable()) {
-            SocketChannel clientChannel =
-              ((ServerSocketChannel)nextReady).accept();
-            clientChannel.configureBlocking(false);
-            SocketChannel serverChannel =
-              SocketChannel.open(new InetSocketAddress(local, actualPort));
-            serverChannel.configureBlocking(true);
-            if (serverChannel.finishConnect()) {
-              serverChannel.configureBlocking(false);
-              clientChannel.register(selector, SelectionKey.OP_READ);
-              serverChannel.register(selector, SelectionKey.OP_READ);
-              addPair(clientChannel, serverChannel);
+          selector.select();
+          Set readyKeys = selector.selectedKeys();
+          Iterator i = readyKeys.iterator();
+          while (i.hasNext()) {
+            SelectionKey sk = (SelectionKey)i.next();
+            i.remove();
+            Channel nextReady = (Channel)sk.channel();
+            if (sk.isAcceptable()) {
+              SocketChannel clientChannel =
+                ((ServerSocketChannel)nextReady).accept();
+              clientChannel.configureBlocking(false);
+              SocketChannel serverChannel = null;
+              try {
+                serverChannel =
+                  SocketChannel.open(new InetSocketAddress(local, actualPort));
+                serverChannel.configureBlocking(true);
+                if (serverChannel.finishConnect()) {
+                  serverChannel.configureBlocking(false);
+                  clientChannel.register(selector, SelectionKey.OP_READ);
+                  serverChannel.register(selector, SelectionKey.OP_READ);
+                  addPair(clientChannel, serverChannel);
+                }
+              } catch (Exception e) {
+                e.printStackTrace();
+                System.err.println("Cannot connect to local server");
+                return;
+              }
+            }
+            if (sk.isReadable()) {
+              ByteBuffer buf = ByteBuffer.allocate(512);
+              //try to seek in clients map:
+              SocketChannel another = findPair((SocketChannel)nextReady);
+              int read = ((SocketChannel)nextReady).read(buf);
+              if (read > 0) {
+                //System.err.println("writing:" + new String(buf.)));
+                buf.flip();
+                another.write(buf);
+              } else if (read == -1) {
+                //System.err.println("closing");
+                nextReady.close();
+                another.close();
+                removePair(another);
+              }
             }
           }
-          if (sk.isReadable()) {
-            ByteBuffer buf = ByteBuffer.allocate(512);
-            //try to seek in clients map:
-            SocketChannel another = findPair((SocketChannel)nextReady);
-            int read = ((SocketChannel)nextReady).read(buf);
-            if (read > 0) {
-              //System.err.println("writing:" + new String(buf.)));
-              buf.flip();
-              another.write(buf);
-            } else if (read == -1) {
-              //System.err.println("closing");
-              nextReady.close();
-              another.close();
-              removePair(another);
-            }
-          }
-        }
         } catch (Exception e) {
           //todo
         }
