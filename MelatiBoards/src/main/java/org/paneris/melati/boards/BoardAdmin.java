@@ -525,10 +525,12 @@ public class BoardAdmin extends TemplateServlet {
                              context.getForm("start")));
 
     if (melati.getTable() == null) {
-      if (melati.getMethod().equals("Types"))
-        return typesTemplate(context,melati);
-      if (melati.getMethod().equals("SearchForBoard"))
+      if (melati.getMethod() != null) {
+       if (melati.getMethod().equals("Types"))
+         return typesTemplate(context,melati);
+       if (melati.getMethod().equals("SearchForBoard"))
         return searchForBoardTemplate(context,melati);
+      }
     }
     else if (melati.getTable().getName().equals("board") &&
                                          melati.getObject() != null) {
