@@ -93,7 +93,7 @@ public class Board extends BoardBase {
            return true;
     return false;
   }
-  
+
   /***************************
    * List users
    ****************************/
@@ -406,7 +406,7 @@ public class Board extends BoardBase {
     if (threadTrees == null)  // Don't bother if we haven't built the trees
       return;                 // (They will be built when we try to access them)
     
-    // ajust caches
+    // adjust caches
     DefaultMutableTreeNode parent = null;
     int treeIndex = 0;
     if (message.getParent() != null) {
@@ -416,6 +416,10 @@ public class Board extends BoardBase {
     }
     // set the children so they have no parent, or their grandparent
     DefaultMutableTreeNode node = getTreeNode(message);
+
+    if (node == null)   // If this message isn't in the tree, because 
+	return;         // it is pending authorisation for example
+    
     Enumeration children = node.children();
     while (children.hasMoreElements()) {
       DefaultMutableTreeNode child = (DefaultMutableTreeNode)children.nextElement();
