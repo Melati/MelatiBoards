@@ -20,7 +20,7 @@
   <td><b>User</b></td>
   <td><b>Manager</b></td>
   <td><b>Status</b></td>
-  <td><b>Delete</b></td>
+  <td><b>Unsubscribe</b></td>
  </tr>
  #foreach $sub in $board.MembersSubscriptions #begin
  <tr>

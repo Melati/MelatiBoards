@@ -38,7 +38,9 @@
 #end
  <tr>
   <td valign=top>Message</td>
-  <td><pre>$ml.rendered($message.Body)</pre></td>
+  <td>
+  <pre>$ml.rendered($message.Body)</pre>
+  </td>
  </tr>
 </table>
 

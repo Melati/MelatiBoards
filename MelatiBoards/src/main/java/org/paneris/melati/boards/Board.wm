@@ -20,7 +20,7 @@
 #if ($board.canViewMessages($melati.User)) #begin
 
     <b>Messages: $messages.PageStart - $messages.PageEnd of
-              #if ($results.TotalCountIsMinimum) #begin
+              #if ($messages.TotalCountIsMinimum) #begin
                 at least
               #end
               $messages.TotalCount

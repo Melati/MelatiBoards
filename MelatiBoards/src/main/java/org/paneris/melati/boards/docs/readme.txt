@@ -299,9 +299,8 @@ default handler and templates thus:
 
     public class BoardAdmin extends org.paneris.melati.boards.BoardAdmin {
 
-      protected final Template boardTemplate(WebContext context, String name)
-          throws NotFoundException, InvalidTypeException {
-            return getTemplate("testapp/boards/" + name);
+      protected String boardTemplate(TemplateContext context, String name) {
+        return "melati/boards/" + name;
       }
 
     }
