@@ -24,7 +24,7 @@
  </tr>
  #foreach $sub in $board.MembersSubscriptions #begin
  <tr>
-  <td>$ml.rendered($sub.User.Name_unsafe)</td>
+  <td><a href=mailto:$sub.User.Email_unsafe>$ml.rendered($sub.User.Name_unsafe)</a></td>
   <td align=center>
    <input type=checkbox name=manager-$sub.Troid value=true
    #if ($sub.Ismanager) #begin 
