@@ -55,6 +55,7 @@ import javax.servlet.http.HttpSession;
 import org.melati.Melati;
 import org.melati.MelatiConfig;
 import org.melati.MelatiUtil;
+import org.melati.LogicalDatabase;
 import org.melati.util.Email;
 import org.melati.util.EnumUtils;
 import org.melati.util.MappedEnumeration;
@@ -62,8 +63,11 @@ import org.melati.util.MelatiWriter;
 import org.melati.util.DumbPageEnumeration;
 import org.melati.servlet.TemplateServlet;
 import org.melati.servlet.InvalidUsageException;
+import org.melati.servlet.MelatiContext;
+import org.melati.servlet.PathInfoException;
 import org.melati.template.TemplateContext;
 import org.melati.template.TemplateEngine;
+import org.melati.poem.Database;
 import org.melati.poem.PoemTask;
 import org.melati.poem.PoemThread;
 import org.melati.poem.PoemException;
@@ -73,6 +77,7 @@ import org.melati.poem.Persistent;
 import org.melati.poem.Initialiser;
 import org.melati.poem.AccessPoemException;
 import org.melati.poem.ValidationPoemException;
+import org.paneris.melati.boards.model.BoardsDatabase;
 import org.paneris.melati.boards.model.User;
 import org.paneris.melati.boards.model.Board;
 import org.paneris.melati.boards.model.Message;
@@ -99,6 +104,66 @@ public class BoardAdmin extends TemplateServlet {
           }
         });
   }
+
+
+ /**
+  * Enable lookup by board name value as well as troid.
+  * 
+  * @see org.melati.servlet.PoemServlet
+  */
+  protected MelatiContext melatiContext(Melati melati)
+      throws PathInfoException {
+
+    final MelatiContext it = new MelatiContext();
+    final String[] parts = melati.getPathInfoParts();
+
+    // set it to something in order to provoke meaningful error
+    it.logicalDatabase = "";
+    if (parts.length > 0) {
+      it.logicalDatabase = parts[0];
+      if (parts.length == 2) it.method = parts[1];
+      if (parts.length == 3) {
+        it.table = parts[1];
+        it.method = parts[2];
+      }
+      if (parts.length >= 4) {
+        it.table = parts[1];
+        try {
+          it.troid = new Integer (parts[2]);
+        }
+        catch (NumberFormatException e) {
+        // FIXME move this to Melati proper
+          try {
+            final Database db = LogicalDatabase.getDatabase(parts[0]);
+            db.inSession(
+                AccessToken.root,
+                new PoemTask() {
+                    public void run() {
+                          Persistent p = db.getTable(parts[1]).displayColumn().
+                                        firstWhereEq(parts[2]);
+                          it.troid = p.troid();
+                      }
+                 });
+          } catch (Exception e1) {
+              throw new PathInfoException (melati.getRequest().getPathInfo(),
+                                           e1);
+          }
+        }
+        if (parts.length == 4) {
+          it.method = parts[3];
+        } else {
+          String pathInfo = melati.getRequest().getPathInfo();
+          pathInfo = pathInfo.substring(1);
+          for (int i = 0; i< 3; i++) {
+            pathInfo = pathInfo.substring(pathInfo.indexOf("/") + 1);
+          }          
+          it.method = pathInfo;
+        }
+      }
+    }
+    return it;
+  }
+
 
   protected String boardTemplate(TemplateContext context, String name) {
     return "melati/boards/" + name;
