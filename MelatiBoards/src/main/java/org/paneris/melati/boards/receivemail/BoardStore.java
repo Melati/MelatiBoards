@@ -72,9 +72,9 @@ public interface BoardStore {
                     final InternetAddress messAddr) 
                     throws IOException, MessagingException;
 
-  public org.melati.poem.User getSender();
+  org.melati.poem.User getSender();
   
-  public Integer messageAccept(final InputStream text) throws Exception;
+  Integer messageAccept(final InputStream text) throws Exception;
 }
 
 
