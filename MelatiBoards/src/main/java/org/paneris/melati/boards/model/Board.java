@@ -588,7 +588,7 @@ public class Board extends BoardBase {
   }
 
   public String getThisOrganisationNote() {
-    return "Welcome to Paneris!!!";
+      return "Welcome to Paneris!!!"; //FIXME
   }
   
   // method to allow a board to be created with a different manager than the
