@@ -14,61 +14,61 @@ import org.melati.poem.*;
 
 public class BoardsDatabaseBase extends PoemDatabase {
 
-  private BoardTypeTable tab_boardtype = null;
-  private BoardTable tab_board = null;
-  private UserTable tab_user = null;
-  private MembershipStatusTable tab_membershipstatus = null;
-  private SubscriptionTable tab_subscription = null;
-  private MessageTable tab_message = null;
-  private AttachmentTypeTable tab_attachmenttype = null;
-  private AttachmentTable tab_attachment = null;
-  private SettingTable tab_setting = null;
+  private BoardTypeTable tab_BoardType = null;
+  private BoardTable tab_Board = null;
+  private UserTable tab_User = null;
+  private MembershipStatusTable tab_MembershipStatus = null;
+  private SubscriptionTable tab_Subscription = null;
+  private MessageTable tab_Message = null;
+  private AttachmentTypeTable tab_AttachmentType = null;
+  private AttachmentTable tab_Attachment = null;
+  private SettingTable tab_Setting = null;
 
   protected BoardsDatabaseBase() {
-    redefineTable(tab_boardtype = new BoardTypeTable(this, "boardtype", DefinitionSource.dsd));
-    redefineTable(tab_board = new BoardTable(this, "board", DefinitionSource.dsd));
-    redefineTable(tab_user = new UserTable(this, "user", DefinitionSource.dsd));
-    redefineTable(tab_membershipstatus = new MembershipStatusTable(this, "membershipstatus", DefinitionSource.dsd));
-    redefineTable(tab_subscription = new SubscriptionTable(this, "subscription", DefinitionSource.dsd));
-    redefineTable(tab_message = new MessageTable(this, "message", DefinitionSource.dsd));
-    redefineTable(tab_attachmenttype = new AttachmentTypeTable(this, "attachmenttype", DefinitionSource.dsd));
-    redefineTable(tab_attachment = new AttachmentTable(this, "attachment", DefinitionSource.dsd));
-    redefineTable(tab_setting = new SettingTable(this, "setting", DefinitionSource.dsd));
+    redefineTable(tab_BoardType = new BoardTypeTable(this, "BoardType", DefinitionSource.dsd));
+    redefineTable(tab_Board = new BoardTable(this, "Board", DefinitionSource.dsd));
+    redefineTable(tab_User = new UserTable(this, "User", DefinitionSource.dsd));
+    redefineTable(tab_MembershipStatus = new MembershipStatusTable(this, "MembershipStatus", DefinitionSource.dsd));
+    redefineTable(tab_Subscription = new SubscriptionTable(this, "Subscription", DefinitionSource.dsd));
+    redefineTable(tab_Message = new MessageTable(this, "Message", DefinitionSource.dsd));
+    redefineTable(tab_AttachmentType = new AttachmentTypeTable(this, "AttachmentType", DefinitionSource.dsd));
+    redefineTable(tab_Attachment = new AttachmentTable(this, "Attachment", DefinitionSource.dsd));
+    redefineTable(tab_Setting = new SettingTable(this, "Setting", DefinitionSource.dsd));
   }
 
   public BoardTypeTable getBoardTypeTable() {
-    return tab_boardtype;
+    return tab_BoardType;
   }
 
   public BoardTable getBoardTable() {
-    return tab_board;
+    return tab_Board;
   }
 
   public org.melati.poem.UserTable getUserTable() {
-    return (org.melati.poem.UserTable)tab_user;
+    return (org.melati.poem.UserTable)tab_User;
   }
 
   public MembershipStatusTable getMembershipStatusTable() {
-    return tab_membershipstatus;
+    return tab_MembershipStatus;
   }
 
   public SubscriptionTable getSubscriptionTable() {
-    return tab_subscription;
+    return tab_Subscription;
   }
 
   public MessageTable getMessageTable() {
-    return tab_message;
+    return tab_Message;
   }
 
   public AttachmentTypeTable getAttachmentTypeTable() {
-    return tab_attachmenttype;
+    return tab_AttachmentType;
   }
 
   public AttachmentTable getAttachmentTable() {
-    return tab_attachment;
+    return tab_Attachment;
   }
 
   public org.melati.poem.SettingTable getSettingTable() {
-    return (org.melati.poem.SettingTable)tab_setting;
+    return (org.melati.poem.SettingTable)tab_Setting;
   }
 }
