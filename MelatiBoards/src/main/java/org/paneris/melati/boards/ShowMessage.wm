@@ -28,7 +28,7 @@
  </tr>
  <tr>
   <th>Author</th>
-  <td>$ml.rendered($message.Author)</td>
+  <td>$ml.rendered($message.Author.Name)</td>
  </tr>
  <tr>
   <th>Date</th>
