@@ -31,7 +31,7 @@ messages, view members and alter options. It can be viewed of as
 a cross between a email mailing list and a web bulletin board where all
 the data is stored in a database.
 
-There are a number of actions which user may or may not be allowed to do
+There are a number of actions which users may or may not be allowed to do
 depending on the settings of the boards and whether they are subscribed
 to a board as a manager. Currently the board options which are available
 are:
@@ -87,7 +87,7 @@ http://java.sun.com/products/javamail/
 1) Set up your database to include the boards tables
 ----------------------------------------------------
 
-The notes belwo are for the future. At present you must change the following
+The notes below are for the future. At present you must change the following
 line in your XXXXDatabaseBase.java:
 
 public class XXXXDatabaseBase extends PoemDatabase {
@@ -118,7 +118,47 @@ BoardsDatabase then you should ensure that your User table subclasses
 org.paneris.melati.boards.model.User
 
 
-2) Set up the outgoing email part of the system
+2) Set up your boards
+---------------------
+
+You need to enter some data in your database in order to create your system.
+E.g. go to /testapp/org.melati.admin.Admin/testdb/Main and
+
+  a) Create one or more `Board Type' entries
+  b) Create one or more `Boards'. Note that when someone creates a board then
+     the User as which they are logged-in will be subscribed to the list as
+     a manager. The _guest_ user cannot be subscribed to a board
+
+
+2a) Settings
+-----------
+
+The values that you must set up in the Settings table:
+
+smtpserver            - the SMTP server for outgoing mail
+    (e.g. testapp.co.uk) 
+BoardsEmailDomain     - the domain which receives mail for this database.
+                        Note that this must be the same as that defined
+                        in smtpServer.properties (or equivalent, if you
+                        set a different name when starting SMTPServerServlet)
+    (e.g. boards.testapp.co.uk) 
+BoardsSystemURL       - the URL to the BoardAdmin handler for this database
+    (e.g. http://www.dgroup.co.uk/testapp/org.paneris.melati.boards.BoardAdmin)
+BoardsEmailTemplates  - the directory containing the templates for sending
+                        out email. This is relative to WM's TemplatePath
+    (e.g. dgroup/boards/emailtemplates)
+BoardsAttachmentsPath - a directory which will contain one directory for
+                        each board (named after the board) in which to
+                        store attachments for this board.
+    (e.g. usr/httpd/ColinR/dgroup/board_attachments)
+BoardsAttachmentsURL  - a URL to the directory defined by BoardsAttachmentsPath
+    (e.g. http://www.dgroup.co.uk/board_attachments)
+LogicalDatabase       - the name of the database (note this must agree with
+                        the entry in org.melati.LogicalDatabase.properties
+    (e.g. testdb)
+
+
+3) Set up the outgoing email part of the system
 -----------------------------------------------
 
 You need to create an entry in the Settings table called `smtpserver'. Set
@@ -130,13 +170,13 @@ the Melati admin system, e.g. go to:
 where testapp is the zone your board-enable database and edit the Settings table.
 
 
-3) Create the incoming email part of the system
+4) Create the incoming email part of the system
 -----------------------------------------------
 
 a) You need to start a SMTP server which handles incoming mail. Since this
    server connects to Melati, it should be started inside the same JVM which
    will be running your Melati application. This is so that both applications
-   use the same cache and therefore see the database contents and being the
+   use the same cache and therefore see the database contents as being the
    same.
 
    NB The SMTP server is launched from a servlet. You need to launch this
@@ -157,7 +197,7 @@ a) You need to start a SMTP server which handles incoming mail. Since this
 
    Note that you should launch an SMTP server for each different JVM running
    a boards-enabled Melati application. With JServ all zones share the same
-   JVM so only one zone needs to start an SMTP server. If your running starts
+   JVM so only one zone needs to start an SMTP server. If your servlet runner starts
    multiple JVMs then you will need to start multiple SMTP servers (using
    different ports!).
 
@@ -252,16 +292,6 @@ c) You now need to direct messages addressed to boards to the SMTP server
 So you need to copy smtpServer.properties.example to smtpServer.properties and
 add your own line of the form
 
-4) Set up your boards
----------------------
-
-You need to enter some data in your database in order to create your system.
-E.g. go to /testapp/org.melati.admin.Admin/testdb/Main and
-
-  a) Create one or more `Board Type' entries
-  b) Create one or more `Boards'. Note that when someone creates a board then
-     the User as which they are logged-in will be subscribed to the list as
-     a manager. The _guest_ user cannot be subscribed to a board
 
 
 5) Customise the UI
@@ -305,35 +335,8 @@ Then copy all the templates to the com.company.testapp.boards directory
 and modify them as required.
 
 
-6) Settings
------------
 
-A recap of the values that you must set up in the Settings table:
-
-smtpserver            - the SMTP server for outgoing mail
-    (e.g. testapp.co.uk) 
-BoardsEmailDomain     - the domain which receives mail for this database.
-                        Note that this must be the same as that defined
-                        in smtpServer.properties (or equivalent, if you
-                        set a different name when starting SMTPServerServlet)
-    (e.g. boards.testapp.co.uk) 
-BoardsSystemURL       - the URL to the BoardAdmin handler for this database
-    (e.g. http://www.dgroup.co.uk/testapp/org.paneris.melati.boards.BoardAdmin)
-BoardsEmailTemplates  - the directory containing the templates for sending
-                        out email. This is relative to WM's TemplatePath
-    (e.g. dgroup/boards/emailtemplates)
-BoardsAttachmentsPath - a directory which will contain one directory for
-                        each board (named after the board) in which to
-                        store attachments for this board.
-    (e.g. usr/httpd/ColinR/dgroup/board_attachments)
-BoardsAttachmentsURL  - a URL to the directory defined by BoardsAttachmentsPath
-    (e.g. http://www.dgroup.co.uk/board_attachments)
-LogicalDatabase       - the name of the database (note this must agree with
-                        the entry in org.melati.LogicalDatabase.properties
-    (e.g. testdb)
-
-
-7) Notes
+6) Notes
 --------
 
 Board's attachmentpath and attachmenturl are set automatically from the
@@ -358,4 +361,13 @@ You will need to ensure that your User[Table] extends
 org.paneris.melati.boards.model.User[Table]
 
 --EOF--
+
+
+
+
+
+
+
+
+
 
