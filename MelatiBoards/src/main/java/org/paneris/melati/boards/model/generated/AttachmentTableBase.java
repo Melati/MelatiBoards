@@ -2,16 +2,42 @@
 
 package org.paneris.melati.boards.model.generated;
 
-import org.paneris.melati.boards.model.User;
-import org.paneris.melati.boards.model.UserTable;
-import org.paneris.melati.boards.model.Setting;
-import org.paneris.melati.boards.model.SettingTable;
-import org.paneris.melati.boards.model.*;
-import java.util.*;
-import java.sql.Date;
-import java.sql.Timestamp;
-import org.melati.poem.*;
 
+import org.melati.poem.Database;
+import org.melati.poem.DefinitionSource;
+import org.melati.poem.Column;
+import org.melati.poem.Persistent;
+import org.melati.poem.Field;
+import org.melati.poem.PoemException;
+import org.melati.poem.AccessPoemException;
+import org.melati.poem.ValidationPoemException;
+import org.melati.poem.Table;
+import org.paneris.melati.boards.model.BoardsDatabaseTables;
+
+import org.paneris.melati.boards.model.Message;
+import org.paneris.melati.boards.model.AttachmentType;
+import org.melati.poem.ReferencePoemType;
+import org.melati.poem.StringPoemType;
+import org.paneris.melati.boards.model.Attachment;
+import org.melati.poem.StandardIntegrityFix;
+import org.melati.poem.Searchability;
+import org.melati.poem.DisplayLevel;
+import org.melati.poem.TroidPoemType;
+import org.melati.poem.IntegerPoemType;
+
+
+/**
+ * Melati POEM generated base class for table Attachment.
+ * Field summary for SQL table attachment:
+ *   id
+ *   message
+ *   filename
+ *   path
+ *   url
+ *   size
+ *   type
+ *
+ */
 public class AttachmentTableBase extends Table {
 
   private Column col_id = null;
@@ -40,7 +66,9 @@ public class AttachmentTableBase extends Table {
   protected void init() throws PoemException {
     super.init();
     defineColumn(col_id =
-        new Column(this, "id", new TroidPoemType(), DefinitionSource.dsd) { 
+        new Column(this, "id",
+                   new TroidPoemType(),
+                   DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
               throws AccessPoemException, PoemException {
             return ((Attachment)g).getId();
@@ -89,7 +117,10 @@ public class AttachmentTableBase extends Table {
         });
 
     defineColumn(col_message =
-        new Column(this, "message", new ReferencePoemType(getBoardsDatabaseTables().getMessageTable(), false), DefinitionSource.dsd) { 
+        new Column(this, "message",
+                   new ReferencePoemType(getBoardsDatabaseTables().
+                                             getMessageTable(), false),
+                   DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
               throws AccessPoemException, PoemException {
             return ((Attachment)g).getMessage();
@@ -158,7 +189,9 @@ public class AttachmentTableBase extends Table {
         });
 
     defineColumn(col_filename =
-        new Column(this, "filename", new StringPoemType(false, -1), DefinitionSource.dsd) { 
+        new Column(this, "filename",
+                   new StringPoemType(false, -1),
+                   DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
               throws AccessPoemException, PoemException {
             return ((Attachment)g).getFilename();
@@ -227,7 +260,9 @@ public class AttachmentTableBase extends Table {
         });
 
     defineColumn(col_path =
-        new Column(this, "path", new StringPoemType(false, -1), DefinitionSource.dsd) { 
+        new Column(this, "path",
+                   new StringPoemType(false, -1),
+                   DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
               throws AccessPoemException, PoemException {
             return ((Attachment)g).getPath();
@@ -288,7 +323,9 @@ public class AttachmentTableBase extends Table {
         });
 
     defineColumn(col_url =
-        new Column(this, "url", new StringPoemType(false, -1), DefinitionSource.dsd) { 
+        new Column(this, "url",
+                   new StringPoemType(false, -1),
+                   DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
               throws AccessPoemException, PoemException {
             return ((Attachment)g).getUrl();
@@ -349,7 +386,9 @@ public class AttachmentTableBase extends Table {
         });
 
     defineColumn(col_size =
-        new Column(this, "size", new IntegerPoemType(false), DefinitionSource.dsd) { 
+        new Column(this, "size",
+                   new IntegerPoemType(false),
+                   DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
               throws AccessPoemException, PoemException {
             return ((Attachment)g).getSize();
@@ -410,7 +449,10 @@ public class AttachmentTableBase extends Table {
         });
 
     defineColumn(col_type =
-        new Column(this, "type", new ReferencePoemType(getBoardsDatabaseTables().getAttachmentTypeTable(), false), DefinitionSource.dsd) { 
+        new Column(this, "type",
+                   new ReferencePoemType(getBoardsDatabaseTables().
+                                             getAttachmentTypeTable(), false),
+                   DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
               throws AccessPoemException, PoemException {
             return ((Attachment)g).getType();

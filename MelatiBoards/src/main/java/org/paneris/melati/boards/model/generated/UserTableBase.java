@@ -2,16 +2,28 @@
 
 package org.paneris.melati.boards.model.generated;
 
-import org.paneris.melati.boards.model.User;
-import org.paneris.melati.boards.model.UserTable;
-import org.paneris.melati.boards.model.Setting;
-import org.paneris.melati.boards.model.SettingTable;
-import org.paneris.melati.boards.model.*;
-import java.util.*;
-import java.sql.Date;
-import java.sql.Timestamp;
-import org.melati.poem.*;
 
+import org.melati.poem.AccessPoemException;
+import org.melati.poem.Column;
+import org.melati.poem.Database;
+import org.melati.poem.DefinitionSource;
+import org.melati.poem.DisplayLevel;
+import org.melati.poem.Field;
+import org.melati.poem.Persistent;
+import org.melati.poem.PoemException;
+import org.melati.poem.Searchability;
+import org.melati.poem.StringPoemType;
+import org.melati.poem.ValidationPoemException;
+import org.paneris.melati.boards.model.BoardsDatabaseTables;
+import org.paneris.melati.boards.model.User;
+
+
+/**
+ * Melati POEM generated base class for table User.
+ * Field summary for SQL table user:
+ *   email
+ *
+ */
 public class UserTableBase extends org.melati.poem.UserTable {
 
   private Column col_email = null;
@@ -34,7 +46,9 @@ public class UserTableBase extends org.melati.poem.UserTable {
   protected void init() throws PoemException {
     super.init();
     defineColumn(col_email =
-        new Column(this, "email", new StringPoemType(false, -1), DefinitionSource.dsd) { 
+        new Column(this, "email",
+                   new StringPoemType(false, -1),
+                   DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
               throws AccessPoemException, PoemException {
             return ((User)g).getEmail();

@@ -50,19 +50,13 @@
 
 package org.paneris.melati.boards.receivemail;
 
-import java.io.*;
-import java.sql.*;
-import javax.mail.Part;
-import javax.mail.Multipart;
+import java.io.IOException;
+import java.io.InputStream;
+
 import javax.mail.MessagingException;
-import javax.mail.Address;
-import javax.mail.Session;
-import javax.mail.internet.MimeMessage;
 import javax.mail.internet.InternetAddress;
-import org.paneris.melati.boards.*;
-import org.paneris.melati.boards.model.*;
-import org.melati.poem.*;
-import org.melati.util.*;
+
+import org.melati.poem.Database;
 
 
 

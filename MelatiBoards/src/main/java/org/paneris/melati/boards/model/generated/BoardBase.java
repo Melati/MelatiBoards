@@ -2,16 +2,40 @@
 
 package org.paneris.melati.boards.model.generated;
 
-import org.paneris.melati.boards.model.User;
-import org.paneris.melati.boards.model.UserTable;
-import org.paneris.melati.boards.model.Setting;
-import org.paneris.melati.boards.model.SettingTable;
-import org.paneris.melati.boards.model.*;
-import java.util.*;
-import java.sql.Date;
-import java.sql.Timestamp;
-import org.melati.poem.*;
 
+import org.melati.poem.Column;
+import org.melati.poem.Field;
+import org.melati.poem.Persistent;
+import org.melati.poem.AccessPoemException;
+import org.melati.poem.ValidationPoemException;
+
+import org.paneris.melati.boards.model.BoardType;
+import org.melati.poem.NoSuchRowPoemException;
+
+import org.paneris.melati.boards.model.BoardTable;
+import org.paneris.melati.boards.model.BoardsDatabaseTables;
+
+/**
+ * Melati POEM generated base class for persistent Board.
+ * Field summary for SQL table board:
+ *   id
+ *   type
+ *   name
+ *   displayname
+ *   purpose
+ *   archived
+ *   opensubscription
+ *   moderatedsubscription
+ *   openposting
+ *   moderatedposting
+ *   openmessageviewing
+ *   openmemberlist
+ *   attachmentsallowed
+ *   anonymousposting
+ *   attachmentspath
+ *   attachmentsurl
+ *
+ */
 public abstract class BoardBase extends Persistent {
 
   public BoardsDatabaseTables getBoardsDatabaseTables() {

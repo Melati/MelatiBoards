@@ -50,12 +50,18 @@
 
 package org.paneris.melati.boards.receivemail;
 
-import javax.servlet.*;
-import java.util.Properties;
-import java.io.*;
-import java.net.ServerSocket;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.InetAddress;
-import org.melati.util.*;
+import java.util.Properties;
+
+import javax.servlet.Servlet;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+
+import org.melati.util.PropertiesUtils;
 
 /**
  * An SMTP server to handle mail coming in to messageboards.

@@ -49,8 +49,7 @@
 
 package org.paneris.melati.boards.model;
 
-import org.melati.util.*;
-import org.melati.poem.*;
+import org.melati.poem.PoemException;
 
 public class SettingNotFoundException extends PoemException {
   public String setting;

@@ -49,12 +49,10 @@
 
 package org.paneris.melati.boards.receivemail;
 
-import javax.servlet.*;
-import java.util.Properties;
-import java.io.*;
 import java.net.ServerSocket;
-import java.net.InetAddress;
-import org.melati.util.*;
+import java.util.Properties;
+
+import javax.servlet.ServletException;
 
 public class SMTPServer implements Runnable {
 

@@ -49,13 +49,24 @@
 
 package org.paneris.melati.boards.model;
 
-import org.melati.util.*;
-import org.paneris.melati.boards.model.generated.*;
-import java.text.*;
-import java.util.*;
-import java.sql.Date;
-import java.sql.Timestamp;
-import org.melati.poem.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Enumeration;
+import java.util.TimeZone;
+import java.util.Vector;
+
+import org.melati.poem.AccessPoemException;
+import org.melati.poem.AccessToken;
+import org.melati.poem.CachedCount;
+import org.melati.poem.Capability;
+import org.melati.poem.CreationAccessPoemException;
+import org.melati.poem.PoemTask;
+import org.melati.poem.ValidationPoemException;
+import org.melati.util.ChildrenDrivenMutableTree;
+import org.melati.util.EnumUtils;
+import org.melati.util.StringUtils;
+import org.melati.util.Treeable;
+import org.paneris.melati.boards.model.generated.MessageBase;
 
 public class Message extends MessageBase implements Treeable {
 

@@ -49,14 +49,12 @@
 
 package org.paneris.melati.boards.model;
 
-import org.paneris.melati.boards.model.User;
-import org.paneris.melati.boards.model.UserTable;
-import org.paneris.melati.boards.model.generated.*;
-import java.util.*;
-import java.sql.Date;
-import java.sql.Timestamp;
-import org.melati.poem.*;
-import org.melati.util.*;
+import org.melati.poem.AccessPoemException;
+import org.melati.poem.AccessToken;
+import org.melati.poem.Capability;
+import org.melati.poem.CreationAccessPoemException;
+import org.melati.poem.PoemThread;
+import org.paneris.melati.boards.model.generated.SubscriptionBase;
 
 
 public class Subscription extends SubscriptionBase {

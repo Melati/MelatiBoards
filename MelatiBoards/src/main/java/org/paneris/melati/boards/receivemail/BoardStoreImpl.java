@@ -50,19 +50,31 @@
 
 package org.paneris.melati.boards.receivemail;
 
-import java.io.*;
-import java.sql.*;
-import javax.mail.Part;
-import javax.mail.Multipart;
+import java.io.IOException;
+import java.io.InputStream;
+
 import javax.mail.MessagingException;
-import javax.mail.Address;
+import javax.mail.Multipart;
+import javax.mail.Part;
 import javax.mail.Session;
-import javax.mail.internet.MimeMessage;
 import javax.mail.internet.InternetAddress;
-import org.paneris.melati.boards.*;
-import org.paneris.melati.boards.model.*;
-import org.melati.poem.*;
-import org.melati.util.*;
+import javax.mail.internet.MimeMessage;
+
+import org.melati.poem.AccessPoemException;
+import org.melati.poem.Database;
+import org.melati.poem.Initialiser;
+import org.melati.poem.NoSuchRowPoemException;
+import org.melati.poem.Persistent;
+import org.melati.poem.ValidationPoemException;
+import org.melati.util.ExceptionUtils;
+import org.melati.util.IoUtils;
+import org.paneris.melati.boards.BoardAdmin;
+import org.paneris.melati.boards.model.Attachment;
+import org.paneris.melati.boards.model.AttachmentType;
+import org.paneris.melati.boards.model.AttachmentTypeTable;
+import org.paneris.melati.boards.model.Board;
+import org.paneris.melati.boards.model.Message;
+import org.paneris.melati.boards.model.MessageTable;
 
 
 

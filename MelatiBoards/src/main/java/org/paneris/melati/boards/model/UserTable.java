@@ -50,12 +50,10 @@
 
 package org.paneris.melati.boards.model;
 
-import org.paneris.melati.boards.model.User;
-import org.paneris.melati.boards.model.generated.*;
-import java.util.*;
-import java.sql.Date;
-import java.sql.Timestamp;
-import org.melati.poem.*;
+import org.melati.poem.Database;
+import org.melati.poem.DefinitionSource;
+import org.melati.poem.PoemException;
+import org.paneris.melati.boards.model.generated.UserTableBase;
 
 public class UserTable extends UserTableBase {
 

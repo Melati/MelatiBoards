@@ -49,8 +49,7 @@
 
 package org.paneris.melati.boards.model;
 
-import org.melati.util.*;
-import org.melati.poem.*;
+import org.melati.util.MelatiRuntimeException;
 
 class MessageAndParentOnDifferentBoardsException
                          extends MelatiRuntimeException {

@@ -50,17 +50,14 @@
 
 package org.paneris.melati.boards.model;
 
-import org.paneris.melati.boards.model.User;
-import org.paneris.melati.boards.model.UserTable;
-import org.paneris.melati.boards.model.Setting;
-import org.paneris.melati.boards.model.generated.SettingTableBase;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import org.melati.poem.Database;
 import org.melati.poem.DefinitionSource;
-import org.melati.poem.PoemTypeFactory;
 import org.melati.poem.PoemException;
-import org.melati.util.Email;
+import org.melati.poem.PoemTypeFactory;
+import org.paneris.melati.boards.model.generated.SettingTableBase;
 
 public class SettingTable extends SettingTableBase {
 

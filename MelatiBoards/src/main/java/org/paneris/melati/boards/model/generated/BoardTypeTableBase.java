@@ -2,16 +2,33 @@
 
 package org.paneris.melati.boards.model.generated;
 
-import org.paneris.melati.boards.model.User;
-import org.paneris.melati.boards.model.UserTable;
-import org.paneris.melati.boards.model.Setting;
-import org.paneris.melati.boards.model.SettingTable;
-import org.paneris.melati.boards.model.*;
-import java.util.*;
-import java.sql.Date;
-import java.sql.Timestamp;
-import org.melati.poem.*;
 
+import org.melati.poem.Database;
+import org.melati.poem.DefinitionSource;
+import org.melati.poem.Column;
+import org.melati.poem.Persistent;
+import org.melati.poem.Field;
+import org.melati.poem.PoemException;
+import org.melati.poem.AccessPoemException;
+import org.melati.poem.ValidationPoemException;
+import org.melati.poem.Table;
+import org.paneris.melati.boards.model.BoardsDatabaseTables;
+
+import org.paneris.melati.boards.model.BoardType;
+import org.melati.poem.StringPoemType;
+import org.melati.poem.Searchability;
+import org.melati.poem.TroidPoemType;
+import org.melati.poem.DisplayLevel;
+
+
+/**
+ * Melati POEM generated base class for table BoardType.
+ * Field summary for SQL table boardtype:
+ *   id
+ *   type
+ *   description
+ *
+ */
 public class BoardTypeTableBase extends Table {
 
   private Column col_id = null;
@@ -36,7 +53,9 @@ public class BoardTypeTableBase extends Table {
   protected void init() throws PoemException {
     super.init();
     defineColumn(col_id =
-        new Column(this, "id", new TroidPoemType(), DefinitionSource.dsd) { 
+        new Column(this, "id",
+                   new TroidPoemType(),
+                   DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
               throws AccessPoemException, PoemException {
             return ((BoardType)g).getId();
@@ -89,7 +108,9 @@ public class BoardTypeTableBase extends Table {
         });
 
     defineColumn(col_type =
-        new Column(this, "type", new StringPoemType(false, -1), DefinitionSource.dsd) { 
+        new Column(this, "type",
+                   new StringPoemType(false, -1),
+                   DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
               throws AccessPoemException, PoemException {
             return ((BoardType)g).getType();
@@ -154,7 +175,9 @@ public class BoardTypeTableBase extends Table {
         });
 
     defineColumn(col_description =
-        new Column(this, "description", new StringPoemType(false, -1), DefinitionSource.dsd) { 
+        new Column(this, "description",
+                   new StringPoemType(false, -1),
+                   DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
               throws AccessPoemException, PoemException {
             return ((BoardType)g).getDescription();

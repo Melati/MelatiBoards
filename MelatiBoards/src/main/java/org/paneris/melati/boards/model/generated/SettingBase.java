@@ -2,16 +2,15 @@
 
 package org.paneris.melati.boards.model.generated;
 
-import org.paneris.melati.boards.model.User;
-import org.paneris.melati.boards.model.UserTable;
-import org.paneris.melati.boards.model.Setting;
-import org.paneris.melati.boards.model.SettingTable;
-import org.paneris.melati.boards.model.*;
-import java.util.*;
-import java.sql.Date;
-import java.sql.Timestamp;
-import org.melati.poem.*;
 
+import org.paneris.melati.boards.model.BoardsDatabaseTables;
+import org.paneris.melati.boards.model.SettingTable;
+
+/**
+ * Melati POEM generated base class for persistent Setting.
+ * Field summary for SQL table setting:
+ *
+ */
 public abstract class SettingBase extends org.melati.poem.Setting {
 
   public BoardsDatabaseTables getBoardsDatabaseTables() {

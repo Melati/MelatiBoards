@@ -2,16 +2,49 @@
 
 package org.paneris.melati.boards.model.generated;
 
-import org.paneris.melati.boards.model.User;
-import org.paneris.melati.boards.model.UserTable;
-import org.paneris.melati.boards.model.Setting;
-import org.paneris.melati.boards.model.SettingTable;
-import org.paneris.melati.boards.model.*;
-import java.util.*;
-import java.sql.Date;
-import java.sql.Timestamp;
-import org.melati.poem.*;
 
+import org.melati.poem.Database;
+import org.melati.poem.DefinitionSource;
+import org.melati.poem.Column;
+import org.melati.poem.Persistent;
+import org.melati.poem.Field;
+import org.melati.poem.PoemException;
+import org.melati.poem.AccessPoemException;
+import org.melati.poem.ValidationPoemException;
+import org.melati.poem.Table;
+import org.paneris.melati.boards.model.BoardsDatabaseTables;
+
+import org.paneris.melati.boards.model.BoardType;
+import org.melati.poem.StringPoemType;
+import org.melati.poem.Searchability;
+import org.melati.poem.ReferencePoemType;
+import org.melati.poem.TroidPoemType;
+import org.melati.poem.BooleanPoemType;
+import org.paneris.melati.boards.model.Board;
+import org.melati.poem.DisplayLevel;
+
+
+/**
+ * Melati POEM generated base class for table Board.
+ * Field summary for SQL table board:
+ *   id
+ *   type
+ *   name
+ *   displayname
+ *   purpose
+ *   archived
+ *   opensubscription
+ *   moderatedsubscription
+ *   openposting
+ *   moderatedposting
+ *   openmessageviewing
+ *   openmemberlist
+ *   attachmentsallowed
+ *   anonymousposting
+ *   attachmentspath
+ *   attachmentsurl
+ *
+ */
 public class BoardTableBase extends Table {
 
   private Column col_id = null;
@@ -49,7 +82,9 @@ public class BoardTableBase extends Table {
   protected void init() throws PoemException {
     super.init();
     defineColumn(col_id =
-        new Column(this, "id", new TroidPoemType(), DefinitionSource.dsd) { 
+        new Column(this, "id",
+                   new TroidPoemType(),
+                   DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
               throws AccessPoemException, PoemException {
             return ((Board)g).getId();
@@ -98,7 +133,10 @@ public class BoardTableBase extends Table {
         });
 
     defineColumn(col_type =
-        new Column(this, "type", new ReferencePoemType(getBoardsDatabaseTables().getBoardTypeTable(), false), DefinitionSource.dsd) { 
+        new Column(this, "type",
+                   new ReferencePoemType(getBoardsDatabaseTables().
+                                             getBoardTypeTable(), false),
+                   DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
               throws AccessPoemException, PoemException {
             return ((Board)g).getType();
@@ -159,7 +197,9 @@ public class BoardTableBase extends Table {
         });
 
     defineColumn(col_name =
-        new Column(this, "name", new StringPoemType(false, -1), DefinitionSource.dsd) { 
+        new Column(this, "name",
+                   new StringPoemType(false, -1),
+                   DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
               throws AccessPoemException, PoemException {
             return ((Board)g).getName();
@@ -228,7 +268,9 @@ public class BoardTableBase extends Table {
         });
 
     defineColumn(col_displayname =
-        new Column(this, "displayname", new StringPoemType(false, -1), DefinitionSource.dsd) { 
+        new Column(this, "displayname",
+                   new StringPoemType(false, -1),
+                   DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
               throws AccessPoemException, PoemException {
             return ((Board)g).getDisplayname();
@@ -289,7 +331,9 @@ public class BoardTableBase extends Table {
         });
 
     defineColumn(col_purpose =
-        new Column(this, "purpose", new StringPoemType(true, -1), DefinitionSource.dsd) { 
+        new Column(this, "purpose",
+                   new StringPoemType(true, -1),
+                   DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
               throws AccessPoemException, PoemException {
             return ((Board)g).getPurpose();
@@ -350,7 +394,9 @@ public class BoardTableBase extends Table {
         });
 
     defineColumn(col_archived =
-        new Column(this, "archived", new BooleanPoemType(false), DefinitionSource.dsd) { 
+        new Column(this, "archived",
+                   new BooleanPoemType(false),
+                   DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
               throws AccessPoemException, PoemException {
             return ((Board)g).getArchived();
@@ -403,7 +449,9 @@ public class BoardTableBase extends Table {
         });
 
     defineColumn(col_opensubscription =
-        new Column(this, "opensubscription", new BooleanPoemType(false), DefinitionSource.dsd) { 
+        new Column(this, "opensubscription",
+                   new BooleanPoemType(false),
+                   DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
               throws AccessPoemException, PoemException {
             return ((Board)g).getOpensubscription();
@@ -460,7 +508,9 @@ public class BoardTableBase extends Table {
         });
 
     defineColumn(col_moderatedsubscription =
-        new Column(this, "moderatedsubscription", new BooleanPoemType(false), DefinitionSource.dsd) { 
+        new Column(this, "moderatedsubscription",
+                   new BooleanPoemType(false),
+                   DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
               throws AccessPoemException, PoemException {
             return ((Board)g).getModeratedsubscription();
@@ -517,7 +567,9 @@ public class BoardTableBase extends Table {
         });
 
     defineColumn(col_openposting =
-        new Column(this, "openposting", new BooleanPoemType(false), DefinitionSource.dsd) { 
+        new Column(this, "openposting",
+                   new BooleanPoemType(false),
+                   DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
               throws AccessPoemException, PoemException {
             return ((Board)g).getOpenposting();
@@ -574,7 +626,9 @@ public class BoardTableBase extends Table {
         });
 
     defineColumn(col_moderatedposting =
-        new Column(this, "moderatedposting", new BooleanPoemType(false), DefinitionSource.dsd) { 
+        new Column(this, "moderatedposting",
+                   new BooleanPoemType(false),
+                   DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
               throws AccessPoemException, PoemException {
             return ((Board)g).getModeratedposting();
@@ -631,7 +685,9 @@ public class BoardTableBase extends Table {
         });
 
     defineColumn(col_openmessageviewing =
-        new Column(this, "openmessageviewing", new BooleanPoemType(false), DefinitionSource.dsd) { 
+        new Column(this, "openmessageviewing",
+                   new BooleanPoemType(false),
+                   DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
               throws AccessPoemException, PoemException {
             return ((Board)g).getOpenmessageviewing();
@@ -688,7 +744,9 @@ public class BoardTableBase extends Table {
         });
 
     defineColumn(col_openmemberlist =
-        new Column(this, "openmemberlist", new BooleanPoemType(false), DefinitionSource.dsd) { 
+        new Column(this, "openmemberlist",
+                   new BooleanPoemType(false),
+                   DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
               throws AccessPoemException, PoemException {
             return ((Board)g).getOpenmemberlist();
@@ -745,7 +803,9 @@ public class BoardTableBase extends Table {
         });
 
     defineColumn(col_attachmentsallowed =
-        new Column(this, "attachmentsallowed", new BooleanPoemType(false), DefinitionSource.dsd) { 
+        new Column(this, "attachmentsallowed",
+                   new BooleanPoemType(false),
+                   DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
               throws AccessPoemException, PoemException {
             return ((Board)g).getAttachmentsallowed();
@@ -802,7 +862,9 @@ public class BoardTableBase extends Table {
         });
 
     defineColumn(col_anonymousposting =
-        new Column(this, "anonymousposting", new BooleanPoemType(false), DefinitionSource.dsd) { 
+        new Column(this, "anonymousposting",
+                   new BooleanPoemType(false),
+                   DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
               throws AccessPoemException, PoemException {
             return ((Board)g).getAnonymousposting();
@@ -859,7 +921,9 @@ public class BoardTableBase extends Table {
         });
 
     defineColumn(col_attachmentspath =
-        new Column(this, "attachmentspath", new StringPoemType(false, -1), DefinitionSource.dsd) { 
+        new Column(this, "attachmentspath",
+                   new StringPoemType(false, -1),
+                   DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
               throws AccessPoemException, PoemException {
             return ((Board)g).getAttachmentspath();
@@ -924,7 +988,9 @@ public class BoardTableBase extends Table {
         });
 
     defineColumn(col_attachmentsurl =
-        new Column(this, "attachmentsurl", new StringPoemType(false, -1), DefinitionSource.dsd) { 
+        new Column(this, "attachmentsurl",
+                   new StringPoemType(false, -1),
+                   DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
               throws AccessPoemException, PoemException {
             return ((Board)g).getAttachmentsurl();

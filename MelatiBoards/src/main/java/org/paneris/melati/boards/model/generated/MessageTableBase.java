@@ -2,16 +2,46 @@
 
 package org.paneris.melati.boards.model.generated;
 
-import org.paneris.melati.boards.model.User;
-import org.paneris.melati.boards.model.UserTable;
-import org.paneris.melati.boards.model.Setting;
-import org.paneris.melati.boards.model.SettingTable;
-import org.paneris.melati.boards.model.*;
-import java.util.*;
-import java.sql.Date;
-import java.sql.Timestamp;
-import org.melati.poem.*;
 
+import org.melati.poem.Database;
+import org.melati.poem.DefinitionSource;
+import org.melati.poem.Column;
+import org.melati.poem.Persistent;
+import org.melati.poem.Field;
+import org.melati.poem.PoemException;
+import org.melati.poem.AccessPoemException;
+import org.melati.poem.ValidationPoemException;
+import org.melati.poem.Table;
+import org.paneris.melati.boards.model.BoardsDatabaseTables;
+
+import org.paneris.melati.boards.model.Message;
+import java.sql.Timestamp;
+import org.paneris.melati.boards.model.Board;
+import org.melati.poem.ReferencePoemType;
+import org.melati.poem.StringPoemType;
+import org.paneris.melati.boards.model.User;
+import org.melati.poem.TimestampPoemType;
+import org.melati.poem.StandardIntegrityFix;
+import org.melati.poem.BooleanPoemType;
+import org.melati.poem.Searchability;
+import org.melati.poem.DisplayLevel;
+import org.melati.poem.TroidPoemType;
+
+
+/**
+ * Melati POEM generated base class for table Message.
+ * Field summary for SQL table message:
+ *   id
+ *   board
+ *   date
+ *   subject
+ *   author
+ *   parent
+ *   body
+ *   deleted
+ *   approved
+ *
+ */
 public class MessageTableBase extends Table {
 
   private Column col_id = null;
@@ -42,7 +72,9 @@ public class MessageTableBase extends Table {
   protected void init() throws PoemException {
     super.init();
     defineColumn(col_id =
-        new Column(this, "id", new TroidPoemType(), DefinitionSource.dsd) { 
+        new Column(this, "id",
+                   new TroidPoemType(),
+                   DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
               throws AccessPoemException, PoemException {
             return ((Message)g).getId();
@@ -91,7 +123,10 @@ public class MessageTableBase extends Table {
         });
 
     defineColumn(col_board =
-        new Column(this, "board", new ReferencePoemType(getBoardsDatabaseTables().getBoardTable(), false), DefinitionSource.dsd) { 
+        new Column(this, "board",
+                   new ReferencePoemType(getBoardsDatabaseTables().
+                                             getBoardTable(), false),
+                   DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
               throws AccessPoemException, PoemException {
             return ((Message)g).getBoard();
@@ -160,7 +195,9 @@ public class MessageTableBase extends Table {
         });
 
     defineColumn(col_date =
-        new Column(this, "date", new TimestampPoemType(false), DefinitionSource.dsd) { 
+        new Column(this, "date",
+                   new TimestampPoemType(false),
+                   DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
               throws AccessPoemException, PoemException {
             return ((Message)g).getDate();
@@ -229,7 +266,9 @@ public class MessageTableBase extends Table {
         });
 
     defineColumn(col_subject =
-        new Column(this, "subject", new StringPoemType(false, -1), DefinitionSource.dsd) { 
+        new Column(this, "subject",
+                   new StringPoemType(false, -1),
+                   DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
               throws AccessPoemException, PoemException {
             return ((Message)g).getSubject();
@@ -286,7 +325,10 @@ public class MessageTableBase extends Table {
         });
 
     defineColumn(col_author =
-        new Column(this, "author", new ReferencePoemType(getBoardsDatabaseTables().getUserTable(), false), DefinitionSource.dsd) { 
+        new Column(this, "author",
+                   new ReferencePoemType(getBoardsDatabaseTables().
+                                             getUserTable(), false),
+                   DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
               throws AccessPoemException, PoemException {
             return ((Message)g).getAuthor();
@@ -347,7 +389,10 @@ public class MessageTableBase extends Table {
         });
 
     defineColumn(col_parent =
-        new Column(this, "parent", new ReferencePoemType(getBoardsDatabaseTables().getMessageTable(), true), DefinitionSource.dsd) { 
+        new Column(this, "parent",
+                   new ReferencePoemType(getBoardsDatabaseTables().
+                                             getMessageTable(), true),
+                   DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
               throws AccessPoemException, PoemException {
             return ((Message)g).getParent();
@@ -412,7 +457,9 @@ public class MessageTableBase extends Table {
         });
 
     defineColumn(col_body =
-        new Column(this, "body", new StringPoemType(false, -1), DefinitionSource.dsd) { 
+        new Column(this, "body",
+                   new StringPoemType(false, -1),
+                   DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
               throws AccessPoemException, PoemException {
             return ((Message)g).getBody();
@@ -473,7 +520,9 @@ public class MessageTableBase extends Table {
         });
 
     defineColumn(col_deleted =
-        new Column(this, "deleted", new BooleanPoemType(false), DefinitionSource.dsd) { 
+        new Column(this, "deleted",
+                   new BooleanPoemType(false),
+                   DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
               throws AccessPoemException, PoemException {
             return ((Message)g).getDeleted();
@@ -530,7 +579,9 @@ public class MessageTableBase extends Table {
         });
 
     defineColumn(col_approved =
-        new Column(this, "approved", new BooleanPoemType(false), DefinitionSource.dsd) { 
+        new Column(this, "approved",
+                   new BooleanPoemType(false),
+                   DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
               throws AccessPoemException, PoemException {
             return ((Message)g).getApproved();
