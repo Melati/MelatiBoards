@@ -232,10 +232,18 @@ http://sourceforge.net/mailarchive/forum.php?forum=melati-users
          <war.bundle>false</war.bundle>
       </properties>
     </dependency>
-    <dependency>
+    <!--dependency>
       <id>hsqldb</id>
       <version>1.7.1</version>
       <url>http://www.hslqldb.org/</url>
+      <properties>
+         <war.bundle>true</war.bundle>
+      </properties>
+    </dependency-->
+    <dependency>
+      <id>postgresql</id>
+      <version>74.214.jdbc3</version>
+      <url>http://www.postgresql.org/</url>
       <properties>
          <war.bundle>true</war.bundle>
       </properties>
