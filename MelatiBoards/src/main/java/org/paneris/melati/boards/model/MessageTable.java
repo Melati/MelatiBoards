@@ -50,11 +50,20 @@
 
 package org.paneris.melati.boards.model;
 
-import org.paneris.melati.boards.model.generated.*;
-import java.util.*;
-import java.sql.Date;
 import java.sql.Timestamp;
-import org.melati.poem.*;
+
+import org.melati.poem.AccessPoemException;
+import org.melati.poem.AccessToken;
+import org.melati.poem.CachedCount;
+import org.melati.poem.CachedSelection;
+import org.melati.poem.Database;
+import org.melati.poem.DefinitionSource;
+import org.melati.poem.InitialisationPoemException;
+import org.melati.poem.Persistent;
+import org.melati.poem.PoemException;
+import org.melati.poem.PoemThread;
+import org.melati.poem.ValidationPoemException;
+import org.paneris.melati.boards.model.generated.MessageTableBase;
 
 public class MessageTable extends MessageTableBase {
 
@@ -70,7 +79,6 @@ public class MessageTable extends MessageTableBase {
 
     Board b = getBoardsDatabaseTables().getBoardTable().
                 getBoardObject(((Message)persistent).getBoard_unsafe());
-    AccessToken token = PoemThread.accessToken();
 
     if ("".equals(((Message)persistent).getSubject_unsafe())) {
       persistent.setRaw("subject", "(no subject)");
