@@ -64,7 +64,7 @@ import org.melati.util.MelatiWriter;
 import org.melati.util.DumbPageEnumeration;
 import org.melati.servlet.TemplateServlet;
 import org.melati.servlet.InvalidUsageException;
-import org.melati.servlet.MelatiContext;
+import org.melati.PoemContext;
 import org.melati.servlet.PathInfoException;
 import org.melati.template.TemplateContext;
 import org.melati.template.TemplateEngine;
@@ -116,25 +116,25 @@ public class BoardAdmin extends TemplateServlet {
   * @todo move this to Melati proper
   * @see org.melati.servlet.PoemServlet
   */
-  protected MelatiContext melatiContext(final Melati melati)
+  protected PoemContext melatiContext(final Melati melati)
       throws PathInfoException {
 
-    final MelatiContext it = new MelatiContext();
+    final PoemContext it = new PoemContext();
     final String[] parts = melati.getPathInfoParts();
 
     // set it to something in order to provoke meaningful error
-    it.logicalDatabase = "";
+    it.setLogicalDatabase("");
     if (parts.length > 0) {
-      it.logicalDatabase = parts[0];
-      if (parts.length == 2) it.method = parts[1];
+      it.setLogicalDatabase(parts[0]);
+      if (parts.length == 2) it.setMethod(parts[1]);
       if (parts.length == 3) {
-        it.table = parts[1];
-        it.method = parts[2];
+        it.setTable(parts[1]);
+        it.setMethod(parts[2]);
       }
       if (parts.length >= 4) {
-        it.table = parts[1];
+        it.setTable(parts[1]);
         try {
-          it.troid = new Integer (parts[2]);
+          it.setTroid(new Integer(parts[2]));
         }
         catch (NumberFormatException e) {
           try {
@@ -148,7 +148,7 @@ public class BoardAdmin extends TemplateServlet {
                                            displayColumn().
                                                firstWhereEq(value);
                         if (p != null) 
-                          it.troid = p.troid();
+                          it.setTroid(p.troid());
                         else 
                          throw new RuntimeException(
                                        "'" +value + "'" + 
@@ -163,14 +163,14 @@ public class BoardAdmin extends TemplateServlet {
           }
         }
         if (parts.length == 4) {
-          it.method = parts[3];
+          it.setMethod(parts[3]);
         } else {
           String pathInfo = melati.getRequest().getPathInfo();
           pathInfo = pathInfo.substring(1);
           for (int i = 0; i< 3; i++) {
             pathInfo = pathInfo.substring(pathInfo.indexOf("/") + 1);
           }          
-          it.method = pathInfo;
+          it.setMethod(pathInfo);
         }
       }
     }
@@ -600,7 +600,7 @@ public class BoardAdmin extends TemplateServlet {
 
     context.put("boardutils",
         new BoardUtils(melati.getServletURL(),
-                       melati.getContext().logicalDatabase));
+                       melati.getPoemContext().getLogicalDatabase()));
 
     Board board = null;
     if (melati.getTable() != null && melati.getObject() != null) {
@@ -683,7 +683,7 @@ public class BoardAdmin extends TemplateServlet {
         return subscriptionUpdateTemplate(context, melati, board);
     }
 
-    throw new InvalidUsageException(this, melati.getContext());
+    throw new InvalidUsageException(this, melati.getPoemContext());
   }
 
   /**
@@ -697,9 +697,9 @@ public class BoardAdmin extends TemplateServlet {
     if (board != null) {
       String key = "org.paneris.melati.boards." + board.troid();
       if (start == null)
-        start = (String)session.getValue(key);
+        start = (String)session.getAttribute(key);
       else
-        session.putValue(key, start);
+        session.setAttribute(key, start);
     }
       
     return (start != null) ? start : "0";
@@ -730,7 +730,7 @@ public class BoardAdmin extends TemplateServlet {
     if (tEngine == null) {
       tEngine = mConfig.getTemplateEngine();
       if (tEngine != null)
-        tEngine.init(mConfig);
+        tEngine.init(mConfig); //FIXME needs a servlet to find templates in jar
     }
     MelatiWriter sw = tEngine.getStringWriter("UTF8");
     Melati melati = new Melati(mConfig, sw);
@@ -750,9 +750,9 @@ public class BoardAdmin extends TemplateServlet {
  */
 
 class DistributeThread extends Thread {
-  private Board board;
-  private User user;
-  private String message;
+  Board board;
+  User user;
+  String message;
 
   DistributeThread(Board board, User user, String message) {
     this.board = board;
