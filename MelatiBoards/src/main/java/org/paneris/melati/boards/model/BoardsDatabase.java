@@ -47,16 +47,9 @@
  *     29 Stanley Road, Oxford, OX4 1QY, UK
  */
 
-
 package org.paneris.melati.boards.model;
 
-import org.paneris.melati.boards.model.User;
-import org.paneris.melati.boards.model.UserTable;
-import org.paneris.melati.boards.model.generated.*;
-import java.util.*;
-import java.sql.Date;
-import java.sql.Timestamp;
-import org.melati.poem.*;
+import org.paneris.melati.boards.model.generated.BoardsDatabaseBase;
 
 public class BoardsDatabase extends BoardsDatabaseBase
                             implements BoardsDatabaseTables {
