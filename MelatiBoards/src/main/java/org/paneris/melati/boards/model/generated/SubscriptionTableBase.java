@@ -2,16 +2,41 @@
 
 package org.paneris.melati.boards.model.generated;
 
-import org.paneris.melati.boards.model.User;
-import org.paneris.melati.boards.model.UserTable;
-import org.paneris.melati.boards.model.Setting;
-import org.paneris.melati.boards.model.SettingTable;
-import org.paneris.melati.boards.model.*;
-import java.util.*;
-import java.sql.Date;
-import java.sql.Timestamp;
-import org.melati.poem.*;
 
+import org.melati.poem.Database;
+import org.melati.poem.DefinitionSource;
+import org.melati.poem.Column;
+import org.melati.poem.Persistent;
+import org.melati.poem.Field;
+import org.melati.poem.PoemException;
+import org.melati.poem.AccessPoemException;
+import org.melati.poem.ValidationPoemException;
+import org.melati.poem.Table;
+import org.paneris.melati.boards.model.BoardsDatabaseTables;
+
+import org.paneris.melati.boards.model.MembershipStatus;
+import org.paneris.melati.boards.model.Board;
+import org.melati.poem.ReferencePoemType;
+import org.paneris.melati.boards.model.User;
+import org.melati.poem.StandardIntegrityFix;
+import org.melati.poem.BooleanPoemType;
+import org.melati.poem.Searchability;
+import org.melati.poem.DisplayLevel;
+import org.melati.poem.TroidPoemType;
+import org.paneris.melati.boards.model.Subscription;
+
+
+/**
+ * Melati POEM generated base class for table Subscription.
+ * Field summary for SQL table subscription:
+ *   id
+ *   user
+ *   board
+ *   status
+ *   ismanager
+ *   approved
+ *
+ */
 public class SubscriptionTableBase extends Table {
 
   private Column col_id = null;
@@ -39,7 +64,9 @@ public class SubscriptionTableBase extends Table {
   protected void init() throws PoemException {
     super.init();
     defineColumn(col_id =
-        new Column(this, "id", new TroidPoemType(), DefinitionSource.dsd) { 
+        new Column(this, "id",
+                   new TroidPoemType(),
+                   DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
               throws AccessPoemException, PoemException {
             return ((Subscription)g).getId();
@@ -92,7 +119,10 @@ public class SubscriptionTableBase extends Table {
         });
 
     defineColumn(col_user =
-        new Column(this, "user", new ReferencePoemType(getBoardsDatabaseTables().getUserTable(), false), DefinitionSource.dsd) { 
+        new Column(this, "user",
+                   new ReferencePoemType(getBoardsDatabaseTables().
+                                             getUserTable(), false),
+                   DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
               throws AccessPoemException, PoemException {
             return ((Subscription)g).getUser();
@@ -157,7 +187,10 @@ public class SubscriptionTableBase extends Table {
         });
 
     defineColumn(col_board =
-        new Column(this, "board", new ReferencePoemType(getBoardsDatabaseTables().getBoardTable(), false), DefinitionSource.dsd) { 
+        new Column(this, "board",
+                   new ReferencePoemType(getBoardsDatabaseTables().
+                                             getBoardTable(), false),
+                   DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
               throws AccessPoemException, PoemException {
             return ((Subscription)g).getBoard();
@@ -222,7 +255,10 @@ public class SubscriptionTableBase extends Table {
         });
 
     defineColumn(col_status =
-        new Column(this, "status", new ReferencePoemType(getBoardsDatabaseTables().getMembershipStatusTable(), false), DefinitionSource.dsd) { 
+        new Column(this, "status",
+                   new ReferencePoemType(getBoardsDatabaseTables().
+                                             getMembershipStatusTable(), false),
+                   DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
               throws AccessPoemException, PoemException {
             return ((Subscription)g).getStatus();
@@ -279,7 +315,9 @@ public class SubscriptionTableBase extends Table {
         });
 
     defineColumn(col_ismanager =
-        new Column(this, "ismanager", new BooleanPoemType(false), DefinitionSource.dsd) { 
+        new Column(this, "ismanager",
+                   new BooleanPoemType(false),
+                   DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
               throws AccessPoemException, PoemException {
             return ((Subscription)g).getIsmanager();
@@ -336,7 +374,9 @@ public class SubscriptionTableBase extends Table {
         });
 
     defineColumn(col_approved =
-        new Column(this, "approved", new BooleanPoemType(false), DefinitionSource.dsd) { 
+        new Column(this, "approved",
+                   new BooleanPoemType(false),
+                   DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
               throws AccessPoemException, PoemException {
             return ((Subscription)g).getApproved();

@@ -48,9 +48,10 @@
  */
 package org.paneris.melati.boards.receivemail;
 
-import java.io.*;
-import java.text.*;
-import java.util.*;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.util.Date;
 
 
 

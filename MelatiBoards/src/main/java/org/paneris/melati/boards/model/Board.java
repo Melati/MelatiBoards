@@ -50,17 +50,24 @@
 
 package org.paneris.melati.boards.model;
 
-import org.paneris.melati.boards.model.User;
-import org.paneris.melati.boards.model.UserTable;
-import org.paneris.melati.boards.model.generated.BoardBase;
 import java.io.File;
-import java.util.Vector;
+import java.lang.ref.SoftReference;
 import java.util.Enumeration;
 import java.util.Hashtable;
-import java.lang.ref.SoftReference;
+import java.util.Vector;
+
 import javax.swing.tree.DefaultMutableTreeNode;
-import org.melati.poem.*;
-import org.melati.util.*;
+
+import org.melati.poem.AccessPoemException;
+import org.melati.poem.AccessToken;
+import org.melati.poem.CachedCount;
+import org.melati.poem.CachedSelection;
+import org.melati.poem.Capability;
+import org.melati.util.ChildrenDrivenMutableTree;
+import org.melati.util.Email;
+import org.melati.util.EnumUtils;
+import org.melati.util.MappedEnumeration;
+import org.paneris.melati.boards.model.generated.BoardBase;
 
 public class Board extends BoardBase {
   public Board() {}

@@ -49,12 +49,12 @@
 
 package org.paneris.melati.boards.model;
 
-import org.paneris.melati.boards.model.generated.*;
-import java.io.*;
-import java.util.*;
-import java.net.*;
-import java.sql.Date;
-import java.sql.Timestamp;
+import org.paneris.melati.boards.model.generated.AttachmentBase;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.net.URLEncoder;
 import org.melati.poem.*;
 import org.melati.util.UnexpectedExceptionException;
 

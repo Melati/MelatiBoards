@@ -2,16 +2,32 @@
 
 package org.paneris.melati.boards.model.generated;
 
-import org.paneris.melati.boards.model.User;
-import org.paneris.melati.boards.model.UserTable;
-import org.paneris.melati.boards.model.Setting;
-import org.paneris.melati.boards.model.SettingTable;
-import org.paneris.melati.boards.model.*;
-import java.util.*;
-import java.sql.Date;
-import java.sql.Timestamp;
-import org.melati.poem.*;
 
+import org.melati.poem.Database;
+import org.melati.poem.DefinitionSource;
+import org.melati.poem.Column;
+import org.melati.poem.Persistent;
+import org.melati.poem.Field;
+import org.melati.poem.PoemException;
+import org.melati.poem.AccessPoemException;
+import org.melati.poem.ValidationPoemException;
+import org.melati.poem.Table;
+import org.paneris.melati.boards.model.BoardsDatabaseTables;
+
+import org.paneris.melati.boards.model.MembershipStatus;
+import org.melati.poem.StringPoemType;
+import org.melati.poem.Searchability;
+import org.melati.poem.TroidPoemType;
+import org.melati.poem.DisplayLevel;
+
+
+/**
+ * Melati POEM generated base class for table MembershipStatus.
+ * Field summary for SQL table membershipstatus:
+ *   id
+ *   status
+ *
+ */
 public class MembershipStatusTableBase extends Table {
 
   private Column col_id = null;
@@ -35,7 +51,9 @@ public class MembershipStatusTableBase extends Table {
   protected void init() throws PoemException {
     super.init();
     defineColumn(col_id =
-        new Column(this, "id", new TroidPoemType(), DefinitionSource.dsd) { 
+        new Column(this, "id",
+                   new TroidPoemType(),
+                   DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
               throws AccessPoemException, PoemException {
             return ((MembershipStatus)g).getId();
@@ -92,7 +110,9 @@ public class MembershipStatusTableBase extends Table {
         });
 
     defineColumn(col_status =
-        new Column(this, "status", new StringPoemType(false, -1), DefinitionSource.dsd) { 
+        new Column(this, "status",
+                   new StringPoemType(false, -1),
+                   DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
               throws AccessPoemException, PoemException {
             return ((MembershipStatus)g).getStatus();

@@ -50,11 +50,7 @@
 
 package org.paneris.melati.boards.model;
 
-import org.paneris.melati.boards.model.generated.*;
-import java.util.*;
-import java.sql.Date;
-import java.sql.Timestamp;
-import org.melati.poem.*;
+import org.paneris.melati.boards.model.generated.MembershipStatusBase;
 
 public class MembershipStatus extends MembershipStatusBase {
   public MembershipStatus() {}

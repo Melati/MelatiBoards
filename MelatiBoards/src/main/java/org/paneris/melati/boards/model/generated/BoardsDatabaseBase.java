@@ -2,73 +2,129 @@
 
 package org.paneris.melati.boards.model.generated;
 
-import org.paneris.melati.boards.model.User;
-import org.paneris.melati.boards.model.UserTable;
-import org.paneris.melati.boards.model.Setting;
-import org.paneris.melati.boards.model.SettingTable;
-import org.paneris.melati.boards.model.*;
-import java.util.*;
-import java.sql.Date;
-import java.sql.Timestamp;
-import org.melati.poem.*;
 
+import org.melati.poem.PoemDatabase;
+import org.melati.poem.DefinitionSource;
+import org.melati.poem.GroupTable;
+import org.melati.poem.CapabilityTable;
+import org.melati.poem.GroupMembershipTable;
+import org.melati.poem.GroupCapabilityTable;
+import org.melati.poem.TableCategoryTable;
+import org.melati.poem.TableInfoTable;
+import org.melati.poem.ColumnInfoTable;
+import org.paneris.melati.boards.model.BoardTypeTable;
+import org.paneris.melati.boards.model.BoardTable;
+import org.paneris.melati.boards.model.UserTable;
+import org.paneris.melati.boards.model.MembershipStatusTable;
+import org.paneris.melati.boards.model.SubscriptionTable;
+import org.paneris.melati.boards.model.MessageTable;
+import org.paneris.melati.boards.model.AttachmentTypeTable;
+import org.paneris.melati.boards.model.AttachmentTable;
+import org.paneris.melati.boards.model.SettingTable;
+
+/**
+ * Melati POEM generated base class
+ */
 public class BoardsDatabaseBase extends PoemDatabase {
 
-  private BoardTypeTable tab_BoardType = null;
-  private BoardTable tab_Board = null;
-  private UserTable tab_User = null;
-  private MembershipStatusTable tab_MembershipStatus = null;
-  private SubscriptionTable tab_Subscription = null;
-  private MessageTable tab_Message = null;
-  private AttachmentTypeTable tab_AttachmentType = null;
-  private AttachmentTable tab_Attachment = null;
-  private SettingTable tab_Setting = null;
+  private GroupTable tab_group = null;
+  private CapabilityTable tab_capability = null;
+  private GroupMembershipTable tab_groupmembership = null;
+  private GroupCapabilityTable tab_groupcapability = null;
+  private TableCategoryTable tab_tablecategory = null;
+  private TableInfoTable tab_tableinfo = null;
+  private ColumnInfoTable tab_columninfo = null;
+  private BoardTypeTable tab_boardtype = null;
+  private BoardTable tab_board = null;
+  private UserTable tab_user = null;
+  private MembershipStatusTable tab_membershipstatus = null;
+  private SubscriptionTable tab_subscription = null;
+  private MessageTable tab_message = null;
+  private AttachmentTypeTable tab_attachmenttype = null;
+  private AttachmentTable tab_attachment = null;
+  private SettingTable tab_setting = null;
 
   protected BoardsDatabaseBase() {
-    redefineTable(tab_BoardType = new BoardTypeTable(this, "BoardType", DefinitionSource.dsd));
-    redefineTable(tab_Board = new BoardTable(this, "Board", DefinitionSource.dsd));
-    redefineTable(tab_User = new UserTable(this, "User", DefinitionSource.dsd));
-    redefineTable(tab_MembershipStatus = new MembershipStatusTable(this, "MembershipStatus", DefinitionSource.dsd));
-    redefineTable(tab_Subscription = new SubscriptionTable(this, "Subscription", DefinitionSource.dsd));
-    redefineTable(tab_Message = new MessageTable(this, "Message", DefinitionSource.dsd));
-    redefineTable(tab_AttachmentType = new AttachmentTypeTable(this, "AttachmentType", DefinitionSource.dsd));
-    redefineTable(tab_Attachment = new AttachmentTable(this, "Attachment", DefinitionSource.dsd));
-    redefineTable(tab_Setting = new SettingTable(this, "Setting", DefinitionSource.dsd));
+    redefineTable(tab_group = new GroupTable(this, "group", DefinitionSource.dsd));
+    redefineTable(tab_capability = new CapabilityTable(this, "capability", DefinitionSource.dsd));
+    redefineTable(tab_groupmembership = new GroupMembershipTable(this, "groupmembership", DefinitionSource.dsd));
+    redefineTable(tab_groupcapability = new GroupCapabilityTable(this, "groupcapability", DefinitionSource.dsd));
+    redefineTable(tab_tablecategory = new TableCategoryTable(this, "tablecategory", DefinitionSource.dsd));
+    redefineTable(tab_tableinfo = new TableInfoTable(this, "tableinfo", DefinitionSource.dsd));
+    redefineTable(tab_columninfo = new ColumnInfoTable(this, "columninfo", DefinitionSource.dsd));
+    redefineTable(tab_boardtype = new BoardTypeTable(this, "boardtype", DefinitionSource.dsd));
+    redefineTable(tab_board = new BoardTable(this, "board", DefinitionSource.dsd));
+    redefineTable(tab_user = new UserTable(this, "user", DefinitionSource.dsd));
+    redefineTable(tab_membershipstatus = new MembershipStatusTable(this, "membershipstatus", DefinitionSource.dsd));
+    redefineTable(tab_subscription = new SubscriptionTable(this, "subscription", DefinitionSource.dsd));
+    redefineTable(tab_message = new MessageTable(this, "message", DefinitionSource.dsd));
+    redefineTable(tab_attachmenttype = new AttachmentTypeTable(this, "attachmenttype", DefinitionSource.dsd));
+    redefineTable(tab_attachment = new AttachmentTable(this, "attachment", DefinitionSource.dsd));
+    redefineTable(tab_setting = new SettingTable(this, "setting", DefinitionSource.dsd));
+  }
+
+  public GroupTable getGroupTable() {
+    return tab_group;
+  }
+
+  public CapabilityTable getCapabilityTable() {
+    return tab_capability;
+  }
+
+  public GroupMembershipTable getGroupMembershipTable() {
+    return tab_groupmembership;
+  }
+
+  public GroupCapabilityTable getGroupCapabilityTable() {
+    return tab_groupcapability;
+  }
+
+  public TableCategoryTable getTableCategoryTable() {
+    return tab_tablecategory;
+  }
+
+  public TableInfoTable getTableInfoTable() {
+    return tab_tableinfo;
+  }
+
+
+  public ColumnInfoTable getColumnInfoTable() {
+    return tab_columninfo;
   }
 
   public BoardTypeTable getBoardTypeTable() {
-    return tab_BoardType;
+    return tab_boardtype;
   }
 
   public BoardTable getBoardTable() {
-    return tab_Board;
+    return tab_board;
   }
 
   public org.melati.poem.UserTable getUserTable() {
-    return (org.melati.poem.UserTable)tab_User;
+    return (org.melati.poem.UserTable)tab_user;
   }
 
   public MembershipStatusTable getMembershipStatusTable() {
-    return tab_MembershipStatus;
+    return tab_membershipstatus;
   }
 
   public SubscriptionTable getSubscriptionTable() {
-    return tab_Subscription;
+    return tab_subscription;
   }
 
   public MessageTable getMessageTable() {
-    return tab_Message;
+    return tab_message;
   }
 
   public AttachmentTypeTable getAttachmentTypeTable() {
-    return tab_AttachmentType;
+    return tab_attachmenttype;
   }
 
   public AttachmentTable getAttachmentTable() {
-    return tab_Attachment;
+    return tab_attachment;
   }
 
   public org.melati.poem.SettingTable getSettingTable() {
-    return (org.melati.poem.SettingTable)tab_Setting;
+    return (org.melati.poem.SettingTable)tab_setting;
   }
 }

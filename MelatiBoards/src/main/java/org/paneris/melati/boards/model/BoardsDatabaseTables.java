@@ -50,13 +50,7 @@
 
 package org.paneris.melati.boards.model;
 
-import org.paneris.melati.boards.model.User;
-import org.paneris.melati.boards.model.UserTable;
-import org.paneris.melati.boards.model.generated.*;
-import java.util.*;
-import java.sql.Date;
-import java.sql.Timestamp;
-import org.melati.poem.*;
+import org.paneris.melati.boards.model.generated.BoardsDatabaseTablesBase;
 
 public interface BoardsDatabaseTables extends BoardsDatabaseTablesBase {
   // programmer's domain-specific code here
