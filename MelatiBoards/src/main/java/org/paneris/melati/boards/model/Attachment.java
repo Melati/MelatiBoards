@@ -49,14 +49,16 @@
 
 package org.paneris.melati.boards.model;
 
-import org.paneris.melati.boards.model.generated.AttachmentBase;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URLEncoder;
-import org.melati.poem.*;
+
+import org.melati.poem.AccessPoemException;
+import org.melati.poem.ValidationPoemException;
 import org.melati.util.UnexpectedExceptionException;
+import org.paneris.melati.boards.model.generated.AttachmentBase;
 
 public class Attachment extends AttachmentBase {
   public Attachment() {}
@@ -146,7 +148,7 @@ public class Attachment extends AttachmentBase {
     attachment.getParentFile().mkdirs();
     FileOutputStream fos = new FileOutputStream(attachment);
     fos.write(content);
-    try {fos.close();} catch (Exception e) {}
+    fos.close();
   }
 
 }
