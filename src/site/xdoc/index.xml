@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+
+<document>
+
+  <properties>
+  <title>MelatiBoards</title>
+    <author email="timp@paneris.org">Tim Pizey</author>
+    <keywords>
+     Messageboards, list server, nntp server
+    </keywords>
+  </properties>
+
+  <body>
+
+
+<section name="Melati Boards">
+<p>
+   A message board system using a <a href="http://melati.paneris.net/">Melati SQL database</a> as the message store.
+</p>
+<p>
+In addition to web based board functionality the MelatiBoards offer 
+email list and news server functionality.
+</p>
+</section>
+</body>
+</document>
+
+
+
+
+

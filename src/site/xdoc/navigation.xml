@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <project name="MelatiBoards">
 
+  <properties>
   <title>MelatiBoards</title>
+    <author email="timp@paneris.org">Tim Pizey</author>
+    <keywords>
+     Messageboards, list server, nntp server
+    </keywords>
+  </properties>
 
   <body>
     <menu name="Overview">
       <item name="Download"                href="/download.html"/>
+    </menu>
+    <menu name="Demonstration">
+      <item name="Boards"              href="db/Boards/boardsdemo/Types"/>
+      <item name="News Server"         href="news://boards/"/>
+      <item name="Admin system"        href="db/Admin/boardsdemo/Main"/>
     </menu>
   </body>
 </project>
