@@ -1,5 +1,6 @@
 #set $Response.ContentType = "text/html"
 #set $ml = $melati.HTMLMarkupLanguage
+#set $onVariableException = $melati.PassbackVariableExceptionHandler
 #set $board = $melati.Object
 
 <html>
@@ -22,7 +23,7 @@ A manager of this board must subscribe you.
   <ul>
     #foreach $subscription in $board.ManagersSubscriptions #begin
     <li>$ml.rendered($subscription.User.Name_unsafe) :
-        <a href="mailto:$ml.Attr.rendered($subscription.User.Email_unsafe)">$ml.rendered($subscription.User.Email_unsafe)</a>
+        <a href="mailto:$ml.Attr.rendered($subscription.User.Email)">$ml.rendered($subscription.User.Email)</a>
     #end
   </ul>
 #end #else #begin
@@ -32,5 +33,3 @@ A manager of this board must subscribe you.
 
 </body>
 </html>
-
-
