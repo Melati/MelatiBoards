@@ -85,8 +85,8 @@ import org.paneris.melati.boards.model.MessageTable;
 
 public class BoardAdmin extends TemplateServlet {
 
-  static private int MAX_HITS = 2000;
-  static private int HITS_PER_PAGE = 20;
+  private static int MAX_HITS = 2000;
+  private static int HITS_PER_PAGE = 20;
 
   protected Persistent create(final MessageTable table, 
                               final TemplateContext context, final User user) {
@@ -389,13 +389,10 @@ public class BoardAdmin extends TemplateServlet {
             getSubscriptionObject(new Integer(subscriptions[i]));
 
       String delete = context.getForm("delete-" + subscriptions[i]);
-      if ("true".equals(delete))
-      {
+      if ("true".equals(delete)){
         if (sub.getUser() != melati.getUser())
           toDelete.addElement(sub);
-      }
-      else
-      {
+      } else {
         String manager = context.getForm("manager-" + subscriptions[i]);
         if (sub.getUser() == melati.getUser())
           manager = sub.getIsmanager().toString();

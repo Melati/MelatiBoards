@@ -472,8 +472,7 @@ public class Board extends BoardBase {
       computeThreads();
     
     Vector realMessages = new Vector();
-    for(int i=0; i < threadTrees.size(); i++)
-    {
+    for(int i=0; i < threadTrees.size(); i++) {
       ChildrenDrivenMutableTree thread =
       (ChildrenDrivenMutableTree)threadTrees.elementAt(i);
       Enumeration e = thread.preorderEnumeration();
