@@ -1,15 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <project basedir="." default="build" name="boards">
-  <property name="app.name" value="boards"/>
   <property file="build.ant.properties"/>
-  <property name="build.classpath" value="lib/jakarta-oro-2.0.jar\:lib/servlet.jar\:lib/webmacro.jar\:lib/mail.jar\:lib/melati.jar\:lib/hsqldb.jar"/>
-  <property name="build.home" value="build"/>
-  <property name="build.dist" value="${build.home}/${app.name}"/>
-  <property name="build.compiled" value="${build.home}/compiled"/>
-  <property name="dist.src" value="${app.name}.src.jar"/>
-  <property name="dist.war" value="${app.name}.war"/>
-  <property name="javadoc.home" value="${build.home}/javadoc"/>
+  <property name="build.sysclasspath" value="ignore"/>
+  <property name="build.compiler"     value="modern"/>
+  <property name="app.name"        value="boards"/>
+  <property name="build.home"      value="./build"/>
+  <property name="build.lib"       value="./lib"/>
+  <property name="build.dist"      value="${build.home}/${app.name}"/>
+  <property name="build.compiled"  value="${build.home}/compiled"/>
+  <property name="dist.src"        value="${app.name}.src.jar"/>
+  <property name="dist.war"        value="${app.name}.war"/>
+  <property name="javadoc.home"    value="${build.home}/javadoc"/>
+
+
+  <path id="classpath.compile">
+    <pathelement path="./WEB-INF/classes"/>
+    <pathelement path="${build.lib}/melati.jar"/>
+    <pathelement path="${build.lib}/mail.jar"/>
+    <pathelement path="${build.lib}/jakarta-oro-2.0.jar"/>
+    <pathelement path="${build.lib}/javax.servlet.jar"/>
+    <pathelement path="${build.lib}/webmacro-1.0.jar"/>
+    <pathelement path="${build.lib}/hsqldb.jar"/>
+  </path>
+
+  <path id="classpath.jetty">
+    <pathelement path="${build.lib}/javax.servlet.jar"/>
+    <pathelement path="${build.lib}/javax.xml.jaxp.jar"/>
+    <pathelement path="${build.lib}/org.apache.crimson.jar"/>
+    <pathelement path="${build.lib}/org.apache.jasper.jar"/>
+    <pathelement path="${build.lib}/org.mortbay.jetty.jar"/>
+    <pathelement path="${build.lib}/melati.jar"/>
+    <pathelement path="${build.dist}/WEB-INF/lib/boards.jar"/>
+    <pathelement path="${build.dist}/WEB-INF/classes"/>
+    <pathelement path="${build.dist}/WEB-INF/lib/webmacro.jar"/>
+    <pathelement path="${build.dist}/WEB-INF/lib/mail.jar"/>
+    <pathelement path="${build.dist}/WEB-INF/lib/jakarta-oro-2.0.jar"/>
+    <pathelement path="${build.dist}/WEB-INF/lib/hsqldb.jar"/>
+    <pathelement path="${build.dist}/WEB-INF/lib/boards.jar"/>
+    <pathelement path="${build.dist}/WEB-INF/lib/activation.jar"/>
+  </path>
+
 
   <target name="prepare">
     <mkdir dir="${build.compiled}"/>
@@ -20,14 +51,15 @@
     <mkdir dir="${build.dist}/WEB-INF/lib"/>
     <copy file="etc/web.xml" tofile="${build.dist}/WEB-INF/web.xml"/>
     <copy todir="${build.dist}/WEB-INF/lib">
-	  <fileset dir="lib" includes="hsqldb.jar, webmacro.jar, jakarta-oro-2.0.jar, melati.jar"/>
+     <fileset dir="lib" includes="hsqldb.jar, webmacro.jar,
+	jakarta-oro-2.0.jar, melati.jar, mail.jar, activation.jar"/>
     </copy>
     <copy todir="${build.dist}/WEB-INF/classes">
       <fileset dir="etc/properties"/>
       <fileset dir="src/org/paneris" includes="**/*.wm"/>
     </copy>
     <copy todir="${build.dist}">
-	  <fileset dir="web"/>
+     <fileset dir="web"/>
     </copy>
   </target>
 
@@ -35,27 +67,47 @@
     <delete dir="${build.home}"/>
   </target>
 
-  <target depends="prepare" name="compile">
-    <javac  classpath="${build.classpath}" debug="on" deprecation="off" destdir="${build.compiled}" 
-       optimize="off" srcdir="src">
+  <target name="compile" depends="prepare" >
+    <javac classpathref="classpath.compile" 
+           debug="on" 
+           deprecation="off" 
+           destdir="${build.compiled}" 
+           optimize="off" 
+           srcdir="src">
     </javac>
   </target>
 
-  <target depends="pack" name="all"/>
+  <target name="all" depends="pack"/>
   
-  <target depends="compile" name="build">
-    <jar basedir="${build.compiled}" includes="**/*.*" jarfile="${build.dist}/WEB-INF/lib/${app.name}.jar"/>
+  <target name="build" depends="compile">
+    <jar basedir="${build.compiled}" 
+         includes="**/*.*" 
+         jarfile="${build.dist}/WEB-INF/lib/${app.name}.jar"/>
   </target>
   
-  <target depends="build" description="Packaging" name="pack">
+  <target name="pack" depends="build" description="Packaging" >
     <jar basedir="${build.dist}" jarfile="${dist.war}"/>
   </target>
   
-  <target depends="build" description="Simple deployment" name="deploy">
+  <target name="deploy" depends="build" description="Simple deployment">
     <delete dir="${deploy.home}/${app.name}/WEB-INF"/>
     <copy todir="${deploy.home}/${app.name}">
       <fileset dir="${build.dist}"/>
     </copy>
   </target>
+
+    <!-- ============================================================== -->
+    <!-- run Jetty with the specified configuration file                -->
+    <!-- ============================================================== -->
+
+  <target name="jetty" depends="deploy" description="Launch Jetty">
+    <java classname="org.mortbay.jetty.Server"
+          classpathref="classpath.jetty"
+          fork="yes"
+          failonerror="yes">
+      <arg line="etc/jetty.xml"/>
+    </java>
+  </target>
+
 
 </project>
