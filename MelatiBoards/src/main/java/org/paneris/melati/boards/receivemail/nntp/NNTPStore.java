@@ -34,6 +34,7 @@ import org.melati.LogicalDatabase;
 import org.melati.poem.AccessPoemException;
 import org.melati.poem.Initialiser;
 import org.melati.poem.Persistent;
+import org.melati.poem.PoemDatabase;
 import org.melati.poem.ValidationPoemException;
 import org.melati.util.ExceptionUtils;
 import org.melati.util.IoUtils;
@@ -42,7 +43,7 @@ import org.paneris.melati.boards.model.Attachment;
 import org.paneris.melati.boards.model.AttachmentType;
 import org.paneris.melati.boards.model.AttachmentTypeTable;
 import org.paneris.melati.boards.model.Board;
-import org.paneris.melati.boards.model.BoardsDatabase;
+import org.paneris.melati.boards.model.BoardsDatabaseTables;
 import org.paneris.melati.boards.model.Message;
 import org.paneris.melati.boards.model.MessageTable;
 import org.paneris.melati.boards.model.User;
@@ -57,7 +58,7 @@ import org.paneris.melati.boards.receivemail.Log;
 public class NNTPStore {
 
   private Log log;
-  public BoardsDatabase db = null;
+  public BoardsDatabaseTables db = null;
   String prefix = null;
   String msgIdSuffix = null;
 
@@ -66,8 +67,8 @@ public class NNTPStore {
   
   public NNTPStore(String database, String prefix, String nntpIdentifier)
     throws Exception {
-    db = (BoardsDatabase)LogicalDatabase.getDatabase(database);
-    db.setLogSQL(false);
+      db = (BoardsDatabaseTables)LogicalDatabase.getDatabase(database);
+      ((PoemDatabase)db).setLogSQL(false);
     this.prefix = prefix;
     msgIdSuffix = "$msg@" + nntpIdentifier;
   }
@@ -90,8 +91,9 @@ public class NNTPStore {
     return null;
   }
 
-  private String formatTimestamp(Date date) {
-    String dbmsClassName = db.getDbms().getClass().getName();
+// What is this doing here?
+   private String formatTimestamp(Date date) {
+    String dbmsClassName = ((PoemDatabase)db).getDbms().getClass().getName();
     if (dbmsClassName.indexOf("Postgresql") != -1) {
       return "'"
         + new SimpleDateFormat("MM-dd-yyyy HH:mm:ss Z").format(date)
@@ -100,7 +102,7 @@ public class NNTPStore {
       return "'"
         + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S").format(date)
         + "'";
-    }
+   }
     return "'" + new java.sql.Timestamp(date.getTime()).toString() + "'";
   }
 
@@ -122,7 +124,7 @@ public class NNTPStore {
       if (from != null) {
         String boardColName =
           db.getMessageTable().getBoardColumn().quotedName();
-        String msgTableName = db.quotedName(db.getMessageTable().getName());
+        String msgTableName = db.getMessageTable().getName();
         String dateColName = db.getMessageTable().getDateColumn().quotedName();
         String troidColName = db.getBoardTable().troidColumn().quotedName();
         criteria =
@@ -344,7 +346,7 @@ public class NNTPStore {
    */
   private Board resolveTargetBoard(String newsGroup) {
     String boardName = newsGroup.substring(prefix.length() + 1).trim();
-    return (Board)db.getTable("board").getColumn("name").firstWhereEq(
+    return (Board)db.getBoardTable().getColumn("name").firstWhereEq(
       boardName);
   }
 
@@ -359,7 +361,7 @@ public class NNTPStore {
     User user = null;
     try {
       user =
-        (User)db.getTable("user").getColumn("login").firstWhereEq(
+        (User)db.getUserTable().getColumn("login").firstWhereEq(
           authInfo.getLogin());
       if (user != null) {
         if (user.getPassword_unsafe().equals(authInfo.getPassword())) {
@@ -380,7 +382,7 @@ public class NNTPStore {
     int troid = id - 1;
     Message message = null;
     try {
-      message = (Message)db.getTable("message").firstSelection("\"id\"=" + troid);
+      message = (Message)db.getMessageTable().firstSelection("\"id\"=" + troid);
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -407,7 +409,7 @@ public class NNTPStore {
                                    final byte[] content)
     throws Exception {
 
-    if (!((Board)db.getTable("board").getObject(message.getBoard_unsafe()))
+    if (!((Board)db.getBoardTable().getObject(message.getBoard_unsafe()))
       .getAttachmentsallowed()
       .booleanValue())
       return "[[ Attachments are not allowed on this board ]]\n";
@@ -419,10 +421,10 @@ public class NNTPStore {
       contentType = contentType.substring(0, semicolonIndex);
 
     final AttachmentType type =
-      ((AttachmentTypeTable)db.getTable("attachmenttype")).ensure(contentType);
+      ((AttachmentTypeTable)db.getAttachmentTypeTable()).ensure(contentType);
 
     Attachment att =
-      (Attachment)db.getTable("attachment").create(new Initialiser() {
+      (Attachment)db.getAttachmentTable().create(new Initialiser() {
       public void init(Persistent object)
         throws AccessPoemException, ValidationPoemException {
         object.setRaw("message", message.troid());
@@ -464,7 +466,7 @@ public class NNTPStore {
       final String subject = message.getSubject();
       Message m =
         (Message)
-          ((MessageTable)db.getTable("message")).create(new Initialiser() {
+          ((MessageTable)db.getMessageTable()).create(new Initialiser() {
         public void init(Persistent object)
           throws AccessPoemException, ValidationPoemException {
           object.setRaw("subject", subject);
