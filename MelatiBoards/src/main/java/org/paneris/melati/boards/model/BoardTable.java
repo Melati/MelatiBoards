@@ -100,6 +100,10 @@ public class BoardTable extends BoardTableBase {
     return getSettingValue("BoardsAttachmentsURL");
   }
 
+  public String getBoardsStylesheetURL() throws SettingNotFoundException {
+    return getSettingValue("BoardsStylesheetURL");
+  }
+
   public String getLogicalDatabase() throws SettingNotFoundException {
     return getSettingValue("LogicalDatabase");
   }

@@ -53,12 +53,13 @@ package org.paneris.melati.boards.model;
 import org.paneris.melati.boards.model.User;
 import org.paneris.melati.boards.model.UserTable;
 import org.paneris.melati.boards.model.Setting;
-import org.paneris.melati.boards.model.generated.*;
-import java.util.*;
-import java.sql.*;
-import java.sql.Date;
-import java.sql.Timestamp;
-import org.melati.poem.*;
+import org.paneris.melati.boards.model.generated.SettingTableBase;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import org.melati.poem.Database;
+import org.melati.poem.DefinitionSource;
+import org.melati.poem.PoemTypeFactory;
+import org.melati.poem.PoemException;
 import org.melati.util.Email;
 
 public class SettingTable extends SettingTableBase {
@@ -69,6 +70,7 @@ public class SettingTable extends SettingTableBase {
                     "BoardsEmailTemplates",
                     "BoardsAttachmentsPath",
                     "BoardsAttachmentsURL",
+                    "BoardsStylesheetURL",
                     "LogicalDatabase"};
 
   String[] displaynames = {"SMTP server",
@@ -77,6 +79,7 @@ public class SettingTable extends SettingTableBase {
                            "Boards email templates",
                            "Boards attachments Path",
                            "Boards attachments URL",
+                           "Boards stylesheet URL",
                            "Logical database"};
 
   String[] descriptions = {"The SMTP server for outgoing mail",
@@ -96,6 +99,7 @@ public class SettingTable extends SettingTableBase {
                            "(e.g. /usr/httpd/testapp/board_attachments)",
                            "A URL to the directory defined by BoardsAttachmentsPath " +
                            "(e.g. http://www.testapp.co.uk/board_attachments)",
+                           "A URL to a stylesheet for all board pages",
                            "The name of the database (note this must agree with " +
                            "the entry in org.melati.LogicalDatabase.properties " +
                            "(e.g. testdb)"

@@ -52,16 +52,14 @@ package org.paneris.melati.boards.model;
 
 import org.paneris.melati.boards.model.User;
 import org.paneris.melati.boards.model.UserTable;
-import org.paneris.melati.boards.model.generated.*;
-import java.io.*;
-import java.util.*;
-import java.lang.ref.*;
-import java.sql.Date;
-import java.sql.Timestamp;
+import org.paneris.melati.boards.model.generated.BoardBase;
+import java.io.File;
+import java.util.Vector;
+import java.util.Enumeration;
+import java.util.Hashtable;
+import java.lang.ref.SoftReference;
 import javax.swing.tree.DefaultMutableTreeNode;
-import org.melati.*;
 import org.melati.poem.*;
-import org.melati.template.*;
 import org.melati.util.*;
 
 public class Board extends BoardBase {
@@ -424,7 +422,7 @@ public class Board extends BoardBase {
     DefaultMutableTreeNode node = getTreeNode(message);
 
     if (node == null)   // If this message isn't in the tree, because 
-	return;         // it is pending authorisation for example
+      return;         // it is pending authorisation for example
     
     Enumeration children = node.children();
     while (children.hasMoreElements()) {
@@ -570,6 +568,10 @@ public class Board extends BoardBase {
     return getBoardTable().getBoardsSystemURL() + "/" +
     getBoardTable().getLogicalDatabase() + "/board/" +
     troid()+"/Board";
+  }
+  
+  public String getStylesheetURL() throws SettingNotFoundException {
+    return getBoardTable().getBoardsStylesheetURL();
   }
   
   public String getMessageURL(Message m) throws SettingNotFoundException {
