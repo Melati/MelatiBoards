@@ -50,7 +50,9 @@
 
 package org.paneris.melati.boards.receivemail;
 
-import java.io.*;
+import java.io.FilterInputStream;
+import java.io.IOException;
+import java.io.PushbackInputStream;
 
 /**
  * A stream comprising everything in an underlying stream up to the
@@ -170,6 +172,9 @@ class DotTerminatedInputStream extends FilterInputStream {
     }
   }
 
+  /**
+   *  @todo Fix empty catch block
+   */
   public synchronized int read(byte[] b, int off, int len) throws IOException {
     if (len <= 0) {
       return 0;
@@ -179,18 +184,18 @@ class DotTerminatedInputStream extends FilterInputStream {
     if (c == -1) {
       return -1;
     }
-    b[off] = (byte)c;
+    b[off] = (byte) c;
 
     int i = 1;
     try {
-      for (; i < len ; i++) {
-    c = read();
-    if (c == -1) {
-      break;
-    }
-    if (b != null) {
-      b[off + i] = (byte)c;
-    }
+      for (; i < len; i++) {
+        c = read();
+        if (c == -1) {
+          break;
+        }
+        if (b != null) {
+          b[off + i] = (byte) c;
+        }
       }
     } catch (IOException ee) {
     }
