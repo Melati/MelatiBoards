@@ -94,10 +94,16 @@ public class Message extends MessageBase implements Treeable {
       getBoard().addToParent(this, getParent());
   }
 
+  String[] lines = null;
+  public String[] getLines() {
+    if (lines == null)
+      lines = StringUtils.split(getBody_unsafe(), '\n');
+    return lines; 
+  }
   public String IndentBody(String indent) {
-    String[] lines = StringUtils.split(getBody_unsafe(), '\n');
     StringBuffer ret = new StringBuffer(
-                    getBody_unsafe().length()+lines.length*indent.length());
+                    getBody_unsafe().length() +
+                    lines.length*indent.length());
     for(int i=0; i<lines.length; i++) {
       ret.append(indent);
       ret.append(lines[i]);
@@ -258,6 +264,7 @@ public class Message extends MessageBase implements Treeable {
       throws AccessPoemException {
     return getSubject();
   }
+
 }
 
 
