@@ -181,7 +181,23 @@ http://sourceforge.net/mailarchive/forum.php?forum=melati-users
       <version>0.7.2.2</version>
       <url>http://www.melati.org/</url>
       <properties>
-         <war.bundle>false</war.bundle>
+         <war.bundle>true</war.bundle>
+      </properties>
+    </dependency>
+    <dependency>
+      <id>webmacro</id>
+      <version>1.0</version>
+      <url>http://www.webmacro.org/</url>
+      <properties>
+         <war.bundle>true</war.bundle>
+      </properties>
+    </dependency>
+    <dependency>
+      <id>activation</id>
+      <version>1.0</version>
+      <url>http://www.sun.com/</url>
+      <properties>
+         <war.bundle>true</war.bundle>
       </properties>
     </dependency>
     <dependency>
@@ -213,7 +229,7 @@ http://sourceforge.net/mailarchive/forum.php?forum=melati-users
       <version>1.7.1</version>
       <url>http://www.hslqldb.org/</url>
       <properties>
-         <war.bundle>false</war.bundle>
+         <war.bundle>true</war.bundle>
       </properties>
     </dependency>
   </dependencies>
@@ -257,6 +273,13 @@ http://sourceforge.net/mailarchive/forum.php?forum=melati-users
      <resource>
       <directory>src/org/paneris</directory>
       <includes>
+       <include>**/*.wm</include>
+      </includes>
+     </resource>
+     <resource>
+      <directory>etc/properties/</directory>
+      <includes>
+       <include>**/*.properties</include>
        <include>**/*.wm</include>
       </includes>
      </resource>
