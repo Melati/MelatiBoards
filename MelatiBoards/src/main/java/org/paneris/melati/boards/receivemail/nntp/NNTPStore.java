@@ -59,6 +59,13 @@ public class NNTPStore {
     msgIDSuffix = "$msg@" + nntpIdentifier;
   }
 
+  /**
+   *  Return a {@link Board} given a newsgroup name.
+   * 
+   * @param name
+   * @return a board object or null
+   * @throws AccessPoemException
+   */
   public Board getBoard(String name) throws AccessPoemException {
     try {
       return resolveTargetBoard(name);
@@ -84,9 +91,19 @@ public class NNTPStore {
     return "'" + new java.sql.Timestamp(date.getTime()).toString() + "'";
   }
 
+  /**
+   *  Return boards : either all boards, those containing messages more 
+   * recent than the <code>from</code> date or whose names match the 
+   * regexp psssed in.  
+   * 
+   * @param from
+   * @param wildmat
+   * @return
+   */
   public Enumeration getBoards(Date from, String wildmat) {
     try {
       String criteria = null;
+      Enumeration result = null;
       if (from != null) {
         String boardColName =
           db.getMessageTable().getBoardColumn().quotedName();
@@ -104,13 +121,11 @@ public class NNTPStore {
             + " >= "
             + formatTimestamp(from)
             + ")";
-      }
-      Enumeration result = null;
-      if (from != null) {
         result = db.getBoardTable().selection(criteria);
       } else {
         result = db.getBoardTable().selection();
       }
+
       if (wildmat != null) {
         Pattern p = new GlobCompiler().compile(wildmat);
         Perl5Matcher matcher = new Perl5Matcher();
@@ -389,11 +404,14 @@ public class NNTPStore {
   public void postMessage(final MimeMessage message, final User sender)
     throws Exception {
     String newsgroups = message.getHeader("newsgroups")[0];
+    if (newsgroups == null) 
+       throw new Exception("newsgroups header missing");
+      
     StringTokenizer strtok = new StringTokenizer(newsgroups, ", ", false);
+    final Board board = resolveTargetBoard(strtok.nextToken());
     try {
       //need to get it according to encoding rules.
       final String subject = message.getSubject();
-      final Board board = resolveTargetBoard(strtok.nextToken());
       Message m =
         (Message)
           ((MessageTable)db.getTable("message")).create(new Initialiser() {
