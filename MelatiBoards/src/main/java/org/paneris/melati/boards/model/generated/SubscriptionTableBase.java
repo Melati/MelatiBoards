@@ -127,6 +127,10 @@ public class SubscriptionTableBase extends Table {
             return true;
           }
 
+          protected String defaultRenderinfo() {
+            return "SelectionWindow";
+          }
+
           public Object getRaw_unsafe(Persistent g)
               throws AccessPoemException {
             return ((Subscription)g).getUser_unsafe();
@@ -186,6 +190,10 @@ public class SubscriptionTableBase extends Table {
 
           protected boolean defaultIndexed() {
             return true;
+          }
+
+          protected String defaultRenderinfo() {
+            return "SelectionWindow";
           }
 
           public Object getRaw_unsafe(Persistent g)

@@ -128,6 +128,10 @@ public class AttachmentTableBase extends Table {
             return true;
           }
 
+          protected String defaultRenderinfo() {
+            return "SelectionWindow";
+          }
+
           public Object getRaw_unsafe(Persistent g)
               throws AccessPoemException {
             return ((Attachment)g).getMessage_unsafe();
