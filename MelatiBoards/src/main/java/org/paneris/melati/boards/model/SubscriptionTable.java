@@ -127,7 +127,7 @@ public class SubscriptionTable extends SubscriptionTableBase {
                  getBoardObject(((Subscription)persistent).getBoard_unsafe());
      AccessToken token = PoemThread.accessToken();
 
-	 // This is the initial manager subscription for a new board
+     // This is the initial manager subscription for a new board
      if (token == AccessToken.root) {
        persistent.setRaw("approved", Boolean.TRUE);
        persistent.setRaw("ismanager", Boolean.TRUE);
