@@ -174,8 +174,9 @@ public class BoardAdmin extends TemplateServlet {
 
     String parent = context.getForm("parent");
     if (parent != null && !parent.equals("")) {
-      context.put("parent", ((BoardTable)melati.getTable()).getBoardsDatabaseTables().
-                        getMessageTable().getObject(new Integer(parent)));
+      context.put("parent",
+                  ((BoardTable)melati.getTable()).getBoardsDatabaseTables().
+                    getMessageTable().getObject(new Integer(parent)));
     }
 
     return boardTemplate(context, "MessageNew");
@@ -202,16 +203,12 @@ public class BoardAdmin extends TemplateServlet {
       throws PoemException {
     Message newMessage = (Message)create(((BoardTable)melati.getTable()).
                               getBoardsDatabaseTables().getMessageTable(), context);
-    if ("".equals(newMessage.getSubject())) {
-      newMessage.setSubject("(no subject)");
-    }
     if (newMessage.getApproved().booleanValue() == true) {
       newMessage.distribute();
       return boardTemplate(context, "MessageCreate");
     }
     else {
-      emailNotification(melati,
-                        newMessage.getBoard(),
+      emailNotification(newMessage.getBoard(),
                         (org.paneris.melati.boards.model.User)melati.getUser(),
                         "MessageReceived");
       return boardTemplate(context, "MessageNeedsModerating");
@@ -233,6 +230,7 @@ public class BoardAdmin extends TemplateServlet {
                             ((BoardsDatabaseTables)melati.getDatabase()).
                           getMessageTable().getObject(new Integer(messages[i]));
         message.approve();
+        message.distribute();
       }
     }
     return boardTemplate(context, "ApproveMessages");
@@ -274,16 +272,14 @@ public class BoardAdmin extends TemplateServlet {
                         getMembershipStatusTable().getNormal(),
                       Boolean.FALSE,             // not a manager
                       Boolean.FALSE);            // not approved
-      emailNotification(melati,
-                        board,
+      emailNotification(board,
                         (org.paneris.melati.boards.model.User)melati.getUser(),
                         "SubscriptionRequestReceived");
       return boardTemplate(context, "SubscribeApprovalRequired");
     }
     else {
       board.subscribe(user);
-      emailNotification(melati,
-                        board,
+      emailNotification(board,
                         (org.paneris.melati.boards.model.User)melati.getUser(),
                         "Subscribed");
       return boardTemplate(context, "Subscribe");
@@ -367,10 +363,7 @@ public class BoardAdmin extends TemplateServlet {
 
       Board board = (Board)melati.getObject();
       board.subscribe(newUser, normal, manager, Boolean.TRUE);
-      emailNotification(melati,
-                        board,
-                        newUser,
-                        "Subscribed");
+      emailNotification(board, newUser, "Subscribed");
     }
     return boardTemplate(context, "MembersEdit");
   }
@@ -400,14 +393,12 @@ public class BoardAdmin extends TemplateServlet {
         if (action.equals("manager"))
           subscription.setIsmanager(Boolean.TRUE);
         subscription.approve();
-        emailNotification(melati,
-                          subscription.getBoard(),
+        emailNotification(subscription.getBoard(),
                           (org.paneris.melati.boards.model.User)melati.getUser(),
                           "SubscriptionRequestApproved");
       }
       else if (action.equals("remove")) {
-        emailNotification(melati,
-                          subscription.getBoard(),
+        emailNotification(subscription.getBoard(),
                           (org.paneris.melati.boards.model.User)melati.getUser(),
                           "SubscriptionRequestDeclined");
         subscription.deleteAndCommit();
@@ -427,63 +418,6 @@ public class BoardAdmin extends TemplateServlet {
     return boardTemplate(context, "SubscriptionUpdate");
   }
 
-  /***********************************
-   * Send emails to users and managers
-   ***********************************/
-  
-  public void emailNotification(Melati melati, Board board, User user,
-                                String templateName) {
-
-    try {
-      String message = evalTemplate(melati, user, templateName, board);
-
-      // Send email to user
-      Email.send(board.getDatabase(),
-                 "admin."+board.getEmailAddress(),       // From
-                 user.getEmail(),      // To
-                 "",                   // reply to
-                 "["+board.getName()+"]: Admin message",
-                 message);
-
-      Vector managers = EnumUtils.vectorOf(
-                          new MappedEnumeration(board.getManagers()) {
-                            public Object mapped(Object manager) {
-                              return ((User)manager).getEmail();
-                            }
-                          });
-      String[] emailArray = new String[managers.size()];
-      managers.copyInto(emailArray);
-
-      // Send email to managers
-      Email.sendToList(board.getDatabase(),
-                       "admin."+board.getEmailAddress(),       // From
-                       emailArray,           // To
-                       user.getEmail(),     // Apparently to
-                       "",                   // reply to
-                       "["+board.getName()+"]: Admin message",
-                       "The following message has been sent to " +
-                       user.getEmail() + " (" + user.getName() + ") \n\n" +
-                       message);
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-  }
-
-  public String evalTemplate(Melati melati, User user, String template, Board board)
-                                throws IOException, TemplateEngineException {
-
-      // templateEngine comes from TemplateServlet
-      MelatiWriter sw = templateEngine.getStringWriter(melati.getEncoding());
-      Melati melati2 = new Melati(melati.getConfig(), sw);
-      TemplateContext context = templateEngine.getTemplateContext(melati2);
-      context.put("melati", melati2);
-      context.put("board", board);
-      context.put("user", user);
-      templateEngine.expandTemplate(melati2.getWriter(),
-                                    board.templatePath(template),
-                                    context);
-      return sw.asString();
-  }
 
   /*****************************
    * Handler
@@ -594,6 +528,109 @@ public class BoardAdmin extends TemplateServlet {
     }
       
     return (start != null) ? start : "0";
+  }
+
+
+  /***********************************
+   * Send emails to users and managers
+   ***********************************/
+  
+  public static void emailNotification(Board board, User user,
+                                       String templateName) {
+    try {
+      (new DistributeThread(board, user,
+                            evalTemplate(user, templateName, board))).start();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+  public static MelatiConfig   mConfig = null;
+  public static TemplateEngine tEngine = null;
+
+  public static String evalTemplate(User user, String template, Board board)
+                                throws Exception {
+    if (mConfig == null)
+      mConfig = new MelatiConfig();
+    if (tEngine == null) {
+      tEngine = mConfig.getTemplateEngine();
+      if (tEngine != null)
+        tEngine.init();
+    }
+    MelatiWriter sw = tEngine.getStringWriter("UTF8");
+    Melati melati = new Melati(mConfig, sw);
+    TemplateContext context = tEngine.getTemplateContext(melati);
+    context.put("melati", melati);
+    context.put("board", board);
+    context.put("user", user);
+    tEngine.expandTemplate(melati.getWriter(),
+                           board.templatePath(template),
+                           context);
+    return sw.asString();
+  }
+}
+
+/**
+ * A daemon to redistribute emails to the messageboard's distribution list
+ */
+
+class DistributeThread extends Thread {
+  private Board board;
+  private User user;
+  private String message;
+
+  public DistributeThread(Board board, User user, String message) {
+    this.board = board;
+    this.user = user;
+    this.message = message;
+  }
+
+  public void run() {
+    board.getDatabase().inSession(
+      AccessToken.root,
+      new PoemTask() {
+        public void run() {
+          try {
+
+      // Send email to user
+      Email.send(board.getDatabase(),
+                 "admin."+board.getEmailAddress(),       // From
+                 user.getEmail(),      // To
+                 "",                   // reply to
+                 "["+board.getName()+"]: Admin message",
+                 message);
+
+      Vector managers = EnumUtils.vectorOf(
+                          new MappedEnumeration(board.getManagers()) {
+                            public Object mapped(Object manager) {
+                              return ((User)manager).getEmail();
+                            }
+                          });
+      String[] emailArray = new String[managers.size()];
+      managers.copyInto(emailArray);
+
+      // Send email to managers
+      Email.sendToList(board.getDatabase(),
+                       "admin."+board.getEmailAddress(),       // From
+                       emailArray,           // To
+                       user.getEmail(),     // Apparently to
+                       "",                   // reply to
+                       "["+board.getName()+"]: Admin message",
+                       "The following message has been sent to " +
+                       user.getEmail() + " (" + user.getName() + ") \n\n" +
+                       message);
+
+
+          }
+          catch (Exception e) {
+            System.err.println("Some problem in the Distribution Thread:");
+            e.printStackTrace();
+          }
+        }
+        public String toString() {
+          return "Sending email to the managers of board:" + board.getName();
+        }
+      });
   }
 }
 
