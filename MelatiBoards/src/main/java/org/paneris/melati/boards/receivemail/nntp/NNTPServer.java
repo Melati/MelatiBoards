@@ -78,7 +78,7 @@ public class NNTPServer implements Runnable {
    * @param identifier  News group identifier eg org.paneris
    * @param port        Socket port to listen on
    * @param config      A properties file containing configuration
-   * @param bufSize     The Buffer size to use
+   * @param bufSize     The Buffer size to use (not used yet)
    * @param log         A Log object
    * @throws ServletException if anything goes wrong
    */
