@@ -66,7 +66,7 @@ import org.melati.servlet.TemplateServlet;
 import org.melati.servlet.InvalidUsageException;
 import org.melati.PoemContext;
 import org.melati.servlet.PathInfoException;
-import org.melati.template.TemplateContext;
+import org.melati.template.ServletTemplateContext;
 import org.melati.template.TemplateEngine;
 import org.melati.poem.Database;
 import org.melati.poem.PoemTask;
@@ -98,7 +98,7 @@ public class BoardAdmin extends TemplateServlet {
   private static int HITS_PER_PAGE = 20;
 
   protected Persistent create(final MessageTable table, 
-                              final TemplateContext context, final User user) {
+                              final ServletTemplateContext context, final User user) {
     return table.create(
         new Initialiser() {
           public void init(Persistent object)
@@ -178,7 +178,7 @@ public class BoardAdmin extends TemplateServlet {
   }
 
 
-  protected String boardTemplate(TemplateContext context, String name) {
+  protected String boardTemplate(ServletTemplateContext context, String name) {
     return "melati/boards/" + name;
   }
 
@@ -186,7 +186,7 @@ public class BoardAdmin extends TemplateServlet {
    * System Actions
    *****************************/
   
-  protected String loginTemplate(TemplateContext context, Melati melati)
+  protected String loginTemplate(ServletTemplateContext context, Melati melati)
       throws PoemException {
     org.melati.poem.User token = (org.melati.poem.User)PoemThread.accessToken();
     if (token.isGuest())
@@ -194,12 +194,12 @@ public class BoardAdmin extends TemplateServlet {
     return boardTemplate(context, melati);
   }
 
-  protected String typesTemplate(TemplateContext context, Melati melati)
+  protected String typesTemplate(ServletTemplateContext context, Melati melati)
       throws PoemException {
     return boardTemplate(context, "Types");
   }
 
-  protected String searchForBoardTemplate(TemplateContext context, Melati melati)
+  protected String searchForBoardTemplate(ServletTemplateContext context, Melati melati)
       throws PoemException {
     return boardTemplate(context, "SearchForBoard");
   }
@@ -208,7 +208,7 @@ public class BoardAdmin extends TemplateServlet {
    * BoardType Actions
    *******************/
   
-  protected String listBoardsTemplate(TemplateContext context, Melati melati)
+  protected String listBoardsTemplate(ServletTemplateContext context, Melati melati)
       throws PoemException {
     return boardTemplate(context, "ListBoards");
   }
@@ -221,7 +221,7 @@ public class BoardAdmin extends TemplateServlet {
    * List a page of messages for this board, starting at a particular
    * message (as determined by the "start" parameter).
    */
-  protected String boardTemplate(TemplateContext context, Melati melati)
+  protected String boardTemplate(ServletTemplateContext context, Melati melati)
       throws PoemException {
 
     // The start parameter is set in the main handler function
@@ -240,30 +240,30 @@ public class BoardAdmin extends TemplateServlet {
       throw new AccessPoemException(user, new Capability("Not Banned"));
   }
 
-  protected String searchBoardTemplate(TemplateContext context, Melati melati, Board board)
+  protected String searchBoardTemplate(ServletTemplateContext context, Melati melati, Board board)
       throws PoemException {
     return boardTemplate(context, "SearchBoard");
   }
 
-  protected String settingsTemplate(TemplateContext context, Melati melati, Board board)
+  protected String settingsTemplate(ServletTemplateContext context, Melati melati, Board board)
       throws PoemException {
     return boardTemplate(context, "Settings");
   }
 
-  protected String settingsUpdateTemplate(TemplateContext context, Melati melati, Board board)
+  protected String settingsUpdateTemplate(ServletTemplateContext context, Melati melati, Board board)
       throws PoemException {
     checkBanned(board, melati.getUser());
     MelatiUtil.extractFields(context, melati.getObject());
     return boardTemplate(context, "SettingsUpdate");
   }
 
-  protected String settingsEditTemplate(TemplateContext context, Melati melati, Board board)
+  protected String settingsEditTemplate(ServletTemplateContext context, Melati melati, Board board)
       throws PoemException {
     checkBanned(board, melati.getUser());
     return boardTemplate(context, "SettingsEdit");
   }
 
-  protected String membersTemplate(TemplateContext context, Melati melati, Board board)
+  protected String membersTemplate(ServletTemplateContext context, Melati melati, Board board)
       throws PoemException {
     return boardTemplate(context, "Members");
   }
@@ -271,7 +271,7 @@ public class BoardAdmin extends TemplateServlet {
   /**
    * Present a form for a user to enter a new message
    */
-  protected String messageNewTemplate(TemplateContext context, Melati melati, Board board)
+  protected String messageNewTemplate(ServletTemplateContext context, Melati melati, Board board)
       throws PoemException {
 
     checkBanned(board, melati.getUser());
@@ -292,7 +292,7 @@ public class BoardAdmin extends TemplateServlet {
    * Message Actions
    *****************/
   
-  protected String messageTemplate(TemplateContext context, Melati melati, 
+  protected String messageTemplate(ServletTemplateContext context, Melati melati, 
                                    Board board, boolean withThread)
       throws PoemException {
     context.put("withThread", new Boolean(withThread));
@@ -305,7 +305,7 @@ public class BoardAdmin extends TemplateServlet {
    * If we need approval from a manager, we send the user an email notifying
    * them. Otherwise, we distribute the message to the members of the board
    */
-  protected String messageCreateTemplate(TemplateContext context, final Melati melati, Board board)
+  protected String messageCreateTemplate(ServletTemplateContext context, final Melati melati, Board board)
       throws PoemException {
         
     checkBanned(board, melati.getUser());
@@ -354,12 +354,12 @@ public class BoardAdmin extends TemplateServlet {
     return boardTemplate(context, "MessageNeedsModerating");
   }
 
-  protected String pendingMessagesTemplate(TemplateContext context, Melati melati, Board board)
+  protected String pendingMessagesTemplate(ServletTemplateContext context, Melati melati, Board board)
       throws PoemException {
     return boardTemplate(context, "PendingMessages");
   }
 
-  protected String approveMessagesTemplate(TemplateContext context, Melati melati, Board board)
+  protected String approveMessagesTemplate(ServletTemplateContext context, Melati melati, Board board)
       throws PoemException {
     String[] messages = melati.getRequest().getParameterValues("message");
     for(int i=0; i < messages.length; i++) {
@@ -394,7 +394,7 @@ public class BoardAdmin extends TemplateServlet {
    * a manager. If so, we let the user and the managers know by email,
    * otherwise we subscribe them to the board.
    */
-  protected String subscribeTemplate(TemplateContext context, 
+  protected String subscribeTemplate(ServletTemplateContext context, 
                                      Melati melati, Board board)
       throws PoemException {
     checkBanned(board, melati.getUser());
@@ -431,7 +431,7 @@ public class BoardAdmin extends TemplateServlet {
     }
   }
 
-  protected String unsubscribeTemplate(TemplateContext context, Melati melati, Board board)
+  protected String unsubscribeTemplate(ServletTemplateContext context, Melati melati, Board board)
       throws PoemException {
     // ensure we are logged in
     if (melati.getUser().isGuest())
@@ -449,7 +449,7 @@ public class BoardAdmin extends TemplateServlet {
    * A manager can alter a member's subscription type, whether they
    * are a manager and can delete the user from the board.
    */
-  protected String membersEditTemplate(TemplateContext context, Melati melati, Board board)
+  protected String membersEditTemplate(ServletTemplateContext context, Melati melati, Board board)
       throws PoemException {
 
     // Read in the new settings, if any. Otherwise, return the form
@@ -490,7 +490,7 @@ public class BoardAdmin extends TemplateServlet {
    * Delete messages
    * A manager can delete messages from a board.  
    */
-  protected String deleteMessagesTemplate(TemplateContext context, Melati melati, Board board)
+  protected String deleteMessagesTemplate(ServletTemplateContext context, Melati melati, Board board)
       throws PoemException {
 
     // Read in the new settings, if any. Otherwise, return the form
@@ -511,7 +511,7 @@ public class BoardAdmin extends TemplateServlet {
    * A manager can subscribe users to a board. We notify the user and the
    * managers by email.
    */
-  protected String subscribeOthersTemplate(TemplateContext context, Melati melati, Board board)
+  protected String subscribeOthersTemplate(ServletTemplateContext context, Melati melati, Board board)
       throws PoemException {
 
     String[] others = melati.getRequest().getParameterValues("others");
@@ -537,7 +537,7 @@ public class BoardAdmin extends TemplateServlet {
     return boardTemplate(context, "MembersEdit");
   }
 
-  protected String pendingSubscriptionsTemplate(TemplateContext context, Melati melati, Board board)
+  protected String pendingSubscriptionsTemplate(ServletTemplateContext context, Melati melati, Board board)
       throws PoemException {
     return boardTemplate(context, "PendingSubscriptions");
   }
@@ -546,7 +546,7 @@ public class BoardAdmin extends TemplateServlet {
    * A manager can approve a user's request to be subscribed to a board
    * or can decline it.
    */
-  protected String approveSubscriptionsTemplate(TemplateContext context, Melati melati, Board board)
+  protected String approveSubscriptionsTemplate(ServletTemplateContext context, Melati melati, Board board)
       throws PoemException {
 
     String[] subscriptions = melati.getRequest().getParameterValues("subscription");
@@ -576,13 +576,13 @@ public class BoardAdmin extends TemplateServlet {
     return boardTemplate(context, "ApproveSubscriptions");
   }
 
-  protected String subscriptionEditTemplate(TemplateContext context, Melati melati, Board board)
+  protected String subscriptionEditTemplate(ServletTemplateContext context, Melati melati, Board board)
       throws PoemException {
     checkBanned(board, melati.getUser());
     return boardTemplate(context, "SubscriptionEdit");
   }
 
-  protected String subscriptionUpdateTemplate(TemplateContext context, Melati melati, Board board)
+  protected String subscriptionUpdateTemplate(ServletTemplateContext context, Melati melati, Board board)
       throws PoemException {
     checkBanned(board, melati.getUser());
     MelatiUtil.extractFields(context, melati.getObject());
@@ -595,7 +595,7 @@ public class BoardAdmin extends TemplateServlet {
    *****************************/
 
   protected String doTemplateRequest(
-                   Melati melati, TemplateContext context) 
+                   Melati melati, ServletTemplateContext context) 
                    throws Exception {
 
     context.put("boardutils",
@@ -734,7 +734,7 @@ public class BoardAdmin extends TemplateServlet {
     }
     MelatiWriter sw = tEngine.getStringWriter("UTF8");
     Melati melati = new Melati(mConfig, sw);
-    TemplateContext context = tEngine.getTemplateContext(melati);
+    ServletTemplateContext context = (ServletTemplateContext)tEngine.getTemplateContext(melati);
     context.put("melati", melati);
     context.put("board", board);
     context.put("user", user);
