@@ -609,9 +609,16 @@ public class Board extends BoardBase {
    */
   public int getFirstMessageId() throws SQLException {
     int result = -1;
+    MessageTable messageTable = getBoardsDatabaseTables().getMessageTable();
     ResultSet rs = getDatabase().sqlQuery(
-        "SELECT MIN(\"id\") FROM \"message\" WHERE \"board\"="
-            + getTroid().intValue());
+        "SELECT MIN(" + 
+        messageTable.troidColumn().quotedName() 
+        +") FROM "
+        + messageTable.quotedName()
+        + " WHERE  " 
+        + messageTable.getBoardColumn().quotedName()
+        + " = "
+        + getTroid().intValue());
     if (rs.next())
       result = rs.getInt(1);
     rs.close();
@@ -628,9 +635,17 @@ public class Board extends BoardBase {
    */
   public int getLastMessageId() throws SQLException {
     int result = -1;
+    MessageTable messageTable = getBoardsDatabaseTables().getMessageTable();
     ResultSet rs = getDatabase().sqlQuery(
-        "SELECT MAX(\"id\") FROM \"message\" WHERE \"board\"="
-            + getTroid().intValue());
+      "SELECT MAX(" + 
+        messageTable.troidColumn().quotedName() 
+        +") FROM "
+        + messageTable.quotedName()
+        + " WHERE  " 
+        + messageTable.getBoardColumn().quotedName()
+        + " = "
+        + getTroid().intValue());
+    
     if (rs.next())
       result = rs.getInt(1);
     rs.close();
