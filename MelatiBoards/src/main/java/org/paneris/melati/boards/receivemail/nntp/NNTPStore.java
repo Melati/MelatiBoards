@@ -75,6 +75,7 @@ import org.paneris.melati.boards.model.AttachmentType;
 import org.paneris.melati.boards.model.Board;
 import org.paneris.melati.boards.model.BoardsDatabaseTables;
 import org.paneris.melati.boards.model.Message;
+import org.paneris.melati.boards.model.MessageTable;
 import org.paneris.melati.boards.model.User;
 import org.paneris.melati.boards.receivemail.Log;
 
@@ -87,7 +88,7 @@ import org.paneris.melati.boards.receivemail.Log;
 public class NNTPStore {
 
   private Log log;
-  public BoardsDatabaseTables db = null;
+  private BoardsDatabaseTables db = null;
   String prefix = null;
   String msgIdSuffix = null;
 
@@ -103,37 +104,51 @@ public class NNTPStore {
   }
 
   /**
+   * Return the DB. 
+   * 
+   * @return Returns the db.
+   */
+  public BoardsDatabaseTables getDb() {
+    return db;
+  }
+
+  /**
    *  Return a {@link Board} given a newsgroup name.
    * 
    * @param name
    * @return a board object or null
    * @throws AccessPoemException
+   * @throws UnknownNewsGroupException 
    */
-  public Board getBoard(String name) throws AccessPoemException {
+  public Board getBoard(String name) 
+      throws AccessPoemException, UnknownNewsGroupException {
     try {
       return resolveTargetBoard(name);
     } catch (AccessPoemException e) {
       throw e;
-    } catch (Exception e) {
-      e.printStackTrace();
     }
-    return null;
   }
 
-// What is this doing here?
-   private String formatTimestamp(Date date) {
+   
+  /**
+   * Format a date taking into account DB peculiarities.
+   * 
+   * @param date A Date to format
+   * @return the formatted string
+   */
+  private String formatTimestamp(Date date) {
     String dbmsClassName = ((PoemDatabase)db).getDbms().getClass().getName();
     if (dbmsClassName.indexOf("Postgresql") != -1) {
       return "'"
         + new SimpleDateFormat("MM-dd-yyyy HH:mm:ss Z").format(date)
         + "'";
-    } else if (dbmsClassName.indexOf("SQLServer") != -1) {
-      return "'"
-        + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S").format(date)
-        + "'";
+     } else if (dbmsClassName.indexOf("SQLServer") != -1) {
+       return "'"
+            + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S").format(date)
+            + "'";
+     }
+     return "'" + new java.sql.Timestamp(date.getTime()).toString() + "'";
    }
-    return "'" + new java.sql.Timestamp(date.getTime()).toString() + "'";
-  }
 
   /**
    * Return boards : either all boards, those containing messages more 
@@ -195,7 +210,7 @@ public class NNTPStore {
   * @todo implement ranges starting with the character "&lt;"
   * @return an Enumeration of Messages 
   */
-  private Enumeration getRange(String range, Board selectedBoard)
+  protected Enumeration getRange(String range, Board selectedBoard)
     throws SQLException {
     // check for msg id
     if (selectedBoard == null)
@@ -219,14 +234,21 @@ public class NNTPStore {
       else
         end = Integer.parseInt(range.substring(idx + 1)) - 1;
     }
+    MessageTable messageTable = (MessageTable)selectedBoard.
+                                    getDatabase().getTable("message");
     Enumeration result =
-      selectedBoard.getDatabase().getTable("message").selection(
-        "\"id\" BETWEEN "
+      messageTable.selection(
+          messageTable.troidColumn().quotedName() // "id"
+          + " BETWEEN "
           + start
           + " AND "
           + end
-          + " AND \"board\"="
+          + " AND "
+          + messageTable.getBoardColumn().quotedName()
+          +" = "
           + selectedBoard.getTroid());
+    
+
     return result;
   }
 
@@ -258,46 +280,6 @@ public class NNTPStore {
           getArticleId(new NNTPMessage(parent).getNntpIdInt());
     }
     return references;
-  }
-
- /**
-  * @see NNTPSession#xover
-  * @todo move to NNTPSession
-  */
-  public void printOverview(String range, PrintWriter writer,
-                            String selectedBoard) {
-    try {
-      Board brd = resolveTargetBoard(selectedBoard);
-      Enumeration messages = getRange(range, brd);
-      if (messages == null) {
-        writer.println("420 No article(s) selected");
-      } else {
-        writer.println("224 Overview information follows");
-        while (messages.hasMoreElements()) {
-          Message msg = (Message)messages.nextElement();
-          NNTPMessage nntpMsg = new NNTPMessage(msg);
-          long byteCount = msg.getBody().length();
-          long lineCount = msg.getLines().length;
-          int id = nntpMsg.getNntpIdInt();
-          String msgID = getArticleId(new NNTPMessage(msg).getNntpIdInt());
-          String references = getReferences(msg);
-          String reply = id + "\t";
-          reply += msg.getSubject() + "\t";
-          reply += nntpMsg.getFrom()+ "\t";
-          reply += NNTPSession.nntpDateFormat.format(msg.getDate()) + "\t";
-          reply += msgID + "\t";
-          reply += references + "\t";
-          reply += ((byteCount == -1) ? 300 : byteCount) + "\t";
-          reply += lineCount + "";
-          writer.println(reply);
-        }
-        writer.println(".");
-      }
-    } catch (AccessPoemException e) {
-      writer.println("502 No permission");
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
   }
 
   /**
@@ -373,8 +355,12 @@ public class NNTPStore {
    * 
    * @param newsGroup name in org.paneris.test format
    * @return the corresponding Board
+   * @throws UnknownNewsGroupException
    */
-  private Board resolveTargetBoard(String newsGroup) {
+  protected Board resolveTargetBoard(String newsGroup) 
+      throws UnknownNewsGroupException {
+    if (!newsGroup.startsWith(prefix)) 
+      throw new UnknownNewsGroupException("Expecting newsgroup name to start with:'" + prefix + "'");
     String boardName = newsGroup.substring(prefix.length() + 1).trim();
     return (Board)db.getBoardTable().getColumn("name").firstWhereEq(
       boardName);
@@ -395,7 +381,7 @@ public class NNTPStore {
           authInfo.getLogin());
       if (user != null) {
         if (user.getPassword_unsafe().equals(authInfo.getPassword())) {
-          authInfo.user = user;
+          authInfo.setUser(user);
         }
       }
     } catch (Exception e) {
@@ -412,7 +398,10 @@ public class NNTPStore {
     int troid = id - 1;
     Message message = null;
     try {
-      message = (Message)db.getMessageTable().firstSelection("\"id\"=" + troid);
+      message = (Message)db.getMessageTable().firstSelection(
+          db.getMessageTable().troidColumn().quotedName() // "id"
+          + "=" 
+          + troid);
     } catch (Exception e) {
       e.printStackTrace();
     }
