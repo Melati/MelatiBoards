@@ -3,7 +3,7 @@
   <pomVersion>3</pomVersion>
   <id>MelatiBoards</id>
   <name>MelatiBoards</name>
-  <currentVersion>1.2.1</currentVersion>
+  <currentVersion>1.2.2</currentVersion>
   <organization>
     <name>PanEris</name>
     <url>http://www.paneris.org/</url>
@@ -178,7 +178,7 @@ http://sourceforge.net/mailarchive/forum.php?forum=melati-users
   <dependencies>
     <dependency>
       <id>melati</id>
-      <version>0.7.2.2</version>
+      <version>0.7.4-SNAPSHOT</version>
       <url>http://www.melati.org/</url>
       <properties>
          <war.bundle>true</war.bundle>
@@ -331,7 +331,9 @@ http://sourceforge.net/mailarchive/forum.php?forum=melati-users
         <include>*.properties</include>
       </includes>
       <excludes>
+        <exclude>
            **/melati-static/**/*.*
+        </exclude>
       </excludes>
      </resource>
     </resources>
