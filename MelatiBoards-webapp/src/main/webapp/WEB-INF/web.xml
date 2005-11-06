@@ -81,11 +81,11 @@
   </servlet-class>
   <init-param>
    <param-name>database</param-name>
-    <param-value>cswcs</param-value>
+    <param-value>boardsdemo</param-value>
     </init-param>
     <init-param>
      <param-name>prefix</param-name>
-     <param-value>csw.cs</param-value>
+     <param-value>net.paneris.boards</param-value>
     </init-param>
     <init-param>
      <param-name>log</param-name>
@@ -97,7 +97,7 @@
     </init-param>
     <init-param>
      <param-name>identifier</param-name>
-     <param-value>csw.cs</param-value>
+     <param-value>boardsdemo</param-value>
     </init-param>
     <load-on-startup>100</load-on-startup>
   </servlet>
