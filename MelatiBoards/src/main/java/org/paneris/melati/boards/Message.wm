@@ -62,7 +62,10 @@
       <A href="$boardutils.MessageURL($messageNode.UserObject, $start)">$ml.rendered($messageNode.UserObject)</a>
      </td>
      <td>
-      <a href="mailto:$messageNode.UserObject.Author.Email">$ml.rendered($messageNode.UserObject.Author.Name_unsafe)</a>
+     &nbsp;
+     </td>
+     <td>
+      <a href="mailto:$messageNode.UserObject.Author.Email\.remove">$ml.rendered($messageNode.UserObject.Author.Name_unsafe)</a>
      </td>
      <td>
       $ml.renderedShort($messageNode.UserObject.DateField)
