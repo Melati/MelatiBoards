@@ -132,7 +132,7 @@ public class SMTPServer implements Runnable {
     }
   }
   /**
-   * Stop the server
+   * Stop the server, finishing any current request.
    * 
    * @throws IllegalStateException if the server is not running.
    */
