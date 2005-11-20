@@ -71,7 +71,7 @@ public class NNTPServerServlet implements Servlet {
   private ServletConfig config = null;
   static Thread nntpServerThread = null;
   private static final String logPathDefault =
-    "/usr/local/apache/log/messageboard-nntp.log";
+    "/var/log/messageboard-nntp.log";
   private static int port = 119;
   Log log = new Log("nntp");
   String identifier = null;
