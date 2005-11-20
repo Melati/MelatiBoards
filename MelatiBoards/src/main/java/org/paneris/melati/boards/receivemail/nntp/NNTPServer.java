@@ -70,7 +70,7 @@ public class NNTPServer implements Runnable {
   private String identifier = null;
   private int port = 119;
   private Properties config = null;
-  private int bufSize = 65536;
+  private int buffSize = 65536;
   private Log log = null;
   private Thread myThread;
   private ServerSocket serverSocket = null;
@@ -92,7 +92,7 @@ public class NNTPServer implements Runnable {
     this.identifier = identifier;
     this.port = port;
     this.config = config;
-    this.bufSize = bufSize;
+    this.buffSize = bufSize;
     this.log = log;
   }
 
@@ -126,7 +126,7 @@ public class NNTPServer implements Runnable {
   }
 
   /**
-   * Stop the server
+   * Stop the server, after finishing established connections.
    * 
    * @throws IllegalStateException if the server is not running.
    */
