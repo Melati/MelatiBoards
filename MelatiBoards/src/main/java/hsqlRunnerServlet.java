@@ -52,31 +52,54 @@ import javax.servlet.http.HttpServlet;
  * Run HSQLDB.
  */
 class RunHSQL implements Runnable {
-  
- /**
-  * Run.
-  */
-  public void run() {
-    String[] args = new String[2];
-    args[0] = "-port";
-    args[1] = "9124";
-    org.hsqldb.Server.main(args);
-  }
+  final Thread myThread;
+
+   public RunHSQL() {
+     myThread = Thread.currentThread();
+   }
+  /**
+   * Run.
+   */
+   public void run() {
+     String[] args = new String[2];
+     args[0] = "-port";
+     args[1] = "9124";
+     org.hsqldb.Server.main(args);
+   }
+   /**
+    * Stop.
+    */
+    public void stop() {
+      myThread.interrupt();
+    }
+
 }
 
 /**
  * Run HSQLDB from a servlet.
  */
 public class hsqlRunnerServlet extends HttpServlet {
-  
- /**
+
+  private static RunHSQL hsql;
+  /**
   * Init.
   *
   * @param conf the servlet configuration.
   */
   public void init(ServletConfig conf) throws ServletException {
-    new Thread(new RunHSQL()).start();
+    hsql = new RunHSQL();
+    new Thread(hsql).start();
     super.init(conf);
   }
+
+  
+  /* (non-Javadoc)
+    * @see javax.servlet.GenericServlet#destroy()
+    */
+   public void destroy() {
+     hsql.stop();
+     super.destroy();
+
+   }
 
 }
