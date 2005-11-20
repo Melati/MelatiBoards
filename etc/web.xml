@@ -99,6 +99,11 @@
      <param-name>identifier</param-name>
      <param-value>paneris.org</param-value>
     </init-param>
+    <init-param>
+     <param-name>buffSize</param-name>
+     <param-value>65536</param-value>
+    </init-param>
+    
     <load-on-startup>100</load-on-startup>
   </servlet>
   
