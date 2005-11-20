@@ -32,7 +32,7 @@
     <servlet-name>org.melati.login.Logout</servlet-name>
     <servlet-class>org.melati.login.Logout</servlet-class>
   </servlet>
-  <servlet>
+  <!--servlet>
     <servlet-name>hsqlRunner</servlet-name>
     <servlet-class>hsqlRunnerServlet</servlet-class>
     <load-on-startup>1000</load-on-startup> 
@@ -40,6 +40,11 @@
   <servlet>
     <servlet-name>hsql</servlet-name>
     <servlet-class>hsqlServlet</servlet-class>
+    <load-on-startup>110</load-on-startup> 
+  </servlet -->
+  <servlet>
+    <servlet-name>hsqldb</servlet-name>
+    <servlet-class>org.hsqldb.Servlet</servlet-class>
     <load-on-startup>110</load-on-startup> 
   </servlet>
   <servlet>
@@ -99,6 +104,10 @@
      <param-name>identifier</param-name>
      <param-value>boardsdemo</param-value>
     </init-param>
+    <init-param>
+     <param-name>buffSize</param-name>
+     <param-value>65536</param-value>
+    </init-param>
     <load-on-startup>100</load-on-startup>
   </servlet>
   
@@ -136,23 +145,23 @@
     <url-pattern>/org.melati.login.Logout/*</url-pattern>
   </servlet-mapping>
   
-<servlet-mapping>
+  <!--servlet-mapping>
     <servlet-name>
         hsqlRunner
     </servlet-name>
     <url-pattern>
         /hsqlRunner/*
     </url-pattern>
-</servlet-mapping>  
-<servlet-mapping>
+  </servlet-mapping -->  
+  <servlet-mapping>
     <servlet-name>
-        hsql
+        hsqldb
     </servlet-name>
     <url-pattern>
-        /hsql/*
+        /hsqldb/*
     </url-pattern>
-</servlet-mapping>
-<servlet-mapping>
+  </servlet-mapping>
+  <servlet-mapping>
     <servlet-name>
         BoardAdmin
     </servlet-name>
