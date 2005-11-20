@@ -49,6 +49,7 @@
 
 package org.paneris.melati.boards.receivemail;
 
+import java.io.IOException;
 import java.net.ServerSocket;
 import java.util.Properties;
 
@@ -60,12 +61,13 @@ import javax.servlet.ServletException;
 public class SMTPServer implements Runnable {
 
   private SMTPServerServlet launcher = null;
+  final Thread myThread;
   private String smtpIdentifier = null;
   private int port = 1615;
   private Properties databaseNameOfDomain = null;
   private int bufSize = 65536;
   private Log log = null;
-
+  ServerSocket serverSocket;
   /**
    * A handler for a session with <TT>sendmail</TT>
    *
@@ -93,6 +95,8 @@ public class SMTPServer implements Runnable {
                     Properties databaseNameOfDomain,
                     int bufSize,
                     Log log) throws ServletException {
+      myThread = Thread.currentThread();
+
       this.launcher = launcher;
       this.smtpIdentifier = smtpIdentifier;
       this.port = port;
@@ -107,10 +111,9 @@ public class SMTPServer implements Runnable {
    */
   public void run() {
 
-    final Thread myThread = Thread.currentThread();
 
     try {
-        ServerSocket serverSocket = new ServerSocket(port);
+        serverSocket = new ServerSocket(port);
 
         // die when SMTPServerServlet is 'destroy'ed
         // (and sets its smtpserver to null)
@@ -128,4 +131,19 @@ public class SMTPServer implements Runnable {
       System.exit(1);
     }
   }
+  /**
+   * Stop the server
+   * 
+   * @throws IllegalStateException if the server is not running.
+   */
+  public synchronized void stop() throws IllegalStateException {
+    if (myThread == null)
+      throw new IllegalStateException("Server is not running");
+    try {
+      serverSocket.close();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+
 }

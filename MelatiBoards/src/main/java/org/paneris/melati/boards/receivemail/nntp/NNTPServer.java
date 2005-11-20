@@ -47,7 +47,9 @@
 
 package org.paneris.melati.boards.receivemail.nntp;
 
+import java.io.IOException;
 import java.net.ServerSocket;
+import java.net.SocketException;
 import java.util.Properties;
 
 import javax.servlet.ServletException;
@@ -70,7 +72,8 @@ public class NNTPServer implements Runnable {
   private Properties config = null;
   private int bufSize = 65536;
   private Log log = null;
-  private Thread myThread = null;
+  private Thread myThread;
+  private ServerSocket serverSocket = null;
 
   /**
    * Constructor.
@@ -85,6 +88,7 @@ public class NNTPServer implements Runnable {
   public NNTPServer(String identifier, int port, Properties config,
                     int bufSize, Log log)
       throws ServletException {
+    myThread = Thread.currentThread();
     this.identifier = identifier;
     this.port = port;
     this.config = config;
@@ -98,17 +102,26 @@ public class NNTPServer implements Runnable {
    * @see java.lang.Runnable#run()
    */
   public void run() {
-    myThread = Thread.currentThread();
 
     try {
-      ServerSocket serverSocket = new ServerSocket(port);
-      while (true) {
+      serverSocket = new ServerSocket(port);
+      while (!myThread.isInterrupted()) {
         (new NNTPSession(identifier, serverSocket.accept(), config, log))
           .start();
       }
+    } catch (SocketException e) {
+      // Happens when stop() called
     } catch (Exception e) {
-      log.exception(e);
+      //log.exception(e);
       e.printStackTrace();
+    } finally {
+      if (!serverSocket.isClosed())
+        try {
+          serverSocket.close();
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
+      myThread = null;      
     }
   }
 
@@ -117,11 +130,15 @@ public class NNTPServer implements Runnable {
    * 
    * @throws IllegalStateException if the server is not running.
    */
-  public void stop() throws IllegalStateException {
+  public synchronized void stop() throws IllegalStateException {
     if (myThread == null)
       throw new IllegalStateException("Server is not running");
+    try {
+      serverSocket.close();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
     myThread.interrupt();
-    myThread = null;
   }
 }
 

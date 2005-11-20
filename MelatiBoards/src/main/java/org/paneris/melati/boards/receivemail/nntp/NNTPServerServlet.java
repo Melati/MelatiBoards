@@ -69,46 +69,55 @@ import org.paneris.melati.boards.receivemail.Log;
 public class NNTPServerServlet implements Servlet {
 
   private ServletConfig config = null;
-  static Thread nntpServer = null;
-  private static int port = 119;
+  static Thread nntpServerThread = null;
   private static final String logPathDefault =
     "/usr/local/apache/log/messageboard-nntp.log";
+  private static int port = 119;
   Log log = new Log("nntp");
-  Properties props = null;
   String identifier = null;
-
+  Properties props = null;
+  private static int buffSize = 65536;
+  private static NNTPServer server;
+  private String databaseName = null;
+  private String prefix = null;
+  private String logPath = null;
   public void init(ServletConfig configP) throws ServletException {
     this.config = configP;
-    String logPath = config.getInitParameter("log");
-    String database = config.getInitParameter("database");
-    String prefix = config.getInitParameter("prefix");
+    logPath = config.getInitParameter("log");
+    if (logPath == null) {
+      logPath = logPathDefault;
+    }
+    log.setTarget(logPath);
+    databaseName = config.getInitParameter("database");
+    prefix = config.getInitParameter("prefix");
     String portS = config.getInitParameter("port");
-    if(portS != null) {
+    if (portS != null) {
       NNTPServerServlet.port = Integer.parseInt(portS);
     }
     identifier = config.getInitParameter("identifier");
+    String buffSizeS = config.getInitParameter("buffSize");
+    if (buffSizeS != null) {
+      NNTPServerServlet.buffSize = Integer.parseInt(buffSizeS);
+    }
     try {
-      if (logPath == null) {
-        log.setTarget(logPathDefault);
-      }
       if (identifier == null) {
         identifier =
           "messageboards." + InetAddress.getLocalHost().getHostName();
       }
       props = new Properties();
-      props.setProperty("database", database);
+      props.setProperty("database", databaseName);
       props.setProperty("prefix", prefix);
-      if (nntpServer == null) {
-        nntpServer =
+      server = new NNTPServer(identifier, NNTPServerServlet.port, props, buffSize, log);
+      if (nntpServerThread == null) {
+        nntpServerThread =
           new Thread(
-            new NNTPServer(identifier, NNTPServerServlet.port, props, 65536, log),
+            server,
             "boards nntpserver");
-        nntpServer.start();
+        nntpServerThread.start();
         log.debug("Started NNTP server servlet");
       }
     } catch (Exception e) {
       log.exception(e);
-      e.printStackTrace();
     }
   }
 
@@ -117,10 +126,10 @@ public class NNTPServerServlet implements Servlet {
    */
   public void destroy() {
     try {
-      nntpServer.interrupt();
+      if (nntpServerThread != null) // if we have stopped it
+        server.stop();
     } catch (Exception e) {
       log.exception(e);
-      e.printStackTrace();
     }
   }
 
@@ -146,29 +155,73 @@ public class NNTPServerServlet implements Servlet {
     // Give info about the server
     resp.setContentType("text/html");
     PrintWriter out = resp.getWriter();
+    out.println("<html>\n<head>\n<title>");
+    out.println("NNTP Server Status");
+    out.println("</title>\n</head>");
+    out.println("<body>");
+    out.println("<h1>NNTP Server Status</h1>");
+    out.println("<table border='1'>");
+    out.println("<tr>");
+    out.println("<th>Setting</th>");
+    out.println("<th>Value</th>");
+    out.println("</tr>");
+    out.println("<tr>");
+    out.println("<td>logPath</td>");
+    out.println("<td>" + logPath + "</td>");
+    out.println("</tr>");
+    out.println("<tr>");
+    out.println("<td>port</td>");
+    out.println("<td>" + port + "</td>");
+    out.println("</tr>");
+    out.println("<tr>");
+    out.println("<td>identifier</td>");
+    out.println("<td>" + identifier + "</td>");
+    out.println("</tr>");
+    out.println("<tr>");
+    out.println("<td>prefix</td>");
+    out.println("<td>" + prefix + "</td>");
+    out.println("</tr>");
+    out.println("<tr>");
+    out.println("<td>buffSize</td>");
+    out.println("<td>" + buffSize + "</td>");
+    out.println("</tr>");
+    out.println("<tr>");
+    out.println("<td>databaseName</td>");
+    out.println("<td>" + databaseName + "</td>");
+    out.println("</tr>");
+    
+    out.println("</table>");
+ 
     String cmd = req.getParameter("cmd");
     if ("start".equalsIgnoreCase(cmd)) {
-      if (nntpServer == null) {
-        nntpServer =
+      log.debug("Starting server");
+      if (nntpServerThread == null) {
+        nntpServerThread =
           new Thread(
-            new NNTPServer(identifier, port, props, 65536, log),
+            server,
             "boards nntpserver");
-        nntpServer.start();
+        nntpServerThread.start();
         log.debug("Started NNTP server servlet");
+      } else {
+        out.println("<p>It aint null</p>");
       }
+      
     } else if ("stop".equalsIgnoreCase(cmd)) {
+      System.err.println("Stopping server");
       try {
-        nntpServer.interrupt();
+        //nntpServerThread.interrupt();
+        server.stop();
+        nntpServerThread = null;
       } catch (Exception e) {
         log.exception(e);
-        e.printStackTrace();
       }
     }
     out.println(
       "The NNTP server is "
-        + (nntpServer != null
-          ? "running [" + "<a href='cmd=stop'>stop</a>" + "]"
-          : "not running [" + "<a href='cmd=start'>start</a>" + "]"));
+        + (nntpServerThread != null
+          ? "running [" + "<a href='?cmd=stop'>stop</a>" + "]"
+          : "not running [" + "<a href='?cmd=start'>start</a>" + "]"));
+    out.println("</body>\n</html>");
     out.flush();
     out.close();
   }
