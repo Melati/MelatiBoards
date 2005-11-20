@@ -85,6 +85,7 @@ import org.paneris.melati.boards.receivemail.Log;
  * @author Vasily Pozhidaev <vasilyp@paneris.org>
  * @todo internal article pointer should be maintained
  * @todo implement LAST and NEXT commands
+ * @todo add some sort of limit to avoid 8000 messages being downloaded
  */
 public class NNTPSession extends Thread {
   public static final SimpleDateFormat nntpDateFormat        = new SimpleDateFormat(
@@ -165,9 +166,9 @@ public class NNTPSession extends Thread {
     this.log = log;
     this.prefix = config.getProperty("prefix");
     try {
-      Enumeration them = config.keys();
-      while(them.hasMoreElements()) 
-        System.err.println(them.nextElement());
+      //Enumeration them = config.keys();
+      //while(them.hasMoreElements()) 
+      //  System.err.println(them.nextElement());
       store = new NNTPStore(config.getProperty("database"), 
                             config.getProperty("prefix"), nntpIdentifier);
       authInfo = new AuthInfo();
