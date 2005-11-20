@@ -165,8 +165,11 @@ public class NNTPSession extends Thread {
     this.log = log;
     this.prefix = config.getProperty("prefix");
     try {
-      store = new NNTPStore(config.getProperty("database"), config
-          .getProperty("prefix"), nntpIdentifier);
+      Enumeration them = config.keys();
+      while(them.hasMoreElements()) 
+        System.err.println(them.nextElement());
+      store = new NNTPStore(config.getProperty("database"), 
+                            config.getProperty("prefix"), nntpIdentifier);
       authInfo = new AuthInfo();
     } catch (Exception e) {
       e.printStackTrace();
@@ -213,17 +216,16 @@ public class NNTPSession extends Thread {
       e.printStackTrace();
     } finally {
       try {
-        writer.println("205 closing connection");
-        reset();
+        if (socket != null && !socket.isClosed())
+          quit();
         writer.close();
         reader.close();
-        if (socket != null && !socket.isClosed())
-          socket.close();
       } catch (Exception e) {
         log.exception(e);
       }
     }
   }
+  
   private boolean handleCommand(final String rawCommand) {
     BoardPoemTask task = new BoardPoemTask() {
       public boolean execute() {
@@ -265,6 +267,22 @@ public class NNTPSession extends Thread {
     db.inSession(authInfo.getUser(), task);
     return task.result;
   }
+  
+  /**
+   * Handle the QUIT command, or closure.
+   * 
+   */
+  private void quit() {
+    writer.println("205 closing connection");
+    try {
+      socket.close();
+      socket = null;
+    } catch (Exception e) {
+      log.exception(e);
+    }
+    reset();
+  }
+
   /**
    * Handle the USER and PASS commands.
    * 
@@ -485,6 +503,7 @@ public class NNTPSession extends Thread {
   private void group(String name) {
     try {
       Board board = store.getBoard(name);
+      if (board == null) throw new UnknownNewsGroupException("Board " + name + "not found");
       int count = board.getMessageCount();
       // seems like BUG in M$ Outlook: it cannot handle properly when id < 1,
       // Mozilla works OK with 0 identifier
@@ -506,20 +525,7 @@ public class NNTPSession extends Thread {
           + e.toString());
     }
   }
-  /**
-   * Handle the QUIT command.
-   * 
-   */
-  private void quit() {
-    writer.println("205 closing connection");
-    try {
-      socket.close();
-      socket = null;
-    } catch (Exception e) {
-      log.exception(e);
-    }
-    reset();
-  }
+
   private Date getDateFrom(StringTokenizer tok) {
     try {
       String dateStr = tok.nextToken() + " " + tok.nextToken();

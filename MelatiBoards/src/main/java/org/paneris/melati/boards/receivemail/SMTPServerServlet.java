@@ -93,7 +93,7 @@ import org.melati.util.PropertiesUtils;
  *
  * Mail can be funelled into the server by having it listen on
  * port 25 in place of sendmail, but this would require your httpd to run
- * as root (in ordr to access ports below 1024), so is not advisable.  
+ * as root (in order to access ports below 1024), so is not advisable.  
  * The prefered mechanism is to configure the locally running
  * sendmail to forward appropriately addressed email to the server on
  * a different port.  The only way I can see to do the latter is to
@@ -162,7 +162,6 @@ public class SMTPServerServlet implements Servlet {
       "/usr/local/apache/log/messageboard-receivemail.log";
 
 /*
- * This can't be right as we don't have a main method.
 
     private static final String usage =
       "Usage: ... [--port <port>] [--properties <resource>] [--log <file>]\n" +
