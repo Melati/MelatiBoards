@@ -181,7 +181,7 @@ http://sourceforge.net/mailarchive/forum.php?forum=melati-users
       <version>0.7.4-SNAPSHOT</version>
       <url>http://www.melati.org/</url>
       <properties>
-         <war.bundle>false</war.bundle>
+         <war.bundle>true</war.bundle>
       </properties>
     </dependency>
     <dependency>
