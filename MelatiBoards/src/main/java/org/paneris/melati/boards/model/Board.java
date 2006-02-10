@@ -358,10 +358,11 @@ public class Board extends BoardBase {
 
   public void distribute(Message message) {
 
-    // Vector of email addresses (Strings)
-    Vector members = EnumUtils.vectorOf(new MappedEnumeration(getMembers()) {
+    String members = EnumUtils.concatenated(",", 
+            new MappedEnumeration(getMembers()) {
       public Object mapped(Object member) {
-        return ((User) member).getEmail();
+        return Email.mailAddress(((User) member).getName(), 
+                                 ((User) member).getEmail());
       }
     });
 
@@ -369,10 +370,7 @@ public class Board extends BoardBase {
     // (ie board allows open posting)
     Message parent = message.getParent();
     if (parent != null && !isSubscribed(parent.getAuthor()))
-      members.add(parent.getAuthor().getEmail());
-
-    String[] emailArray = new String[members.size()];
-    members.copyInto(emailArray);
+      members += Email.mailAddress(parent.getAuthor().getEmail(), parent.getAuthor().getEmail());
 
     /*
      * String toString = ""; for(int i=0; i <emailArray.length; i++) { toString +=
@@ -393,14 +391,17 @@ public class Board extends BoardBase {
     body += ":\n";
     body += getMessageURL(message) + "\n";
 
-    //TODO add real names as per org.paneris.messageboards.model.Message
     try {
-      Email.sendToList(getDatabase(), message.getAuthor().getEmail(), // From
-          emailArray, // To list
-          toString, // apparently to
-          replyTo, // reply to
-          "[" + getName() + "] " + message.getSubject(), // subject
-          body);
+      String smtpServer = getDatabase().getSettingTable().get(Email.SMTPSERVER);
+      File[] empty = {};
+      Email.sendWithAttachments(smtpServer, 
+                Email.mailAddress(message.getAuthor().getName(), // From
+                                  message.getAuthor().getEmail()), 
+                members, // To list
+                replyTo, // reply to
+                "[" + getName() + "] " + message.getSubject(), // subject
+                body, 
+                empty);
     } catch (Exception e) {
       e.printStackTrace();
     }
