@@ -10,6 +10,13 @@
   </properties>
 
   <body>
+    <links>
+    <item name="Context Computing" href="http://www.context-computing.co.uk/" />
+    <item name="Melati"                href="http://www.melati.org" />
+    <item name="PanEris.org"           href="http://www.paneris.org" />
+    <item name="PanEris.net"           href="http://www.paneris.net" />
+    <item name="Bibliomania"           href="http://www.bibliomania.com" />
+    </links>
     <menu name="Overview">
       <item name="Download"                href="/download.html"/>
     </menu>
