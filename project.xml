@@ -16,10 +16,6 @@
 
   <shortDescription>PanEris Melati Boards System</shortDescription>
 
-  <!-- Gump integration 
-  <gumpRepositoryId>jakarta</gumpRepositoryId>
-  -->
-
   <description>
    A message board system using a Melati SQL database as the message store.
   </description>
@@ -31,15 +27,12 @@
 <!--    http://nagoya.apache.org/scarab/servlet/scarab/ -->
    http://www.paneris.org/webmacro/MessageBoard?db=paneris&amp;messageboard=381
   </issueTrackingUrl>
-  <distributionDirectory>
-    /inst/MelatiBoards/target/distributions/
-  </distributionDirectory>
 
   <repository>
     <connection>
-      scm:cvs:pserver:anon@melati.org:/usr/cvsroot:MelatiBoards
+      scm:cvs:pserver:anonymous@melati.org:/usr/cvsroot:MelatiBoards
     </connection>
-<developerConnection>scm:cvs:ext:anon@melati.org:/usr/cvsroot:MelatiBoards</developerConnection>
+<developerConnection>scm:pserver:anonymous@melati.org:/usr/cvsroot:MelatiBoards</developerConnection>
 
     <url>
       http://paneris.net/cgi-bin/cvsweb.cgi/MelatiBoards/
