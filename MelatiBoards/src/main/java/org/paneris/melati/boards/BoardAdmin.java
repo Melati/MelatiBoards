@@ -54,7 +54,7 @@ import java.util.Vector;
 import javax.servlet.http.HttpSession;
 import org.melati.Melati;
 import org.melati.MelatiConfig;
-import org.melati.MelatiUtil;
+import org.melati.servlet.Form;
 import org.melati.LogicalDatabase;
 import org.melati.util.Email;
 import org.melati.util.EnumUtils;
@@ -103,7 +103,7 @@ public class BoardAdmin extends TemplateServlet {
         new Initialiser() {
           public void init(Persistent object)
               throws AccessPoemException, ValidationPoemException {
-            MelatiUtil.extractFields(context, object);
+            Form.extractFields(context, object);
             ((Message)object).setAuthor(user);
           }
         });
@@ -253,7 +253,7 @@ public class BoardAdmin extends TemplateServlet {
   protected String settingsUpdateTemplate(ServletTemplateContext context, Melati melati, Board board)
       throws PoemException {
     checkBanned(board, melati.getUser());
-    MelatiUtil.extractFields(context, melati.getObject());
+    Form.extractFields(context, melati.getObject());
     return boardTemplate(context, "SettingsUpdate");
   }
 
@@ -315,7 +315,7 @@ public class BoardAdmin extends TemplateServlet {
       // fair play, i am not logged in, but do i already exist?
       // note that this can mean that people can fake posts to 'anonymous posting'
       // boards, but i guess this is the nature of anonymous posting
-      String email = MelatiUtil.getFormNulled(context, "field_email");
+      String email = Form.getFormNulled(context, "field_email");
       user = (User)melati.getDatabase().getUserTable().firstSelection(
                         "UPPER(" +
                         melati.getDatabase().getDbms().getQuotedName("email") +
@@ -363,7 +363,7 @@ public class BoardAdmin extends TemplateServlet {
       throws PoemException {
     String[] messages = melati.getRequest().getParameterValues("message");
     for(int i=0; i < messages.length; i++) {
-      String action = MelatiUtil.getFormNulled(context, messages[i]);
+      String action = Form.getFormNulled(context, messages[i]);
       if (action != null) {
         Message message = (Message)
                             ((BoardsDatabaseTables)melati.getDatabase()).
@@ -585,7 +585,7 @@ public class BoardAdmin extends TemplateServlet {
   protected String subscriptionUpdateTemplate(ServletTemplateContext context, Melati melati, Board board)
       throws PoemException {
     checkBanned(board, melati.getUser());
-    MelatiUtil.extractFields(context, melati.getObject());
+    Form.extractFields(context, melati.getObject());
     return boardTemplate(context, "SubscriptionUpdate");
   }
 
@@ -768,7 +768,7 @@ class DistributeThread extends Thread {
           try {
 
       // Send email to user
-      Email.send(board.getDatabase(), 
+      Email.send(board.getDatabase().getSettingTable().get(Email.SMTPSERVER), 
                  "admin."+board.getEmailAddress(),       // From
                  user.getEmail(),      // To
                  "",                   // reply to
@@ -785,7 +785,7 @@ class DistributeThread extends Thread {
       managers.copyInto(emailArray);
 
       // Send email to managers
-      Email.sendToList(board.getDatabase(), 
+      Email.sendToList(board.getDatabase().getSettingTable().get(Email.SMTPSERVER), 
                        "admin."+board.getEmailAddress(),       // From
                        emailArray,           // To
                        user.getEmail(),     // Apparently to
