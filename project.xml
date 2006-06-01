@@ -33,7 +33,9 @@
     <connection>
       scm:cvs:pserver:anonymous@melati.org:/usr/cvsroot:MelatiBoards
     </connection>
-<developerConnection>scm:pserver:anonymous@melati.org:/usr/cvsroot:MelatiBoards</developerConnection>
+    <developerConnection>
+      scm:cvs:pserver:anonymous@melati.org:/usr/cvsroot:MelatiBoards
+    </developerConnection>
 
     <url>
       http://paneris.net/cgi-bin/cvsweb.cgi/MelatiBoards/
@@ -139,16 +141,6 @@ http://sourceforge.net/mailarchive/forum.php?forum=melati-users
         <role>Release Manager</role>
       </roles>
     </developer>
-
-    <developer>
-      <name>Tim Joyce</name>
-      <id>timj</id>
-      <email>timj@paneris.org</email>
-      <organization/>
-      <roles>
-        <role>Java Developer</role>
-      </roles>
-    </developer>
     <developer>
       <name>Vasily Pozhidaev</name>
       <id>vasilyp</id>
@@ -159,6 +151,26 @@ http://sourceforge.net/mailarchive/forum.php?forum=melati-users
       </roles>
     </developer>
     <developer>
+      <name>Tim Joyce</name>
+      <id>timj</id>
+      <email>timj@paneris.org</email>
+      <organization/>
+      <roles>
+        <role>Java Developer</role>
+      </roles>
+    </developer>
+    <developer>
+      <name>Jim Wright</name>
+      <id>jimw</id>
+      <email>jimw@paneris.org</email>
+      <organization>PanEris</organization>
+      <roles>
+        <role>Developer</role>
+      </roles>
+      <timezone>+3</timezone>
+      <url>http://paneris.org/~jimw</url>
+    </developer>
+    <developer>
       <name>Karl Zilles</name>
       <id>karlz</id>
       <email>karlz@paneris.org</email>
@@ -166,6 +178,17 @@ http://sourceforge.net/mailarchive/forum.php?forum=melati-users
       <roles>
         <role>Java Developer</role>
       </roles>
+    </developer>
+    <developer>
+      <name>William Chesters</name>
+      <id>williamc</id>
+      <email>williamc@paneris.org</email>
+      <organization>PanEris</organization>
+      <roles>
+        <role>Original author</role>
+      </roles>
+      <timezone>0</timezone>
+      <url>http://paneris.org/~williamc</url>
     </developer>
   </developers>
 
