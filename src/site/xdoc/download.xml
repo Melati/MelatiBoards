@@ -10,7 +10,8 @@
     <section name="Download Jar">
 
       <p>
-        The latest build can be found <a href="distributions/">here</a>.
+        The latest build can be found in the Maven 
+        <a href="/maven/MelatiBoards/">repository</a>.
       </p>
       
     </section>
