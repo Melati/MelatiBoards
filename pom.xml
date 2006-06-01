@@ -4,10 +4,14 @@
   <artifactId>MelatiBoards</artifactId>
   <name>MelatiBoards</name>
   <version>1.2.2</version>
-  <description>A message board system using a Melati SQL database as the message store.</description>
+  <description>
+A message board system using a Melati SQL database as the message store.
+  </description>
   <url>http://boards.paneris.net/</url>
   <issueManagement>
-    <url>http://www.paneris.org/webmacro/MessageBoard?db=paneris&amp;messageboard=381</url>
+    <url>
+   http://www.paneris.org/webmacro/MessageBoard?db=paneris&amp;messageboard=381
+   </url>
   </issueManagement>
   <ciManagement>
     <notifiers>
@@ -160,10 +164,17 @@
     </dependency>
   </dependencies>
   <distributionManagement>
+    <repository>
+      <id>melati</id>
+      <name>Default Repository</name>
+      <url>scp://melati.org/data/www/maven2/</url>
+    </repository>
     <site>
       <id>default</id>
       <name>Default Site</name>
-      <url>scp://boards.paneris.net//inst/MelatiBoards/target/docs</url>
+      <url>scp://boards.paneris.net//data/www/MelatiBoards</url>
     </site>
   </distributionManagement>
 </project>
+
+
