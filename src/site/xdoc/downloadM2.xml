@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!-- Maven 2 version -->
+<document>
+
+  <properties>
+    <title>Download</title>
+    <author email="timp@paneris.org">Tim Pizey</author>
+  </properties>
+
+  <body>
+    <section name="Download Jar">
+
+      <p>
+        The latest build can be found in the Maven 
+        <a href="/maven2/org/paneris/MelatiBoards/">repository</a>.
+      </p>
+      
+    </section>
+    <section name="Download Source">
+
+      <p>
+        To download the source see the 
+        <a href="source-repository.html">Source Repository</a>.
+      </p>
+      
+    </section>
+  </body>
+</document>
