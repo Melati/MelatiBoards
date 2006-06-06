@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="MelatiBoards">
+
+  <skin>
+    <groupId>org.melati</groupId>
+    <artifactId>melati-skin</artifactId>
+    <version>1.0-SNAPSHOT</version>
+  </skin>
+  <bannerLeft>
+    <name>Melati</name>
+    <src>http://www.melati.org/images/logo.jpg</src> 
+    <href>http://www.melati.org/</href>
+  </bannerLeft>
+  <bannerRight>
+    <name>PanEris</name>
+    <src>http://www.paneris.org/images/logo.jpg</src> 
+    <href>http://www.paneris.org/</href>
+  </bannerRight>
+
+  <body>
+   <links>
+    <item name="Context Computing" href="http://www.context-computing.co.uk/" />
+     <item name="PanEris.net"          href="http://www.paneris.net" />
+     <item name="Melati"               href="http://melati.net" />
+   </links>
+   <menu ref="parent" inherit="top"/>
+    <menu name="Overview">
+      <item name="Download"            href="/download.html"/>
+      <item name="Maven1"              href="/maven1/index.html"/>
+    </menu>
+    <menu name="Demonstration">
+      <item name="Boards"              href="/MelatiBoards/BoardAdmin/boardsdemo/Types"/>
+      <item name="News Server"         href="news://boards.paneris.net"/>
+      <item name="Admin system"        href="/MelatiBoards/Admin/boardsdemo/Main"/>
+    </menu>
+   <menu ref="modules" name="Modules" inherit="bottom"/>
+   ${reports}
+  </body>
+</project>
