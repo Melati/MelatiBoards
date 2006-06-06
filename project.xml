@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <project>
   <pomVersion>3</pomVersion>
-  <groupId>org.melati</groupId>
-  <id>MelatiBoards</id>
+  <groupId>org.paneris</groupId>
+  <artifactId>MelatiBoards</artifactId>
   <name>MelatiBoards</name>
   <currentVersion>1.2.2</currentVersion>
   <organization>
