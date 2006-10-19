@@ -56,6 +56,9 @@ import org.melati.poem.PoemException;
  * the Boards system.
  */
 public class BoardsInitialisationException extends PoemException {
+
+  private static final long serialVersionUID = 1L;
+
   public String message;
 
   public BoardsInitialisationException(String message) {

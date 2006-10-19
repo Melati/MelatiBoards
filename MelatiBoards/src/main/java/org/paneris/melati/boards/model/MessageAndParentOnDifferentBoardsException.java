@@ -56,6 +56,9 @@ import org.melati.util.MelatiRuntimeException;
  */
 class MessageAndParentOnDifferentBoardsException
                          extends MelatiRuntimeException {
+
+  private static final long serialVersionUID = 1L;
+
   public MessageAndParentOnDifferentBoardsException(String message) {
     super(message, null);
   }

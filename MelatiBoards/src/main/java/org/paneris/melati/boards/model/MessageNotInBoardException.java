@@ -52,6 +52,9 @@ package org.paneris.melati.boards.model;
 import org.melati.util.MelatiRuntimeException;
 
 class MessageNotInBoardException extends MelatiRuntimeException {
+
+  private static final long serialVersionUID = 1L;
+
   public MessageNotInBoardException(String message) {
     super(message, null);
   }

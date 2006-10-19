@@ -52,8 +52,11 @@ package org.paneris.melati.boards.receivemail.nntp;
  *
  */
 public class UnknownNewsGroupException extends Exception {
+
+  private static final long serialVersionUID = 1L;
+  
   /**
-   * 
+   * Constructor. 
    */
   public UnknownNewsGroupException() {
     super();

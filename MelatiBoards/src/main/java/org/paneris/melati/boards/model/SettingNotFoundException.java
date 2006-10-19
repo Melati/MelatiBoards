@@ -55,6 +55,9 @@ import org.melati.poem.PoemException;
  * Thrown when a <tt>Setting</tt> is not found in the <tt>SettingTable</tt>.
  */
 public class SettingNotFoundException extends PoemException {
+
+  private static final long serialVersionUID = 1L;
+
   public String setting;
 
   public SettingNotFoundException(String setting) {
