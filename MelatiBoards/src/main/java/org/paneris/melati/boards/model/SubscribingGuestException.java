@@ -52,6 +52,9 @@ package org.paneris.melati.boards.model;
 import org.melati.util.MelatiRuntimeException;
 
 class SubscribingGuestException extends MelatiRuntimeException {
+
+  private static final long serialVersionUID = 1L;
+
   public SubscribingGuestException(String message) {
     super(message, null);
   }

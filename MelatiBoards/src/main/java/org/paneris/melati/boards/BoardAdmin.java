@@ -51,41 +51,43 @@
 package org.paneris.melati.boards;
 
 import java.util.Vector;
+
 import javax.servlet.http.HttpSession;
+
+import org.melati.LogicalDatabase;
 import org.melati.Melati;
 import org.melati.MelatiConfig;
-import org.melati.servlet.Form;
-import org.melati.LogicalDatabase;
-import org.melati.util.Email;
-import org.melati.util.EnumUtils;
-import org.melati.util.StringUtils;
-import org.melati.util.MappedEnumeration;
-import org.melati.util.MelatiWriter;
-import org.melati.util.DumbPageEnumeration;
-import org.melati.servlet.TemplateServlet;
-import org.melati.servlet.InvalidUsageException;
 import org.melati.PoemContext;
-import org.melati.servlet.PathInfoException;
-import org.melati.template.ServletTemplateContext;
-import org.melati.template.TemplateEngine;
-import org.melati.poem.Database;
-import org.melati.poem.PoemTask;
-import org.melati.poem.PoemThread;
-import org.melati.poem.PoemException;
+import org.melati.poem.AccessPoemException;
 import org.melati.poem.AccessToken;
 import org.melati.poem.Capability;
-import org.melati.poem.Persistent;
+import org.melati.poem.Database;
 import org.melati.poem.Initialiser;
-import org.melati.poem.AccessPoemException;
+import org.melati.poem.Persistent;
+import org.melati.poem.PoemException;
+import org.melati.poem.PoemTask;
+import org.melati.poem.PoemThread;
 import org.melati.poem.ValidationPoemException;
-import org.paneris.melati.boards.model.User;
+import org.melati.servlet.Form;
+import org.melati.servlet.InvalidUsageException;
+import org.melati.servlet.PathInfoException;
+import org.melati.servlet.TemplateServlet;
+import org.melati.template.ServletTemplateContext;
+import org.melati.template.TemplateEngine;
+import org.melati.util.DumbPageEnumeration;
+import org.melati.util.Email;
+import org.melati.util.EnumUtils;
+import org.melati.util.MappedEnumeration;
+import org.melati.util.MelatiStringWriter;
+import org.melati.util.StringUtils;
 import org.paneris.melati.boards.model.Board;
-import org.paneris.melati.boards.model.Message;
-import org.paneris.melati.boards.model.Subscription;
-import org.paneris.melati.boards.model.MembershipStatus;
-import org.paneris.melati.boards.model.BoardsDatabaseTables;
 import org.paneris.melati.boards.model.BoardTable;
+import org.paneris.melati.boards.model.BoardsDatabaseTables;
+import org.paneris.melati.boards.model.MembershipStatus;
+import org.paneris.melati.boards.model.Message;
 import org.paneris.melati.boards.model.MessageTable;
+import org.paneris.melati.boards.model.Subscription;
+import org.paneris.melati.boards.model.User;
 
 
 /**
@@ -93,6 +95,8 @@ import org.paneris.melati.boards.model.MessageTable;
  * 
  */
 public class BoardAdmin extends TemplateServlet {
+
+  private static final long serialVersionUID = 1L;
 
   private static int MAX_HITS = 2000;
   private static int HITS_PER_PAGE = 20;
@@ -732,7 +736,7 @@ public class BoardAdmin extends TemplateServlet {
       if (tEngine != null)
         tEngine.init(mConfig); //FIXME needs a servlet to find templates in jar
     }
-    MelatiWriter sw = tEngine.getStringWriter("UTF8");
+    MelatiStringWriter sw = tEngine.getStringWriter();
     Melati melati = new Melati(mConfig, sw);
     ServletTemplateContext context = (ServletTemplateContext)tEngine.getTemplateContext(melati);
     context.put("melati", melati);
@@ -741,7 +745,7 @@ public class BoardAdmin extends TemplateServlet {
     tEngine.expandTemplate(melati.getWriter(),
                            board.templatePath(template),
                            context);
-    return sw.asString();
+    return sw.toString();
   }
 }
 
