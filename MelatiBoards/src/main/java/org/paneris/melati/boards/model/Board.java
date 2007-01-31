@@ -65,10 +65,10 @@ import org.melati.poem.CachedCount;
 import org.melati.poem.CachedSelection;
 import org.melati.poem.Capability;
 import org.melati.poem.ValidationPoemException;
+import org.melati.poem.util.EnumUtils;
+import org.melati.poem.util.MappedEnumeration;
 import org.melati.util.ChildrenDrivenMutableTree;
 import org.melati.util.Email;
-import org.melati.util.EnumUtils;
-import org.melati.util.MappedEnumeration;
 import org.paneris.melati.boards.model.generated.BoardBase;
 
 /**
