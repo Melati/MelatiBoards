@@ -63,7 +63,7 @@ import org.melati.poem.CreationAccessPoemException;
 import org.melati.poem.PoemTask;
 import org.melati.poem.ValidationPoemException;
 import org.melati.util.ChildrenDrivenMutableTree;
-import org.melati.util.EnumUtils;
+import org.melati.poem.util.EnumUtils;
 import org.melati.util.StringUtils;
 import org.melati.util.Treeable;
 import org.paneris.melati.boards.model.generated.MessageBase;
