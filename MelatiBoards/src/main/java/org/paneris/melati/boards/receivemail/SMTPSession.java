@@ -120,11 +120,11 @@ class SMTPSession extends Thread {
    */
 
   SMTPSession(String smtpIdentifier, Socket withClient,
-      Properties databaseNameOfDomain, int bufSize, Log log) throws IOException {
+      Properties databaseNameOfDomain, int buffSize, Log log) throws IOException {
     this.smtpIdentifier = smtpIdentifier;
     this.withClient = withClient;
     this.databaseNameOfDomain = databaseNameOfDomain;
-    this.bufSize = bufSize;
+    this.bufSize = buffSize;
     this.log = log;
 
     fromClientPushBack = new PushbackInputStream(new BufferedInputStream(

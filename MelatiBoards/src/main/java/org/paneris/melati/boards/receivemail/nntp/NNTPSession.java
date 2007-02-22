@@ -45,6 +45,7 @@
  *     Vasily Pozhidaev  <vasilyp@paneris.org>
  */
 package org.paneris.melati.boards.receivemail.nntp;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -78,6 +79,7 @@ import org.paneris.melati.boards.model.Message;
 import org.paneris.melati.boards.model.User;
 import org.paneris.melati.boards.receivemail.DotTerminatedInputStream;
 import org.paneris.melati.boards.receivemail.Log;
+
 /**
  * An NNTP session object.
  * 
@@ -88,54 +90,71 @@ import org.paneris.melati.boards.receivemail.Log;
  * @todo add some sort of limit to avoid 8000 messages being downloaded
  */
 public class NNTPSession extends Thread {
-  public static final SimpleDateFormat nntpDateFormat        = new SimpleDateFormat(
-                                                                 "EEE, dd MMM yyyy HH:mm:ss z",
-                                                                 Locale.US);
-  public static final DateFormat       longRFC977DateFormat  = new SimpleDateFormat(
-                                                                 "yyyyMMdd HHmmss",
-                                                                 Locale.ENGLISH);
-  public static final DateFormat       shortRFC977DateFormat = new SimpleDateFormat(
-                                                                 "yyMMdd HHmmss",
-                                                                 Locale.ENGLISH);
+  public static final SimpleDateFormat nntpDateFormat = new SimpleDateFormat(
+      "EEE, dd MMM yyyy HH:mm:ss z", Locale.US);
+
+  public static final DateFormat longRFC977DateFormat = new SimpleDateFormat(
+      "yyyyMMdd HHmmss", Locale.ENGLISH);
+
+  public static final DateFormat shortRFC977DateFormat = new SimpleDateFormat(
+      "yyMMdd HHmmss", Locale.ENGLISH);
   static {
     nntpDateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
   }
-  private String                       nntpIdentifier;
-  private Socket                       socket;
-  private BufferedReader               reader;
-  private Properties                   config;
-  private PrintWriter                  writer;
-  private Log                          log                   = null;
-  private String                       prefix;
-  private NNTPStore                    store                 = null;
-  private String                       selectedGroup         = null;
-  private AuthInfo                     authInfo              = null;
+
+  private String nntpIdentifier;
+
+  private Socket socket;
+
+  private BufferedReader reader;
+
+  private Properties config;
+
+  private PrintWriter writer;
+
+  private Log log = null;
+
+  private String prefix;
+
+  private NNTPStore store = null;
+
+  private String selectedGroup = null;
+
+  private AuthInfo authInfo = null;
+
   /**
    * An authorisation information object.
    */
   public class AuthInfo {
-    private String login    = null;
+    private String login = null;
+
     private String password = null;
-    private User   user     = null;
+
+    private User user = null;
+
     /**
      * 
      */
     public AuthInfo() {
       super();
-      user = (User) store.getDb().getUserTable().guestUser();
+      user = (User)store.getDb().getUserTable().guestUser();
     }
+
     public String getLogin() {
       return login;
     }
+
     public String getPassword() {
       return password;
     }
+
     /**
      * @return Returns the user.
      */
     public User getUser() {
       return user;
     }
+
     /**
      * @param user
      *          The user to set.
@@ -144,6 +163,7 @@ public class NNTPSession extends Thread {
       this.user = user;
     }
   }
+
   /**
    * Constructor.
    * 
@@ -158,19 +178,18 @@ public class NNTPSession extends Thread {
    * @throws IOException
    *           if something goes wrong with the File System
    */
-  NNTPSession(String nntpIdentifier, Socket socket, Properties config, Log log)
+  NNTPSession(String nntpIdentifier, Socket socket, Properties configP, Log log)
       throws IOException {
     this.nntpIdentifier = nntpIdentifier;
     this.socket = socket;
-    this.config = config;
+    this.config = configP;
     this.log = log;
     this.prefix = config.getProperty("prefix");
     try {
-      //Enumeration them = config.keys();
-      //while(them.hasMoreElements()) 
-      //  System.err.println(them.nextElement());
-      store = new NNTPStore(config.getProperty("database"), 
-                            config.getProperty("prefix"), nntpIdentifier);
+      // Enumeration them = config.keys();
+      // while(them.hasMoreElements())
+      // System.err.println(them.nextElement());
+      store = new NNTPStore(config.getProperty("database"), prefix, nntpIdentifier);
       authInfo = new AuthInfo();
     } catch (Exception e) {
       e.printStackTrace();
@@ -189,15 +208,18 @@ public class NNTPSession extends Thread {
         print("\r\n");
         flush();
       }
+
       public void println(String s) {
         super.println(s);
         System.err.println("S: " + s);
       }
     };
   }
+
   private void reset() {
     store = null;
   }
+
   /*
    * @see java.lang.Runnable#run()
    */
@@ -226,7 +248,7 @@ public class NNTPSession extends Thread {
       }
     }
   }
-  
+
   private boolean handleCommand(final String rawCommand) {
     BoardPoemTask task = new BoardPoemTask() {
       public boolean execute() {
@@ -262,13 +284,13 @@ public class NNTPSession extends Thread {
         return true;
       }
     };
-    PoemDatabase db = (PoemDatabase) store.getDb();
+    PoemDatabase db = (PoemDatabase)store.getDb();
     if (db == null)
       System.err.println("DB not initialised");
     db.inSession(authInfo.getUser(), task);
     return task.result;
   }
-  
+
   /**
    * Handle the QUIT command, or closure.
    * 
@@ -307,6 +329,7 @@ public class NNTPSession extends Thread {
     } else
       throw new RuntimeException("Unexpected command:" + command);
   }
+
   /**
    * Handle the POST command.
    * 
@@ -333,6 +356,7 @@ public class NNTPSession extends Thread {
       writer.println("440 posting not allowed");
     }
   }
+
   /**
    * Handle the MODE command.
    * 
@@ -341,6 +365,7 @@ public class NNTPSession extends Thread {
   private void modereader() {
     writer.println("200 Posting Permitted");
   }
+
   /**
    * Handle the HELP command.
    * 
@@ -349,6 +374,7 @@ public class NNTPSession extends Thread {
     writer.println("100 Help text follows");
     writer.println(".");
   }
+
   /**
    * Handle the XOVER command.
    * 
@@ -367,14 +393,14 @@ public class NNTPSession extends Thread {
       } else {
         writer.println("224 Overview information follows");
         while (messages.hasMoreElements()) {
-          Message msg = (Message) messages.nextElement();
+          Message msg = (Message)messages.nextElement();
           long byteCount = msg.getBody().length();
           long lineCount = msg.getLines().length;
           NNTPMessage nntpMsg = new NNTPMessage(msg);
           int id = nntpMsg.getNntpIdInt();
           String msgID = store.getArticleId(id);
           String references = store.getReferences(msg);
-          
+
           String reply = id + "\t";
           reply += msg.getSubject() + "\t";
           reply += nntpMsg.getFrom() + "\t";
@@ -393,6 +419,7 @@ public class NNTPSession extends Thread {
       e.printStackTrace();
     }
   }
+
   /**
    * Handle the ARTICLE command.
    * 
@@ -444,7 +471,7 @@ public class NNTPSession extends Thread {
         if (attachmentCount > 0) {
           Enumeration attachments = message.getAttachments();
           while (attachments.hasMoreElements()) {
-            Attachment element = (Attachment) attachments.nextElement();
+            Attachment element = (Attachment)attachments.nextElement();
             File f = new File(element.getPath());
             if (f.exists()) {
               // todo: determine content type more accurately
@@ -495,6 +522,7 @@ public class NNTPSession extends Thread {
       writer.println("503 program error function not performed");
     }
   }
+
   /**
    * Handle the GROUP command.
    * 
@@ -504,7 +532,8 @@ public class NNTPSession extends Thread {
   private void group(String name) {
     try {
       Board board = store.getBoard(name);
-      if (board == null) throw new UnknownNewsGroupException("Board " + name + "not found");
+      if (board == null)
+        throw new UnknownNewsGroupException("Board " + name + "not found");
       int count = board.getMessageCount();
       // seems like BUG in M$ Outlook: it cannot handle properly when id < 1,
       // Mozilla works OK with 0 identifier
@@ -547,6 +576,7 @@ public class NNTPSession extends Thread {
       return null;
     }
   }
+
   /**
    * Handle NEWGROUPS command.
    * 
@@ -558,13 +588,14 @@ public class NNTPSession extends Thread {
     Enumeration boards = store.getBoards(getDateFrom(tok), null);
     if (boards != null) {
       while (boards.hasMoreElements()) {
-        Board board = (Board) boards.nextElement();
+        Board board = (Board)boards.nextElement();
         writer.println(store.prefix + "." + board.getName() + " "
             + board.getPurpose());
       }
     }
     writer.println(".");
   }
+
   /**
    * Handle LIST command.
    * 
@@ -575,8 +606,8 @@ public class NNTPSession extends Thread {
     String wildmat = "*";
     if (tok.hasMoreTokens()) {
       String param = tok.nextToken();
-      String[] unsupported = {"ACTIVE.TIMES", "DISTRIBUTIONS", "DISTRIB.PATS",
-          "SUBSCRIPTIONS"};
+      String[] unsupported = { "ACTIVE.TIMES", "DISTRIBUTIONS", "DISTRIB.PATS",
+          "SUBSCRIPTIONS" };
       for (int i = 0; i < unsupported.length; i++) {
         if (unsupported[i].equalsIgnoreCase(param)) {
           writer.println("501 command not supported");
@@ -591,7 +622,7 @@ public class NNTPSession extends Thread {
         Enumeration boards = store.getBoards(null, wildmat);
         if (boards != null) {
           while (boards.hasMoreElements()) {
-            Board board = (Board) boards.nextElement();
+            Board board = (Board)boards.nextElement();
             writer.println(store.prefix + "." + board.getName() + " "
                 + board.getDisplayname() + " " + board.getPurpose());
           }
@@ -601,7 +632,7 @@ public class NNTPSession extends Thread {
         Enumeration boards = store.getBoards(null, wildmat);
         if (boards != null) {
           while (boards.hasMoreElements()) {
-            Board board = (Board) boards.nextElement();
+            Board board = (Board)boards.nextElement();
             writer.println(store.prefix + "." + board.getName() + " "
                 + (board.getModeratedposting().booleanValue() ? "n" : "y"));
           }
@@ -625,7 +656,7 @@ public class NNTPSession extends Thread {
       Enumeration boards = store.getBoards(null, null);
       if (boards != null) {
         while (boards.hasMoreElements()) {
-          Board board = (Board) boards.nextElement();
+          Board board = (Board)boards.nextElement();
           writer.println(store.prefix + "." + board.getName() + " "
               + (board.getModeratedposting().booleanValue() ? "n" : "y"));
           /*
@@ -637,6 +668,7 @@ public class NNTPSession extends Thread {
     }
     writer.println(".");
   }
+
   /**
    * Handle XPAT command.
    * 
@@ -654,11 +686,14 @@ public class NNTPSession extends Thread {
     wildmat = wildmat.trim();
     store.xpat(header, range, wildmat, selectedGroup, writer);
   }
+
   abstract class BoardPoemTask implements PoemTask {
     public boolean result = false;
+
     public void run() {
       result = execute();
     }
+
     public abstract boolean execute();
   }
 }
