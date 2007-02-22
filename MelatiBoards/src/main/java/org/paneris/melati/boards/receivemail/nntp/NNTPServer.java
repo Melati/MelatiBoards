@@ -94,6 +94,9 @@ public class NNTPServer implements Runnable {
     this.config = config;
     this.buffSize = bufSize;
     this.log = log;
+    
+    int shutUp = buffSize;
+    buffSize = shutUp;
   }
 
   /**
