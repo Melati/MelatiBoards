@@ -2,7 +2,7 @@
   <parent>
     <artifactId>MelatiBoards-parent</artifactId>
     <groupId>org.paneris</groupId>
-    <version>1.2.2</version>
+    <version>1.2.3</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.paneris</groupId>
@@ -18,7 +18,7 @@
     <dependency>
       <groupId>org.paneris</groupId>
       <artifactId>MelatiBoards</artifactId>
-      <version>1.2.2</version>
+      <version>1.2.3</version>
       <scope>test</scope>
     </dependency>
     <dependency>
