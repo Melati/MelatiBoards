@@ -18,25 +18,32 @@ import org.paneris.melati.boards.model.User;
 
 
 /**
- * Melati POEM generated base class for persistent Message.
- * Field summary for SQL table message:
- *   id
- *   board
- *   date
- *   subject
- *   author
- *   parent
- *   body
- *   deleted
- *   approved
+ * Melati POEM generated abstract base class for a <code>Persistent</code> 
+ * <code>Message</code> Object.
  *
+ * @generator org.melati.poem.prepro.TableDef#generateBaseJava 
  */
 public abstract class MessageBase extends Persistent {
 
+
+ /**
+  * Retrieves the Database object.
+  * 
+  * @generator org.melati.poem.prepro.TableDef#generateBaseJava 
+  * @return the database
+  */
   public BoardsDatabaseTables getBoardsDatabaseTables() {
     return (BoardsDatabaseTables)getDatabase();
   }
 
+
+ /**
+  * Retrieves the  <code>MessageTable</code> table 
+  * which this <code>Persistent</code> is from.
+  * 
+  * @generator org.melati.poem.prepro.TableDef#generateBaseJava 
+  * @return the MessageTable
+  */
   public MessageTable getMessageTable() {
     return (MessageTable)getTable();
   }
@@ -45,23 +52,80 @@ public abstract class MessageBase extends Persistent {
     return (MessageTable)getTable();
   }
 
+  // Fields in this table 
+ /**
+  * id 
+  */
   protected Integer id;
+ /**
+  * board - The board this message belongs to 
+  */
   protected Integer board;
+ /**
+  * date - The date and time at which this message was posted 
+  */
   protected Timestamp date;
+ /**
+  * subject - The subject line of this message 
+  */
   protected String subject;
+ /**
+  * author - Author of this message 
+  */
   protected Integer author;
+ /**
+  * Parent - The message to which this message is a follow-up 
+  */
   protected Integer parent;
+ /**
+  * body - The main content of this message 
+  */
   protected String body;
+ /**
+  * Deleted - A deleted message cannot be viewed or displayed on lists 
+  */
   protected Boolean deleted;
+ /**
+  * Approved - A message must be approved by a manager of the board before it 
+  * can be viewed (if the board has moderated postings) 
+  */
   protected Boolean approved;
 
+
+ /**
+  * Retrieves the <code>Id</code> value, without locking, 
+  * for this <code>Message</code> <code>Persistent</code>.
+  *
+  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @return the Integer id
+  */
   public Integer getId_unsafe() {
     return id;
   }
 
+
+ /**
+  * Sets the <code>Id</code> value directly, without checking, 
+  * for this Message <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @param cooked  the pre-validated value to set
+  */
   public void setId_unsafe(Integer cooked) {
     id = cooked;
   }
+
+ /**
+  * Retrieves the Id value, with locking, for this 
+  * <code>Message</code> <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.AtomFieldDef#generateBaseMethods 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights 
+  * @return the value of the field <code>Id</code> for this 
+  *         <code>Message</code> <code>Persistent</code>  
+  */
 
   public Integer getId()
       throws AccessPoemException {
@@ -69,30 +133,94 @@ public abstract class MessageBase extends Persistent {
     return getId_unsafe();
   }
 
+
+ /**
+  * Sets the <code>Id</code> value, with checking, for this 
+  * <code>Message</code> <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.AtomFieldDef#generateBaseMethods  
+  * @param cooked  a validated <code>int</code> 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @throws ValidationPoemException 
+  *         if the value is not valid
+  */
   public void setId(Integer cooked)
       throws AccessPoemException, ValidationPoemException {
-    _getMessageTable().getIdColumn().getType().assertValidCooked(cooked);
+    _getMessageTable().getIdColumn().
+      getType().assertValidCooked(cooked);
     writeLock();
     setId_unsafe(cooked);
   }
+
+ /**
+  * Sets the <code>Id</code> value, with checking, for this 
+  * <code>Message</code> <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.IntegerFieldDef#generateBaseMethods 
+  * @param cooked  a validated <code>int</code>
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @throws ValidationPoemException 
+  *         if the value is not valid
+  */
 
   public final void setId(int cooked)
       throws AccessPoemException, ValidationPoemException {
     setId(new Integer(cooked));
   }
 
+
+ /**
+  * Retrieves the <code>Id</code> value as a <code>Field</code>
+  * from this <code>Message</code> <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateFieldCreator 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @return the Integer id
+  */
   public Field getIdField() throws AccessPoemException {
     Column c = _getMessageTable().getIdColumn();
     return new Field(c.getRaw(this), c);
   }
 
+
+ /**
+  * Retrieves the <code>Board</code> value, without locking, 
+  * for this <code>Message</code> <code>Persistent</code>.
+  *
+  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @return the Integer board
+  */
   public Integer getBoard_unsafe() {
     return board;
   }
 
+
+ /**
+  * Sets the <code>Board</code> value directly, without checking, 
+  * for this Message <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @param cooked  the pre-validated value to set
+  */
   public void setBoard_unsafe(Integer cooked) {
     board = cooked;
   }
+
+ /**
+  * Retrieves the Table Row Object ID. 
+  *
+  * @generator org.melati.poem.prepro.ReferenceFieldDef#generateBaseMethods 
+  * @throws AccessPoemException  
+  *         if the current <code>AccessToken</code> 
+  *         does not confer read access rights 
+  * @return the TROID as an <code>Integer</code> 
+  */
 
   public Integer getBoardTroid()
       throws AccessPoemException {
@@ -100,12 +228,34 @@ public abstract class MessageBase extends Persistent {
     return getBoard_unsafe();
   }
 
+
+ /**
+  * Sets the Table Row Object ID. 
+  * 
+  * @generator org.melati.poem.prepro.ReferenceFieldDef#generateBaseMethods 
+  * @param raw  a Table Row Object Id 
+  * @throws AccessPoemException  
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  */
   public void setBoardTroid(Integer raw)
       throws AccessPoemException {
     setBoard(raw == null ? null : 
         getBoardsDatabaseTables().getBoardTable().getBoardObject(raw));
   }
 
+
+ /**
+  * Retrieves the <code>Board</code> object referred to.
+  *  
+  * @generator org.melati.poem.prepro.ReferenceFieldDef#generateBaseMethods 
+  * @throws AccessPoemException  
+  *         if the current <code>AccessToken</code> 
+  *         does not confer read access rights 
+  * @throws NoSuchRowPoemException  
+  *         if the <code>Persistent</code> has yet to be allocated a TROID 
+  * @return the <code>Board</code> as a <code>Board</code> 
+  */
   public Board getBoard()
       throws AccessPoemException, NoSuchRowPoemException {
     Integer troid = getBoardTroid();
@@ -113,9 +263,21 @@ public abstract class MessageBase extends Persistent {
         getBoardsDatabaseTables().getBoardTable().getBoardObject(troid);
   }
 
+
+ /**
+  * Set the Board.
+  * 
+  * @generator org.melati.poem.prepro.ReferenceFieldDef#generateBaseMethods 
+  * @param cooked  a validated <code>Board</code>
+  * @throws AccessPoemException  
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights 
+  */
   public void setBoard(Board cooked)
       throws AccessPoemException {
-    _getMessageTable().getBoardColumn().getType().assertValidCooked(cooked);
+    _getMessageTable().
+      getBoardColumn().
+        getType().assertValidCooked(cooked);
     writeLock();
     if (cooked == null)
       setBoard_unsafe(null);
@@ -125,18 +287,59 @@ public abstract class MessageBase extends Persistent {
     }
   }
 
+
+ /**
+  * Retrieves the <code>Board</code> value as a <code>Field</code>
+  * from this <code>Message</code> <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateFieldCreator 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @return the Integer board
+  */
   public Field getBoardField() throws AccessPoemException {
     Column c = _getMessageTable().getBoardColumn();
     return new Field(c.getRaw(this), c);
   }
 
+
+ /**
+  * Retrieves the <code>Date</code> value, without locking, 
+  * for this <code>Message</code> <code>Persistent</code>.
+  *
+  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @return the Timestamp date
+  */
   public Timestamp getDate_unsafe() {
     return date;
   }
 
+
+ /**
+  * Sets the <code>Date</code> value directly, without checking, 
+  * for this Message <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @param cooked  the pre-validated value to set
+  */
   public void setDate_unsafe(Timestamp cooked) {
     date = cooked;
   }
+
+ /**
+  * Retrieves the Date value, with locking, for this 
+  * <code>Message</code> <code>Persistent</code>.
+  * Field description: 
+  *   The date and time at which this message was posted 
+  * 
+  * @generator org.melati.poem.prepro.AtomFieldDef#generateBaseMethods 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights 
+  * @return the value of the field <code>Date</code> for this 
+  *         <code>Message</code> <code>Persistent</code>  
+  */
 
   public Timestamp getDate()
       throws AccessPoemException {
@@ -144,25 +347,82 @@ public abstract class MessageBase extends Persistent {
     return getDate_unsafe();
   }
 
+
+ /**
+  * Sets the <code>Date</code> value, with checking, for this 
+  * <code>Message</code> <code>Persistent</code>.
+  * Field description: 
+  *   The date and time at which this message was posted 
+  * 
+  * @generator org.melati.poem.prepro.AtomFieldDef#generateBaseMethods  
+  * @param cooked  a validated <code>int</code> 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @throws ValidationPoemException 
+  *         if the value is not valid
+  */
   public void setDate(Timestamp cooked)
       throws AccessPoemException, ValidationPoemException {
-    _getMessageTable().getDateColumn().getType().assertValidCooked(cooked);
+    _getMessageTable().getDateColumn().
+      getType().assertValidCooked(cooked);
     writeLock();
     setDate_unsafe(cooked);
   }
 
+
+ /**
+  * Retrieves the <code>Date</code> value as a <code>Field</code>
+  * from this <code>Message</code> <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateFieldCreator 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @return the Timestamp date
+  */
   public Field getDateField() throws AccessPoemException {
     Column c = _getMessageTable().getDateColumn();
     return new Field(c.getRaw(this), c);
   }
 
+
+ /**
+  * Retrieves the <code>Subject</code> value, without locking, 
+  * for this <code>Message</code> <code>Persistent</code>.
+  *
+  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @return the String subject
+  */
   public String getSubject_unsafe() {
     return subject;
   }
 
+
+ /**
+  * Sets the <code>Subject</code> value directly, without checking, 
+  * for this Message <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @param cooked  the pre-validated value to set
+  */
   public void setSubject_unsafe(String cooked) {
     subject = cooked;
   }
+
+ /**
+  * Retrieves the Subject value, with locking, for this 
+  * <code>Message</code> <code>Persistent</code>.
+  * Field description: 
+  *   The subject line of this message 
+  * 
+  * @generator org.melati.poem.prepro.AtomFieldDef#generateBaseMethods 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights 
+  * @return the value of the field <code>Subject</code> for this 
+  *         <code>Message</code> <code>Persistent</code>  
+  */
 
   public String getSubject()
       throws AccessPoemException {
@@ -170,25 +430,78 @@ public abstract class MessageBase extends Persistent {
     return getSubject_unsafe();
   }
 
+
+ /**
+  * Sets the <code>Subject</code> value, with checking, for this 
+  * <code>Message</code> <code>Persistent</code>.
+  * Field description: 
+  *   The subject line of this message 
+  * 
+  * @generator org.melati.poem.prepro.AtomFieldDef#generateBaseMethods  
+  * @param cooked  a validated <code>int</code> 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @throws ValidationPoemException 
+  *         if the value is not valid
+  */
   public void setSubject(String cooked)
       throws AccessPoemException, ValidationPoemException {
-    _getMessageTable().getSubjectColumn().getType().assertValidCooked(cooked);
+    _getMessageTable().getSubjectColumn().
+      getType().assertValidCooked(cooked);
     writeLock();
     setSubject_unsafe(cooked);
   }
 
+
+ /**
+  * Retrieves the <code>Subject</code> value as a <code>Field</code>
+  * from this <code>Message</code> <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateFieldCreator 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @return the String subject
+  */
   public Field getSubjectField() throws AccessPoemException {
     Column c = _getMessageTable().getSubjectColumn();
     return new Field(c.getRaw(this), c);
   }
 
+
+ /**
+  * Retrieves the <code>Author</code> value, without locking, 
+  * for this <code>Message</code> <code>Persistent</code>.
+  *
+  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @return the Integer author
+  */
   public Integer getAuthor_unsafe() {
     return author;
   }
 
+
+ /**
+  * Sets the <code>Author</code> value directly, without checking, 
+  * for this Message <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @param cooked  the pre-validated value to set
+  */
   public void setAuthor_unsafe(Integer cooked) {
     author = cooked;
   }
+
+ /**
+  * Retrieves the Table Row Object ID. 
+  *
+  * @generator org.melati.poem.prepro.ReferenceFieldDef#generateBaseMethods 
+  * @throws AccessPoemException  
+  *         if the current <code>AccessToken</code> 
+  *         does not confer read access rights 
+  * @return the TROID as an <code>Integer</code> 
+  */
 
   public Integer getAuthorTroid()
       throws AccessPoemException {
@@ -196,12 +509,34 @@ public abstract class MessageBase extends Persistent {
     return getAuthor_unsafe();
   }
 
+
+ /**
+  * Sets the Table Row Object ID. 
+  * 
+  * @generator org.melati.poem.prepro.ReferenceFieldDef#generateBaseMethods 
+  * @param raw  a Table Row Object Id 
+  * @throws AccessPoemException  
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  */
   public void setAuthorTroid(Integer raw)
       throws AccessPoemException {
     setAuthor(raw == null ? null : 
         (User)getBoardsDatabaseTables().getUserTable().getUserObject(raw));
   }
 
+
+ /**
+  * Retrieves the <code>Author</code> object referred to.
+  *  
+  * @generator org.melati.poem.prepro.ReferenceFieldDef#generateBaseMethods 
+  * @throws AccessPoemException  
+  *         if the current <code>AccessToken</code> 
+  *         does not confer read access rights 
+  * @throws NoSuchRowPoemException  
+  *         if the <code>Persistent</code> has yet to be allocated a TROID 
+  * @return the <code>Author</code> as a <code>User</code> 
+  */
   public User getAuthor()
       throws AccessPoemException, NoSuchRowPoemException {
     Integer troid = getAuthorTroid();
@@ -209,9 +544,21 @@ public abstract class MessageBase extends Persistent {
         (User)getBoardsDatabaseTables().getUserTable().getUserObject(troid);
   }
 
+
+ /**
+  * Set the Author.
+  * 
+  * @generator org.melati.poem.prepro.ReferenceFieldDef#generateBaseMethods 
+  * @param cooked  a validated <code>User</code>
+  * @throws AccessPoemException  
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights 
+  */
   public void setAuthor(User cooked)
       throws AccessPoemException {
-    _getMessageTable().getAuthorColumn().getType().assertValidCooked(cooked);
+    _getMessageTable().
+      getAuthorColumn().
+        getType().assertValidCooked(cooked);
     writeLock();
     if (cooked == null)
       setAuthor_unsafe(null);
@@ -221,18 +568,55 @@ public abstract class MessageBase extends Persistent {
     }
   }
 
+
+ /**
+  * Retrieves the <code>Author</code> value as a <code>Field</code>
+  * from this <code>Message</code> <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateFieldCreator 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @return the Integer author
+  */
   public Field getAuthorField() throws AccessPoemException {
     Column c = _getMessageTable().getAuthorColumn();
     return new Field(c.getRaw(this), c);
   }
 
+
+ /**
+  * Retrieves the <code>Parent</code> value, without locking, 
+  * for this <code>Message</code> <code>Persistent</code>.
+  *
+  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @return the Integer parent
+  */
   public Integer getParent_unsafe() {
     return parent;
   }
 
+
+ /**
+  * Sets the <code>Parent</code> value directly, without checking, 
+  * for this Message <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @param cooked  the pre-validated value to set
+  */
   public void setParent_unsafe(Integer cooked) {
     parent = cooked;
   }
+
+ /**
+  * Retrieves the Table Row Object ID. 
+  *
+  * @generator org.melati.poem.prepro.ReferenceFieldDef#generateBaseMethods 
+  * @throws AccessPoemException  
+  *         if the current <code>AccessToken</code> 
+  *         does not confer read access rights 
+  * @return the TROID as an <code>Integer</code> 
+  */
 
   public Integer getParentTroid()
       throws AccessPoemException {
@@ -240,12 +624,34 @@ public abstract class MessageBase extends Persistent {
     return getParent_unsafe();
   }
 
+
+ /**
+  * Sets the Table Row Object ID. 
+  * 
+  * @generator org.melati.poem.prepro.ReferenceFieldDef#generateBaseMethods 
+  * @param raw  a Table Row Object Id 
+  * @throws AccessPoemException  
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  */
   public void setParentTroid(Integer raw)
       throws AccessPoemException {
     setParent(raw == null ? null : 
         getBoardsDatabaseTables().getMessageTable().getMessageObject(raw));
   }
 
+
+ /**
+  * Retrieves the <code>Parent</code> object referred to.
+  *  
+  * @generator org.melati.poem.prepro.ReferenceFieldDef#generateBaseMethods 
+  * @throws AccessPoemException  
+  *         if the current <code>AccessToken</code> 
+  *         does not confer read access rights 
+  * @throws NoSuchRowPoemException  
+  *         if the <code>Persistent</code> has yet to be allocated a TROID 
+  * @return the <code>Parent</code> as a <code>Message</code> 
+  */
   public Message getParent()
       throws AccessPoemException, NoSuchRowPoemException {
     Integer troid = getParentTroid();
@@ -253,9 +659,21 @@ public abstract class MessageBase extends Persistent {
         getBoardsDatabaseTables().getMessageTable().getMessageObject(troid);
   }
 
+
+ /**
+  * Set the Parent.
+  * 
+  * @generator org.melati.poem.prepro.ReferenceFieldDef#generateBaseMethods 
+  * @param cooked  a validated <code>Message</code>
+  * @throws AccessPoemException  
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights 
+  */
   public void setParent(Message cooked)
       throws AccessPoemException {
-    _getMessageTable().getParentColumn().getType().assertValidCooked(cooked);
+    _getMessageTable().
+      getParentColumn().
+        getType().assertValidCooked(cooked);
     writeLock();
     if (cooked == null)
       setParent_unsafe(null);
@@ -265,18 +683,59 @@ public abstract class MessageBase extends Persistent {
     }
   }
 
+
+ /**
+  * Retrieves the <code>Parent</code> value as a <code>Field</code>
+  * from this <code>Message</code> <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateFieldCreator 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @return the Integer parent
+  */
   public Field getParentField() throws AccessPoemException {
     Column c = _getMessageTable().getParentColumn();
     return new Field(c.getRaw(this), c);
   }
 
+
+ /**
+  * Retrieves the <code>Body</code> value, without locking, 
+  * for this <code>Message</code> <code>Persistent</code>.
+  *
+  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @return the String body
+  */
   public String getBody_unsafe() {
     return body;
   }
 
+
+ /**
+  * Sets the <code>Body</code> value directly, without checking, 
+  * for this Message <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @param cooked  the pre-validated value to set
+  */
   public void setBody_unsafe(String cooked) {
     body = cooked;
   }
+
+ /**
+  * Retrieves the Body value, with locking, for this 
+  * <code>Message</code> <code>Persistent</code>.
+  * Field description: 
+  *   The main content of this message 
+  * 
+  * @generator org.melati.poem.prepro.AtomFieldDef#generateBaseMethods 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights 
+  * @return the value of the field <code>Body</code> for this 
+  *         <code>Message</code> <code>Persistent</code>  
+  */
 
   public String getBody()
       throws AccessPoemException {
@@ -284,25 +743,82 @@ public abstract class MessageBase extends Persistent {
     return getBody_unsafe();
   }
 
+
+ /**
+  * Sets the <code>Body</code> value, with checking, for this 
+  * <code>Message</code> <code>Persistent</code>.
+  * Field description: 
+  *   The main content of this message 
+  * 
+  * @generator org.melati.poem.prepro.AtomFieldDef#generateBaseMethods  
+  * @param cooked  a validated <code>int</code> 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @throws ValidationPoemException 
+  *         if the value is not valid
+  */
   public void setBody(String cooked)
       throws AccessPoemException, ValidationPoemException {
-    _getMessageTable().getBodyColumn().getType().assertValidCooked(cooked);
+    _getMessageTable().getBodyColumn().
+      getType().assertValidCooked(cooked);
     writeLock();
     setBody_unsafe(cooked);
   }
 
+
+ /**
+  * Retrieves the <code>Body</code> value as a <code>Field</code>
+  * from this <code>Message</code> <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateFieldCreator 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @return the String body
+  */
   public Field getBodyField() throws AccessPoemException {
     Column c = _getMessageTable().getBodyColumn();
     return new Field(c.getRaw(this), c);
   }
 
+
+ /**
+  * Retrieves the <code>Deleted</code> value, without locking, 
+  * for this <code>Message</code> <code>Persistent</code>.
+  *
+  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @return the Boolean deleted
+  */
   public Boolean getDeleted_unsafe() {
     return deleted;
   }
 
+
+ /**
+  * Sets the <code>Deleted</code> value directly, without checking, 
+  * for this Message <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @param cooked  the pre-validated value to set
+  */
   public void setDeleted_unsafe(Boolean cooked) {
     deleted = cooked;
   }
+
+ /**
+  * Retrieves the Deleted value, with locking, for this 
+  * <code>Message</code> <code>Persistent</code>.
+  * Field description: 
+  *   A deleted message cannot be viewed or displayed on lists 
+  * 
+  * @generator org.melati.poem.prepro.AtomFieldDef#generateBaseMethods 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights 
+  * @return the value of the field <code>Deleted</code> for this 
+  *         <code>Message</code> <code>Persistent</code>  
+  */
 
   public Boolean getDeleted()
       throws AccessPoemException {
@@ -310,30 +826,105 @@ public abstract class MessageBase extends Persistent {
     return getDeleted_unsafe();
   }
 
+
+ /**
+  * Sets the <code>Deleted</code> value, with checking, for this 
+  * <code>Message</code> <code>Persistent</code>.
+  * Field description: 
+  *   A deleted message cannot be viewed or displayed on lists 
+  * 
+  * @generator org.melati.poem.prepro.AtomFieldDef#generateBaseMethods  
+  * @param cooked  a validated <code>int</code> 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @throws ValidationPoemException 
+  *         if the value is not valid
+  */
   public void setDeleted(Boolean cooked)
       throws AccessPoemException, ValidationPoemException {
-    _getMessageTable().getDeletedColumn().getType().assertValidCooked(cooked);
+    _getMessageTable().getDeletedColumn().
+      getType().assertValidCooked(cooked);
     writeLock();
     setDeleted_unsafe(cooked);
   }
+
+ /**
+  * Sets the <code>Deleted</code> value, with checking, 
+  * from a <code>boolean</code>, for this 
+  * <code>Message</code> <code>Persistent</code>.
+  * Field description: 
+  *   A deleted message cannot be viewed or displayed on lists 
+  * 
+  * 
+  * @generator org.melati.poem.prepro.BooleanFieldDef#generateBaseMethods 
+  * @param cooked  a <code>boolean</code> 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @throws ValidationPoemException 
+  *         if the value is not valid
+  */
 
   public final void setDeleted(boolean cooked)
       throws AccessPoemException, ValidationPoemException {
     setDeleted(cooked ? Boolean.TRUE : Boolean.FALSE);
   }
 
+
+ /**
+  * Retrieves the <code>Deleted</code> value as a <code>Field</code>
+  * from this <code>Message</code> <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateFieldCreator 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @return the Boolean deleted
+  */
   public Field getDeletedField() throws AccessPoemException {
     Column c = _getMessageTable().getDeletedColumn();
     return new Field(c.getRaw(this), c);
   }
 
+
+ /**
+  * Retrieves the <code>Approved</code> value, without locking, 
+  * for this <code>Message</code> <code>Persistent</code>.
+  *
+  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @return the Boolean approved
+  */
   public Boolean getApproved_unsafe() {
     return approved;
   }
 
+
+ /**
+  * Sets the <code>Approved</code> value directly, without checking, 
+  * for this Message <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @param cooked  the pre-validated value to set
+  */
   public void setApproved_unsafe(Boolean cooked) {
     approved = cooked;
   }
+
+ /**
+  * Retrieves the Approved value, with locking, for this 
+  * <code>Message</code> <code>Persistent</code>.
+  * Field description: 
+  *   A message must be approved by a manager of the board before it can be 
+  *   viewed (if the board has moderated postings) 
+  * 
+  * @generator org.melati.poem.prepro.AtomFieldDef#generateBaseMethods 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights 
+  * @return the value of the field <code>Approved</code> for this 
+  *         <code>Message</code> <code>Persistent</code>  
+  */
 
   public Boolean getApproved()
       throws AccessPoemException {
@@ -341,20 +932,67 @@ public abstract class MessageBase extends Persistent {
     return getApproved_unsafe();
   }
 
+
+ /**
+  * Sets the <code>Approved</code> value, with checking, for this 
+  * <code>Message</code> <code>Persistent</code>.
+  * Field description: 
+  *   A message must be approved by a manager of the board before it can be 
+  *   viewed (if the board has moderated postings) 
+  * 
+  * @generator org.melati.poem.prepro.AtomFieldDef#generateBaseMethods  
+  * @param cooked  a validated <code>int</code> 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @throws ValidationPoemException 
+  *         if the value is not valid
+  */
   public void setApproved(Boolean cooked)
       throws AccessPoemException, ValidationPoemException {
-    _getMessageTable().getApprovedColumn().getType().assertValidCooked(cooked);
+    _getMessageTable().getApprovedColumn().
+      getType().assertValidCooked(cooked);
     writeLock();
     setApproved_unsafe(cooked);
   }
+
+ /**
+  * Sets the <code>Approved</code> value, with checking, 
+  * from a <code>boolean</code>, for this 
+  * <code>Message</code> <code>Persistent</code>.
+  * Field description: 
+  *   A message must be approved by a manager of the board before it can be 
+  *   viewed (if the board has moderated postings) 
+  * 
+  * 
+  * @generator org.melati.poem.prepro.BooleanFieldDef#generateBaseMethods 
+  * @param cooked  a <code>boolean</code> 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @throws ValidationPoemException 
+  *         if the value is not valid
+  */
 
   public final void setApproved(boolean cooked)
       throws AccessPoemException, ValidationPoemException {
     setApproved(cooked ? Boolean.TRUE : Boolean.FALSE);
   }
 
+
+ /**
+  * Retrieves the <code>Approved</code> value as a <code>Field</code>
+  * from this <code>Message</code> <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateFieldCreator 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @return the Boolean approved
+  */
   public Field getApprovedField() throws AccessPoemException {
     Column c = _getMessageTable().getApprovedColumn();
     return new Field(c.getRaw(this), c);
   }
 }
+

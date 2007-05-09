@@ -12,25 +12,34 @@ import org.melati.poem.Persistent;
 import org.melati.poem.PoemException;
 import org.melati.poem.Searchability;
 import org.melati.poem.StringPoemType;
-import org.melati.poem.Table;
 import org.melati.poem.TroidPoemType;
 import org.melati.poem.ValidationPoemException;
 import org.paneris.melati.boards.model.AttachmentType;
 import org.paneris.melati.boards.model.BoardsDatabaseTables;
+import org.paneris.melati.boards.model.BoardsTable;
 
 
 /**
- * Melati POEM generated base class for table AttachmentType.
- * Field summary for SQL table attachmenttype:
- *   id
- *   type
+ * Melati POEM generated base class for 
+<code>Table</code> <code>AttachmentType</code>.
  *
+ * @generator org.melati.poem.prepro.TableDef#generateTableBaseJava 
  */
 
-public class AttachmentTypeTableBase extends Table {
+public class AttachmentTypeTableBase extends BoardsTable {
 
   private Column col_id = null;
   private Column col_type = null;
+
+ /**
+  * Constructor. 
+  * 
+  * @generator org.melati.poem.prepro.TableDef#generateTableBaseJava 
+  * @param database          the POEM database we are using
+  * @param name              the name of this <code>Table</code>
+  * @param definitionSource  which definition is being used
+  * @throws PoemException    if anything goes wrong
+  */
 
   public AttachmentTypeTableBase(
       Database database, String name,
@@ -38,11 +47,27 @@ public class AttachmentTypeTableBase extends Table {
     super(database, name, definitionSource);
   }
 
+
+ /**
+  * Constructor.
+  *
+  * @generator org.melati.poem.prepro.TableDef#generateTableBaseJava 
+  * @param database          the POEM database we are using
+  * @param name              the name of this <code>Table</code>
+  * @throws PoemException    if anything goes wrong
+  */
   public AttachmentTypeTableBase(
       Database database, String name) throws PoemException {
     this(database, name, DefinitionSource.dsd);
   }
 
+
+ /**
+  * Get the database tables.
+  *
+  * @generator org.melati.poem.prepro.TableDef#generateTableBaseJava 
+  * @return the database tables
+  */
   public BoardsDatabaseTables getBoardsDatabaseTables() {
     return (BoardsDatabaseTables)getDatabase();
   }
@@ -172,18 +197,50 @@ public class AttachmentTypeTableBase extends Table {
         });
   }
 
+
+ /**
+  * Retrieves the <code>Id</code> <code>Column</code> for this 
+  * <code>AttachmentType</code> <code>Table</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateColAccessor 
+  * @return the id <code>Column</code>
+  */
   public final Column getIdColumn() {
     return col_id;
   }
 
+
+ /**
+  * Retrieves the <code>Type</code> <code>Column</code> for this 
+  * <code>AttachmentType</code> <code>Table</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateColAccessor 
+  * @return the type <code>Column</code>
+  */
   public final Column getTypeColumn() {
     return col_type;
   }
 
+
+ /**
+  * Retrieve the <code>AttachmentType</code> as a <code>AttachmentType</code>.
+  *
+  * @generator org.melati.poem.prepro.TableDef#generateTableBaseJava 
+  * @param troid a Table Row Oject ID
+  * @return the <code>Persistent</code> identified by the <code>troid</code>
+  */
   public AttachmentType getAttachmentTypeObject(Integer troid) {
     return (AttachmentType)getObject(troid);
   }
 
+
+ /**
+  * Retrieve the <code>AttachmentType</code> 
+  * as a <code>AttachmentType</code>.
+  *
+  * @generator org.melati.poem.prepro.TableDef#generateTableBaseJava 
+  * @param troid a Table Row Object ID
+  * @return the <code>Persistent</code> identified   */
   public AttachmentType getAttachmentTypeObject(int troid) {
     return (AttachmentType)getObject(troid);
   }
@@ -215,3 +272,4 @@ public class AttachmentTypeTableBase extends Table {
     return 1060;
   }
 }
+

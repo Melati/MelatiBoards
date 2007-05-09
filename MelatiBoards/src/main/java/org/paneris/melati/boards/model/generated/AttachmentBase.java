@@ -16,23 +16,32 @@ import org.paneris.melati.boards.model.Message;
 
 
 /**
- * Melati POEM generated base class for persistent Attachment.
- * Field summary for SQL table attachment:
- *   id
- *   message
- *   filename
- *   path
- *   url
- *   size
- *   type
+ * Melati POEM generated abstract base class for a <code>Persistent</code> 
+ * <code>Attachment</code> Object.
  *
+ * @generator org.melati.poem.prepro.TableDef#generateBaseJava 
  */
 public abstract class AttachmentBase extends Persistent {
 
+
+ /**
+  * Retrieves the Database object.
+  * 
+  * @generator org.melati.poem.prepro.TableDef#generateBaseJava 
+  * @return the database
+  */
   public BoardsDatabaseTables getBoardsDatabaseTables() {
     return (BoardsDatabaseTables)getDatabase();
   }
 
+
+ /**
+  * Retrieves the  <code>AttachmentTable</code> table 
+  * which this <code>Persistent</code> is from.
+  * 
+  * @generator org.melati.poem.prepro.TableDef#generateBaseJava 
+  * @return the AttachmentTable
+  */
   public AttachmentTable getAttachmentTable() {
     return (AttachmentTable)getTable();
   }
@@ -41,21 +50,71 @@ public abstract class AttachmentBase extends Persistent {
     return (AttachmentTable)getTable();
   }
 
+  // Fields in this table 
+ /**
+  * id 
+  */
   protected Integer id;
+ /**
+  * message - The message this attachment belongs to 
+  */
   protected Integer message;
+ /**
+  * filename - The filename of this attachment 
+  */
   protected String filename;
+ /**
+  * path - The path to this attachment 
+  */
   protected String path;
+ /**
+  * url - A url to this attachment 
+  */
   protected String url;
+ /**
+  * size - The size of the file in bytes 
+  */
   protected Integer size;
+ /**
+  * type - The type of this attachment 
+  */
   protected Integer type;
 
+
+ /**
+  * Retrieves the <code>Id</code> value, without locking, 
+  * for this <code>Attachment</code> <code>Persistent</code>.
+  *
+  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @return the Integer id
+  */
   public Integer getId_unsafe() {
     return id;
   }
 
+
+ /**
+  * Sets the <code>Id</code> value directly, without checking, 
+  * for this Attachment <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @param cooked  the pre-validated value to set
+  */
   public void setId_unsafe(Integer cooked) {
     id = cooked;
   }
+
+ /**
+  * Retrieves the Id value, with locking, for this 
+  * <code>Attachment</code> <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.AtomFieldDef#generateBaseMethods 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights 
+  * @return the value of the field <code>Id</code> for this 
+  *         <code>Attachment</code> <code>Persistent</code>  
+  */
 
   public Integer getId()
       throws AccessPoemException {
@@ -63,30 +122,94 @@ public abstract class AttachmentBase extends Persistent {
     return getId_unsafe();
   }
 
+
+ /**
+  * Sets the <code>Id</code> value, with checking, for this 
+  * <code>Attachment</code> <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.AtomFieldDef#generateBaseMethods  
+  * @param cooked  a validated <code>int</code> 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @throws ValidationPoemException 
+  *         if the value is not valid
+  */
   public void setId(Integer cooked)
       throws AccessPoemException, ValidationPoemException {
-    _getAttachmentTable().getIdColumn().getType().assertValidCooked(cooked);
+    _getAttachmentTable().getIdColumn().
+      getType().assertValidCooked(cooked);
     writeLock();
     setId_unsafe(cooked);
   }
+
+ /**
+  * Sets the <code>Id</code> value, with checking, for this 
+  * <code>Attachment</code> <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.IntegerFieldDef#generateBaseMethods 
+  * @param cooked  a validated <code>int</code>
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @throws ValidationPoemException 
+  *         if the value is not valid
+  */
 
   public final void setId(int cooked)
       throws AccessPoemException, ValidationPoemException {
     setId(new Integer(cooked));
   }
 
+
+ /**
+  * Retrieves the <code>Id</code> value as a <code>Field</code>
+  * from this <code>Attachment</code> <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateFieldCreator 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @return the Integer id
+  */
   public Field getIdField() throws AccessPoemException {
     Column c = _getAttachmentTable().getIdColumn();
     return new Field(c.getRaw(this), c);
   }
 
+
+ /**
+  * Retrieves the <code>Message</code> value, without locking, 
+  * for this <code>Attachment</code> <code>Persistent</code>.
+  *
+  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @return the Integer message
+  */
   public Integer getMessage_unsafe() {
     return message;
   }
 
+
+ /**
+  * Sets the <code>Message</code> value directly, without checking, 
+  * for this Attachment <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @param cooked  the pre-validated value to set
+  */
   public void setMessage_unsafe(Integer cooked) {
     message = cooked;
   }
+
+ /**
+  * Retrieves the Table Row Object ID. 
+  *
+  * @generator org.melati.poem.prepro.ReferenceFieldDef#generateBaseMethods 
+  * @throws AccessPoemException  
+  *         if the current <code>AccessToken</code> 
+  *         does not confer read access rights 
+  * @return the TROID as an <code>Integer</code> 
+  */
 
   public Integer getMessageTroid()
       throws AccessPoemException {
@@ -94,12 +217,34 @@ public abstract class AttachmentBase extends Persistent {
     return getMessage_unsafe();
   }
 
+
+ /**
+  * Sets the Table Row Object ID. 
+  * 
+  * @generator org.melati.poem.prepro.ReferenceFieldDef#generateBaseMethods 
+  * @param raw  a Table Row Object Id 
+  * @throws AccessPoemException  
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  */
   public void setMessageTroid(Integer raw)
       throws AccessPoemException {
     setMessage(raw == null ? null : 
         getBoardsDatabaseTables().getMessageTable().getMessageObject(raw));
   }
 
+
+ /**
+  * Retrieves the <code>Message</code> object referred to.
+  *  
+  * @generator org.melati.poem.prepro.ReferenceFieldDef#generateBaseMethods 
+  * @throws AccessPoemException  
+  *         if the current <code>AccessToken</code> 
+  *         does not confer read access rights 
+  * @throws NoSuchRowPoemException  
+  *         if the <code>Persistent</code> has yet to be allocated a TROID 
+  * @return the <code>Message</code> as a <code>Message</code> 
+  */
   public Message getMessage()
       throws AccessPoemException, NoSuchRowPoemException {
     Integer troid = getMessageTroid();
@@ -107,9 +252,21 @@ public abstract class AttachmentBase extends Persistent {
         getBoardsDatabaseTables().getMessageTable().getMessageObject(troid);
   }
 
+
+ /**
+  * Set the Message.
+  * 
+  * @generator org.melati.poem.prepro.ReferenceFieldDef#generateBaseMethods 
+  * @param cooked  a validated <code>Message</code>
+  * @throws AccessPoemException  
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights 
+  */
   public void setMessage(Message cooked)
       throws AccessPoemException {
-    _getAttachmentTable().getMessageColumn().getType().assertValidCooked(cooked);
+    _getAttachmentTable().
+      getMessageColumn().
+        getType().assertValidCooked(cooked);
     writeLock();
     if (cooked == null)
       setMessage_unsafe(null);
@@ -119,18 +276,59 @@ public abstract class AttachmentBase extends Persistent {
     }
   }
 
+
+ /**
+  * Retrieves the <code>Message</code> value as a <code>Field</code>
+  * from this <code>Attachment</code> <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateFieldCreator 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @return the Integer message
+  */
   public Field getMessageField() throws AccessPoemException {
     Column c = _getAttachmentTable().getMessageColumn();
     return new Field(c.getRaw(this), c);
   }
 
+
+ /**
+  * Retrieves the <code>Filename</code> value, without locking, 
+  * for this <code>Attachment</code> <code>Persistent</code>.
+  *
+  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @return the String filename
+  */
   public String getFilename_unsafe() {
     return filename;
   }
 
+
+ /**
+  * Sets the <code>Filename</code> value directly, without checking, 
+  * for this Attachment <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @param cooked  the pre-validated value to set
+  */
   public void setFilename_unsafe(String cooked) {
     filename = cooked;
   }
+
+ /**
+  * Retrieves the Filename value, with locking, for this 
+  * <code>Attachment</code> <code>Persistent</code>.
+  * Field description: 
+  *   The filename of this attachment 
+  * 
+  * @generator org.melati.poem.prepro.AtomFieldDef#generateBaseMethods 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights 
+  * @return the value of the field <code>Filename</code> for this 
+  *         <code>Attachment</code> <code>Persistent</code>  
+  */
 
   public String getFilename()
       throws AccessPoemException {
@@ -138,25 +336,82 @@ public abstract class AttachmentBase extends Persistent {
     return getFilename_unsafe();
   }
 
+
+ /**
+  * Sets the <code>Filename</code> value, with checking, for this 
+  * <code>Attachment</code> <code>Persistent</code>.
+  * Field description: 
+  *   The filename of this attachment 
+  * 
+  * @generator org.melati.poem.prepro.AtomFieldDef#generateBaseMethods  
+  * @param cooked  a validated <code>int</code> 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @throws ValidationPoemException 
+  *         if the value is not valid
+  */
   public void setFilename(String cooked)
       throws AccessPoemException, ValidationPoemException {
-    _getAttachmentTable().getFilenameColumn().getType().assertValidCooked(cooked);
+    _getAttachmentTable().getFilenameColumn().
+      getType().assertValidCooked(cooked);
     writeLock();
     setFilename_unsafe(cooked);
   }
 
+
+ /**
+  * Retrieves the <code>Filename</code> value as a <code>Field</code>
+  * from this <code>Attachment</code> <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateFieldCreator 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @return the String filename
+  */
   public Field getFilenameField() throws AccessPoemException {
     Column c = _getAttachmentTable().getFilenameColumn();
     return new Field(c.getRaw(this), c);
   }
 
+
+ /**
+  * Retrieves the <code>Path</code> value, without locking, 
+  * for this <code>Attachment</code> <code>Persistent</code>.
+  *
+  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @return the String path
+  */
   public String getPath_unsafe() {
     return path;
   }
 
+
+ /**
+  * Sets the <code>Path</code> value directly, without checking, 
+  * for this Attachment <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @param cooked  the pre-validated value to set
+  */
   public void setPath_unsafe(String cooked) {
     path = cooked;
   }
+
+ /**
+  * Retrieves the Path value, with locking, for this 
+  * <code>Attachment</code> <code>Persistent</code>.
+  * Field description: 
+  *   The path to this attachment 
+  * 
+  * @generator org.melati.poem.prepro.AtomFieldDef#generateBaseMethods 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights 
+  * @return the value of the field <code>Path</code> for this 
+  *         <code>Attachment</code> <code>Persistent</code>  
+  */
 
   public String getPath()
       throws AccessPoemException {
@@ -164,25 +419,82 @@ public abstract class AttachmentBase extends Persistent {
     return getPath_unsafe();
   }
 
+
+ /**
+  * Sets the <code>Path</code> value, with checking, for this 
+  * <code>Attachment</code> <code>Persistent</code>.
+  * Field description: 
+  *   The path to this attachment 
+  * 
+  * @generator org.melati.poem.prepro.AtomFieldDef#generateBaseMethods  
+  * @param cooked  a validated <code>int</code> 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @throws ValidationPoemException 
+  *         if the value is not valid
+  */
   public void setPath(String cooked)
       throws AccessPoemException, ValidationPoemException {
-    _getAttachmentTable().getPathColumn().getType().assertValidCooked(cooked);
+    _getAttachmentTable().getPathColumn().
+      getType().assertValidCooked(cooked);
     writeLock();
     setPath_unsafe(cooked);
   }
 
+
+ /**
+  * Retrieves the <code>Path</code> value as a <code>Field</code>
+  * from this <code>Attachment</code> <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateFieldCreator 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @return the String path
+  */
   public Field getPathField() throws AccessPoemException {
     Column c = _getAttachmentTable().getPathColumn();
     return new Field(c.getRaw(this), c);
   }
 
+
+ /**
+  * Retrieves the <code>Url</code> value, without locking, 
+  * for this <code>Attachment</code> <code>Persistent</code>.
+  *
+  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @return the String url
+  */
   public String getUrl_unsafe() {
     return url;
   }
 
+
+ /**
+  * Sets the <code>Url</code> value directly, without checking, 
+  * for this Attachment <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @param cooked  the pre-validated value to set
+  */
   public void setUrl_unsafe(String cooked) {
     url = cooked;
   }
+
+ /**
+  * Retrieves the Url value, with locking, for this 
+  * <code>Attachment</code> <code>Persistent</code>.
+  * Field description: 
+  *   A url to this attachment 
+  * 
+  * @generator org.melati.poem.prepro.AtomFieldDef#generateBaseMethods 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights 
+  * @return the value of the field <code>Url</code> for this 
+  *         <code>Attachment</code> <code>Persistent</code>  
+  */
 
   public String getUrl()
       throws AccessPoemException {
@@ -190,25 +502,82 @@ public abstract class AttachmentBase extends Persistent {
     return getUrl_unsafe();
   }
 
+
+ /**
+  * Sets the <code>Url</code> value, with checking, for this 
+  * <code>Attachment</code> <code>Persistent</code>.
+  * Field description: 
+  *   A url to this attachment 
+  * 
+  * @generator org.melati.poem.prepro.AtomFieldDef#generateBaseMethods  
+  * @param cooked  a validated <code>int</code> 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @throws ValidationPoemException 
+  *         if the value is not valid
+  */
   public void setUrl(String cooked)
       throws AccessPoemException, ValidationPoemException {
-    _getAttachmentTable().getUrlColumn().getType().assertValidCooked(cooked);
+    _getAttachmentTable().getUrlColumn().
+      getType().assertValidCooked(cooked);
     writeLock();
     setUrl_unsafe(cooked);
   }
 
+
+ /**
+  * Retrieves the <code>Url</code> value as a <code>Field</code>
+  * from this <code>Attachment</code> <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateFieldCreator 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @return the String url
+  */
   public Field getUrlField() throws AccessPoemException {
     Column c = _getAttachmentTable().getUrlColumn();
     return new Field(c.getRaw(this), c);
   }
 
+
+ /**
+  * Retrieves the <code>Size</code> value, without locking, 
+  * for this <code>Attachment</code> <code>Persistent</code>.
+  *
+  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @return the Integer size
+  */
   public Integer getSize_unsafe() {
     return size;
   }
 
+
+ /**
+  * Sets the <code>Size</code> value directly, without checking, 
+  * for this Attachment <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @param cooked  the pre-validated value to set
+  */
   public void setSize_unsafe(Integer cooked) {
     size = cooked;
   }
+
+ /**
+  * Retrieves the Size value, with locking, for this 
+  * <code>Attachment</code> <code>Persistent</code>.
+  * Field description: 
+  *   The size of the file in bytes 
+  * 
+  * @generator org.melati.poem.prepro.AtomFieldDef#generateBaseMethods 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights 
+  * @return the value of the field <code>Size</code> for this 
+  *         <code>Attachment</code> <code>Persistent</code>  
+  */
 
   public Integer getSize()
       throws AccessPoemException {
@@ -216,30 +585,99 @@ public abstract class AttachmentBase extends Persistent {
     return getSize_unsafe();
   }
 
+
+ /**
+  * Sets the <code>Size</code> value, with checking, for this 
+  * <code>Attachment</code> <code>Persistent</code>.
+  * Field description: 
+  *   The size of the file in bytes 
+  * 
+  * @generator org.melati.poem.prepro.AtomFieldDef#generateBaseMethods  
+  * @param cooked  a validated <code>int</code> 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @throws ValidationPoemException 
+  *         if the value is not valid
+  */
   public void setSize(Integer cooked)
       throws AccessPoemException, ValidationPoemException {
-    _getAttachmentTable().getSizeColumn().getType().assertValidCooked(cooked);
+    _getAttachmentTable().getSizeColumn().
+      getType().assertValidCooked(cooked);
     writeLock();
     setSize_unsafe(cooked);
   }
+
+ /**
+  * Sets the <code>Size</code> value, with checking, for this 
+  * <code>Attachment</code> <code>Persistent</code>.
+  * Field description: 
+  *   The size of the file in bytes 
+  * 
+  * 
+  * @generator org.melati.poem.prepro.IntegerFieldDef#generateBaseMethods 
+  * @param cooked  a validated <code>int</code>
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @throws ValidationPoemException 
+  *         if the value is not valid
+  */
 
   public final void setSize(int cooked)
       throws AccessPoemException, ValidationPoemException {
     setSize(new Integer(cooked));
   }
 
+
+ /**
+  * Retrieves the <code>Size</code> value as a <code>Field</code>
+  * from this <code>Attachment</code> <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateFieldCreator 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @return the Integer size
+  */
   public Field getSizeField() throws AccessPoemException {
     Column c = _getAttachmentTable().getSizeColumn();
     return new Field(c.getRaw(this), c);
   }
 
+
+ /**
+  * Retrieves the <code>Type</code> value, without locking, 
+  * for this <code>Attachment</code> <code>Persistent</code>.
+  *
+  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @return the Integer type
+  */
   public Integer getType_unsafe() {
     return type;
   }
 
+
+ /**
+  * Sets the <code>Type</code> value directly, without checking, 
+  * for this Attachment <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @param cooked  the pre-validated value to set
+  */
   public void setType_unsafe(Integer cooked) {
     type = cooked;
   }
+
+ /**
+  * Retrieves the Table Row Object ID. 
+  *
+  * @generator org.melati.poem.prepro.ReferenceFieldDef#generateBaseMethods 
+  * @throws AccessPoemException  
+  *         if the current <code>AccessToken</code> 
+  *         does not confer read access rights 
+  * @return the TROID as an <code>Integer</code> 
+  */
 
   public Integer getTypeTroid()
       throws AccessPoemException {
@@ -247,12 +685,34 @@ public abstract class AttachmentBase extends Persistent {
     return getType_unsafe();
   }
 
+
+ /**
+  * Sets the Table Row Object ID. 
+  * 
+  * @generator org.melati.poem.prepro.ReferenceFieldDef#generateBaseMethods 
+  * @param raw  a Table Row Object Id 
+  * @throws AccessPoemException  
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  */
   public void setTypeTroid(Integer raw)
       throws AccessPoemException {
     setType(raw == null ? null : 
         getBoardsDatabaseTables().getAttachmentTypeTable().getAttachmentTypeObject(raw));
   }
 
+
+ /**
+  * Retrieves the <code>Type</code> object referred to.
+  *  
+  * @generator org.melati.poem.prepro.ReferenceFieldDef#generateBaseMethods 
+  * @throws AccessPoemException  
+  *         if the current <code>AccessToken</code> 
+  *         does not confer read access rights 
+  * @throws NoSuchRowPoemException  
+  *         if the <code>Persistent</code> has yet to be allocated a TROID 
+  * @return the <code>Type</code> as a <code>AttachmentType</code> 
+  */
   public AttachmentType getType()
       throws AccessPoemException, NoSuchRowPoemException {
     Integer troid = getTypeTroid();
@@ -260,9 +720,21 @@ public abstract class AttachmentBase extends Persistent {
         getBoardsDatabaseTables().getAttachmentTypeTable().getAttachmentTypeObject(troid);
   }
 
+
+ /**
+  * Set the Type.
+  * 
+  * @generator org.melati.poem.prepro.ReferenceFieldDef#generateBaseMethods 
+  * @param cooked  a validated <code>AttachmentType</code>
+  * @throws AccessPoemException  
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights 
+  */
   public void setType(AttachmentType cooked)
       throws AccessPoemException {
-    _getAttachmentTable().getTypeColumn().getType().assertValidCooked(cooked);
+    _getAttachmentTable().
+      getTypeColumn().
+        getType().assertValidCooked(cooked);
     writeLock();
     if (cooked == null)
       setType_unsafe(null);
@@ -272,8 +744,20 @@ public abstract class AttachmentBase extends Persistent {
     }
   }
 
+
+ /**
+  * Retrieves the <code>Type</code> value as a <code>Field</code>
+  * from this <code>Attachment</code> <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateFieldCreator 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @return the Integer type
+  */
   public Field getTypeField() throws AccessPoemException {
     Column c = _getAttachmentTable().getTypeColumn();
     return new Field(c.getRaw(this), c);
   }
 }
+

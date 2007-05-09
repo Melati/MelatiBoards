@@ -13,17 +13,32 @@ import org.paneris.melati.boards.model.UserTable;
 
 
 /**
- * Melati POEM generated base class for persistent User.
- * Field summary for SQL table user:
- *   email
+ * Melati POEM generated abstract base class for a <code>Persistent</code> 
+ * <code>User</code> Object.
  *
+ * @generator org.melati.poem.prepro.TableDef#generateBaseJava 
  */
 public abstract class UserBase extends User {
 
+
+ /**
+  * Retrieves the Database object.
+  * 
+  * @generator org.melati.poem.prepro.TableDef#generateBaseJava 
+  * @return the database
+  */
   public BoardsDatabaseTables getBoardsDatabaseTables() {
     return (BoardsDatabaseTables)getDatabase();
   }
 
+
+ /**
+  * Retrieves the  <code>UserTable</code> table 
+  * which this <code>Persistent</code> is from.
+  * 
+  * @generator org.melati.poem.prepro.TableDef#generateBaseJava 
+  * @return the org.melati.poem.UserTable
+  */
   public org.melati.poem.UserTable getUserTable() {
     return (org.melati.poem.UserTable)getTable();
   }
@@ -32,15 +47,49 @@ public abstract class UserBase extends User {
     return (UserTable)getTable();
   }
 
+  // Fields in this table 
+ /**
+  * email - The user's email address 
+  */
   protected String email;
 
+
+ /**
+  * Retrieves the <code>Email</code> value, without locking, 
+  * for this <code>User</code> <code>Persistent</code>.
+  *
+  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @return the String email
+  */
   public String getEmail_unsafe() {
     return email;
   }
 
+
+ /**
+  * Sets the <code>Email</code> value directly, without checking, 
+  * for this User <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @param cooked  the pre-validated value to set
+  */
   public void setEmail_unsafe(String cooked) {
     email = cooked;
   }
+
+ /**
+  * Retrieves the Email value, with locking, for this 
+  * <code>User</code> <code>Persistent</code>.
+  * Field description: 
+  *   The user's email address 
+  * 
+  * @generator org.melati.poem.prepro.AtomFieldDef#generateBaseMethods 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights 
+  * @return the value of the field <code>Email</code> for this 
+  *         <code>User</code> <code>Persistent</code>  
+  */
 
   public String getEmail()
       throws AccessPoemException {
@@ -48,15 +97,43 @@ public abstract class UserBase extends User {
     return getEmail_unsafe();
   }
 
+
+ /**
+  * Sets the <code>Email</code> value, with checking, for this 
+  * <code>User</code> <code>Persistent</code>.
+  * Field description: 
+  *   The user's email address 
+  * 
+  * @generator org.melati.poem.prepro.AtomFieldDef#generateBaseMethods  
+  * @param cooked  a validated <code>int</code> 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @throws ValidationPoemException 
+  *         if the value is not valid
+  */
   public void setEmail(String cooked)
       throws AccessPoemException, ValidationPoemException {
-    _getUserTable().getEmailColumn().getType().assertValidCooked(cooked);
+    _getUserTable().getEmailColumn().
+      getType().assertValidCooked(cooked);
     writeLock();
     setEmail_unsafe(cooked);
   }
 
+
+ /**
+  * Retrieves the <code>Email</code> value as a <code>Field</code>
+  * from this <code>User</code> <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateFieldCreator 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @return the String email
+  */
   public Field getEmailField() throws AccessPoemException {
     Column c = _getUserTable().getEmailColumn();
     return new Field(c.getRaw(this), c);
   }
 }
+

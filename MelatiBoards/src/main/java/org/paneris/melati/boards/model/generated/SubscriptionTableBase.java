@@ -14,29 +14,24 @@ import org.melati.poem.PoemException;
 import org.melati.poem.ReferencePoemType;
 import org.melati.poem.Searchability;
 import org.melati.poem.StandardIntegrityFix;
-import org.melati.poem.Table;
 import org.melati.poem.TroidPoemType;
 import org.melati.poem.ValidationPoemException;
 import org.paneris.melati.boards.model.Board;
 import org.paneris.melati.boards.model.BoardsDatabaseTables;
+import org.paneris.melati.boards.model.BoardsTable;
 import org.paneris.melati.boards.model.MembershipStatus;
 import org.paneris.melati.boards.model.Subscription;
 import org.paneris.melati.boards.model.User;
 
 
 /**
- * Melati POEM generated base class for table Subscription.
- * Field summary for SQL table subscription:
- *   id
- *   user
- *   board
- *   status
- *   ismanager
- *   approved
+ * Melati POEM generated base class for 
+<code>Table</code> <code>Subscription</code>.
  *
+ * @generator org.melati.poem.prepro.TableDef#generateTableBaseJava 
  */
 
-public class SubscriptionTableBase extends Table {
+public class SubscriptionTableBase extends BoardsTable {
 
   private Column col_id = null;
   private Column col_user = null;
@@ -45,17 +40,43 @@ public class SubscriptionTableBase extends Table {
   private Column col_ismanager = null;
   private Column col_approved = null;
 
+ /**
+  * Constructor. 
+  * 
+  * @generator org.melati.poem.prepro.TableDef#generateTableBaseJava 
+  * @param database          the POEM database we are using
+  * @param name              the name of this <code>Table</code>
+  * @param definitionSource  which definition is being used
+  * @throws PoemException    if anything goes wrong
+  */
+
   public SubscriptionTableBase(
       Database database, String name,
       DefinitionSource definitionSource) throws PoemException {
     super(database, name, definitionSource);
   }
 
+
+ /**
+  * Constructor.
+  *
+  * @generator org.melati.poem.prepro.TableDef#generateTableBaseJava 
+  * @param database          the POEM database we are using
+  * @param name              the name of this <code>Table</code>
+  * @throws PoemException    if anything goes wrong
+  */
   public SubscriptionTableBase(
       Database database, String name) throws PoemException {
     this(database, name, DefinitionSource.dsd);
   }
 
+
+ /**
+  * Get the database tables.
+  *
+  * @generator org.melati.poem.prepro.TableDef#generateTableBaseJava 
+  * @return the database tables
+  */
   public BoardsDatabaseTables getBoardsDatabaseTables() {
     return (BoardsDatabaseTables)getDatabase();
   }
@@ -436,34 +457,98 @@ public class SubscriptionTableBase extends Table {
         });
   }
 
+
+ /**
+  * Retrieves the <code>Id</code> <code>Column</code> for this 
+  * <code>Subscription</code> <code>Table</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateColAccessor 
+  * @return the id <code>Column</code>
+  */
   public final Column getIdColumn() {
     return col_id;
   }
 
+
+ /**
+  * Retrieves the <code>User</code> <code>Column</code> for this 
+  * <code>Subscription</code> <code>Table</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateColAccessor 
+  * @return the user <code>Column</code>
+  */
   public final Column getUserColumn() {
     return col_user;
   }
 
+
+ /**
+  * Retrieves the <code>Board</code> <code>Column</code> for this 
+  * <code>Subscription</code> <code>Table</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateColAccessor 
+  * @return the board <code>Column</code>
+  */
   public final Column getBoardColumn() {
     return col_board;
   }
 
+
+ /**
+  * Retrieves the <code>Status</code> <code>Column</code> for this 
+  * <code>Subscription</code> <code>Table</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateColAccessor 
+  * @return the status <code>Column</code>
+  */
   public final Column getStatusColumn() {
     return col_status;
   }
 
+
+ /**
+  * Retrieves the <code>Ismanager</code> <code>Column</code> for this 
+  * <code>Subscription</code> <code>Table</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateColAccessor 
+  * @return the ismanager <code>Column</code>
+  */
   public final Column getIsmanagerColumn() {
     return col_ismanager;
   }
 
+
+ /**
+  * Retrieves the <code>Approved</code> <code>Column</code> for this 
+  * <code>Subscription</code> <code>Table</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateColAccessor 
+  * @return the approved <code>Column</code>
+  */
   public final Column getApprovedColumn() {
     return col_approved;
   }
 
+
+ /**
+  * Retrieve the <code>Subscription</code> as a <code>Subscription</code>.
+  *
+  * @generator org.melati.poem.prepro.TableDef#generateTableBaseJava 
+  * @param troid a Table Row Oject ID
+  * @return the <code>Persistent</code> identified by the <code>troid</code>
+  */
   public Subscription getSubscriptionObject(Integer troid) {
     return (Subscription)getObject(troid);
   }
 
+
+ /**
+  * Retrieve the <code>Subscription</code> 
+  * as a <code>Subscription</code>.
+  *
+  * @generator org.melati.poem.prepro.TableDef#generateTableBaseJava 
+  * @param troid a Table Row Object ID
+  * @return the <code>Persistent</code> identified   */
   public Subscription getSubscriptionObject(int troid) {
     return (Subscription)getObject(troid);
   }
@@ -487,3 +572,4 @@ public class SubscriptionTableBase extends Table {
     return 1040;
   }
 }
+

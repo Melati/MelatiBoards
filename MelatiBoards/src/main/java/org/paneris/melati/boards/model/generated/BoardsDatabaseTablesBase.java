@@ -3,40 +3,160 @@
 package org.paneris.melati.boards.model.generated;
 
 // 19 tables in database
+// hidden import org.melati.poem.UserTable;
 import org.melati.poem.GroupTable;
 import org.melati.poem.CapabilityTable;
 import org.melati.poem.GroupMembershipTable;
 import org.melati.poem.GroupCapabilityTable;
 import org.melati.poem.TableCategoryTable;
 import org.melati.poem.TableInfoTable;
+// abstract import org.melati.poem.ValueInfoTable;
 import org.melati.poem.ColumnInfoTable;
+// hidden import org.melati.poem.SettingTable;
 import org.paneris.melati.boards.model.BoardTypeTable;
 import org.paneris.melati.boards.model.BoardTable;
+// hides import org.paneris.melati.boards.model.UserTable;
 import org.paneris.melati.boards.model.MembershipStatusTable;
 import org.paneris.melati.boards.model.SubscriptionTable;
 import org.paneris.melati.boards.model.MessageTable;
 import org.paneris.melati.boards.model.AttachmentTypeTable;
 import org.paneris.melati.boards.model.AttachmentTable;
+// hides import org.paneris.melati.boards.model.SettingTable;
 
 /**
- * Melati POEM generated interface
+ * Melati POEM generated base interface to the tables in 
+ * org.paneris.melati.boards.model.
  */
 public interface BoardsDatabaseTablesBase {
 
+
+ /**
+  * Retrieves the <code>GroupTable</code> table.
+  * 
+  * @generator org.melati.poem.prepro.TableDef#generateTableAccessorDefnJava 
+  * @return the GroupTable from this database
+  */
   GroupTable getGroupTable();
+
+ /**
+  * Retrieves the <code>CapabilityTable</code> table.
+  * 
+  * @generator org.melati.poem.prepro.TableDef#generateTableAccessorDefnJava 
+  * @return the CapabilityTable from this database
+  */
   CapabilityTable getCapabilityTable();
+
+ /**
+  * Retrieves the <code>GroupMembershipTable</code> table.
+  * 
+  * @generator org.melati.poem.prepro.TableDef#generateTableAccessorDefnJava 
+  * @return the GroupMembershipTable from this database
+  */
   GroupMembershipTable getGroupMembershipTable();
+
+ /**
+  * Retrieves the <code>GroupCapabilityTable</code> table.
+  * 
+  * @generator org.melati.poem.prepro.TableDef#generateTableAccessorDefnJava 
+  * @return the GroupCapabilityTable from this database
+  */
   GroupCapabilityTable getGroupCapabilityTable();
+
+ /**
+  * Retrieves the <code>TableCategoryTable</code> table.
+  * 
+  * @generator org.melati.poem.prepro.TableDef#generateTableAccessorDefnJava 
+  * @return the TableCategoryTable from this database
+  */
   TableCategoryTable getTableCategoryTable();
+
+ /**
+  * Retrieves the <code>TableInfoTable</code> table.
+  * 
+  * @generator org.melati.poem.prepro.TableDef#generateTableAccessorDefnJava 
+  * @return the TableInfoTable from this database
+  */
   TableInfoTable getTableInfoTable();
+
+ /**
+  * Retrieves the <code>ColumnInfoTable</code> table.
+  * 
+  * @generator org.melati.poem.prepro.TableDef#generateTableAccessorDefnJava 
+  * @return the ColumnInfoTable from this database
+  */
   ColumnInfoTable getColumnInfoTable();
+
+ /**
+  * Retrieves the <code>BoardTypeTable</code> table.
+  * 
+  * @generator org.melati.poem.prepro.TableDef#generateTableAccessorDefnJava 
+  * @return the BoardTypeTable from this database
+  */
   BoardTypeTable getBoardTypeTable();
+
+ /**
+  * Retrieves the <code>BoardTable</code> table.
+  * 
+  * @generator org.melati.poem.prepro.TableDef#generateTableAccessorDefnJava 
+  * @return the BoardTable from this database
+  */
   BoardTable getBoardTable();
+
+ /**
+  * Retrieves the <code>UserTable</code> tableas a  <code>org.melati.poem.UserTable</code>.
+  * 
+  * @generator org.melati.poem.prepro.TableDef#generateTableAccessorDefnJava 
+  * @return the org.melati.poem.UserTable from this database
+  */
   org.melati.poem.UserTable getUserTable();
+
+ /**
+  * Retrieves the <code>MembershipStatusTable</code> table.
+  * 
+  * @generator org.melati.poem.prepro.TableDef#generateTableAccessorDefnJava 
+  * @return the MembershipStatusTable from this database
+  */
   MembershipStatusTable getMembershipStatusTable();
+
+ /**
+  * Retrieves the <code>SubscriptionTable</code> table.
+  * 
+  * @generator org.melati.poem.prepro.TableDef#generateTableAccessorDefnJava 
+  * @return the SubscriptionTable from this database
+  */
   SubscriptionTable getSubscriptionTable();
+
+ /**
+  * Retrieves the <code>MessageTable</code> table.
+  * 
+  * @generator org.melati.poem.prepro.TableDef#generateTableAccessorDefnJava 
+  * @return the MessageTable from this database
+  */
   MessageTable getMessageTable();
+
+ /**
+  * Retrieves the <code>AttachmentTypeTable</code> table.
+  * 
+  * @generator org.melati.poem.prepro.TableDef#generateTableAccessorDefnJava 
+  * @return the AttachmentTypeTable from this database
+  */
   AttachmentTypeTable getAttachmentTypeTable();
+
+ /**
+  * Retrieves the <code>AttachmentTable</code> table.
+  * 
+  * @generator org.melati.poem.prepro.TableDef#generateTableAccessorDefnJava 
+  * @return the AttachmentTable from this database
+  */
   AttachmentTable getAttachmentTable();
+
+ /**
+  * Retrieves the <code>SettingTable</code> tableas a  <code>org.melati.poem.SettingTable</code>.
+  * 
+  * @generator org.melati.poem.prepro.TableDef#generateTableAccessorDefnJava 
+  * @return the org.melati.poem.SettingTable from this database
+  */
   org.melati.poem.SettingTable getSettingTable();
 }
+
+

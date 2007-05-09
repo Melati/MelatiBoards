@@ -15,29 +15,23 @@ import org.melati.poem.ReferencePoemType;
 import org.melati.poem.Searchability;
 import org.melati.poem.StandardIntegrityFix;
 import org.melati.poem.StringPoemType;
-import org.melati.poem.Table;
 import org.melati.poem.TroidPoemType;
 import org.melati.poem.ValidationPoemException;
 import org.paneris.melati.boards.model.Attachment;
 import org.paneris.melati.boards.model.AttachmentType;
 import org.paneris.melati.boards.model.BoardsDatabaseTables;
+import org.paneris.melati.boards.model.BoardsTable;
 import org.paneris.melati.boards.model.Message;
 
 
 /**
- * Melati POEM generated base class for table Attachment.
- * Field summary for SQL table attachment:
- *   id
- *   message
- *   filename
- *   path
- *   url
- *   size
- *   type
+ * Melati POEM generated base class for 
+<code>Table</code> <code>Attachment</code>.
  *
+ * @generator org.melati.poem.prepro.TableDef#generateTableBaseJava 
  */
 
-public class AttachmentTableBase extends Table {
+public class AttachmentTableBase extends BoardsTable {
 
   private Column col_id = null;
   private Column col_message = null;
@@ -47,17 +41,43 @@ public class AttachmentTableBase extends Table {
   private Column col_size = null;
   private Column col_type = null;
 
+ /**
+  * Constructor. 
+  * 
+  * @generator org.melati.poem.prepro.TableDef#generateTableBaseJava 
+  * @param database          the POEM database we are using
+  * @param name              the name of this <code>Table</code>
+  * @param definitionSource  which definition is being used
+  * @throws PoemException    if anything goes wrong
+  */
+
   public AttachmentTableBase(
       Database database, String name,
       DefinitionSource definitionSource) throws PoemException {
     super(database, name, definitionSource);
   }
 
+
+ /**
+  * Constructor.
+  *
+  * @generator org.melati.poem.prepro.TableDef#generateTableBaseJava 
+  * @param database          the POEM database we are using
+  * @param name              the name of this <code>Table</code>
+  * @throws PoemException    if anything goes wrong
+  */
   public AttachmentTableBase(
       Database database, String name) throws PoemException {
     this(database, name, DefinitionSource.dsd);
   }
 
+
+ /**
+  * Get the database tables.
+  *
+  * @generator org.melati.poem.prepro.TableDef#generateTableBaseJava 
+  * @return the database tables
+  */
   public BoardsDatabaseTables getBoardsDatabaseTables() {
     return (BoardsDatabaseTables)getDatabase();
   }
@@ -504,38 +524,110 @@ public class AttachmentTableBase extends Table {
         });
   }
 
+
+ /**
+  * Retrieves the <code>Id</code> <code>Column</code> for this 
+  * <code>Attachment</code> <code>Table</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateColAccessor 
+  * @return the id <code>Column</code>
+  */
   public final Column getIdColumn() {
     return col_id;
   }
 
+
+ /**
+  * Retrieves the <code>Message</code> <code>Column</code> for this 
+  * <code>Attachment</code> <code>Table</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateColAccessor 
+  * @return the message <code>Column</code>
+  */
   public final Column getMessageColumn() {
     return col_message;
   }
 
+
+ /**
+  * Retrieves the <code>Filename</code> <code>Column</code> for this 
+  * <code>Attachment</code> <code>Table</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateColAccessor 
+  * @return the filename <code>Column</code>
+  */
   public final Column getFilenameColumn() {
     return col_filename;
   }
 
+
+ /**
+  * Retrieves the <code>Path</code> <code>Column</code> for this 
+  * <code>Attachment</code> <code>Table</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateColAccessor 
+  * @return the path <code>Column</code>
+  */
   public final Column getPathColumn() {
     return col_path;
   }
 
+
+ /**
+  * Retrieves the <code>Url</code> <code>Column</code> for this 
+  * <code>Attachment</code> <code>Table</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateColAccessor 
+  * @return the url <code>Column</code>
+  */
   public final Column getUrlColumn() {
     return col_url;
   }
 
+
+ /**
+  * Retrieves the <code>Size</code> <code>Column</code> for this 
+  * <code>Attachment</code> <code>Table</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateColAccessor 
+  * @return the size <code>Column</code>
+  */
   public final Column getSizeColumn() {
     return col_size;
   }
 
+
+ /**
+  * Retrieves the <code>Type</code> <code>Column</code> for this 
+  * <code>Attachment</code> <code>Table</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateColAccessor 
+  * @return the type <code>Column</code>
+  */
   public final Column getTypeColumn() {
     return col_type;
   }
 
+
+ /**
+  * Retrieve the <code>Attachment</code> as a <code>Attachment</code>.
+  *
+  * @generator org.melati.poem.prepro.TableDef#generateTableBaseJava 
+  * @param troid a Table Row Oject ID
+  * @return the <code>Persistent</code> identified by the <code>troid</code>
+  */
   public Attachment getAttachmentObject(Integer troid) {
     return (Attachment)getObject(troid);
   }
 
+
+ /**
+  * Retrieve the <code>Attachment</code> 
+  * as a <code>Attachment</code>.
+  *
+  * @generator org.melati.poem.prepro.TableDef#generateTableBaseJava 
+  * @param troid a Table Row Object ID
+  * @return the <code>Persistent</code> identified   */
   public Attachment getAttachmentObject(int troid) {
     return (Attachment)getObject(troid);
   }
@@ -555,3 +647,4 @@ public class AttachmentTableBase extends Table {
     return 1070;
   }
 }
+
