@@ -13,18 +13,32 @@ import org.paneris.melati.boards.model.BoardsDatabaseTables;
 
 
 /**
- * Melati POEM generated base class for persistent AttachmentType.
- * Field summary for SQL table attachmenttype:
- *   id
- *   type
+ * Melati POEM generated abstract base class for a <code>Persistent</code> 
+ * <code>AttachmentType</code> Object.
  *
+ * @generator org.melati.poem.prepro.TableDef#generateBaseJava 
  */
 public abstract class AttachmentTypeBase extends Persistent {
 
+
+ /**
+  * Retrieves the Database object.
+  * 
+  * @generator org.melati.poem.prepro.TableDef#generateBaseJava 
+  * @return the database
+  */
   public BoardsDatabaseTables getBoardsDatabaseTables() {
     return (BoardsDatabaseTables)getDatabase();
   }
 
+
+ /**
+  * Retrieves the  <code>AttachmentTypeTable</code> table 
+  * which this <code>Persistent</code> is from.
+  * 
+  * @generator org.melati.poem.prepro.TableDef#generateBaseJava 
+  * @return the AttachmentTypeTable
+  */
   public AttachmentTypeTable getAttachmentTypeTable() {
     return (AttachmentTypeTable)getTable();
   }
@@ -33,16 +47,51 @@ public abstract class AttachmentTypeBase extends Persistent {
     return (AttachmentTypeTable)getTable();
   }
 
+  // Fields in this table 
+ /**
+  * id 
+  */
   protected Integer id;
+ /**
+  * type - The name of a type 
+  */
   protected String type;
 
+
+ /**
+  * Retrieves the <code>Id</code> value, without locking, 
+  * for this <code>AttachmentType</code> <code>Persistent</code>.
+  *
+  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @return the Integer id
+  */
   public Integer getId_unsafe() {
     return id;
   }
 
+
+ /**
+  * Sets the <code>Id</code> value directly, without checking, 
+  * for this AttachmentType <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @param cooked  the pre-validated value to set
+  */
   public void setId_unsafe(Integer cooked) {
     id = cooked;
   }
+
+ /**
+  * Retrieves the Id value, with locking, for this 
+  * <code>AttachmentType</code> <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.AtomFieldDef#generateBaseMethods 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights 
+  * @return the value of the field <code>Id</code> for this 
+  *         <code>AttachmentType</code> <code>Persistent</code>  
+  */
 
   public Integer getId()
       throws AccessPoemException {
@@ -50,30 +99,98 @@ public abstract class AttachmentTypeBase extends Persistent {
     return getId_unsafe();
   }
 
+
+ /**
+  * Sets the <code>Id</code> value, with checking, for this 
+  * <code>AttachmentType</code> <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.AtomFieldDef#generateBaseMethods  
+  * @param cooked  a validated <code>int</code> 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @throws ValidationPoemException 
+  *         if the value is not valid
+  */
   public void setId(Integer cooked)
       throws AccessPoemException, ValidationPoemException {
-    _getAttachmentTypeTable().getIdColumn().getType().assertValidCooked(cooked);
+    _getAttachmentTypeTable().getIdColumn().
+      getType().assertValidCooked(cooked);
     writeLock();
     setId_unsafe(cooked);
   }
+
+ /**
+  * Sets the <code>Id</code> value, with checking, for this 
+  * <code>AttachmentType</code> <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.IntegerFieldDef#generateBaseMethods 
+  * @param cooked  a validated <code>int</code>
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @throws ValidationPoemException 
+  *         if the value is not valid
+  */
 
   public final void setId(int cooked)
       throws AccessPoemException, ValidationPoemException {
     setId(new Integer(cooked));
   }
 
+
+ /**
+  * Retrieves the <code>Id</code> value as a <code>Field</code>
+  * from this <code>AttachmentType</code> <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateFieldCreator 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @return the Integer id
+  */
   public Field getIdField() throws AccessPoemException {
     Column c = _getAttachmentTypeTable().getIdColumn();
     return new Field(c.getRaw(this), c);
   }
 
+
+ /**
+  * Retrieves the <code>Type</code> value, without locking, 
+  * for this <code>AttachmentType</code> <code>Persistent</code>.
+  *
+  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @return the String type
+  */
   public String getType_unsafe() {
     return type;
   }
 
+
+ /**
+  * Sets the <code>Type</code> value directly, without checking, 
+  * for this AttachmentType <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @param cooked  the pre-validated value to set
+  */
   public void setType_unsafe(String cooked) {
     type = cooked;
   }
+
+ /**
+  * Retrieves the Type value, with locking, for this 
+  * <code>AttachmentType</code> <code>Persistent</code>.
+  * Field description: 
+  *   The name of a type 
+  * 
+  * @generator org.melati.poem.prepro.AtomFieldDef#generateBaseMethods 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights 
+  * @return the value of the field <code>Type</code> for this 
+  *         <code>AttachmentType</code> <code>Persistent</code>  
+  */
 
   public String getType()
       throws AccessPoemException {
@@ -81,15 +198,43 @@ public abstract class AttachmentTypeBase extends Persistent {
     return getType_unsafe();
   }
 
+
+ /**
+  * Sets the <code>Type</code> value, with checking, for this 
+  * <code>AttachmentType</code> <code>Persistent</code>.
+  * Field description: 
+  *   The name of a type 
+  * 
+  * @generator org.melati.poem.prepro.AtomFieldDef#generateBaseMethods  
+  * @param cooked  a validated <code>int</code> 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @throws ValidationPoemException 
+  *         if the value is not valid
+  */
   public void setType(String cooked)
       throws AccessPoemException, ValidationPoemException {
-    _getAttachmentTypeTable().getTypeColumn().getType().assertValidCooked(cooked);
+    _getAttachmentTypeTable().getTypeColumn().
+      getType().assertValidCooked(cooked);
     writeLock();
     setType_unsafe(cooked);
   }
 
+
+ /**
+  * Retrieves the <code>Type</code> value as a <code>Field</code>
+  * from this <code>AttachmentType</code> <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateFieldCreator 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @return the String type
+  */
   public Field getTypeField() throws AccessPoemException {
     Column c = _getAttachmentTypeTable().getTypeColumn();
     return new Field(c.getRaw(this), c);
   }
 }
+

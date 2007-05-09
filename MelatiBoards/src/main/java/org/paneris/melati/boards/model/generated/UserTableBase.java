@@ -19,15 +19,25 @@ import org.paneris.melati.boards.model.User;
 
 
 /**
- * Melati POEM generated base class for table User.
- * Field summary for SQL table user:
- *   email
+ * Melati POEM generated base class for 
+<code>Table</code> <code>User</code>.
  *
+ * @generator org.melati.poem.prepro.TableDef#generateTableBaseJava 
  */
 
 public class UserTableBase extends UserTable {
 
   private Column col_email = null;
+
+ /**
+  * Constructor. 
+  * 
+  * @generator org.melati.poem.prepro.TableDef#generateTableBaseJava 
+  * @param database          the POEM database we are using
+  * @param name              the name of this <code>Table</code>
+  * @param definitionSource  which definition is being used
+  * @throws PoemException    if anything goes wrong
+  */
 
   public UserTableBase(
       Database database, String name,
@@ -35,11 +45,27 @@ public class UserTableBase extends UserTable {
     super(database, name, definitionSource);
   }
 
+
+ /**
+  * Constructor.
+  *
+  * @generator org.melati.poem.prepro.TableDef#generateTableBaseJava 
+  * @param database          the POEM database we are using
+  * @param name              the name of this <code>Table</code>
+  * @throws PoemException    if anything goes wrong
+  */
   public UserTableBase(
       Database database, String name) throws PoemException {
     this(database, name, DefinitionSource.dsd);
   }
 
+
+ /**
+  * Get the database tables.
+  *
+  * @generator org.melati.poem.prepro.TableDef#generateTableBaseJava 
+  * @return the database tables
+  */
   public BoardsDatabaseTables getBoardsDatabaseTables() {
     return (BoardsDatabaseTables)getDatabase();
   }
@@ -106,14 +132,38 @@ public class UserTableBase extends UserTable {
         });
   }
 
+
+ /**
+  * Retrieves the <code>Email</code> <code>Column</code> for this 
+  * <code>User</code> <code>Table</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateColAccessor 
+  * @return the email <code>Column</code>
+  */
   public final Column getEmailColumn() {
     return col_email;
   }
 
+
+ /**
+  * Retrieve the <code>User</code> as a <code>org.melati.poem.User</code>.
+  *
+  * @generator org.melati.poem.prepro.TableDef#generateTableBaseJava 
+  * @param troid a Table Row Oject ID
+  * @return the <code>Persistent</code> identified by the <code>troid</code>
+  */
   public org.melati.poem.User getUserObject(Integer troid) {
     return (org.melati.poem.User)getObject(troid);
   }
 
+
+ /**
+  * Retrieve the <code>User</code> 
+  * as a <code>org.melati.poem.User</code>.
+  *
+  * @generator org.melati.poem.prepro.TableDef#generateTableBaseJava 
+  * @param troid a Table Row Object ID
+  * @return the <code>Persistent</code> identified   */
   public org.melati.poem.User getUserObject(int troid) {
     return (org.melati.poem.User)getObject(troid);
   }
@@ -133,3 +183,4 @@ public class UserTableBase extends UserTable {
     return 2010;
   }
 }
+

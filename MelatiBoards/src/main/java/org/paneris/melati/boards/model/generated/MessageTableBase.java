@@ -16,32 +16,24 @@ import org.melati.poem.ReferencePoemType;
 import org.melati.poem.Searchability;
 import org.melati.poem.StandardIntegrityFix;
 import org.melati.poem.StringPoemType;
-import org.melati.poem.Table;
 import org.melati.poem.TimestampPoemType;
 import org.melati.poem.TroidPoemType;
 import org.melati.poem.ValidationPoemException;
 import org.paneris.melati.boards.model.Board;
 import org.paneris.melati.boards.model.BoardsDatabaseTables;
+import org.paneris.melati.boards.model.BoardsTable;
 import org.paneris.melati.boards.model.Message;
 import org.paneris.melati.boards.model.User;
 
 
 /**
- * Melati POEM generated base class for table Message.
- * Field summary for SQL table message:
- *   id
- *   board
- *   date
- *   subject
- *   author
- *   parent
- *   body
- *   deleted
- *   approved
+ * Melati POEM generated base class for 
+<code>Table</code> <code>Message</code>.
  *
+ * @generator org.melati.poem.prepro.TableDef#generateTableBaseJava 
  */
 
-public class MessageTableBase extends Table {
+public class MessageTableBase extends BoardsTable {
 
   private Column col_id = null;
   private Column col_board = null;
@@ -53,17 +45,43 @@ public class MessageTableBase extends Table {
   private Column col_deleted = null;
   private Column col_approved = null;
 
+ /**
+  * Constructor. 
+  * 
+  * @generator org.melati.poem.prepro.TableDef#generateTableBaseJava 
+  * @param database          the POEM database we are using
+  * @param name              the name of this <code>Table</code>
+  * @param definitionSource  which definition is being used
+  * @throws PoemException    if anything goes wrong
+  */
+
   public MessageTableBase(
       Database database, String name,
       DefinitionSource definitionSource) throws PoemException {
     super(database, name, definitionSource);
   }
 
+
+ /**
+  * Constructor.
+  *
+  * @generator org.melati.poem.prepro.TableDef#generateTableBaseJava 
+  * @param database          the POEM database we are using
+  * @param name              the name of this <code>Table</code>
+  * @throws PoemException    if anything goes wrong
+  */
   public MessageTableBase(
       Database database, String name) throws PoemException {
     this(database, name, DefinitionSource.dsd);
   }
 
+
+ /**
+  * Get the database tables.
+  *
+  * @generator org.melati.poem.prepro.TableDef#generateTableBaseJava 
+  * @return the database tables
+  */
   public BoardsDatabaseTables getBoardsDatabaseTables() {
     return (BoardsDatabaseTables)getDatabase();
   }
@@ -641,46 +659,134 @@ public class MessageTableBase extends Table {
         });
   }
 
+
+ /**
+  * Retrieves the <code>Id</code> <code>Column</code> for this 
+  * <code>Message</code> <code>Table</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateColAccessor 
+  * @return the id <code>Column</code>
+  */
   public final Column getIdColumn() {
     return col_id;
   }
 
+
+ /**
+  * Retrieves the <code>Board</code> <code>Column</code> for this 
+  * <code>Message</code> <code>Table</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateColAccessor 
+  * @return the board <code>Column</code>
+  */
   public final Column getBoardColumn() {
     return col_board;
   }
 
+
+ /**
+  * Retrieves the <code>Date</code> <code>Column</code> for this 
+  * <code>Message</code> <code>Table</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateColAccessor 
+  * @return the date <code>Column</code>
+  */
   public final Column getDateColumn() {
     return col_date;
   }
 
+
+ /**
+  * Retrieves the <code>Subject</code> <code>Column</code> for this 
+  * <code>Message</code> <code>Table</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateColAccessor 
+  * @return the subject <code>Column</code>
+  */
   public final Column getSubjectColumn() {
     return col_subject;
   }
 
+
+ /**
+  * Retrieves the <code>Author</code> <code>Column</code> for this 
+  * <code>Message</code> <code>Table</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateColAccessor 
+  * @return the author <code>Column</code>
+  */
   public final Column getAuthorColumn() {
     return col_author;
   }
 
+
+ /**
+  * Retrieves the <code>Parent</code> <code>Column</code> for this 
+  * <code>Message</code> <code>Table</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateColAccessor 
+  * @return the parent <code>Column</code>
+  */
   public final Column getParentColumn() {
     return col_parent;
   }
 
+
+ /**
+  * Retrieves the <code>Body</code> <code>Column</code> for this 
+  * <code>Message</code> <code>Table</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateColAccessor 
+  * @return the body <code>Column</code>
+  */
   public final Column getBodyColumn() {
     return col_body;
   }
 
+
+ /**
+  * Retrieves the <code>Deleted</code> <code>Column</code> for this 
+  * <code>Message</code> <code>Table</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateColAccessor 
+  * @return the deleted <code>Column</code>
+  */
   public final Column getDeletedColumn() {
     return col_deleted;
   }
 
+
+ /**
+  * Retrieves the <code>Approved</code> <code>Column</code> for this 
+  * <code>Message</code> <code>Table</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateColAccessor 
+  * @return the approved <code>Column</code>
+  */
   public final Column getApprovedColumn() {
     return col_approved;
   }
 
+
+ /**
+  * Retrieve the <code>Message</code> as a <code>Message</code>.
+  *
+  * @generator org.melati.poem.prepro.TableDef#generateTableBaseJava 
+  * @param troid a Table Row Oject ID
+  * @return the <code>Persistent</code> identified by the <code>troid</code>
+  */
   public Message getMessageObject(Integer troid) {
     return (Message)getObject(troid);
   }
 
+
+ /**
+  * Retrieve the <code>Message</code> 
+  * as a <code>Message</code>.
+  *
+  * @generator org.melati.poem.prepro.TableDef#generateTableBaseJava 
+  * @param troid a Table Row Object ID
+  * @return the <code>Persistent</code> identified   */
   public Message getMessageObject(int troid) {
     return (Message)getObject(troid);
   }
@@ -700,3 +806,4 @@ public class MessageTableBase extends Table {
     return 1050;
   }
 }
+

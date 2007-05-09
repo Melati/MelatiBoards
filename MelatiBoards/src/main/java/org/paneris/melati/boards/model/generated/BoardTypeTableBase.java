@@ -12,27 +12,35 @@ import org.melati.poem.Persistent;
 import org.melati.poem.PoemException;
 import org.melati.poem.Searchability;
 import org.melati.poem.StringPoemType;
-import org.melati.poem.Table;
 import org.melati.poem.TroidPoemType;
 import org.melati.poem.ValidationPoemException;
 import org.paneris.melati.boards.model.BoardType;
 import org.paneris.melati.boards.model.BoardsDatabaseTables;
+import org.paneris.melati.boards.model.BoardsTable;
 
 
 /**
- * Melati POEM generated base class for table BoardType.
- * Field summary for SQL table boardtype:
- *   id
- *   type
- *   description
+ * Melati POEM generated base class for 
+<code>Table</code> <code>BoardType</code>.
  *
+ * @generator org.melati.poem.prepro.TableDef#generateTableBaseJava 
  */
 
-public class BoardTypeTableBase extends Table {
+public class BoardTypeTableBase extends BoardsTable {
 
   private Column col_id = null;
   private Column col_type = null;
   private Column col_description = null;
+
+ /**
+  * Constructor. 
+  * 
+  * @generator org.melati.poem.prepro.TableDef#generateTableBaseJava 
+  * @param database          the POEM database we are using
+  * @param name              the name of this <code>Table</code>
+  * @param definitionSource  which definition is being used
+  * @throws PoemException    if anything goes wrong
+  */
 
   public BoardTypeTableBase(
       Database database, String name,
@@ -40,11 +48,27 @@ public class BoardTypeTableBase extends Table {
     super(database, name, definitionSource);
   }
 
+
+ /**
+  * Constructor.
+  *
+  * @generator org.melati.poem.prepro.TableDef#generateTableBaseJava 
+  * @param database          the POEM database we are using
+  * @param name              the name of this <code>Table</code>
+  * @throws PoemException    if anything goes wrong
+  */
   public BoardTypeTableBase(
       Database database, String name) throws PoemException {
     this(database, name, DefinitionSource.dsd);
   }
 
+
+ /**
+  * Get the database tables.
+  *
+  * @generator org.melati.poem.prepro.TableDef#generateTableBaseJava 
+  * @return the database tables
+  */
   public BoardsDatabaseTables getBoardsDatabaseTables() {
     return (BoardsDatabaseTables)getDatabase();
   }
@@ -241,22 +265,62 @@ public class BoardTypeTableBase extends Table {
         });
   }
 
+
+ /**
+  * Retrieves the <code>Id</code> <code>Column</code> for this 
+  * <code>BoardType</code> <code>Table</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateColAccessor 
+  * @return the id <code>Column</code>
+  */
   public final Column getIdColumn() {
     return col_id;
   }
 
+
+ /**
+  * Retrieves the <code>Type</code> <code>Column</code> for this 
+  * <code>BoardType</code> <code>Table</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateColAccessor 
+  * @return the type <code>Column</code>
+  */
   public final Column getTypeColumn() {
     return col_type;
   }
 
+
+ /**
+  * Retrieves the <code>Description</code> <code>Column</code> for this 
+  * <code>BoardType</code> <code>Table</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateColAccessor 
+  * @return the description <code>Column</code>
+  */
   public final Column getDescriptionColumn() {
     return col_description;
   }
 
+
+ /**
+  * Retrieve the <code>BoardType</code> as a <code>BoardType</code>.
+  *
+  * @generator org.melati.poem.prepro.TableDef#generateTableBaseJava 
+  * @param troid a Table Row Oject ID
+  * @return the <code>Persistent</code> identified by the <code>troid</code>
+  */
   public BoardType getBoardTypeObject(Integer troid) {
     return (BoardType)getObject(troid);
   }
 
+
+ /**
+  * Retrieve the <code>BoardType</code> 
+  * as a <code>BoardType</code>.
+  *
+  * @generator org.melati.poem.prepro.TableDef#generateTableBaseJava 
+  * @param troid a Table Row Object ID
+  * @return the <code>Persistent</code> identified   */
   public BoardType getBoardTypeObject(int troid) {
     return (BoardType)getObject(troid);
   }
@@ -288,3 +352,4 @@ public class BoardTypeTableBase extends Table {
     return 1010;
   }
 }
+

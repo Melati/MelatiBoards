@@ -14,37 +14,22 @@ import org.melati.poem.PoemException;
 import org.melati.poem.ReferencePoemType;
 import org.melati.poem.Searchability;
 import org.melati.poem.StringPoemType;
-import org.melati.poem.Table;
 import org.melati.poem.TroidPoemType;
 import org.melati.poem.ValidationPoemException;
 import org.paneris.melati.boards.model.Board;
 import org.paneris.melati.boards.model.BoardType;
 import org.paneris.melati.boards.model.BoardsDatabaseTables;
+import org.paneris.melati.boards.model.BoardsTable;
 
 
 /**
- * Melati POEM generated base class for table Board.
- * Field summary for SQL table board:
- *   id
- *   type
- *   name
- *   displayname
- *   purpose
- *   archived
- *   opensubscription
- *   moderatedsubscription
- *   openposting
- *   moderatedposting
- *   openmessageviewing
- *   openmemberlist
- *   attachmentsallowed
- *   anonymousposting
- *   attachmentspath
- *   attachmentsurl
+ * Melati POEM generated base class for 
+<code>Table</code> <code>Board</code>.
  *
+ * @generator org.melati.poem.prepro.TableDef#generateTableBaseJava 
  */
 
-public class BoardTableBase extends Table {
+public class BoardTableBase extends BoardsTable {
 
   private Column col_id = null;
   private Column col_type = null;
@@ -63,17 +48,43 @@ public class BoardTableBase extends Table {
   private Column col_attachmentspath = null;
   private Column col_attachmentsurl = null;
 
+ /**
+  * Constructor. 
+  * 
+  * @generator org.melati.poem.prepro.TableDef#generateTableBaseJava 
+  * @param database          the POEM database we are using
+  * @param name              the name of this <code>Table</code>
+  * @param definitionSource  which definition is being used
+  * @throws PoemException    if anything goes wrong
+  */
+
   public BoardTableBase(
       Database database, String name,
       DefinitionSource definitionSource) throws PoemException {
     super(database, name, definitionSource);
   }
 
+
+ /**
+  * Constructor.
+  *
+  * @generator org.melati.poem.prepro.TableDef#generateTableBaseJava 
+  * @param database          the POEM database we are using
+  * @param name              the name of this <code>Table</code>
+  * @throws PoemException    if anything goes wrong
+  */
   public BoardTableBase(
       Database database, String name) throws PoemException {
     this(database, name, DefinitionSource.dsd);
   }
 
+
+ /**
+  * Get the database tables.
+  *
+  * @generator org.melati.poem.prepro.TableDef#generateTableBaseJava 
+  * @return the database tables
+  */
   public BoardsDatabaseTables getBoardsDatabaseTables() {
     return (BoardsDatabaseTables)getDatabase();
   }
@@ -1054,74 +1065,218 @@ public class BoardTableBase extends Table {
         });
   }
 
+
+ /**
+  * Retrieves the <code>Id</code> <code>Column</code> for this 
+  * <code>Board</code> <code>Table</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateColAccessor 
+  * @return the id <code>Column</code>
+  */
   public final Column getIdColumn() {
     return col_id;
   }
 
+
+ /**
+  * Retrieves the <code>Type</code> <code>Column</code> for this 
+  * <code>Board</code> <code>Table</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateColAccessor 
+  * @return the type <code>Column</code>
+  */
   public final Column getTypeColumn() {
     return col_type;
   }
 
+
+ /**
+  * Retrieves the <code>Name</code> <code>Column</code> for this 
+  * <code>Board</code> <code>Table</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateColAccessor 
+  * @return the name <code>Column</code>
+  */
   public final Column getNameColumn() {
     return col_name;
   }
 
+
+ /**
+  * Retrieves the <code>Displayname</code> <code>Column</code> for this 
+  * <code>Board</code> <code>Table</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateColAccessor 
+  * @return the displayname <code>Column</code>
+  */
   public final Column getDisplaynameColumn() {
     return col_displayname;
   }
 
+
+ /**
+  * Retrieves the <code>Purpose</code> <code>Column</code> for this 
+  * <code>Board</code> <code>Table</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateColAccessor 
+  * @return the purpose <code>Column</code>
+  */
   public final Column getPurposeColumn() {
     return col_purpose;
   }
 
+
+ /**
+  * Retrieves the <code>Archived</code> <code>Column</code> for this 
+  * <code>Board</code> <code>Table</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateColAccessor 
+  * @return the archived <code>Column</code>
+  */
   public final Column getArchivedColumn() {
     return col_archived;
   }
 
+
+ /**
+  * Retrieves the <code>Opensubscription</code> <code>Column</code> for this 
+  * <code>Board</code> <code>Table</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateColAccessor 
+  * @return the opensubscription <code>Column</code>
+  */
   public final Column getOpensubscriptionColumn() {
     return col_opensubscription;
   }
 
+
+ /**
+  * Retrieves the <code>Moderatedsubscription</code> <code>Column</code> for this 
+  * <code>Board</code> <code>Table</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateColAccessor 
+  * @return the moderatedsubscription <code>Column</code>
+  */
   public final Column getModeratedsubscriptionColumn() {
     return col_moderatedsubscription;
   }
 
+
+ /**
+  * Retrieves the <code>Openposting</code> <code>Column</code> for this 
+  * <code>Board</code> <code>Table</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateColAccessor 
+  * @return the openposting <code>Column</code>
+  */
   public final Column getOpenpostingColumn() {
     return col_openposting;
   }
 
+
+ /**
+  * Retrieves the <code>Moderatedposting</code> <code>Column</code> for this 
+  * <code>Board</code> <code>Table</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateColAccessor 
+  * @return the moderatedposting <code>Column</code>
+  */
   public final Column getModeratedpostingColumn() {
     return col_moderatedposting;
   }
 
+
+ /**
+  * Retrieves the <code>Openmessageviewing</code> <code>Column</code> for this 
+  * <code>Board</code> <code>Table</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateColAccessor 
+  * @return the openmessageviewing <code>Column</code>
+  */
   public final Column getOpenmessageviewingColumn() {
     return col_openmessageviewing;
   }
 
+
+ /**
+  * Retrieves the <code>Openmemberlist</code> <code>Column</code> for this 
+  * <code>Board</code> <code>Table</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateColAccessor 
+  * @return the openmemberlist <code>Column</code>
+  */
   public final Column getOpenmemberlistColumn() {
     return col_openmemberlist;
   }
 
+
+ /**
+  * Retrieves the <code>Attachmentsallowed</code> <code>Column</code> for this 
+  * <code>Board</code> <code>Table</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateColAccessor 
+  * @return the attachmentsallowed <code>Column</code>
+  */
   public final Column getAttachmentsallowedColumn() {
     return col_attachmentsallowed;
   }
 
+
+ /**
+  * Retrieves the <code>Anonymousposting</code> <code>Column</code> for this 
+  * <code>Board</code> <code>Table</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateColAccessor 
+  * @return the anonymousposting <code>Column</code>
+  */
   public final Column getAnonymouspostingColumn() {
     return col_anonymousposting;
   }
 
+
+ /**
+  * Retrieves the <code>Attachmentspath</code> <code>Column</code> for this 
+  * <code>Board</code> <code>Table</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateColAccessor 
+  * @return the attachmentspath <code>Column</code>
+  */
   public final Column getAttachmentspathColumn() {
     return col_attachmentspath;
   }
 
+
+ /**
+  * Retrieves the <code>Attachmentsurl</code> <code>Column</code> for this 
+  * <code>Board</code> <code>Table</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateColAccessor 
+  * @return the attachmentsurl <code>Column</code>
+  */
   public final Column getAttachmentsurlColumn() {
     return col_attachmentsurl;
   }
 
+
+ /**
+  * Retrieve the <code>Board</code> as a <code>Board</code>.
+  *
+  * @generator org.melati.poem.prepro.TableDef#generateTableBaseJava 
+  * @param troid a Table Row Oject ID
+  * @return the <code>Persistent</code> identified by the <code>troid</code>
+  */
   public Board getBoardObject(Integer troid) {
     return (Board)getObject(troid);
   }
 
+
+ /**
+  * Retrieve the <code>Board</code> 
+  * as a <code>Board</code>.
+  *
+  * @generator org.melati.poem.prepro.TableDef#generateTableBaseJava 
+  * @param troid a Table Row Object ID
+  * @return the <code>Persistent</code> identified   */
   public Board getBoardObject(int troid) {
     return (Board)getObject(troid);
   }
@@ -1153,3 +1308,4 @@ public class BoardTableBase extends Table {
     return 1020;
   }
 }
+

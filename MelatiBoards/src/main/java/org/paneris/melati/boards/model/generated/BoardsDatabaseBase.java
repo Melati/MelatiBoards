@@ -22,7 +22,7 @@ import org.paneris.melati.boards.model.AttachmentTable;
 import org.paneris.melati.boards.model.SettingTable;
 
 /**
- * Melati POEM generated base class
+ * Melati POEM generated Database base class.
  */
 public class BoardsDatabaseBase extends PoemDatabase {
 
@@ -62,68 +62,182 @@ public class BoardsDatabaseBase extends PoemDatabase {
     redefineTable(tab_setting = new SettingTable(this, "setting", DefinitionSource.dsd));
   }
 
+
+ /**
+  * Retrieves the GroupTable table.
+  *
+  * @generator org.melati.poem.prepro.TableDef#generateTableAccessorJava 
+  * @return the GroupTable from this database
+  */
   public GroupTable getGroupTable() {
     return tab_group;
   }
 
+
+ /**
+  * Retrieves the CapabilityTable table.
+  *
+  * @generator org.melati.poem.prepro.TableDef#generateTableAccessorJava 
+  * @return the CapabilityTable from this database
+  */
   public CapabilityTable getCapabilityTable() {
     return tab_capability;
   }
 
+
+ /**
+  * Retrieves the GroupMembershipTable table.
+  *
+  * @generator org.melati.poem.prepro.TableDef#generateTableAccessorJava 
+  * @return the GroupMembershipTable from this database
+  */
   public GroupMembershipTable getGroupMembershipTable() {
     return tab_groupmembership;
   }
 
+
+ /**
+  * Retrieves the GroupCapabilityTable table.
+  *
+  * @generator org.melati.poem.prepro.TableDef#generateTableAccessorJava 
+  * @return the GroupCapabilityTable from this database
+  */
   public GroupCapabilityTable getGroupCapabilityTable() {
     return tab_groupcapability;
   }
 
+
+ /**
+  * Retrieves the TableCategoryTable table.
+  *
+  * @generator org.melati.poem.prepro.TableDef#generateTableAccessorJava 
+  * @return the TableCategoryTable from this database
+  */
   public TableCategoryTable getTableCategoryTable() {
     return tab_tablecategory;
   }
 
+
+ /**
+  * Retrieves the TableInfoTable table.
+  *
+  * @generator org.melati.poem.prepro.TableDef#generateTableAccessorJava 
+  * @return the TableInfoTable from this database
+  */
   public TableInfoTable getTableInfoTable() {
     return tab_tableinfo;
   }
 
 
+
+ /**
+  * Retrieves the ColumnInfoTable table.
+  *
+  * @generator org.melati.poem.prepro.TableDef#generateTableAccessorJava 
+  * @return the ColumnInfoTable from this database
+  */
   public ColumnInfoTable getColumnInfoTable() {
     return tab_columninfo;
   }
 
+
+ /**
+  * Retrieves the BoardTypeTable table.
+  *
+  * @generator org.melati.poem.prepro.TableDef#generateTableAccessorJava 
+  * @return the BoardTypeTable from this database
+  */
   public BoardTypeTable getBoardTypeTable() {
     return tab_boardtype;
   }
 
+
+ /**
+  * Retrieves the BoardTable table.
+  *
+  * @generator org.melati.poem.prepro.TableDef#generateTableAccessorJava 
+  * @return the BoardTable from this database
+  */
   public BoardTable getBoardTable() {
     return tab_board;
   }
 
+
+ /**
+  * Retrieves the UserTable table.
+  *
+  * @generator org.melati.poem.prepro.TableDef#generateTableAccessorJava 
+  * @return the org.melati.poem.UserTable from this database
+  */
   public org.melati.poem.UserTable getUserTable() {
     return (org.melati.poem.UserTable)tab_user;
   }
 
+
+ /**
+  * Retrieves the MembershipStatusTable table.
+  *
+  * @generator org.melati.poem.prepro.TableDef#generateTableAccessorJava 
+  * @return the MembershipStatusTable from this database
+  */
   public MembershipStatusTable getMembershipStatusTable() {
     return tab_membershipstatus;
   }
 
+
+ /**
+  * Retrieves the SubscriptionTable table.
+  *
+  * @generator org.melati.poem.prepro.TableDef#generateTableAccessorJava 
+  * @return the SubscriptionTable from this database
+  */
   public SubscriptionTable getSubscriptionTable() {
     return tab_subscription;
   }
 
+
+ /**
+  * Retrieves the MessageTable table.
+  *
+  * @generator org.melati.poem.prepro.TableDef#generateTableAccessorJava 
+  * @return the MessageTable from this database
+  */
   public MessageTable getMessageTable() {
     return tab_message;
   }
 
+
+ /**
+  * Retrieves the AttachmentTypeTable table.
+  *
+  * @generator org.melati.poem.prepro.TableDef#generateTableAccessorJava 
+  * @return the AttachmentTypeTable from this database
+  */
   public AttachmentTypeTable getAttachmentTypeTable() {
     return tab_attachmenttype;
   }
 
+
+ /**
+  * Retrieves the AttachmentTable table.
+  *
+  * @generator org.melati.poem.prepro.TableDef#generateTableAccessorJava 
+  * @return the AttachmentTable from this database
+  */
   public AttachmentTable getAttachmentTable() {
     return tab_attachment;
   }
 
+
+ /**
+  * Retrieves the SettingTable table.
+  *
+  * @generator org.melati.poem.prepro.TableDef#generateTableAccessorJava 
+  * @return the org.melati.poem.SettingTable from this database
+  */
   public org.melati.poem.SettingTable getSettingTable() {
     return (org.melati.poem.SettingTable)tab_setting;
   }
 }
+
+

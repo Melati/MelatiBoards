@@ -15,32 +15,32 @@ import org.paneris.melati.boards.model.BoardsDatabaseTables;
 
 
 /**
- * Melati POEM generated base class for persistent Board.
- * Field summary for SQL table board:
- *   id
- *   type
- *   name
- *   displayname
- *   purpose
- *   archived
- *   opensubscription
- *   moderatedsubscription
- *   openposting
- *   moderatedposting
- *   openmessageviewing
- *   openmemberlist
- *   attachmentsallowed
- *   anonymousposting
- *   attachmentspath
- *   attachmentsurl
+ * Melati POEM generated abstract base class for a <code>Persistent</code> 
+ * <code>Board</code> Object.
  *
+ * @generator org.melati.poem.prepro.TableDef#generateBaseJava 
  */
 public abstract class BoardBase extends Persistent {
 
+
+ /**
+  * Retrieves the Database object.
+  * 
+  * @generator org.melati.poem.prepro.TableDef#generateBaseJava 
+  * @return the database
+  */
   public BoardsDatabaseTables getBoardsDatabaseTables() {
     return (BoardsDatabaseTables)getDatabase();
   }
 
+
+ /**
+  * Retrieves the  <code>BoardTable</code> table 
+  * which this <code>Persistent</code> is from.
+  * 
+  * @generator org.melati.poem.prepro.TableDef#generateBaseJava 
+  * @return the BoardTable
+  */
   public BoardTable getBoardTable() {
     return (BoardTable)getTable();
   }
@@ -49,30 +49,118 @@ public abstract class BoardBase extends Persistent {
     return (BoardTable)getTable();
   }
 
+  // Fields in this table 
+ /**
+  * id 
+  */
   protected Integer id;
+ /**
+  * type - The type of this messageboard 
+  */
   protected Integer type;
+ /**
+  * Name - A code-name for this board 
+  */
   protected String name;
+ /**
+  * displayname - A user-friendly name of this board 
+  */
   protected String displayname;
+ /**
+  * purpose - The purpose of this message board 
+  */
   protected String purpose;
+ /**
+  * archived - If a board is archived then it cannot be viewed and is not 
+  * displayed on lists by default 
+  */
   protected Boolean archived;
+ /**
+  * Open Subscription - With open subscription anyone can subscribe to the 
+  * board. Otherwise a board manager must subscribe members 
+  */
   protected Boolean opensubscription;
+ /**
+  * Moderated Subscription - With moderated subscription the manager must 
+  * approve all requests to be subscribed 
+  */
   protected Boolean moderatedsubscription;
+ /**
+  * Open Posting - With open posting anyone with a user account can post a 
+  * message to this list. Otherwise, only members can post 
+  */
   protected Boolean openposting;
+ /**
+  * Moderated Posting - With moderated posting all messages must be approved 
+  * by a manager 
+  */
   protected Boolean moderatedposting;
+ /**
+  * Open Message Viewing - With open message viewing anyone can view messages 
+  * in a board. Otherwise, only members can see messages 
+  */
   protected Boolean openmessageviewing;
+ /**
+  * Open Member List - With open member list anyone can see the members of 
+  * the list. Otherwise, only members can see who else is subscribed 
+  */
   protected Boolean openmemberlist;
+ /**
+  * Attachments Allowed - Can attachments be sent with messages. If not, 
+  * attachments are ignored 
+  */
   protected Boolean attachmentsallowed;
+ /**
+  * Anonymous Posting Allowed - Can people without user accounts post to this 
+  * messageboard. If so, a user account is created for them when they post. 
+  */
   protected Boolean anonymousposting;
+ /**
+  * Attachments Path - A path to the directory containing attachments for 
+  * this board 
+  */
   protected String attachmentspath;
+ /**
+  * Attachments URL - A URL to the directory containing attachments for this 
+  * board 
+  */
   protected String attachmentsurl;
 
+
+ /**
+  * Retrieves the <code>Id</code> value, without locking, 
+  * for this <code>Board</code> <code>Persistent</code>.
+  *
+  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @return the Integer id
+  */
   public Integer getId_unsafe() {
     return id;
   }
 
+
+ /**
+  * Sets the <code>Id</code> value directly, without checking, 
+  * for this Board <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @param cooked  the pre-validated value to set
+  */
   public void setId_unsafe(Integer cooked) {
     id = cooked;
   }
+
+ /**
+  * Retrieves the Id value, with locking, for this 
+  * <code>Board</code> <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.AtomFieldDef#generateBaseMethods 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights 
+  * @return the value of the field <code>Id</code> for this 
+  *         <code>Board</code> <code>Persistent</code>  
+  */
 
   public Integer getId()
       throws AccessPoemException {
@@ -80,30 +168,94 @@ public abstract class BoardBase extends Persistent {
     return getId_unsafe();
   }
 
+
+ /**
+  * Sets the <code>Id</code> value, with checking, for this 
+  * <code>Board</code> <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.AtomFieldDef#generateBaseMethods  
+  * @param cooked  a validated <code>int</code> 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @throws ValidationPoemException 
+  *         if the value is not valid
+  */
   public void setId(Integer cooked)
       throws AccessPoemException, ValidationPoemException {
-    _getBoardTable().getIdColumn().getType().assertValidCooked(cooked);
+    _getBoardTable().getIdColumn().
+      getType().assertValidCooked(cooked);
     writeLock();
     setId_unsafe(cooked);
   }
+
+ /**
+  * Sets the <code>Id</code> value, with checking, for this 
+  * <code>Board</code> <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.IntegerFieldDef#generateBaseMethods 
+  * @param cooked  a validated <code>int</code>
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @throws ValidationPoemException 
+  *         if the value is not valid
+  */
 
   public final void setId(int cooked)
       throws AccessPoemException, ValidationPoemException {
     setId(new Integer(cooked));
   }
 
+
+ /**
+  * Retrieves the <code>Id</code> value as a <code>Field</code>
+  * from this <code>Board</code> <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateFieldCreator 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @return the Integer id
+  */
   public Field getIdField() throws AccessPoemException {
     Column c = _getBoardTable().getIdColumn();
     return new Field(c.getRaw(this), c);
   }
 
+
+ /**
+  * Retrieves the <code>Type</code> value, without locking, 
+  * for this <code>Board</code> <code>Persistent</code>.
+  *
+  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @return the Integer type
+  */
   public Integer getType_unsafe() {
     return type;
   }
 
+
+ /**
+  * Sets the <code>Type</code> value directly, without checking, 
+  * for this Board <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @param cooked  the pre-validated value to set
+  */
   public void setType_unsafe(Integer cooked) {
     type = cooked;
   }
+
+ /**
+  * Retrieves the Table Row Object ID. 
+  *
+  * @generator org.melati.poem.prepro.ReferenceFieldDef#generateBaseMethods 
+  * @throws AccessPoemException  
+  *         if the current <code>AccessToken</code> 
+  *         does not confer read access rights 
+  * @return the TROID as an <code>Integer</code> 
+  */
 
   public Integer getTypeTroid()
       throws AccessPoemException {
@@ -111,12 +263,34 @@ public abstract class BoardBase extends Persistent {
     return getType_unsafe();
   }
 
+
+ /**
+  * Sets the Table Row Object ID. 
+  * 
+  * @generator org.melati.poem.prepro.ReferenceFieldDef#generateBaseMethods 
+  * @param raw  a Table Row Object Id 
+  * @throws AccessPoemException  
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  */
   public void setTypeTroid(Integer raw)
       throws AccessPoemException {
     setType(raw == null ? null : 
         getBoardsDatabaseTables().getBoardTypeTable().getBoardTypeObject(raw));
   }
 
+
+ /**
+  * Retrieves the <code>Type</code> object referred to.
+  *  
+  * @generator org.melati.poem.prepro.ReferenceFieldDef#generateBaseMethods 
+  * @throws AccessPoemException  
+  *         if the current <code>AccessToken</code> 
+  *         does not confer read access rights 
+  * @throws NoSuchRowPoemException  
+  *         if the <code>Persistent</code> has yet to be allocated a TROID 
+  * @return the <code>Type</code> as a <code>BoardType</code> 
+  */
   public BoardType getType()
       throws AccessPoemException, NoSuchRowPoemException {
     Integer troid = getTypeTroid();
@@ -124,9 +298,21 @@ public abstract class BoardBase extends Persistent {
         getBoardsDatabaseTables().getBoardTypeTable().getBoardTypeObject(troid);
   }
 
+
+ /**
+  * Set the Type.
+  * 
+  * @generator org.melati.poem.prepro.ReferenceFieldDef#generateBaseMethods 
+  * @param cooked  a validated <code>BoardType</code>
+  * @throws AccessPoemException  
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights 
+  */
   public void setType(BoardType cooked)
       throws AccessPoemException {
-    _getBoardTable().getTypeColumn().getType().assertValidCooked(cooked);
+    _getBoardTable().
+      getTypeColumn().
+        getType().assertValidCooked(cooked);
     writeLock();
     if (cooked == null)
       setType_unsafe(null);
@@ -136,18 +322,59 @@ public abstract class BoardBase extends Persistent {
     }
   }
 
+
+ /**
+  * Retrieves the <code>Type</code> value as a <code>Field</code>
+  * from this <code>Board</code> <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateFieldCreator 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @return the Integer type
+  */
   public Field getTypeField() throws AccessPoemException {
     Column c = _getBoardTable().getTypeColumn();
     return new Field(c.getRaw(this), c);
   }
 
+
+ /**
+  * Retrieves the <code>Name</code> value, without locking, 
+  * for this <code>Board</code> <code>Persistent</code>.
+  *
+  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @return the String name
+  */
   public String getName_unsafe() {
     return name;
   }
 
+
+ /**
+  * Sets the <code>Name</code> value directly, without checking, 
+  * for this Board <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @param cooked  the pre-validated value to set
+  */
   public void setName_unsafe(String cooked) {
     name = cooked;
   }
+
+ /**
+  * Retrieves the Name value, with locking, for this 
+  * <code>Board</code> <code>Persistent</code>.
+  * Field description: 
+  *   A code-name for this board 
+  * 
+  * @generator org.melati.poem.prepro.AtomFieldDef#generateBaseMethods 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights 
+  * @return the value of the field <code>Name</code> for this 
+  *         <code>Board</code> <code>Persistent</code>  
+  */
 
   public String getName()
       throws AccessPoemException {
@@ -155,25 +382,82 @@ public abstract class BoardBase extends Persistent {
     return getName_unsafe();
   }
 
+
+ /**
+  * Sets the <code>Name</code> value, with checking, for this 
+  * <code>Board</code> <code>Persistent</code>.
+  * Field description: 
+  *   A code-name for this board 
+  * 
+  * @generator org.melati.poem.prepro.AtomFieldDef#generateBaseMethods  
+  * @param cooked  a validated <code>int</code> 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @throws ValidationPoemException 
+  *         if the value is not valid
+  */
   public void setName(String cooked)
       throws AccessPoemException, ValidationPoemException {
-    _getBoardTable().getNameColumn().getType().assertValidCooked(cooked);
+    _getBoardTable().getNameColumn().
+      getType().assertValidCooked(cooked);
     writeLock();
     setName_unsafe(cooked);
   }
 
+
+ /**
+  * Retrieves the <code>Name</code> value as a <code>Field</code>
+  * from this <code>Board</code> <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateFieldCreator 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @return the String name
+  */
   public Field getNameField() throws AccessPoemException {
     Column c = _getBoardTable().getNameColumn();
     return new Field(c.getRaw(this), c);
   }
 
+
+ /**
+  * Retrieves the <code>Displayname</code> value, without locking, 
+  * for this <code>Board</code> <code>Persistent</code>.
+  *
+  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @return the String displayname
+  */
   public String getDisplayname_unsafe() {
     return displayname;
   }
 
+
+ /**
+  * Sets the <code>Displayname</code> value directly, without checking, 
+  * for this Board <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @param cooked  the pre-validated value to set
+  */
   public void setDisplayname_unsafe(String cooked) {
     displayname = cooked;
   }
+
+ /**
+  * Retrieves the Displayname value, with locking, for this 
+  * <code>Board</code> <code>Persistent</code>.
+  * Field description: 
+  *   A user-friendly name of this board 
+  * 
+  * @generator org.melati.poem.prepro.AtomFieldDef#generateBaseMethods 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights 
+  * @return the value of the field <code>Displayname</code> for this 
+  *         <code>Board</code> <code>Persistent</code>  
+  */
 
   public String getDisplayname()
       throws AccessPoemException {
@@ -181,25 +465,82 @@ public abstract class BoardBase extends Persistent {
     return getDisplayname_unsafe();
   }
 
+
+ /**
+  * Sets the <code>Displayname</code> value, with checking, for this 
+  * <code>Board</code> <code>Persistent</code>.
+  * Field description: 
+  *   A user-friendly name of this board 
+  * 
+  * @generator org.melati.poem.prepro.AtomFieldDef#generateBaseMethods  
+  * @param cooked  a validated <code>int</code> 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @throws ValidationPoemException 
+  *         if the value is not valid
+  */
   public void setDisplayname(String cooked)
       throws AccessPoemException, ValidationPoemException {
-    _getBoardTable().getDisplaynameColumn().getType().assertValidCooked(cooked);
+    _getBoardTable().getDisplaynameColumn().
+      getType().assertValidCooked(cooked);
     writeLock();
     setDisplayname_unsafe(cooked);
   }
 
+
+ /**
+  * Retrieves the <code>Displayname</code> value as a <code>Field</code>
+  * from this <code>Board</code> <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateFieldCreator 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @return the String displayname
+  */
   public Field getDisplaynameField() throws AccessPoemException {
     Column c = _getBoardTable().getDisplaynameColumn();
     return new Field(c.getRaw(this), c);
   }
 
+
+ /**
+  * Retrieves the <code>Purpose</code> value, without locking, 
+  * for this <code>Board</code> <code>Persistent</code>.
+  *
+  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @return the String purpose
+  */
   public String getPurpose_unsafe() {
     return purpose;
   }
 
+
+ /**
+  * Sets the <code>Purpose</code> value directly, without checking, 
+  * for this Board <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @param cooked  the pre-validated value to set
+  */
   public void setPurpose_unsafe(String cooked) {
     purpose = cooked;
   }
+
+ /**
+  * Retrieves the Purpose value, with locking, for this 
+  * <code>Board</code> <code>Persistent</code>.
+  * Field description: 
+  *   The purpose of this message board 
+  * 
+  * @generator org.melati.poem.prepro.AtomFieldDef#generateBaseMethods 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights 
+  * @return the value of the field <code>Purpose</code> for this 
+  *         <code>Board</code> <code>Persistent</code>  
+  */
 
   public String getPurpose()
       throws AccessPoemException {
@@ -207,25 +548,83 @@ public abstract class BoardBase extends Persistent {
     return getPurpose_unsafe();
   }
 
+
+ /**
+  * Sets the <code>Purpose</code> value, with checking, for this 
+  * <code>Board</code> <code>Persistent</code>.
+  * Field description: 
+  *   The purpose of this message board 
+  * 
+  * @generator org.melati.poem.prepro.AtomFieldDef#generateBaseMethods  
+  * @param cooked  a validated <code>int</code> 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @throws ValidationPoemException 
+  *         if the value is not valid
+  */
   public void setPurpose(String cooked)
       throws AccessPoemException, ValidationPoemException {
-    _getBoardTable().getPurposeColumn().getType().assertValidCooked(cooked);
+    _getBoardTable().getPurposeColumn().
+      getType().assertValidCooked(cooked);
     writeLock();
     setPurpose_unsafe(cooked);
   }
 
+
+ /**
+  * Retrieves the <code>Purpose</code> value as a <code>Field</code>
+  * from this <code>Board</code> <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateFieldCreator 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @return the String purpose
+  */
   public Field getPurposeField() throws AccessPoemException {
     Column c = _getBoardTable().getPurposeColumn();
     return new Field(c.getRaw(this), c);
   }
 
+
+ /**
+  * Retrieves the <code>Archived</code> value, without locking, 
+  * for this <code>Board</code> <code>Persistent</code>.
+  *
+  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @return the Boolean archived
+  */
   public Boolean getArchived_unsafe() {
     return archived;
   }
 
+
+ /**
+  * Sets the <code>Archived</code> value directly, without checking, 
+  * for this Board <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @param cooked  the pre-validated value to set
+  */
   public void setArchived_unsafe(Boolean cooked) {
     archived = cooked;
   }
+
+ /**
+  * Retrieves the Archived value, with locking, for this 
+  * <code>Board</code> <code>Persistent</code>.
+  * Field description: 
+  *   If a board is archived then it cannot be viewed and is not displayed on 
+  *   lists by default 
+  * 
+  * @generator org.melati.poem.prepro.AtomFieldDef#generateBaseMethods 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights 
+  * @return the value of the field <code>Archived</code> for this 
+  *         <code>Board</code> <code>Persistent</code>  
+  */
 
   public Boolean getArchived()
       throws AccessPoemException {
@@ -233,30 +632,107 @@ public abstract class BoardBase extends Persistent {
     return getArchived_unsafe();
   }
 
+
+ /**
+  * Sets the <code>Archived</code> value, with checking, for this 
+  * <code>Board</code> <code>Persistent</code>.
+  * Field description: 
+  *   If a board is archived then it cannot be viewed and is not displayed on 
+  *   lists by default 
+  * 
+  * @generator org.melati.poem.prepro.AtomFieldDef#generateBaseMethods  
+  * @param cooked  a validated <code>int</code> 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @throws ValidationPoemException 
+  *         if the value is not valid
+  */
   public void setArchived(Boolean cooked)
       throws AccessPoemException, ValidationPoemException {
-    _getBoardTable().getArchivedColumn().getType().assertValidCooked(cooked);
+    _getBoardTable().getArchivedColumn().
+      getType().assertValidCooked(cooked);
     writeLock();
     setArchived_unsafe(cooked);
   }
+
+ /**
+  * Sets the <code>Archived</code> value, with checking, 
+  * from a <code>boolean</code>, for this 
+  * <code>Board</code> <code>Persistent</code>.
+  * Field description: 
+  *   If a board is archived then it cannot be viewed and is not displayed on 
+  *   lists by default 
+  * 
+  * 
+  * @generator org.melati.poem.prepro.BooleanFieldDef#generateBaseMethods 
+  * @param cooked  a <code>boolean</code> 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @throws ValidationPoemException 
+  *         if the value is not valid
+  */
 
   public final void setArchived(boolean cooked)
       throws AccessPoemException, ValidationPoemException {
     setArchived(cooked ? Boolean.TRUE : Boolean.FALSE);
   }
 
+
+ /**
+  * Retrieves the <code>Archived</code> value as a <code>Field</code>
+  * from this <code>Board</code> <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateFieldCreator 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @return the Boolean archived
+  */
   public Field getArchivedField() throws AccessPoemException {
     Column c = _getBoardTable().getArchivedColumn();
     return new Field(c.getRaw(this), c);
   }
 
+
+ /**
+  * Retrieves the <code>Opensubscription</code> value, without locking, 
+  * for this <code>Board</code> <code>Persistent</code>.
+  *
+  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @return the Boolean opensubscription
+  */
   public Boolean getOpensubscription_unsafe() {
     return opensubscription;
   }
 
+
+ /**
+  * Sets the <code>Opensubscription</code> value directly, without checking, 
+  * for this Board <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @param cooked  the pre-validated value to set
+  */
   public void setOpensubscription_unsafe(Boolean cooked) {
     opensubscription = cooked;
   }
+
+ /**
+  * Retrieves the Opensubscription value, with locking, for this 
+  * <code>Board</code> <code>Persistent</code>.
+  * Field description: 
+  *   With open subscription anyone can subscribe to the board. Otherwise a 
+  *   board manager must subscribe members 
+  * 
+  * @generator org.melati.poem.prepro.AtomFieldDef#generateBaseMethods 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights 
+  * @return the value of the field <code>Opensubscription</code> for this 
+  *         <code>Board</code> <code>Persistent</code>  
+  */
 
   public Boolean getOpensubscription()
       throws AccessPoemException {
@@ -264,30 +740,107 @@ public abstract class BoardBase extends Persistent {
     return getOpensubscription_unsafe();
   }
 
+
+ /**
+  * Sets the <code>Opensubscription</code> value, with checking, for this 
+  * <code>Board</code> <code>Persistent</code>.
+  * Field description: 
+  *   With open subscription anyone can subscribe to the board. Otherwise a 
+  *   board manager must subscribe members 
+  * 
+  * @generator org.melati.poem.prepro.AtomFieldDef#generateBaseMethods  
+  * @param cooked  a validated <code>int</code> 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @throws ValidationPoemException 
+  *         if the value is not valid
+  */
   public void setOpensubscription(Boolean cooked)
       throws AccessPoemException, ValidationPoemException {
-    _getBoardTable().getOpensubscriptionColumn().getType().assertValidCooked(cooked);
+    _getBoardTable().getOpensubscriptionColumn().
+      getType().assertValidCooked(cooked);
     writeLock();
     setOpensubscription_unsafe(cooked);
   }
+
+ /**
+  * Sets the <code>Opensubscription</code> value, with checking, 
+  * from a <code>boolean</code>, for this 
+  * <code>Board</code> <code>Persistent</code>.
+  * Field description: 
+  *   With open subscription anyone can subscribe to the board. Otherwise a 
+  *   board manager must subscribe members 
+  * 
+  * 
+  * @generator org.melati.poem.prepro.BooleanFieldDef#generateBaseMethods 
+  * @param cooked  a <code>boolean</code> 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @throws ValidationPoemException 
+  *         if the value is not valid
+  */
 
   public final void setOpensubscription(boolean cooked)
       throws AccessPoemException, ValidationPoemException {
     setOpensubscription(cooked ? Boolean.TRUE : Boolean.FALSE);
   }
 
+
+ /**
+  * Retrieves the <code>Opensubscription</code> value as a <code>Field</code>
+  * from this <code>Board</code> <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateFieldCreator 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @return the Boolean opensubscription
+  */
   public Field getOpensubscriptionField() throws AccessPoemException {
     Column c = _getBoardTable().getOpensubscriptionColumn();
     return new Field(c.getRaw(this), c);
   }
 
+
+ /**
+  * Retrieves the <code>Moderatedsubscription</code> value, without locking, 
+  * for this <code>Board</code> <code>Persistent</code>.
+  *
+  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @return the Boolean moderatedsubscription
+  */
   public Boolean getModeratedsubscription_unsafe() {
     return moderatedsubscription;
   }
 
+
+ /**
+  * Sets the <code>Moderatedsubscription</code> value directly, without checking, 
+  * for this Board <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @param cooked  the pre-validated value to set
+  */
   public void setModeratedsubscription_unsafe(Boolean cooked) {
     moderatedsubscription = cooked;
   }
+
+ /**
+  * Retrieves the Moderatedsubscription value, with locking, for this 
+  * <code>Board</code> <code>Persistent</code>.
+  * Field description: 
+  *   With moderated subscription the manager must approve all requests to be 
+  *   subscribed 
+  * 
+  * @generator org.melati.poem.prepro.AtomFieldDef#generateBaseMethods 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights 
+  * @return the value of the field <code>Moderatedsubscription</code> for this 
+  *         <code>Board</code> <code>Persistent</code>  
+  */
 
   public Boolean getModeratedsubscription()
       throws AccessPoemException {
@@ -295,30 +848,107 @@ public abstract class BoardBase extends Persistent {
     return getModeratedsubscription_unsafe();
   }
 
+
+ /**
+  * Sets the <code>Moderatedsubscription</code> value, with checking, for this 
+  * <code>Board</code> <code>Persistent</code>.
+  * Field description: 
+  *   With moderated subscription the manager must approve all requests to be 
+  *   subscribed 
+  * 
+  * @generator org.melati.poem.prepro.AtomFieldDef#generateBaseMethods  
+  * @param cooked  a validated <code>int</code> 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @throws ValidationPoemException 
+  *         if the value is not valid
+  */
   public void setModeratedsubscription(Boolean cooked)
       throws AccessPoemException, ValidationPoemException {
-    _getBoardTable().getModeratedsubscriptionColumn().getType().assertValidCooked(cooked);
+    _getBoardTable().getModeratedsubscriptionColumn().
+      getType().assertValidCooked(cooked);
     writeLock();
     setModeratedsubscription_unsafe(cooked);
   }
+
+ /**
+  * Sets the <code>Moderatedsubscription</code> value, with checking, 
+  * from a <code>boolean</code>, for this 
+  * <code>Board</code> <code>Persistent</code>.
+  * Field description: 
+  *   With moderated subscription the manager must approve all requests to be 
+  *   subscribed 
+  * 
+  * 
+  * @generator org.melati.poem.prepro.BooleanFieldDef#generateBaseMethods 
+  * @param cooked  a <code>boolean</code> 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @throws ValidationPoemException 
+  *         if the value is not valid
+  */
 
   public final void setModeratedsubscription(boolean cooked)
       throws AccessPoemException, ValidationPoemException {
     setModeratedsubscription(cooked ? Boolean.TRUE : Boolean.FALSE);
   }
 
+
+ /**
+  * Retrieves the <code>Moderatedsubscription</code> value as a <code>Field</code>
+  * from this <code>Board</code> <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateFieldCreator 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @return the Boolean moderatedsubscription
+  */
   public Field getModeratedsubscriptionField() throws AccessPoemException {
     Column c = _getBoardTable().getModeratedsubscriptionColumn();
     return new Field(c.getRaw(this), c);
   }
 
+
+ /**
+  * Retrieves the <code>Openposting</code> value, without locking, 
+  * for this <code>Board</code> <code>Persistent</code>.
+  *
+  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @return the Boolean openposting
+  */
   public Boolean getOpenposting_unsafe() {
     return openposting;
   }
 
+
+ /**
+  * Sets the <code>Openposting</code> value directly, without checking, 
+  * for this Board <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @param cooked  the pre-validated value to set
+  */
   public void setOpenposting_unsafe(Boolean cooked) {
     openposting = cooked;
   }
+
+ /**
+  * Retrieves the Openposting value, with locking, for this 
+  * <code>Board</code> <code>Persistent</code>.
+  * Field description: 
+  *   With open posting anyone with a user account can post a message to this 
+  *   list. Otherwise, only members can post 
+  * 
+  * @generator org.melati.poem.prepro.AtomFieldDef#generateBaseMethods 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights 
+  * @return the value of the field <code>Openposting</code> for this 
+  *         <code>Board</code> <code>Persistent</code>  
+  */
 
   public Boolean getOpenposting()
       throws AccessPoemException {
@@ -326,30 +956,106 @@ public abstract class BoardBase extends Persistent {
     return getOpenposting_unsafe();
   }
 
+
+ /**
+  * Sets the <code>Openposting</code> value, with checking, for this 
+  * <code>Board</code> <code>Persistent</code>.
+  * Field description: 
+  *   With open posting anyone with a user account can post a message to this 
+  *   list. Otherwise, only members can post 
+  * 
+  * @generator org.melati.poem.prepro.AtomFieldDef#generateBaseMethods  
+  * @param cooked  a validated <code>int</code> 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @throws ValidationPoemException 
+  *         if the value is not valid
+  */
   public void setOpenposting(Boolean cooked)
       throws AccessPoemException, ValidationPoemException {
-    _getBoardTable().getOpenpostingColumn().getType().assertValidCooked(cooked);
+    _getBoardTable().getOpenpostingColumn().
+      getType().assertValidCooked(cooked);
     writeLock();
     setOpenposting_unsafe(cooked);
   }
+
+ /**
+  * Sets the <code>Openposting</code> value, with checking, 
+  * from a <code>boolean</code>, for this 
+  * <code>Board</code> <code>Persistent</code>.
+  * Field description: 
+  *   With open posting anyone with a user account can post a message to this 
+  *   list. Otherwise, only members can post 
+  * 
+  * 
+  * @generator org.melati.poem.prepro.BooleanFieldDef#generateBaseMethods 
+  * @param cooked  a <code>boolean</code> 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @throws ValidationPoemException 
+  *         if the value is not valid
+  */
 
   public final void setOpenposting(boolean cooked)
       throws AccessPoemException, ValidationPoemException {
     setOpenposting(cooked ? Boolean.TRUE : Boolean.FALSE);
   }
 
+
+ /**
+  * Retrieves the <code>Openposting</code> value as a <code>Field</code>
+  * from this <code>Board</code> <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateFieldCreator 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @return the Boolean openposting
+  */
   public Field getOpenpostingField() throws AccessPoemException {
     Column c = _getBoardTable().getOpenpostingColumn();
     return new Field(c.getRaw(this), c);
   }
 
+
+ /**
+  * Retrieves the <code>Moderatedposting</code> value, without locking, 
+  * for this <code>Board</code> <code>Persistent</code>.
+  *
+  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @return the Boolean moderatedposting
+  */
   public Boolean getModeratedposting_unsafe() {
     return moderatedposting;
   }
 
+
+ /**
+  * Sets the <code>Moderatedposting</code> value directly, without checking, 
+  * for this Board <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @param cooked  the pre-validated value to set
+  */
   public void setModeratedposting_unsafe(Boolean cooked) {
     moderatedposting = cooked;
   }
+
+ /**
+  * Retrieves the Moderatedposting value, with locking, for this 
+  * <code>Board</code> <code>Persistent</code>.
+  * Field description: 
+  *   With moderated posting all messages must be approved by a manager 
+  * 
+  * @generator org.melati.poem.prepro.AtomFieldDef#generateBaseMethods 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights 
+  * @return the value of the field <code>Moderatedposting</code> for this 
+  *         <code>Board</code> <code>Persistent</code>  
+  */
 
   public Boolean getModeratedposting()
       throws AccessPoemException {
@@ -357,30 +1063,105 @@ public abstract class BoardBase extends Persistent {
     return getModeratedposting_unsafe();
   }
 
+
+ /**
+  * Sets the <code>Moderatedposting</code> value, with checking, for this 
+  * <code>Board</code> <code>Persistent</code>.
+  * Field description: 
+  *   With moderated posting all messages must be approved by a manager 
+  * 
+  * @generator org.melati.poem.prepro.AtomFieldDef#generateBaseMethods  
+  * @param cooked  a validated <code>int</code> 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @throws ValidationPoemException 
+  *         if the value is not valid
+  */
   public void setModeratedposting(Boolean cooked)
       throws AccessPoemException, ValidationPoemException {
-    _getBoardTable().getModeratedpostingColumn().getType().assertValidCooked(cooked);
+    _getBoardTable().getModeratedpostingColumn().
+      getType().assertValidCooked(cooked);
     writeLock();
     setModeratedposting_unsafe(cooked);
   }
+
+ /**
+  * Sets the <code>Moderatedposting</code> value, with checking, 
+  * from a <code>boolean</code>, for this 
+  * <code>Board</code> <code>Persistent</code>.
+  * Field description: 
+  *   With moderated posting all messages must be approved by a manager 
+  * 
+  * 
+  * @generator org.melati.poem.prepro.BooleanFieldDef#generateBaseMethods 
+  * @param cooked  a <code>boolean</code> 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @throws ValidationPoemException 
+  *         if the value is not valid
+  */
 
   public final void setModeratedposting(boolean cooked)
       throws AccessPoemException, ValidationPoemException {
     setModeratedposting(cooked ? Boolean.TRUE : Boolean.FALSE);
   }
 
+
+ /**
+  * Retrieves the <code>Moderatedposting</code> value as a <code>Field</code>
+  * from this <code>Board</code> <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateFieldCreator 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @return the Boolean moderatedposting
+  */
   public Field getModeratedpostingField() throws AccessPoemException {
     Column c = _getBoardTable().getModeratedpostingColumn();
     return new Field(c.getRaw(this), c);
   }
 
+
+ /**
+  * Retrieves the <code>Openmessageviewing</code> value, without locking, 
+  * for this <code>Board</code> <code>Persistent</code>.
+  *
+  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @return the Boolean openmessageviewing
+  */
   public Boolean getOpenmessageviewing_unsafe() {
     return openmessageviewing;
   }
 
+
+ /**
+  * Sets the <code>Openmessageviewing</code> value directly, without checking, 
+  * for this Board <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @param cooked  the pre-validated value to set
+  */
   public void setOpenmessageviewing_unsafe(Boolean cooked) {
     openmessageviewing = cooked;
   }
+
+ /**
+  * Retrieves the Openmessageviewing value, with locking, for this 
+  * <code>Board</code> <code>Persistent</code>.
+  * Field description: 
+  *   With open message viewing anyone can view messages in a board. 
+  *   Otherwise, only members can see messages 
+  * 
+  * @generator org.melati.poem.prepro.AtomFieldDef#generateBaseMethods 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights 
+  * @return the value of the field <code>Openmessageviewing</code> for this 
+  *         <code>Board</code> <code>Persistent</code>  
+  */
 
   public Boolean getOpenmessageviewing()
       throws AccessPoemException {
@@ -388,30 +1169,107 @@ public abstract class BoardBase extends Persistent {
     return getOpenmessageviewing_unsafe();
   }
 
+
+ /**
+  * Sets the <code>Openmessageviewing</code> value, with checking, for this 
+  * <code>Board</code> <code>Persistent</code>.
+  * Field description: 
+  *   With open message viewing anyone can view messages in a board. 
+  *   Otherwise, only members can see messages 
+  * 
+  * @generator org.melati.poem.prepro.AtomFieldDef#generateBaseMethods  
+  * @param cooked  a validated <code>int</code> 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @throws ValidationPoemException 
+  *         if the value is not valid
+  */
   public void setOpenmessageviewing(Boolean cooked)
       throws AccessPoemException, ValidationPoemException {
-    _getBoardTable().getOpenmessageviewingColumn().getType().assertValidCooked(cooked);
+    _getBoardTable().getOpenmessageviewingColumn().
+      getType().assertValidCooked(cooked);
     writeLock();
     setOpenmessageviewing_unsafe(cooked);
   }
+
+ /**
+  * Sets the <code>Openmessageviewing</code> value, with checking, 
+  * from a <code>boolean</code>, for this 
+  * <code>Board</code> <code>Persistent</code>.
+  * Field description: 
+  *   With open message viewing anyone can view messages in a board. 
+  *   Otherwise, only members can see messages 
+  * 
+  * 
+  * @generator org.melati.poem.prepro.BooleanFieldDef#generateBaseMethods 
+  * @param cooked  a <code>boolean</code> 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @throws ValidationPoemException 
+  *         if the value is not valid
+  */
 
   public final void setOpenmessageviewing(boolean cooked)
       throws AccessPoemException, ValidationPoemException {
     setOpenmessageviewing(cooked ? Boolean.TRUE : Boolean.FALSE);
   }
 
+
+ /**
+  * Retrieves the <code>Openmessageviewing</code> value as a <code>Field</code>
+  * from this <code>Board</code> <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateFieldCreator 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @return the Boolean openmessageviewing
+  */
   public Field getOpenmessageviewingField() throws AccessPoemException {
     Column c = _getBoardTable().getOpenmessageviewingColumn();
     return new Field(c.getRaw(this), c);
   }
 
+
+ /**
+  * Retrieves the <code>Openmemberlist</code> value, without locking, 
+  * for this <code>Board</code> <code>Persistent</code>.
+  *
+  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @return the Boolean openmemberlist
+  */
   public Boolean getOpenmemberlist_unsafe() {
     return openmemberlist;
   }
 
+
+ /**
+  * Sets the <code>Openmemberlist</code> value directly, without checking, 
+  * for this Board <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @param cooked  the pre-validated value to set
+  */
   public void setOpenmemberlist_unsafe(Boolean cooked) {
     openmemberlist = cooked;
   }
+
+ /**
+  * Retrieves the Openmemberlist value, with locking, for this 
+  * <code>Board</code> <code>Persistent</code>.
+  * Field description: 
+  *   With open member list anyone can see the members of the list. 
+  *   Otherwise, only members can see who else is subscribed 
+  * 
+  * @generator org.melati.poem.prepro.AtomFieldDef#generateBaseMethods 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights 
+  * @return the value of the field <code>Openmemberlist</code> for this 
+  *         <code>Board</code> <code>Persistent</code>  
+  */
 
   public Boolean getOpenmemberlist()
       throws AccessPoemException {
@@ -419,30 +1277,106 @@ public abstract class BoardBase extends Persistent {
     return getOpenmemberlist_unsafe();
   }
 
+
+ /**
+  * Sets the <code>Openmemberlist</code> value, with checking, for this 
+  * <code>Board</code> <code>Persistent</code>.
+  * Field description: 
+  *   With open member list anyone can see the members of the list. 
+  *   Otherwise, only members can see who else is subscribed 
+  * 
+  * @generator org.melati.poem.prepro.AtomFieldDef#generateBaseMethods  
+  * @param cooked  a validated <code>int</code> 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @throws ValidationPoemException 
+  *         if the value is not valid
+  */
   public void setOpenmemberlist(Boolean cooked)
       throws AccessPoemException, ValidationPoemException {
-    _getBoardTable().getOpenmemberlistColumn().getType().assertValidCooked(cooked);
+    _getBoardTable().getOpenmemberlistColumn().
+      getType().assertValidCooked(cooked);
     writeLock();
     setOpenmemberlist_unsafe(cooked);
   }
+
+ /**
+  * Sets the <code>Openmemberlist</code> value, with checking, 
+  * from a <code>boolean</code>, for this 
+  * <code>Board</code> <code>Persistent</code>.
+  * Field description: 
+  *   With open member list anyone can see the members of the list. 
+  *   Otherwise, only members can see who else is subscribed 
+  * 
+  * 
+  * @generator org.melati.poem.prepro.BooleanFieldDef#generateBaseMethods 
+  * @param cooked  a <code>boolean</code> 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @throws ValidationPoemException 
+  *         if the value is not valid
+  */
 
   public final void setOpenmemberlist(boolean cooked)
       throws AccessPoemException, ValidationPoemException {
     setOpenmemberlist(cooked ? Boolean.TRUE : Boolean.FALSE);
   }
 
+
+ /**
+  * Retrieves the <code>Openmemberlist</code> value as a <code>Field</code>
+  * from this <code>Board</code> <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateFieldCreator 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @return the Boolean openmemberlist
+  */
   public Field getOpenmemberlistField() throws AccessPoemException {
     Column c = _getBoardTable().getOpenmemberlistColumn();
     return new Field(c.getRaw(this), c);
   }
 
+
+ /**
+  * Retrieves the <code>Attachmentsallowed</code> value, without locking, 
+  * for this <code>Board</code> <code>Persistent</code>.
+  *
+  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @return the Boolean attachmentsallowed
+  */
   public Boolean getAttachmentsallowed_unsafe() {
     return attachmentsallowed;
   }
 
+
+ /**
+  * Sets the <code>Attachmentsallowed</code> value directly, without checking, 
+  * for this Board <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @param cooked  the pre-validated value to set
+  */
   public void setAttachmentsallowed_unsafe(Boolean cooked) {
     attachmentsallowed = cooked;
   }
+
+ /**
+  * Retrieves the Attachmentsallowed value, with locking, for this 
+  * <code>Board</code> <code>Persistent</code>.
+  * Field description: 
+  *   Can attachments be sent with messages. If not, attachments are ignored 
+  * 
+  * @generator org.melati.poem.prepro.AtomFieldDef#generateBaseMethods 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights 
+  * @return the value of the field <code>Attachmentsallowed</code> for this 
+  *         <code>Board</code> <code>Persistent</code>  
+  */
 
   public Boolean getAttachmentsallowed()
       throws AccessPoemException {
@@ -450,30 +1384,105 @@ public abstract class BoardBase extends Persistent {
     return getAttachmentsallowed_unsafe();
   }
 
+
+ /**
+  * Sets the <code>Attachmentsallowed</code> value, with checking, for this 
+  * <code>Board</code> <code>Persistent</code>.
+  * Field description: 
+  *   Can attachments be sent with messages. If not, attachments are ignored 
+  * 
+  * @generator org.melati.poem.prepro.AtomFieldDef#generateBaseMethods  
+  * @param cooked  a validated <code>int</code> 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @throws ValidationPoemException 
+  *         if the value is not valid
+  */
   public void setAttachmentsallowed(Boolean cooked)
       throws AccessPoemException, ValidationPoemException {
-    _getBoardTable().getAttachmentsallowedColumn().getType().assertValidCooked(cooked);
+    _getBoardTable().getAttachmentsallowedColumn().
+      getType().assertValidCooked(cooked);
     writeLock();
     setAttachmentsallowed_unsafe(cooked);
   }
+
+ /**
+  * Sets the <code>Attachmentsallowed</code> value, with checking, 
+  * from a <code>boolean</code>, for this 
+  * <code>Board</code> <code>Persistent</code>.
+  * Field description: 
+  *   Can attachments be sent with messages. If not, attachments are ignored 
+  * 
+  * 
+  * @generator org.melati.poem.prepro.BooleanFieldDef#generateBaseMethods 
+  * @param cooked  a <code>boolean</code> 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @throws ValidationPoemException 
+  *         if the value is not valid
+  */
 
   public final void setAttachmentsallowed(boolean cooked)
       throws AccessPoemException, ValidationPoemException {
     setAttachmentsallowed(cooked ? Boolean.TRUE : Boolean.FALSE);
   }
 
+
+ /**
+  * Retrieves the <code>Attachmentsallowed</code> value as a <code>Field</code>
+  * from this <code>Board</code> <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateFieldCreator 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @return the Boolean attachmentsallowed
+  */
   public Field getAttachmentsallowedField() throws AccessPoemException {
     Column c = _getBoardTable().getAttachmentsallowedColumn();
     return new Field(c.getRaw(this), c);
   }
 
+
+ /**
+  * Retrieves the <code>Anonymousposting</code> value, without locking, 
+  * for this <code>Board</code> <code>Persistent</code>.
+  *
+  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @return the Boolean anonymousposting
+  */
   public Boolean getAnonymousposting_unsafe() {
     return anonymousposting;
   }
 
+
+ /**
+  * Sets the <code>Anonymousposting</code> value directly, without checking, 
+  * for this Board <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @param cooked  the pre-validated value to set
+  */
   public void setAnonymousposting_unsafe(Boolean cooked) {
     anonymousposting = cooked;
   }
+
+ /**
+  * Retrieves the Anonymousposting value, with locking, for this 
+  * <code>Board</code> <code>Persistent</code>.
+  * Field description: 
+  *   Can people without user accounts post to this messageboard. If so, a 
+  *   user account is created for them when they post. 
+  * 
+  * @generator org.melati.poem.prepro.AtomFieldDef#generateBaseMethods 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights 
+  * @return the value of the field <code>Anonymousposting</code> for this 
+  *         <code>Board</code> <code>Persistent</code>  
+  */
 
   public Boolean getAnonymousposting()
       throws AccessPoemException {
@@ -481,30 +1490,106 @@ public abstract class BoardBase extends Persistent {
     return getAnonymousposting_unsafe();
   }
 
+
+ /**
+  * Sets the <code>Anonymousposting</code> value, with checking, for this 
+  * <code>Board</code> <code>Persistent</code>.
+  * Field description: 
+  *   Can people without user accounts post to this messageboard. If so, a 
+  *   user account is created for them when they post. 
+  * 
+  * @generator org.melati.poem.prepro.AtomFieldDef#generateBaseMethods  
+  * @param cooked  a validated <code>int</code> 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @throws ValidationPoemException 
+  *         if the value is not valid
+  */
   public void setAnonymousposting(Boolean cooked)
       throws AccessPoemException, ValidationPoemException {
-    _getBoardTable().getAnonymouspostingColumn().getType().assertValidCooked(cooked);
+    _getBoardTable().getAnonymouspostingColumn().
+      getType().assertValidCooked(cooked);
     writeLock();
     setAnonymousposting_unsafe(cooked);
   }
+
+ /**
+  * Sets the <code>Anonymousposting</code> value, with checking, 
+  * from a <code>boolean</code>, for this 
+  * <code>Board</code> <code>Persistent</code>.
+  * Field description: 
+  *   Can people without user accounts post to this messageboard. If so, a 
+  *   user account is created for them when they post. 
+  * 
+  * 
+  * @generator org.melati.poem.prepro.BooleanFieldDef#generateBaseMethods 
+  * @param cooked  a <code>boolean</code> 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @throws ValidationPoemException 
+  *         if the value is not valid
+  */
 
   public final void setAnonymousposting(boolean cooked)
       throws AccessPoemException, ValidationPoemException {
     setAnonymousposting(cooked ? Boolean.TRUE : Boolean.FALSE);
   }
 
+
+ /**
+  * Retrieves the <code>Anonymousposting</code> value as a <code>Field</code>
+  * from this <code>Board</code> <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateFieldCreator 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @return the Boolean anonymousposting
+  */
   public Field getAnonymouspostingField() throws AccessPoemException {
     Column c = _getBoardTable().getAnonymouspostingColumn();
     return new Field(c.getRaw(this), c);
   }
 
+
+ /**
+  * Retrieves the <code>Attachmentspath</code> value, without locking, 
+  * for this <code>Board</code> <code>Persistent</code>.
+  *
+  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @return the String attachmentspath
+  */
   public String getAttachmentspath_unsafe() {
     return attachmentspath;
   }
 
+
+ /**
+  * Sets the <code>Attachmentspath</code> value directly, without checking, 
+  * for this Board <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @param cooked  the pre-validated value to set
+  */
   public void setAttachmentspath_unsafe(String cooked) {
     attachmentspath = cooked;
   }
+
+ /**
+  * Retrieves the Attachmentspath value, with locking, for this 
+  * <code>Board</code> <code>Persistent</code>.
+  * Field description: 
+  *   A path to the directory containing attachments for this board 
+  * 
+  * @generator org.melati.poem.prepro.AtomFieldDef#generateBaseMethods 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights 
+  * @return the value of the field <code>Attachmentspath</code> for this 
+  *         <code>Board</code> <code>Persistent</code>  
+  */
 
   public String getAttachmentspath()
       throws AccessPoemException {
@@ -512,25 +1597,82 @@ public abstract class BoardBase extends Persistent {
     return getAttachmentspath_unsafe();
   }
 
+
+ /**
+  * Sets the <code>Attachmentspath</code> value, with checking, for this 
+  * <code>Board</code> <code>Persistent</code>.
+  * Field description: 
+  *   A path to the directory containing attachments for this board 
+  * 
+  * @generator org.melati.poem.prepro.AtomFieldDef#generateBaseMethods  
+  * @param cooked  a validated <code>int</code> 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @throws ValidationPoemException 
+  *         if the value is not valid
+  */
   public void setAttachmentspath(String cooked)
       throws AccessPoemException, ValidationPoemException {
-    _getBoardTable().getAttachmentspathColumn().getType().assertValidCooked(cooked);
+    _getBoardTable().getAttachmentspathColumn().
+      getType().assertValidCooked(cooked);
     writeLock();
     setAttachmentspath_unsafe(cooked);
   }
 
+
+ /**
+  * Retrieves the <code>Attachmentspath</code> value as a <code>Field</code>
+  * from this <code>Board</code> <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateFieldCreator 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @return the String attachmentspath
+  */
   public Field getAttachmentspathField() throws AccessPoemException {
     Column c = _getBoardTable().getAttachmentspathColumn();
     return new Field(c.getRaw(this), c);
   }
 
+
+ /**
+  * Retrieves the <code>Attachmentsurl</code> value, without locking, 
+  * for this <code>Board</code> <code>Persistent</code>.
+  *
+  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @return the String attachmentsurl
+  */
   public String getAttachmentsurl_unsafe() {
     return attachmentsurl;
   }
 
+
+ /**
+  * Sets the <code>Attachmentsurl</code> value directly, without checking, 
+  * for this Board <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @param cooked  the pre-validated value to set
+  */
   public void setAttachmentsurl_unsafe(String cooked) {
     attachmentsurl = cooked;
   }
+
+ /**
+  * Retrieves the Attachmentsurl value, with locking, for this 
+  * <code>Board</code> <code>Persistent</code>.
+  * Field description: 
+  *   A URL to the directory containing attachments for this board 
+  * 
+  * @generator org.melati.poem.prepro.AtomFieldDef#generateBaseMethods 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights 
+  * @return the value of the field <code>Attachmentsurl</code> for this 
+  *         <code>Board</code> <code>Persistent</code>  
+  */
 
   public String getAttachmentsurl()
       throws AccessPoemException {
@@ -538,15 +1680,43 @@ public abstract class BoardBase extends Persistent {
     return getAttachmentsurl_unsafe();
   }
 
+
+ /**
+  * Sets the <code>Attachmentsurl</code> value, with checking, for this 
+  * <code>Board</code> <code>Persistent</code>.
+  * Field description: 
+  *   A URL to the directory containing attachments for this board 
+  * 
+  * @generator org.melati.poem.prepro.AtomFieldDef#generateBaseMethods  
+  * @param cooked  a validated <code>int</code> 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @throws ValidationPoemException 
+  *         if the value is not valid
+  */
   public void setAttachmentsurl(String cooked)
       throws AccessPoemException, ValidationPoemException {
-    _getBoardTable().getAttachmentsurlColumn().getType().assertValidCooked(cooked);
+    _getBoardTable().getAttachmentsurlColumn().
+      getType().assertValidCooked(cooked);
     writeLock();
     setAttachmentsurl_unsafe(cooked);
   }
 
+
+ /**
+  * Retrieves the <code>Attachmentsurl</code> value as a <code>Field</code>
+  * from this <code>Board</code> <code>Persistent</code>.
+  * 
+  * @generator org.melati.poem.prepro.FieldDef#generateFieldCreator 
+  * @throws AccessPoemException 
+  *         if the current <code>AccessToken</code> 
+  *         does not confer write access rights
+  * @return the String attachmentsurl
+  */
   public Field getAttachmentsurlField() throws AccessPoemException {
     Column c = _getBoardTable().getAttachmentsurlColumn();
     return new Field(c.getRaw(this), c);
   }
 }
+
