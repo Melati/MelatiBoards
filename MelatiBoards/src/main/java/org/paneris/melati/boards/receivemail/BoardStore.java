@@ -42,7 +42,7 @@
  *
  * Contact details for copyright holder:
  *
- *     Mylesc Chippendale <mylesc@paneris.org>
+ *     Mylesc Chippendale <mylesc At paneris.org>
  *     http://paneris.org/
  *     29 Stanley Road, Oxford, OX4 1QY, UK
  */
@@ -64,16 +64,24 @@ import org.melati.poem.Database;
  * A wrapper to make a handy interface to the database tables comprising
  * a set of messageboards.
  */
-
 public interface BoardStore {
 
+  /**
+   * Initialise the store.
+   */
   void init (Database database, Log log,
                     final InternetAddress senderAddr,
                     final InternetAddress messAddr) 
                     throws IOException, MessagingException;
 
+  /**
+   * @return the sender
+   */
   org.melati.poem.User getSender();
   
+  /**
+   * @return the troid of the persisted, accepted message
+   */
   Integer messageAccept(final InputStream text) throws Exception;
 }
 

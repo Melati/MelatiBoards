@@ -42,7 +42,7 @@
  *
  * Contact details for copyright holder:
  *
- *     Mylesc Chippendale <mylesc@paneris.org>
+ *     Mylesc Chippendale <mylesc At paneris.org>
  *     http://paneris.org/
  *     29 Stanley Road, Oxford, OX4 1QY, UK
  */
@@ -74,19 +74,31 @@ public class BoardUtils {
     this.logicalDatabase = logicalDatabase;
   }
 
+  /**
+   * @return the login url
+   */
   public String LoginURL(Board board) {
     return boardURL + "/" + logicalDatabase + "/board/" + board.troid() +
              "/Login";
   }
 
+  /**
+   * @return the Types url
+   */
   public String TypesURL() {
     return boardURL + "/" + logicalDatabase + "/Types";
   }
 
+  /**
+   * @return the board search url
+   */
   public String SearchForBoardURL() {
     return boardURL + "/" + logicalDatabase + "/SearchForBoard";
   }
 
+  /**
+   * @return the list boards of type url
+   */
   public String ListBoardsURL(BoardType type) {
     return boardURL + "/" + logicalDatabase + "/boardtype/" + type.troid()+
            "/ListBoards";
@@ -100,113 +112,178 @@ public class BoardUtils {
   }
 */
 
+  /**
+   * @return the url for a board, starting at a message
+   */
   public String BoardURL(Board board, String start) {
     return boardURL + "/" + logicalDatabase + "/board/" + board.troid() +
            "/Board?start="+start;
   }
 
+  /**
+   * @return the search url for a board
+   */
   public String SearchBoardURL(Board board) {
     return boardURL + "/" + logicalDatabase + "/board/" + board.troid() +
            "/SearchBoard";
   }
 
+  /**
+   * @param message
+   * @param start
+   * @return the message url with bookmark
+   */
   public String MessageURL(Message message, String start) {
     return boardURL + "/" + logicalDatabase + "/message/" + message.troid()+
            "/Message?start="+start;
   }
 
+  /**
+   * @return message url without thread
+   */
   public String MessageNoThreadURL(Message message, String start) {
     return boardURL + "/" + logicalDatabase + "/message/" + message.troid()+
            "/MessageNoThread?start="+start;
   }
 
+  /**
+   * @return the new message url
+   */
   public String MessageNewURL(Board board) {
     return boardURL + "/" + logicalDatabase + "/board/" + board.troid() +
            "/MessageNew";
   }
 
+  /**
+   * @return the create message url
+   */
   public String MessageCreateURL(Board board) {
     return boardURL + "/" + logicalDatabase + "/board/" + board.troid() +
            "/MessageCreate";
   }
 
+  /**
+   * @return the subscribe url
+   */
   public String SubscribeURL(Board board) {
     return boardURL + "/" + logicalDatabase + "/board/" + board.troid() +
            "/Subscribe";
   }
 
+  /**
+   * @return the edit subscription url
+   */
   public String SubscriptionEditURL(Subscription sub) {
     return boardURL + "/" + logicalDatabase + "/subscription/" + sub.troid() +
            "/SubscriptionEdit";
   }
 
+  /**
+   * @return the update subscription url
+   */
   public String SubscriptionUpdateURL(Subscription sub) {
     return boardURL + "/" + logicalDatabase + "/subscription/" + sub.troid() +
            "/SubscriptionUpdate";
   }
 
+  /**
+   * @return the unsubscribe url
+   */
   public String UnsubscribeURL(Board board) {
     return boardURL + "/" + logicalDatabase + "/board/" + board.troid() +
            "/Unsubscribe";
   }
 
+  /**
+   * @return the members url
+   */
   public String MembersURL(Board board) {
     return boardURL + "/" + logicalDatabase + "/board/" + board.troid() +
            "/Members";
   }
 
+  /**
+   * @return the edit members url
+   */
   public String MembersEditURL(Board board) {
     return boardURL + "/" + logicalDatabase + "/board/" + board.troid() +
            "/MembersEdit";
   }
 
+  /**
+   * @return the subscribe other people url
+   */
   public String SubscribeOthersURL(Board board) {
     return boardURL + "/" + logicalDatabase + "/board/" + board.troid() +
            "/SubscribeOthers";
   }
 
+  /**
+   * @return the pending messages url
+   */
   public String PendingMessagesURL(Board board) {
     return boardURL + "/" + logicalDatabase + "/board/" + board.troid() +
            "/PendingMessages";
   }
 
+  /**
+   * @return the pending subscriptions url
+   */
   public String PendingSubscriptionsURL(Board board) {
     return boardURL + "/" + logicalDatabase + "/board/" + board.troid() +
            "/PendingSubscriptions";
   }
 
+  /**
+   * @return the approve message url
+   */
   public String ApproveMessagesURL(Board board) {
     return boardURL + "/" + logicalDatabase + "/board/" + board.troid() +
             "/ApproveMessages";
   }
 
+  /**
+   * @return the approve subscriptions url
+   */
   public String ApproveSubscriptionsURL(Board board) {
     return boardURL + "/" + logicalDatabase + "/board/" + board.troid() +
             "/ApproveSubscriptions";
   }
 
+  /**
+   * @return the settings url
+   */
   public String SettingsURL(Board board) {
     return boardURL + "/" + logicalDatabase + "/board/" + board.troid() +
            "/Settings";
   }
 
+  /**
+   * @return the update settings url
+   */
   public String SettingsUpdateURL(Board board) {
     return boardURL + "/" + logicalDatabase + "/board/" + board.troid() +
            "/SettingsUpdate";
   }
 
+  /**
+   * @return the edit settings url
+   */
   public String SettingsEditURL(Board board) {
     return boardURL + "/" + logicalDatabase + "/board/" + board.troid() +
            "/SettingsEdit";
   }
 
+  /**
+   * @return the delete messages url
+   */
   public String DeleteMessagesURL(Board board) {
     return boardURL + "/" + logicalDatabase + "/board/" + board.troid() +
            "/DeleteMessages";
   }
 
   /**
-   * Utility to calculate message indentation
+   * Utility to calculate message indentation.
    * 
    * @param space the number of spaces in a tab
    * @param depth the depth within a tree where the top is zero

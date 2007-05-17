@@ -42,7 +42,7 @@
  *
  * Contact details for copyright holder:
  *
- *     Mylesc Chippendale <mylesc@paneris.org>
+ *     Mylesc Chippendale <mylesc At paneris.org>
  *     http://paneris.org/
  *     29 Stanley Road, Oxford, OX4 1QY, UK
  */
@@ -152,16 +152,25 @@ public class Board extends BoardBase {
         .administerCapability());
   }
 
+  /**
+   * @return whether the user is a manager of this board
+   */
   public boolean isManager(User user) {
     return getBoardsDatabaseTables().getSubscriptionTable().isManager(user,
         this);
   }
 
+  /**
+   * @return whether the user is a member of this board
+   */
   public boolean isMember(User user) {
     return getBoardsDatabaseTables().getSubscriptionTable()
         .isMember(user, this);
   }
 
+  /**
+   * @return whether the user is a banned from this board
+   */
   public boolean isBanned(User user) {
     Subscription subscription = getUserSubscription(user);
     if (subscription != null
@@ -171,6 +180,9 @@ public class Board extends BoardBase {
     return false;
   }
 
+  /**
+   * Ban a user from posting to this board.
+   */
   public void ban(User user) {
     Subscription subscription = getUserSubscription(user);
     subscription.setStatus(getBoardsDatabaseTables().getMembershipStatusTable()
@@ -183,6 +195,9 @@ public class Board extends BoardBase {
 
   private CachedCount managerCount = null;
 
+  /**
+   * @return the number of managers
+   */
   public int getManagerCount() {
     if (managerCount == null)
       managerCount = getBoardsDatabaseTables().getSubscriptionTable()
@@ -192,6 +207,9 @@ public class Board extends BoardBase {
 
   private CachedSelection managersubs = null;
 
+  /**
+   * @return the Subscriptions of the managers
+   */
   public Enumeration getManagersSubscriptions() {
     if (managersubs == null)
       managersubs = getBoardsDatabaseTables().getSubscriptionTable()
@@ -199,6 +217,9 @@ public class Board extends BoardBase {
     return managersubs.objects();
   }
 
+  /**
+   * @return the Managers of this board
+   */
   public Enumeration getManagers() {
     return new MappedEnumeration(getManagersSubscriptions()) {
       public Object mapped(Object subscription) {
@@ -310,8 +331,11 @@ public class Board extends BoardBase {
     }
   }
 
-  // method to allow a board to be created with a different manager than the
-  // creating user
+  /**
+   * Method to allow a board to be created with a different manager than the
+   * creating user.
+   * @param manager the manager of the board
+   */
   public final void makePersistent(User manager) {
     ((BoardTable) getTable()).create(this, manager);
   }
@@ -545,6 +569,9 @@ public class Board extends BoardBase {
     messages = new SoftReference(realMessages);
   }
 
+  /**
+   * @return the messages
+   */
   public Enumeration getMessages() {
     if (messages == null || messages.get() == null)
       computeMessages();
@@ -554,6 +581,9 @@ public class Board extends BoardBase {
 
   private CachedCount messageCount = null;
 
+  /**
+   * @return the number of messages
+   */
   public int getMessageCount() {
     if (messageCount == null)
       messageCount = getBoardsDatabaseTables().getMessageTable()
@@ -741,6 +771,10 @@ public class Board extends BoardBase {
         + "/Message";
   }
 
+  /**
+   * @param templateName short name of template
+   * @return full name of template
+   */
   public String templatePath(String templateName) {
     return getBoardTable().getBoardsEmailTemplates() + File.separator
         + templateName + ".wm";

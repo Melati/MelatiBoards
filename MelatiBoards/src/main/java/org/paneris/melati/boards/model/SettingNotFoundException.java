@@ -42,7 +42,7 @@
  *
  * Contact details for copyright holder:
  *
- *     Mylesc Chippendale <mylesc@paneris.org>
+ *     Mylesc Chippendale <mylesc At paneris.org>
  *     http://paneris.org/
  *     29 Stanley Road, Oxford, OX4 1QY, UK
  */
@@ -58,12 +58,22 @@ public class SettingNotFoundException extends PoemException {
 
   private static final long serialVersionUID = 1L;
 
+  /** 
+   * The key of the setting.
+   */
   public String setting;
 
+  /**
+   * @param setting the setting key which has not been found
+   */
   public SettingNotFoundException(String setting) {
     this.setting = setting;
   }
 
+  /** 
+   * {@inheritDoc}
+   * @see org.melati.poem.PoemException#getMessage()
+   */
   public String getMessage() {
     return
         "The entry " + setting + " was not found in the setting table";

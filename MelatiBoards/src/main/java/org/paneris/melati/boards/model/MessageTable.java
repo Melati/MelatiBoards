@@ -42,7 +42,7 @@
  *
  * Contact details for copyright holder:
  *
- *     Mylesc Chippendale <mylesc@paneris.org>
+ *     Mylesc Chippendale <mylesc At paneris.org>
  *     http://paneris.org/
  *     29 Stanley Road, Oxford, OX4 1QY, UK
  */
@@ -155,7 +155,7 @@ public class MessageTable extends MessageTableBase {
   }
 
  /**
-  * Get messages
+  * SQL to get the messages in this board.
   */
   public String messageInBoardSQL(Board board, boolean approved) {
     return getBoardColumn().eqClause(board.troid()) + " AND " +
@@ -163,24 +163,39 @@ public class MessageTable extends MessageTableBase {
            getDeletedColumn().eqClause(Boolean.FALSE);
   }
 
+  /**
+   * @return a CachedSelection of the roots
+   */
   public CachedSelection cachedBoardRoots(Board board) {
     return cachedSelection(messageInBoardSQL(board, true) + " AND " +
                              getParentColumn().eqClause(null),
                            null);
   }
 
+  /**
+   * @return a CahcedCount of the number of messages in the board
+   */
   public CachedCount cachedMessageCount(Board board) {
     return cachedCount(messageInBoardSQL(board, true));
   }
 
+  /**
+   * @return a CachedSelection of the messages in the board
+   */
   public CachedSelection cachedMessages(Board board) {
     return cachedSelection(messageInBoardSQL(board, false), null);
   }
 
+  /**
+   * @return a CachedCount of the messages in the board
+   */
   public CachedCount cachedPendingMessageCount(Board board) {
     return cachedCount(messageInBoardSQL(board, false));
   }
 
+  /**
+   * @return a CachedSelection of the pendign messages in the board
+   */
   public CachedSelection cachedPendingMessages(Board board) {
     return cachedSelection(messageInBoardSQL(board, false), null);
   }

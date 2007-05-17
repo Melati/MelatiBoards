@@ -42,7 +42,7 @@
  *
  * Contact details for copyright holder:
  *
- *     Vasily Pozhidaev  <vasilyp@paneris.org>
+ *     Vasily Pozhidaev  <vasilyp At paneris.org>
  * 
  */
 package org.paneris.melati.boards.receivemail;
@@ -61,7 +61,9 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 class ChannelPair {
+  /** The server socket. */
   public SocketChannel server = null;
+  /** the client socket. */
   public SocketChannel client = null;
 }
 /**
@@ -82,6 +84,9 @@ public class Redirector extends Thread {
   //actual server host
   private String host = "localhost";
 
+  /**
+   * Constructor.
+   */
   public Redirector(int port, int actualPort, String host) {
     this.port = port;
     this.actualPort = actualPort;
@@ -93,7 +98,10 @@ public class Redirector extends Thread {
     this.server.put(serverSC, clientSC);
   }
 
-  //todo make more elegant :)
+  
+  /**
+   * @todo make more elegant :)
+   */
   private SocketChannel findPair(SocketChannel other) {
     SocketChannel channel = null;
     if ((channel = (SocketChannel)client.get(other)) != null) {
@@ -116,6 +124,10 @@ public class Redirector extends Thread {
     }
   }
 
+  /** 
+   * {@inheritDoc}
+   * @see java.lang.Thread#run()
+   */
   public void run() {
     try {
       Selector selector = Selector.open();
@@ -181,6 +193,9 @@ public class Redirector extends Thread {
     }
   }
 
+  /**
+   * Test harness.
+   */
   public static void main(String[] args) {
     int port = 119;
     int actualPort = 8119;

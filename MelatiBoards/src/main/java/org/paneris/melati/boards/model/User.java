@@ -42,7 +42,7 @@
  *
  * Contact details for copyright holder:
  *
- *     Mylesc Chippendale <mylesc@paneris.org>
+ *     Mylesc Chippendale <mylesc At paneris.org>
  *     http://paneris.org/
  *     29 Stanley Road, Oxford, OX4 1QY, UK
  */
@@ -103,8 +103,11 @@ public class User extends UserBase {
     if (getName() == null || getName().equals("")) setName(generateName());
   }
 
-   public String generateName() {
-     // by default - name = login
+  /**
+   * By default name = login. 
+   * @return a generated name
+   */
+  public String generateName() {
      return getLogin();
    }
 

@@ -42,7 +42,7 @@
  *
  * Contact details for copyright holder:
  *
- *     Mylesc Chippendale <mylesc@paneris.org>
+ *     Mylesc Chippendale <mylesc At paneris.org>
  *     http://paneris.org/
  *     29 Stanley Road, Oxford, OX4 1QY, UK
  */
@@ -126,14 +126,23 @@ public class Message extends MessageBase implements Treeable {
     localeFormatter.setTimeZone(TimeZone.getTimeZone("Europe/London"));
   }
 
+  /**
+   * @return the localised date
+   */
   public String getLondonDate() {
     return localeFormatter.format(getDate_unsafe());
   }
 
+  /**
+   * Distribute the message
+   */
   public void distribute() {
     (new DistributeThread(this)).start();
   }
 
+  /**
+   * Approve the message and add it to thread.
+   */
   public void approve() {
     setApproved(Boolean.TRUE);
     if (getParent() == null)
@@ -143,11 +152,18 @@ public class Message extends MessageBase implements Treeable {
   }
 
   String[] lines = null;
+  /**
+   * @return the lines in an Array
+   */
   public String[] getLines() {
     if (lines == null)
       lines = StringUtils.split(getBody_unsafe(), '\n');
     return lines; 
   }
+  /**
+   * @param indent the characters to indent with
+   * @return the indented body
+   */
   public String IndentBody(String indent) {
     StringBuffer ret = new StringBuffer(
                     getBody_unsafe().length() +
@@ -159,10 +175,16 @@ public class Message extends MessageBase implements Treeable {
     return ret.toString();
   }
 
+  /**
+   * @return the indented body
+   */
   public String IndentBody() {
     return IndentBody(">");
   }
 
+  /**
+   * @return the attachments
+   */
   public Enumeration getAttachments() {
     return getBoardsDatabaseTables().getAttachmentTable().getColumn("message").
              referencesTo(this);
@@ -170,6 +192,9 @@ public class Message extends MessageBase implements Treeable {
 
   CachedCount attachments = null;
 
+  /**
+   * @return the number of attachments
+   */
   public int getAttachmentCount() {
 
     if (attachments == null)
@@ -179,12 +204,16 @@ public class Message extends MessageBase implements Treeable {
     return attachments.count();
   }
 
+  /**
+   * @return whether there are attachments
+   */
   public boolean hasAttachments() {
     return getAttachmentCount() > 0;
   }
 
-  /**
-   * Tree stuff
+  /** 
+   * {@inheritDoc}
+   * @see org.melati.util.Treeable#getChildren()
    */
   public Treeable[] getChildren() {
     Enumeration kidsEnum = getTable().
@@ -201,6 +230,9 @@ public class Message extends MessageBase implements Treeable {
     return kidsArray;
   }
 
+  /**
+   * @return the root of the Thread tree
+   */
   public Message getThreadRoot() {
     Message current = this;
     while (current.getParent() != null)
@@ -208,11 +240,19 @@ public class Message extends MessageBase implements Treeable {
     return current;
   }
 
+  /**
+   * @return the thread as a tree
+   */
   public ChildrenDrivenMutableTree getThread() {
     return getBoard().threadWithRoot(getThreadRoot());
   }
 
-  // if we delete a message, recompute the messages for the board
+  
+  /**
+   * If we delete a message, recompute the messages for the board. 
+   * {@inheritDoc}
+   * @see org.paneris.melati.boards.model.generated.MessageBase#setDeleted(java.lang.Boolean)
+   */
   public void setDeleted(Boolean cooked)
       throws AccessPoemException, ValidationPoemException {
     if (getDeleted() == Boolean.FALSE && cooked == Boolean.TRUE) {
@@ -268,7 +308,7 @@ public class Message extends MessageBase implements Treeable {
 
   /**
    * A user can create a message if they have post permissions for the
-   * relevant board
+   * relevant board.
    */
   public void assertCanCreate(AccessToken token)
       throws AccessPoemException {
@@ -285,6 +325,10 @@ public class Message extends MessageBase implements Treeable {
     }
   }
 
+  /** 
+   * {@inheritDoc}
+   * @see org.paneris.melati.boards.model.generated.MessageBase#setParentTroid(java.lang.Integer)
+   */
   public void setParentTroid(Integer raw)
       throws AccessPoemException {
     getMessageTable().getParentColumn().getType().assertValidRaw(raw);
@@ -317,11 +361,16 @@ public class Message extends MessageBase implements Treeable {
 
 
 /**
- * A daemon to redistribute emails to the messageboard's distribution list
+ * A daemon to redistribute emails to the messageboard's distribution list.
  */
 
 class DistributeThread extends Thread {
   private Message message;
+  
+  /**
+   * Constructor.
+   * @param message message to distribute
+   */
   public DistributeThread(Message message) {
     this.message = message;
   }

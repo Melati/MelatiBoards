@@ -42,7 +42,7 @@
  *
  * Contact details for copyright holder:
  *
- *     Mylesc Chippendale <mylesc@paneris.org>
+ *     Mylesc Chippendale <mylesc At paneris.org>
  *     http://paneris.org/
  *     29 Stanley Road, Oxford, OX4 1QY, UK
  */
@@ -138,11 +138,15 @@ public class BoardStoreImpl implements BoardStore {
   }
 
  /**
-  * Tidy up
+  * Tidy up.
   */
   public void close() {
   }
 
+  /** 
+   * {@inheritDoc}
+   * @see java.lang.Object#finalize()
+   */
   protected void finalize() {
     close();
   }
@@ -151,7 +155,9 @@ public class BoardStoreImpl implements BoardStore {
   * Return type of {@link BoardStoreImpl#recipientOfAddress(InternetAddress)}.
   */
   public class Recipient {
+    /** The board. */
     public Board board;
+    /** The parent message ID. */
     public Integer parentID;
   }
 

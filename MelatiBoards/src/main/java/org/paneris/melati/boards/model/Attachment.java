@@ -42,7 +42,7 @@
  *
  * Contact details for copyright holder:
  *
- *     Mylesc Chippendale <mylesc@paneris.org>
+ *     Mylesc Chippendale <mylesc At paneris.org>
  *     http://paneris.org/
  *     29 Stanley Road, Oxford, OX4 1QY, UK
  */
@@ -64,9 +64,12 @@ import org.paneris.melati.boards.model.generated.AttachmentBase;
  * An Attachment. 
  */
 public class Attachment extends AttachmentBase {
+  /**
+   * Constructor.
+   */
   public Attachment() {}
 
-  /* (non-Javadoc)
+  /**
    * @see org.paneris.melati.boards.model.generated.AttachmentBase#setFilename_unsafe(java.lang.String)
    */
   public void setFilename_unsafe(String cooked) {
@@ -81,7 +84,7 @@ public class Attachment extends AttachmentBase {
                          File.separatorChar + UTF8URLEncoder.encode(cooked));
   }
 
-  /* (non-Javadoc)
+  /**
    * @see org.paneris.melati.boards.model.generated.AttachmentBase#setFilename(java.lang.String)
    */
   public void setFilename(String cooked) {
