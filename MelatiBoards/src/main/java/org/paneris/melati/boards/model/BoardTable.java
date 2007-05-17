@@ -42,7 +42,7 @@
  *
  * Contact details for copyright holder:
  *
- *     Mylesc Chippendale <mylesc@paneris.org>
+ *     Mylesc Chippendale <mylesc At paneris.org>
  *     http://paneris.org/
  *     29 Stanley Road, Oxford, OX4 1QY, UK
  */
@@ -152,34 +152,59 @@ public class BoardTable extends BoardTableBase {
    * Settings
    **************/
 
+  /**
+   * @return the email domain for this board
+   */
   public String getBoardsEmailDomain() throws SettingNotFoundException {
     return getSettingValue("BoardsEmailDomain");
   }
 
+  /**
+   * @return the base url for the baords
+   */
   public String getBoardsSystemURL() throws SettingNotFoundException {
     return getSettingValue("BoardsSystemURL");
   }
 
+  /**
+   * @return the templates setting 
+   */
   public String getBoardsEmailTemplates() throws SettingNotFoundException {
     return getSettingValue("BoardsEmailTemplates");
   }
 
+  /**
+   * @return the attachments path setting
+   */
   public String getBoardsAttachmentsPath() throws SettingNotFoundException {
     return getSettingValue("BoardsAttachmentsPath");
   }
 
+  /**
+   * @return the attachemnts url path
+   */
   public String getBoardsAttachmentsURL() throws SettingNotFoundException {
     return getSettingValue("BoardsAttachmentsURL");
   }
 
+  /**
+   * @return the stylesheet url
+   */
   public String getBoardsStylesheetURL() throws SettingNotFoundException {
     return getSettingValue("BoardsStylesheetURL");
   }
 
+  /**
+   * @return the logical database 
+   */
   public String getLogicalDatabase() throws SettingNotFoundException {
     return getSettingValue("LogicalDatabase");
   }
 
+  /**
+   * @param settingName the name of a setting to retrieve
+   * @return the string value of a setting
+   */
   public String getSettingValue(String settingName) throws SettingNotFoundException {
     Setting setting =
       (Setting)getDatabase().getSettingTable().getNameColumn().
@@ -190,10 +215,20 @@ public class BoardTable extends BoardTableBase {
   }
 
 
+  /**
+   * Create a board with a null manager. 
+   * {@inheritDoc}
+   * @see org.melati.poem.Table#create(org.melati.poem.Persistent)
+   */
   public void create(Persistent persistent) {
     create(persistent, null);
   }
 
+  /**
+   * Create a board.
+   * @param persistent the floating board persistent
+   * @param manager the board manager user
+   */
   public void create(Persistent persistent, User manager)
       throws AccessPoemException, ValidationPoemException,
              InitialisationPoemException {

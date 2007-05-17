@@ -42,7 +42,7 @@
  *
  * Contact details for copyright holder:
  *
- *     Vasily Pozhidaev  <vasilyp@paneris.org>
+ *     Vasily Pozhidaev  <vasilyp At paneris.org>
  */
 package org.paneris.melati.boards.receivemail.nntp;
 
@@ -95,6 +95,9 @@ public class NNTPStore {
   private NNTPStore() {
   }
   
+  /**
+   * Constructor.
+   */
   public NNTPStore(String database, String prefix, String nntpIdentifier)
     throws Exception {
       db = (BoardsDatabaseTables)LogicalDatabase.getDatabase(database);

@@ -42,7 +42,7 @@
  *
  * Contact details for copyright holder:
  *
- *     Mylesc Chippendale <mylesc@paneris.org>
+ *     Mylesc Chippendale <mylesc At paneris.org>
  *     http://paneris.org/
  *     29 Stanley Road, Oxford, OX4 1QY, UK
  */
@@ -59,12 +59,21 @@ public class BoardsInitialisationException extends PoemException {
 
   private static final long serialVersionUID = 1L;
 
+  /** The message. */
   public String message;
 
+  /**
+   * Constructor.
+   * @param message the message
+   */
   public BoardsInitialisationException(String message) {
     this.message = message;
   }
 
+  /** 
+   * {@inheritDoc}
+   * @see org.melati.poem.PoemException#getMessage()
+   */
   public String getMessage() {
     return
         "Something went wrong trying to start a boards database: " + message;

@@ -156,6 +156,9 @@ public class SubscriptionTable extends SubscriptionTableBase {
     }
   }
 
+  /**
+   * @return the subscription for a user to a board
+   */
   public Subscription getUserSubscription(User user, Board board) {
     Enumeration e = selection(
                       getUserColumn().eqClause(user.troid()) + " AND " +

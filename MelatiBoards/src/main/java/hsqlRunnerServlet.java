@@ -42,7 +42,7 @@
  *
  * Contact details for copyright holder:
  *
- *     Vasily Pozhidaev  <vasilyp@paneris.org>
+ *     Vasily Pozhidaev  <vasilyp At paneris.org>
  */
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -54,7 +54,10 @@ import javax.servlet.http.HttpServlet;
 class RunHSQL implements Runnable {
   final Thread myThread;
 
-   public RunHSQL() {
+  /**
+   * Constructor. 
+   */
+  public RunHSQL() {
      myThread = Thread.currentThread();
    }
   /**

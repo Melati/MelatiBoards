@@ -42,7 +42,7 @@
  *
  * Contact details for copyright holder:
  *
- *     Mylesc Chippendale <mylesc@paneris.org>
+ *     Mylesc Chippendale <mylesc At paneris.org>
  *     http://paneris.org/
  *     29 Stanley Road, Oxford, OX4 1QY, UK
  */
@@ -59,6 +59,9 @@ class MessageAndParentOnDifferentBoardsException
 
   private static final long serialVersionUID = 1L;
 
+  /**
+   * Constructor. 
+   */
   public MessageAndParentOnDifferentBoardsException(String message) {
     super(message, null);
   }

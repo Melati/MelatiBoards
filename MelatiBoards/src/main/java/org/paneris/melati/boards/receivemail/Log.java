@@ -42,7 +42,7 @@
  *
  * Contact details for copyright holder:
  *
- *     Mylesc Chippendale <mylesc@paneris.org>
+ *     Mylesc Chippendale <mylesc At paneris.org>
  *     http://paneris.org/
  *     29 Stanley Road, Oxford, OX4 1QY, UK
  */
@@ -67,16 +67,27 @@ public class Log {
       DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT);
     private String module = null;
 
+    /**
+     * Constructor.
+     * @param module name 
+     */
     public Log(String module) {
       this.module = module;
     }
 
+    /**
+     * @param target to log to
+     */
     public void setTarget(PrintWriter target) {
       Log.target = target;
       target.println("*** BEGIN: " + dateFormat.format(new Date())
                      + " : " + module + " ***");
     }
 
+    /**
+     * Set log target.
+     * @param path log file path
+     */
     public void setTarget(String path) {
       PrintWriter out;
       try {
@@ -89,6 +100,10 @@ public class Log {
       out.flush();
     }
 
+    /**
+     * Log message to output.
+     * @param message to output
+     */
     public void write(String message) {
       try {
         target.println(dateFormat.format(new Date())
@@ -103,20 +118,32 @@ public class Log {
       }
     }
 
+    /**
+     * @param e Exception to log
+     */
     public void exception(Exception e) {
       write("EXCEPTION:");
       e.printStackTrace(target);
       target.flush();
     }
 
+    /**
+     * @param s debug string to log
+     */
     public void debug(String s) {
       write("DEBUG: " + s);
     }
 
+    /**
+     * @param s error message to log
+     */
     public void error(String s) {
       write("ERROR: " + s);
     }
 
+    /**
+     * @param s warning to log
+     */
     public void warning(String s) {
       write("WARNING: " + s);
     }
