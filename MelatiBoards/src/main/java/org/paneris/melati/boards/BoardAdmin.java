@@ -68,7 +68,7 @@ import org.melati.poem.PoemException;
 import org.melati.poem.PoemTask;
 import org.melati.poem.PoemThread;
 import org.melati.poem.ValidationPoemException;
-import org.melati.poem.util.DumbPageEnumeration;
+import org.melati.poem.util.DumbPagedEnumeration;
 import org.melati.poem.util.EnumUtils;
 import org.melati.poem.util.MappedEnumeration;
 import org.melati.servlet.Form;
@@ -231,7 +231,7 @@ public class BoardAdmin extends TemplateServlet {
     // The start parameter is set in the main handler function
     int s = new Integer((String)context.get("start")).intValue();
 
-    DumbPageEnumeration messages = new DumbPageEnumeration (
+    DumbPagedEnumeration messages = new DumbPagedEnumeration (
         ((Board)melati.getObject()).getMessages(),
         s, HITS_PER_PAGE, MAX_HITS);
     context.put("messages", messages);
