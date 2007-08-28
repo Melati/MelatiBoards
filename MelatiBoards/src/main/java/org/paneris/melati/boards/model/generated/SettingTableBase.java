@@ -4,6 +4,7 @@ package org.paneris.melati.boards.model.generated;
 
 import org.melati.poem.Database;
 import org.melati.poem.DefinitionSource;
+import org.melati.poem.JdbcPersistent;
 import org.melati.poem.Persistent;
 import org.melati.poem.PoemException;
 import org.melati.poem.SettingTable;
@@ -35,20 +36,6 @@ public class SettingTableBase extends SettingTable {
       Database database, String name,
       DefinitionSource definitionSource) throws PoemException {
     super(database, name, definitionSource);
-  }
-
-
- /**
-  * Constructor.
-  *
-  * @generator org.melati.poem.prepro.TableDef#generateTableBaseJava 
-  * @param database          the POEM database we are using
-  * @param name              the name of this <code>Table</code>
-  * @throws PoemException    if anything goes wrong
-  */
-  public SettingTableBase(
-      Database database, String name) throws PoemException {
-    this(database, name, DefinitionSource.dsd);
   }
 
 
@@ -90,7 +77,7 @@ public class SettingTableBase extends SettingTable {
     return (org.melati.poem.Setting)getObject(troid);
   }
 
-  protected Persistent _newPersistent() {
+  protected JdbcPersistent _newPersistent() {
     return new Setting();
   }
   protected int defaultDisplayOrder() {

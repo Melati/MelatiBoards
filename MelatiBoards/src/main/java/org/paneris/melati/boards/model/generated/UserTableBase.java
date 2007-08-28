@@ -8,6 +8,7 @@ import org.melati.poem.Database;
 import org.melati.poem.DefinitionSource;
 import org.melati.poem.DisplayLevel;
 import org.melati.poem.Field;
+import org.melati.poem.JdbcPersistent;
 import org.melati.poem.Persistent;
 import org.melati.poem.PoemException;
 import org.melati.poem.Searchability;
@@ -43,20 +44,6 @@ public class UserTableBase extends UserTable {
       Database database, String name,
       DefinitionSource definitionSource) throws PoemException {
     super(database, name, definitionSource);
-  }
-
-
- /**
-  * Constructor.
-  *
-  * @generator org.melati.poem.prepro.TableDef#generateTableBaseJava 
-  * @param database          the POEM database we are using
-  * @param name              the name of this <code>Table</code>
-  * @throws PoemException    if anything goes wrong
-  */
-  public UserTableBase(
-      Database database, String name) throws PoemException {
-    this(database, name, DefinitionSource.dsd);
   }
 
 
@@ -168,7 +155,7 @@ public class UserTableBase extends UserTable {
     return (org.melati.poem.User)getObject(troid);
   }
 
-  protected Persistent _newPersistent() {
+  protected JdbcPersistent _newPersistent() {
     return new User();
   }
   protected String defaultDescription() {

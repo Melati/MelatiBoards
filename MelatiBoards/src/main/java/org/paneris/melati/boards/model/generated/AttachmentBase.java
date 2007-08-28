@@ -6,8 +6,8 @@ package org.paneris.melati.boards.model.generated;
 import org.melati.poem.AccessPoemException;
 import org.melati.poem.Column;
 import org.melati.poem.Field;
+import org.melati.poem.JdbcPersistent;
 import org.melati.poem.NoSuchRowPoemException;
-import org.melati.poem.Persistent;
 import org.melati.poem.ValidationPoemException;
 import org.paneris.melati.boards.model.AttachmentTable;
 import org.paneris.melati.boards.model.AttachmentType;
@@ -19,15 +19,15 @@ import org.paneris.melati.boards.model.Message;
  * Melati POEM generated abstract base class for a <code>Persistent</code> 
  * <code>Attachment</code> Object.
  *
- * @generator org.melati.poem.prepro.TableDef#generateBaseJava 
+ * @generator org.melati.poem.prepro.TableDef#generatePersistentBaseJava 
  */
-public abstract class AttachmentBase extends Persistent {
+public abstract class AttachmentBase extends JdbcPersistent {
 
 
  /**
   * Retrieves the Database object.
   * 
-  * @generator org.melati.poem.prepro.TableDef#generateBaseJava 
+  * @generator org.melati.poem.prepro.TableDef#generatePersistentBaseJava 
   * @return the database
   */
   public BoardsDatabaseTables getBoardsDatabaseTables() {
@@ -39,7 +39,7 @@ public abstract class AttachmentBase extends Persistent {
   * Retrieves the  <code>AttachmentTable</code> table 
   * which this <code>Persistent</code> is from.
   * 
-  * @generator org.melati.poem.prepro.TableDef#generateBaseJava 
+  * @generator org.melati.poem.prepro.TableDef#generatePersistentBaseJava 
   * @return the AttachmentTable
   */
   public AttachmentTable getAttachmentTable() {

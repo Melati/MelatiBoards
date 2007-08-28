@@ -2,14 +2,12 @@
   <parent>
     <artifactId>MelatiBoards-parent</artifactId>
     <groupId>org.paneris</groupId>
-    <version>1.2.3</version>
+    <version>1.2.4</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
-  <groupId>org.paneris</groupId>
   <artifactId>MelatiBoards-webapp</artifactId>
   <packaging>war</packaging>
   <name>MelatiBoards WebApp</name>
-  <version>1.0-SNAPSHOT</version>
   <url>http://maven.apache.org</url>
   <build>
     <finalName>MelatiBoards-webapp</finalName>
@@ -18,7 +16,7 @@
     <dependency>
       <groupId>org.paneris</groupId>
       <artifactId>MelatiBoards</artifactId>
-      <version>1.2.3</version>
+      <version>${project.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
