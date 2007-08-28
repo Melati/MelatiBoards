@@ -4,7 +4,7 @@
   <groupId>org.paneris</groupId>
   <artifactId>MelatiBoards-parent</artifactId>
   <name>MelatiBoards</name>
-  <version>1.2.3</version>
+  <version>1.2.4</version>
   <packaging>pom</packaging>
   <modules>
     <module>MelatiBoards</module>
@@ -31,7 +31,7 @@ A message board system using a Melati SQL database as the message store.
     <developer>
       <id>mylesc</id>
       <name>Myles Chippendale</name>
-      <email>mylesc@paneris.org</email>
+      <email>mylesc At paneris.org</email>
       <organization>MJC Solutions</organization>
       <roles>
         <role>Original Author</role>
@@ -40,7 +40,7 @@ A message board system using a Melati SQL database as the message store.
     <developer>
       <id>timp</id>
       <name>Tim Pizey</name>
-      <email>timp@paneris.org</email>
+      <email>timp At paneris.org</email>
       <organization>Context Computing</organization>
       <roles>
         <role>Java Developer</role>
@@ -51,7 +51,7 @@ A message board system using a Melati SQL database as the message store.
     <developer>
       <id>timj</id>
       <name>Tim Joyce</name>
-      <email>timj@paneris.org</email>
+      <email>timj At paneris.org</email>
       <roles>
         <role>Java Developer</role>
       </roles>
@@ -59,7 +59,7 @@ A message board system using a Melati SQL database as the message store.
     <developer>
       <id>vasilyp</id>
       <name>Vasily Pozhidaev</name>
-      <email>vasilyp@paneris.org</email>
+      <email>vasilyp At paneris.org</email>
       <roles>
         <role>Java Developer</role>
       </roles>
@@ -67,7 +67,7 @@ A message board system using a Melati SQL database as the message store.
     <developer>
       <id>karlz</id>
       <name>Karl Zilles</name>
-      <email>karlz@paneris.org</email>
+      <email>karlz At paneris.org</email>
       <roles>
         <role>Java Developer</role>
       </roles>
@@ -84,8 +84,8 @@ A message board system using a Melati SQL database as the message store.
 
 
   <scm>
-    <connection>scm:cvs:pserver:anonymous@melati.org:/usr/cvsroot:MelatiBoards</connection>
-    <developerConnection>scm:pserver:anonymous@melati.org:/usr/cvsroot:MelatiBoards</developerConnection>
+    <connection>scm:cvs:pserver:anonymous@paneris.net:/usr/cvsroot:MelatiBoards</connection>
+    <developerConnection>scm:pserver:anonymous@paneris.net:/usr/cvsroot:MelatiBoards</developerConnection>
     <url>http://paneris.net/cgi-bin/cvsweb.cgi/MelatiBoards/</url>
   </scm>
   <organization>

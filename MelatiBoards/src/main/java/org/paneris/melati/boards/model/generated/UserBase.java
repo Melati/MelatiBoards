@@ -16,7 +16,7 @@ import org.paneris.melati.boards.model.UserTable;
  * Melati POEM generated abstract base class for a <code>Persistent</code> 
  * <code>User</code> Object.
  *
- * @generator org.melati.poem.prepro.TableDef#generateBaseJava 
+ * @generator org.melati.poem.prepro.TableDef#generatePersistentBaseJava 
  */
 public abstract class UserBase extends User {
 
@@ -24,7 +24,7 @@ public abstract class UserBase extends User {
  /**
   * Retrieves the Database object.
   * 
-  * @generator org.melati.poem.prepro.TableDef#generateBaseJava 
+  * @generator org.melati.poem.prepro.TableDef#generatePersistentBaseJava 
   * @return the database
   */
   public BoardsDatabaseTables getBoardsDatabaseTables() {
@@ -36,7 +36,7 @@ public abstract class UserBase extends User {
   * Retrieves the  <code>UserTable</code> table 
   * which this <code>Persistent</code> is from.
   * 
-  * @generator org.melati.poem.prepro.TableDef#generateBaseJava 
+  * @generator org.melati.poem.prepro.TableDef#generatePersistentBaseJava 
   * @return the org.melati.poem.UserTable
   */
   public org.melati.poem.UserTable getUserTable() {

@@ -6,8 +6,8 @@ package org.paneris.melati.boards.model.generated;
 import org.melati.poem.AccessPoemException;
 import org.melati.poem.Column;
 import org.melati.poem.Field;
+import org.melati.poem.JdbcPersistent;
 import org.melati.poem.NoSuchRowPoemException;
-import org.melati.poem.Persistent;
 import org.melati.poem.ValidationPoemException;
 import org.paneris.melati.boards.model.BoardTable;
 import org.paneris.melati.boards.model.BoardType;
@@ -18,15 +18,15 @@ import org.paneris.melati.boards.model.BoardsDatabaseTables;
  * Melati POEM generated abstract base class for a <code>Persistent</code> 
  * <code>Board</code> Object.
  *
- * @generator org.melati.poem.prepro.TableDef#generateBaseJava 
+ * @generator org.melati.poem.prepro.TableDef#generatePersistentBaseJava 
  */
-public abstract class BoardBase extends Persistent {
+public abstract class BoardBase extends JdbcPersistent {
 
 
  /**
   * Retrieves the Database object.
   * 
-  * @generator org.melati.poem.prepro.TableDef#generateBaseJava 
+  * @generator org.melati.poem.prepro.TableDef#generatePersistentBaseJava 
   * @return the database
   */
   public BoardsDatabaseTables getBoardsDatabaseTables() {
@@ -38,7 +38,7 @@ public abstract class BoardBase extends Persistent {
   * Retrieves the  <code>BoardTable</code> table 
   * which this <code>Persistent</code> is from.
   * 
-  * @generator org.melati.poem.prepro.TableDef#generateBaseJava 
+  * @generator org.melati.poem.prepro.TableDef#generatePersistentBaseJava 
   * @return the BoardTable
   */
   public BoardTable getBoardTable() {

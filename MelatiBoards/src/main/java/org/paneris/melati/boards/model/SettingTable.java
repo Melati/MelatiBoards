@@ -51,7 +51,6 @@
 package org.paneris.melati.boards.model;
 
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
 import org.melati.poem.Database;
 import org.melati.poem.DefinitionSource;
@@ -153,7 +152,7 @@ public class SettingTable extends SettingTableBase {
   * 
   */
   public synchronized void unifyWithDB(ResultSet colDescs)
-      throws SQLException, PoemException {
+      throws PoemException {
 
     super.unifyWithDB(colDescs);
 
