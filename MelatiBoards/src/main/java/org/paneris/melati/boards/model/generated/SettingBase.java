@@ -5,7 +5,6 @@ package org.paneris.melati.boards.model.generated;
 
 import org.melati.poem.Setting;
 import org.paneris.melati.boards.model.BoardsDatabaseTables;
-import org.paneris.melati.boards.model.SettingTable;
 
 
 /**

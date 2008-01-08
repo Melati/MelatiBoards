@@ -170,7 +170,7 @@ public class BoardsDatabaseBase extends PoemDatabase {
   * @return the org.melati.poem.UserTable from this database
   */
   public org.melati.poem.UserTable getUserTable() {
-    return (org.melati.poem.UserTable)tab_user;
+    return tab_user;
   }
 
 
@@ -236,7 +236,7 @@ public class BoardsDatabaseBase extends PoemDatabase {
   * @return the org.melati.poem.SettingTable from this database
   */
   public org.melati.poem.SettingTable getSettingTable() {
-    return (org.melati.poem.SettingTable)tab_setting;
+    return tab_setting;
   }
 }
 
