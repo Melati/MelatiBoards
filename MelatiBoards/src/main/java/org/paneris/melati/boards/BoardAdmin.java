@@ -792,7 +792,6 @@ class DistributeThread extends Thread {
       Email.sendToList(board.getDatabase().getSettingTable().get(Email.SMTPSERVER), 
                        "admin."+board.getEmailAddress(),       // From
                        emailArray,           // To
-                       user.getEmail(),     // Apparently to
                        "",                   // reply to
                        "["+board.getName()+"]: Admin message",
                        "The following message has been sent to " +
