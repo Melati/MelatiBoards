@@ -53,8 +53,6 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.util.Properties;
 
-import javax.servlet.ServletException;
-
 /**
  * An SMTP Server.
  */
@@ -94,7 +92,7 @@ public class SMTPServer implements Runnable {
                     int port,
                     Properties databaseNameOfDomain,
                     int bufSize,
-                    Log log) throws ServletException {
+                    Log log) {
       myThread = Thread.currentThread();
 
       this.launcher = launcher;
