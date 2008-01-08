@@ -286,8 +286,9 @@ public class NNTPSession extends Thread {
     };
     PoemDatabase db = (PoemDatabase)store.getDb();
     if (db == null)
-      System.err.println("DB not initialised");
-    db.inSession(authInfo.getUser(), task);
+      throw new RuntimeException("DB not initialised");
+    else
+      db.inSession(authInfo.getUser(), task);
     return task.result;
   }
 
@@ -439,9 +440,9 @@ public class NNTPSession extends Thread {
     try {
       NNTPMessage nntpMessage = store.getArticle(nntpMessageId);
       Message message = nntpMessage.getMessage();
-      int attachmentCount = message.getAttachmentCount();
-      String boundary = "------------070200030503000409090500";
       if (message != null) {
+        int attachmentCount = message.getAttachmentCount();
+        String boundary = "------------070200030503000409090500";
         writer.println("220 " + id + " " + store.getArticleId(nntpMessageId)
             + " article retrieved and follows");
         writer.flush();
