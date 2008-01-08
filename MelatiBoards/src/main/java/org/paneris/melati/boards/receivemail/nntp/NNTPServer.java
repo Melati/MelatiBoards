@@ -52,8 +52,6 @@ import java.net.ServerSocket;
 import java.net.SocketException;
 import java.util.Properties;
 
-import javax.servlet.ServletException;
-
 import org.paneris.melati.boards.receivemail.Log;
 
 /**
@@ -83,11 +81,9 @@ public class NNTPServer implements Runnable {
    * @param config      A properties file containing configuration
    * @param bufSize     The Buffer size to use (not used yet)
    * @param log         A Log object
-   * @throws ServletException if anything goes wrong
    */
   public NNTPServer(String identifier, int port, Properties config,
-                    int bufSize, Log log)
-      throws ServletException {
+                    int bufSize, Log log) {
     myThread = Thread.currentThread();
     this.identifier = identifier;
     this.port = port;
