@@ -572,7 +572,7 @@ public class NNTPStore {
           //todo: should this be done here?
           BoardAdmin.emailNotification(
             m.getBoard(),
-            (org.paneris.melati.boards.model.User)sender,
+            sender,
             "MessageReceived");
         }
         //BUG: M$ Outlook doesn't send used encoding in headers
