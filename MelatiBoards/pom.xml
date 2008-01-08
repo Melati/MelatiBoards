@@ -27,6 +27,12 @@
     <sourceDirectory>src/main/java</sourceDirectory>
     <resources>
       <resource>
+        <directory>src/main/java</directory>
+        <includes>
+          <include>**/*.dsd</include>
+        </includes>
+      </resource>
+      <resource>
         <directory>src/main/java/org/paneris</directory>
         <includes>
           <include>**/*.wm</include>
