@@ -144,7 +144,7 @@ public class Redirector extends Thread {
           while (i.hasNext()) {
             SelectionKey sk = (SelectionKey)i.next();
             i.remove();
-            Channel nextReady = (Channel)sk.channel();
+            Channel nextReady = sk.channel();
             if (sk.isAcceptable()) {
               SocketChannel clientChannel =
                 ((ServerSocketChannel)nextReady).accept();

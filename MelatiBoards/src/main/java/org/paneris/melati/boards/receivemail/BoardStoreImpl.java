@@ -113,7 +113,7 @@ public class BoardStoreImpl implements BoardStore {
     recipient = recipientOfAddress(messAddr);
     sender = senderOfAddress(recipient, senderAddr);
 
-    if (!recipient.board.canPost((org.paneris.melati.boards.model.User)sender)) {
+    if (!recipient.board.canPost(sender)) {
       throw new MessagingException(
             "user `" + sender + "' " +
             "not authorised to post on this message board");
@@ -440,7 +440,7 @@ public class BoardStoreImpl implements BoardStore {
     }
     else {
       BoardAdmin.emailNotification(m.getBoard(),
-                                   (org.paneris.melati.boards.model.User)sender,
+                                   sender,
                                    "MessageReceived");
     }
 
