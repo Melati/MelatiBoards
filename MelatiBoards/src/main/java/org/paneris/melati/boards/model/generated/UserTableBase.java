@@ -57,7 +57,7 @@ public class UserTableBase extends UserTable {
     return (BoardsDatabaseTables)getDatabase();
   }
 
-  protected void init() throws PoemException {
+  public void init() throws PoemException {
     super.init();
     defineColumn(col_email =
         new Column(this, "email",

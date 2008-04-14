@@ -3,7 +3,7 @@
   <parent>
     <artifactId>MelatiBoards-parent</artifactId>
     <groupId>org.paneris</groupId>
-    <version>1.2.4</version>
+    <version>1.2.5</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <artifactId>MelatiBoards</artifactId>
@@ -14,7 +14,7 @@
     <dependency>
       <groupId>org.melati</groupId>
       <artifactId>melati</artifactId>
-      <version>0.7.8-RC1-SNAPSHOT</version>
+      <version>0.7.8-RC2-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
@@ -81,7 +81,7 @@
         <dependency>
          <groupId>org.melati</groupId>
          <artifactId>poem</artifactId>
-         <version>0.7.8-RC1-SNAPSHOT</version>
+         <version>0.7.8-RC2-SNAPSHOT</version>
          <scope>compile</scope>
         </dependency>
        </dependencies>

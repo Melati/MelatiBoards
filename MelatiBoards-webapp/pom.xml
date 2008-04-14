@@ -2,7 +2,7 @@
   <parent>
     <artifactId>MelatiBoards-parent</artifactId>
     <groupId>org.paneris</groupId>
-    <version>1.2.4</version>
+    <version>1.2.5</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <artifactId>MelatiBoards-webapp</artifactId>

@@ -1,6 +1,6 @@
 package org.paneris.melati.boards.model;
 
-import org.melati.poem.Table;
+import org.melati.poem.JdbcTable;
 import org.melati.poem.DefinitionSource;
 import org.melati.poem.Database;
 import org.melati.poem.PoemException;
@@ -8,7 +8,7 @@ import org.melati.poem.PoemException;
 /**
  * Melati POEM generated, programmer modifyable inheritance hook.
  */
-public class BoardsTable extends Table {
+public class BoardsTable extends JdbcTable {
 
  /**
   * Constructor. 

@@ -94,7 +94,7 @@ public class UserTable extends UserTableBase {
 
   // programmer's domain-specific code here
 
-  protected void init() throws PoemException {
+  public void init() throws PoemException {
     super.init();
 
     // We can't put this in the constructor because the email

@@ -48,7 +48,7 @@ public class SettingTableBase extends SettingTable {
     return (BoardsDatabaseTables)getDatabase();
   }
 
-  protected void init() throws PoemException {
+  public void init() throws PoemException {
     super.init();
   }
 
