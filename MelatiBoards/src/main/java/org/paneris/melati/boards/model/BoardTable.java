@@ -139,7 +139,7 @@ public class BoardTable extends BoardTableBase {
 
   // programmer's domain-specific code here
 
-  protected void init() throws PoemException {
+  public void init() throws PoemException {
     super.init();
 
     // Define empty versions of the settings below
