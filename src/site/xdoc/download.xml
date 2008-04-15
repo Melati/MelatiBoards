@@ -1,10 +1,9 @@
 <?xml version="1.0"?>
-<!-- Maven 1 version -->
 <document>
 
   <properties>
     <title>Download</title>
-    <author email="timp@paneris.org">Tim Pizey</author>
+    <author email="timp@ At aneris.org">Tim Pizey</author>
   </properties>
 
   <body>
@@ -12,7 +11,7 @@
 
       <p>
         The latest build can be found in the Maven 
-        <a href="/maven/MelatiBoards/">repository</a>.
+        <a href="/maven2/org/paneris/MelatiBoards/">repository</a>.
       </p>
       
     </section>
@@ -20,7 +19,7 @@
 
       <p>
         To download the source see the 
-        <a href="cvs-usage.html">Source Repository</a>.
+        <a href="source-repository.html">Source Repository</a>.
       </p>
       
     </section>

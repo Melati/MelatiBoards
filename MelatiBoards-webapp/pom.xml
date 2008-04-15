@@ -10,7 +10,7 @@
   <name>MelatiBoards WebApp</name>
   <url>http://maven.apache.org</url>
   <build>
-    <finalName>MelatiBoards-webapp</finalName>
+    <finalName>boards</finalName>
   </build>
   <dependencies>
     <dependency>
