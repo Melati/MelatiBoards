@@ -26,7 +26,6 @@
    <menu ref="parent" inherit="top"/>
     <menu name="Overview">
       <item name="Download"            href="/download.html"/>
-      <item name="Maven1"              href="/maven1/index.html"/>
     </menu>
     <menu name="Demonstration">
       <item name="Boards"              href="/MelatiBoards/BoardAdmin/boardsdemo/Types"/>
