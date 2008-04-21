@@ -96,7 +96,7 @@ public class MembershipStatusTable extends MembershipStatusTableBase {
 
   private MembershipStatus normal, digest, suspended, banned;
 
-  protected void postInitialise() {
+  public void postInitialise() {
     super.postInitialise();
 
     normal = ensure("normal");

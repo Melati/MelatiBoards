@@ -97,7 +97,7 @@ public class BoardTypeTable extends BoardTypeTableBase {
 
   // programmer's domain-specific code here
 
-  protected void postInitialise() {
+  public void postInitialise() {
     super.postInitialise();
     TableInfo info = getInfo();
     if (info.getDefaultcanwrite() == null)
