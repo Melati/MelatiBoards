@@ -68,7 +68,7 @@ import org.melati.poem.PoemException;
 import org.melati.poem.PoemTask;
 import org.melati.poem.PoemThread;
 import org.melati.poem.ValidationPoemException;
-import org.melati.poem.util.DumbPagedEnumeration;
+import org.melati.util.DumbPagedEnumeration;
 import org.melati.poem.util.EnumUtils;
 import org.melati.poem.util.MappedEnumeration;
 import org.melati.servlet.Form;
