@@ -1,6 +1,6 @@
 #set $melati.ResponseContentType = "text/html"
 #set $ml=$melati.HTMLMarkupLanguage
-#set $onVariableException = $melati.PassbackVariableExceptionHandler
+$melati.setPassbackExceptionHandling()
 #set $message=$melati.Object
 #set $board=$message.Board
 
