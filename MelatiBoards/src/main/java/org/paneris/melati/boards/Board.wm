@@ -16,9 +16,8 @@ $melati.setPassbackExceptionHandling()
 <h2>Messages</h2>
 
 <!-- Start Messages -->
-<P>
 #if ($board.canViewMessages($melati.User)) #begin
-
+  <p>
     <b>Messages: $messages.PageStart - $messages.PageEnd of
               #if ($messages.TotalCountIsMinimum) #begin
                 at least
@@ -29,7 +28,7 @@ $melati.setPassbackExceptionHandling()
     #if ($messages.PrevPageStart) #begin
      <a href="$boardutils.BoardURL($board, "$messages.PrevPageStart")"><< Previous</a>
     #end #else #begin
-     << Previous
+     &nbsp;
     #end
     #foreach $page in $messages.PageStartList #begin
      #if ($page.Start == $messages.PageStart) #begin
@@ -41,32 +40,41 @@ $melati.setPassbackExceptionHandling()
     #if ($messages.NextPageStart) #begin
      <a href="$boardutils.BoardURL($board, "$messages.NextPageStart")">Next >></a>
     #end #else #begin
-     Next >>
+     &nbsp;
     #end
     </p>
 
-    <table cellpadding=0 cellspacing=0>
+    <table cellpadding="3" cellspacing="3">
     #if ($board.canManage($melati.User)) #begin
-      <tr><td>Delete?</td><td colspan=4><form action=$boardutils.DeleteMessagesURL($board)></td></tr>
+      <tr>
+       <td><p>Delete?</p></td>
+       <td colspan="4"><form action="$boardutils.DeleteMessagesURL($board)"></td>
+      </tr>
     #end
     #foreach $messageNode in $messages #begin
     <tr>
       #if ($board.canManage($melati.User)) #begin
         <td>
-         <input type=checkbox name=delete-$messageNode.UserObject.Troid>
-         <input type=hidden name=messages value=$messageNode.UserObject.Troid>
+         <input type="checkbox" name="delete-$messageNode.UserObject.Troid">
+         <input type="hidden"   name="messages" value="$messageNode.UserObject.Troid">
        </td>
       #end
        <td>
-        <img src="$melati.Config.StaticURL/admin/plus.gif" height=1 width=$boardutils.indent(20, $messageNode.Level)>
-        <A href="$boardutils.MessageURL($messageNode.UserObject, "$messages.PageStart")">$ml.rendered($messageNode.UserObject.Subject)</a>
+        <img src="$melati.Config.StaticURL/admin/plus.gif" 
+             height="1" 
+             width="$boardutils.indent(20, $messageNode.Level)">
+        <a href="$boardutils.MessageURL($messageNode.UserObject, "$messages.PageStart")">
+          $ml.rendered($messageNode.UserObject.Subject)
+        </a>
      </td>
      <td>&nbsp;</td>
      <td>
-        <a href="mailto:$messageNode.UserObject.Author.Email">$ml.rendered($messageNode.UserObject.Author.Name)</a>
+        <a href="mailto:$messageNode.UserObject.Author.Email">
+          $ml.rendered($messageNode.UserObject.Author.Name)
+        </a>
      </td>
      <td>
-        $ml.renderedShort($messageNode.UserObject.DateField)
+        $ml.rendered($messageNode.UserObject.DateField,3) ## 3 = java.text.DateFormat.SHORT
         #if ($messageNode.UserObject.hasAttachments()) #begin
          $messageNode.UserObject.AttachmentCount attachments
         #end
@@ -75,13 +83,13 @@ $melati.setPassbackExceptionHandling()
     #end
 </table>
   #if ($board.canManage($melati.User)) #begin
-   <p><input type=submit name=delete value="Delete Selected Messages"></p>
+   <p><input type="submit" name="delete" value="Delete Selected Messages"></p>
    </form>
   #end
 #end #else #begin
- You must be subscribed to this board to view its messages
+ <p>You must be subscribed to this board to view its messages</p>
 #end
-</P>
+
 <!-- End Messages -->
 
 </body>

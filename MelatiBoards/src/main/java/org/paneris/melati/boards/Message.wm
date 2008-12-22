@@ -18,12 +18,12 @@ $melati.setPassbackExceptionHandling()
 
 <table>
  <tr>
-  <td valign=top>Author</td>
+  <td valign="top">Author</td>
   <td>$ml.rendered($message.Author.Name_unsafe)</td>
  </tr>
  <tr>
-  <td valign=top>Date</td>
-  <td>$ml.renderedLong($message.DateField)</td>
+  <td valign="top">Date</td>
+  <td>$ml.rendered($message.DateField, 3)</td>
  </tr>
 #set $attachments = $message.Attachments
 #if ($attachments.hasMoreElements()) #begin
@@ -31,35 +31,37 @@ $melati.setPassbackExceptionHandling()
   <td>Attachments</td>
   <td>
 #foreach $attachment in $attachments #begin
-<A href="$attachment.Url">$ml.rendered($attachment.Filename)</a><br>
+<a href="$attachment.Url">$ml.rendered($attachment.Filename)</a><br>
 #end
   </td>
  </tr>
 #end
  <tr>
-  <td valign=top>Message</td>
+  <td valign="top">Message</td>
   <td>
   <pre>$ml.rendered($message.Body)</pre>
   </td>
  </tr>
 </table>
 
-<P>
+<p>
 #if ($board.canPost($melati.User)) #begin
   <a href="$boardutils.MessageNewURL($board)?parent=$message.Troid">Reply to this message</a>\ 
 #end #else #begin
   You need to <a href="$boardutils.LoginURL($board)">Log in</a> to reply to this message.
 #end
-</P>
+</p>
 
 #if ($withThread) #begin
 <h3>Message Thread</h3>
-    <table cellpadding=0 cellspacing=0>
+    <table cellpadding="0" cellspacing="0"
     #foreach $messageNode in $message.Thread.preorderEnumeration() #begin
-    <tr\ #if ($messageNode.UserObject == $message) #begin bgcolor=lightyellow #end>
+    <tr\ #if ($messageNode.UserObject == $message) #begin bgcolor="lightyellow" #end>
      <td>
-      <img src="$melati.Config.StaticURL/admin/plus.gif" height=1 width=$boardutils.indent(20, $messageNode.Level)>
-      <A href="$boardutils.MessageURL($messageNode.UserObject, $start)">$ml.rendered($messageNode.UserObject)</a>
+      <img src="$melati.Config.StaticURL/admin/plus.gif" 
+           height="1" 
+           width="$boardutils.indent(20, $messageNode.Level)">
+      <a href="$boardutils.MessageURL($messageNode.UserObject, $start)">$ml.rendered($messageNode.UserObject)</a>
      </td>
      <td>
      &nbsp;
@@ -68,7 +70,7 @@ $melati.setPassbackExceptionHandling()
       <a href="mailto:$messageNode.UserObject.Author.Email\.remove">$ml.rendered($messageNode.UserObject.Author.Name_unsafe)</a>
      </td>
      <td>
-      $ml.renderedShort($messageNode.UserObject.DateField)
+      $ml.rendered($messageNode.UserObject.DateField,3)
      </td>
     </tr>
     #end
