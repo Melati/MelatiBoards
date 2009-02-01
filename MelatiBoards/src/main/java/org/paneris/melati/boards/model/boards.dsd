@@ -29,7 +29,7 @@ table Board
     (displayname = "Board")
     (description = "A board for messages")
     (category = "Boards")
-    (cachelimit = 20)
+    (cachelimit = 2000)
     (seqcached) {
 
     (primary) Integer id;
@@ -203,7 +203,9 @@ table Subscription
 table Message
     (displayorder = 1050)
     (description = "A message posted to a message board")
-    (category = "Boards") {
+    (category = "Boards") 
+    (cachelimit = 2000)
+    {
 
     (primary) Integer id;
 
