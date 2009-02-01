@@ -31,7 +31,7 @@ import org.paneris.melati.boards.model.User;
  * Melati POEM generated base class for 
 <code>Table</code> <code>Message</code>.
  *
- * @generator org.melati.poem.prepro.TableDef#generateTableBaseJava 
+ * @see org.melati.poem.prepro.TableDef#generateTableBaseJava 
  */
 
 public class MessageTableBase extends BoardsTable {
@@ -49,7 +49,7 @@ public class MessageTableBase extends BoardsTable {
  /**
   * Constructor. 
   * 
-  * @generator org.melati.poem.prepro.TableDef#generateTableBaseJava 
+  * @see org.melati.poem.prepro.TableDef#generateTableBaseJava 
   * @param database          the POEM database we are using
   * @param name              the name of this <code>Table</code>
   * @param definitionSource  which definition is being used
@@ -66,7 +66,7 @@ public class MessageTableBase extends BoardsTable {
  /**
   * Get the database tables.
   *
-  * @generator org.melati.poem.prepro.TableDef#generateTableBaseJava 
+  * @see org.melati.poem.prepro.TableDef#generateTableBaseJava 
   * @return the database tables
   */
   public BoardsDatabaseTables getBoardsDatabaseTables() {
@@ -651,7 +651,7 @@ public class MessageTableBase extends BoardsTable {
   * Retrieves the <code>Id</code> <code>Column</code> for this 
   * <code>Message</code> <code>Table</code>.
   * 
-  * @generator org.melati.poem.prepro.FieldDef#generateColAccessor 
+  * @see org.melati.poem.prepro.FieldDef#generateColAccessor 
   * @return the id <code>Column</code>
   */
   public final Column getIdColumn() {
@@ -663,7 +663,7 @@ public class MessageTableBase extends BoardsTable {
   * Retrieves the <code>Board</code> <code>Column</code> for this 
   * <code>Message</code> <code>Table</code>.
   * 
-  * @generator org.melati.poem.prepro.FieldDef#generateColAccessor 
+  * @see org.melati.poem.prepro.FieldDef#generateColAccessor 
   * @return the board <code>Column</code>
   */
   public final Column getBoardColumn() {
@@ -675,7 +675,7 @@ public class MessageTableBase extends BoardsTable {
   * Retrieves the <code>Date</code> <code>Column</code> for this 
   * <code>Message</code> <code>Table</code>.
   * 
-  * @generator org.melati.poem.prepro.FieldDef#generateColAccessor 
+  * @see org.melati.poem.prepro.FieldDef#generateColAccessor 
   * @return the date <code>Column</code>
   */
   public final Column getDateColumn() {
@@ -687,7 +687,7 @@ public class MessageTableBase extends BoardsTable {
   * Retrieves the <code>Subject</code> <code>Column</code> for this 
   * <code>Message</code> <code>Table</code>.
   * 
-  * @generator org.melati.poem.prepro.FieldDef#generateColAccessor 
+  * @see org.melati.poem.prepro.FieldDef#generateColAccessor 
   * @return the subject <code>Column</code>
   */
   public final Column getSubjectColumn() {
@@ -699,7 +699,7 @@ public class MessageTableBase extends BoardsTable {
   * Retrieves the <code>Author</code> <code>Column</code> for this 
   * <code>Message</code> <code>Table</code>.
   * 
-  * @generator org.melati.poem.prepro.FieldDef#generateColAccessor 
+  * @see org.melati.poem.prepro.FieldDef#generateColAccessor 
   * @return the author <code>Column</code>
   */
   public final Column getAuthorColumn() {
@@ -711,7 +711,7 @@ public class MessageTableBase extends BoardsTable {
   * Retrieves the <code>Parent</code> <code>Column</code> for this 
   * <code>Message</code> <code>Table</code>.
   * 
-  * @generator org.melati.poem.prepro.FieldDef#generateColAccessor 
+  * @see org.melati.poem.prepro.FieldDef#generateColAccessor 
   * @return the parent <code>Column</code>
   */
   public final Column getParentColumn() {
@@ -723,7 +723,7 @@ public class MessageTableBase extends BoardsTable {
   * Retrieves the <code>Body</code> <code>Column</code> for this 
   * <code>Message</code> <code>Table</code>.
   * 
-  * @generator org.melati.poem.prepro.FieldDef#generateColAccessor 
+  * @see org.melati.poem.prepro.FieldDef#generateColAccessor 
   * @return the body <code>Column</code>
   */
   public final Column getBodyColumn() {
@@ -735,7 +735,7 @@ public class MessageTableBase extends BoardsTable {
   * Retrieves the <code>Deleted</code> <code>Column</code> for this 
   * <code>Message</code> <code>Table</code>.
   * 
-  * @generator org.melati.poem.prepro.FieldDef#generateColAccessor 
+  * @see org.melati.poem.prepro.FieldDef#generateColAccessor 
   * @return the deleted <code>Column</code>
   */
   public final Column getDeletedColumn() {
@@ -747,7 +747,7 @@ public class MessageTableBase extends BoardsTable {
   * Retrieves the <code>Approved</code> <code>Column</code> for this 
   * <code>Message</code> <code>Table</code>.
   * 
-  * @generator org.melati.poem.prepro.FieldDef#generateColAccessor 
+  * @see org.melati.poem.prepro.FieldDef#generateColAccessor 
   * @return the approved <code>Column</code>
   */
   public final Column getApprovedColumn() {
@@ -758,7 +758,7 @@ public class MessageTableBase extends BoardsTable {
  /**
   * Retrieve the <code>Message</code> as a <code>Message</code>.
   *
-  * @generator org.melati.poem.prepro.TableDef#generateTableBaseJava 
+  * @see org.melati.poem.prepro.TableDef#generateTableBaseJava 
   * @param troid a Table Row Oject ID
   * @return the <code>Persistent</code> identified by the <code>troid</code>
   */
@@ -771,7 +771,7 @@ public class MessageTableBase extends BoardsTable {
   * Retrieve the <code>Message</code> 
   * as a <code>Message</code>.
   *
-  * @generator org.melati.poem.prepro.TableDef#generateTableBaseJava 
+  * @see org.melati.poem.prepro.TableDef#generateTableBaseJava 
   * @param troid a Table Row Object ID
   * @return the <code>Persistent</code> identified   */
   public Message getMessageObject(int troid) {
@@ -783,6 +783,10 @@ public class MessageTableBase extends BoardsTable {
   }
   protected String defaultDescription() {
     return "A message posted to a message board";
+  }
+
+  protected Integer defaultCacheLimit() {
+    return new Integer(2000);
   }
 
   protected String defaultCategory() {
