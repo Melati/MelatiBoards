@@ -66,7 +66,7 @@ public class BoardsDatabaseBase extends PoemDatabase {
  /**
   * Retrieves the GroupTable table.
   *
-  * @generator org.melati.poem.prepro.TableDef#generateTableAccessorJava 
+  * @see org.melati.poem.prepro.TableDef#generateTableAccessorJava 
   * @return the GroupTable from this database
   */
   public GroupTable getGroupTable() {
@@ -77,7 +77,7 @@ public class BoardsDatabaseBase extends PoemDatabase {
  /**
   * Retrieves the CapabilityTable table.
   *
-  * @generator org.melati.poem.prepro.TableDef#generateTableAccessorJava 
+  * @see org.melati.poem.prepro.TableDef#generateTableAccessorJava 
   * @return the CapabilityTable from this database
   */
   public CapabilityTable getCapabilityTable() {
@@ -88,7 +88,7 @@ public class BoardsDatabaseBase extends PoemDatabase {
  /**
   * Retrieves the GroupMembershipTable table.
   *
-  * @generator org.melati.poem.prepro.TableDef#generateTableAccessorJava 
+  * @see org.melati.poem.prepro.TableDef#generateTableAccessorJava 
   * @return the GroupMembershipTable from this database
   */
   public GroupMembershipTable getGroupMembershipTable() {
@@ -99,7 +99,7 @@ public class BoardsDatabaseBase extends PoemDatabase {
  /**
   * Retrieves the GroupCapabilityTable table.
   *
-  * @generator org.melati.poem.prepro.TableDef#generateTableAccessorJava 
+  * @see org.melati.poem.prepro.TableDef#generateTableAccessorJava 
   * @return the GroupCapabilityTable from this database
   */
   public GroupCapabilityTable getGroupCapabilityTable() {
@@ -110,7 +110,7 @@ public class BoardsDatabaseBase extends PoemDatabase {
  /**
   * Retrieves the TableCategoryTable table.
   *
-  * @generator org.melati.poem.prepro.TableDef#generateTableAccessorJava 
+  * @see org.melati.poem.prepro.TableDef#generateTableAccessorJava 
   * @return the TableCategoryTable from this database
   */
   public TableCategoryTable getTableCategoryTable() {
@@ -121,7 +121,7 @@ public class BoardsDatabaseBase extends PoemDatabase {
  /**
   * Retrieves the TableInfoTable table.
   *
-  * @generator org.melati.poem.prepro.TableDef#generateTableAccessorJava 
+  * @see org.melati.poem.prepro.TableDef#generateTableAccessorJava 
   * @return the TableInfoTable from this database
   */
   public TableInfoTable getTableInfoTable() {
@@ -133,7 +133,7 @@ public class BoardsDatabaseBase extends PoemDatabase {
  /**
   * Retrieves the ColumnInfoTable table.
   *
-  * @generator org.melati.poem.prepro.TableDef#generateTableAccessorJava 
+  * @see org.melati.poem.prepro.TableDef#generateTableAccessorJava 
   * @return the ColumnInfoTable from this database
   */
   public ColumnInfoTable getColumnInfoTable() {
@@ -144,7 +144,7 @@ public class BoardsDatabaseBase extends PoemDatabase {
  /**
   * Retrieves the BoardTypeTable table.
   *
-  * @generator org.melati.poem.prepro.TableDef#generateTableAccessorJava 
+  * @see org.melati.poem.prepro.TableDef#generateTableAccessorJava 
   * @return the BoardTypeTable from this database
   */
   public BoardTypeTable getBoardTypeTable() {
@@ -155,7 +155,7 @@ public class BoardsDatabaseBase extends PoemDatabase {
  /**
   * Retrieves the BoardTable table.
   *
-  * @generator org.melati.poem.prepro.TableDef#generateTableAccessorJava 
+  * @see org.melati.poem.prepro.TableDef#generateTableAccessorJava 
   * @return the BoardTable from this database
   */
   public BoardTable getBoardTable() {
@@ -166,7 +166,7 @@ public class BoardsDatabaseBase extends PoemDatabase {
  /**
   * Retrieves the UserTable table.
   *
-  * @generator org.melati.poem.prepro.TableDef#generateTableAccessorJava 
+  * @see org.melati.poem.prepro.TableDef#generateTableAccessorJava 
   * @return the org.melati.poem.UserTable from this database
   */
   public org.melati.poem.UserTable getUserTable() {
@@ -177,7 +177,7 @@ public class BoardsDatabaseBase extends PoemDatabase {
  /**
   * Retrieves the MembershipStatusTable table.
   *
-  * @generator org.melati.poem.prepro.TableDef#generateTableAccessorJava 
+  * @see org.melati.poem.prepro.TableDef#generateTableAccessorJava 
   * @return the MembershipStatusTable from this database
   */
   public MembershipStatusTable getMembershipStatusTable() {
@@ -188,7 +188,7 @@ public class BoardsDatabaseBase extends PoemDatabase {
  /**
   * Retrieves the SubscriptionTable table.
   *
-  * @generator org.melati.poem.prepro.TableDef#generateTableAccessorJava 
+  * @see org.melati.poem.prepro.TableDef#generateTableAccessorJava 
   * @return the SubscriptionTable from this database
   */
   public SubscriptionTable getSubscriptionTable() {
@@ -199,7 +199,7 @@ public class BoardsDatabaseBase extends PoemDatabase {
  /**
   * Retrieves the MessageTable table.
   *
-  * @generator org.melati.poem.prepro.TableDef#generateTableAccessorJava 
+  * @see org.melati.poem.prepro.TableDef#generateTableAccessorJava 
   * @return the MessageTable from this database
   */
   public MessageTable getMessageTable() {
@@ -210,7 +210,7 @@ public class BoardsDatabaseBase extends PoemDatabase {
  /**
   * Retrieves the AttachmentTypeTable table.
   *
-  * @generator org.melati.poem.prepro.TableDef#generateTableAccessorJava 
+  * @see org.melati.poem.prepro.TableDef#generateTableAccessorJava 
   * @return the AttachmentTypeTable from this database
   */
   public AttachmentTypeTable getAttachmentTypeTable() {
@@ -221,7 +221,7 @@ public class BoardsDatabaseBase extends PoemDatabase {
  /**
   * Retrieves the AttachmentTable table.
   *
-  * @generator org.melati.poem.prepro.TableDef#generateTableAccessorJava 
+  * @see org.melati.poem.prepro.TableDef#generateTableAccessorJava 
   * @return the AttachmentTable from this database
   */
   public AttachmentTable getAttachmentTable() {
@@ -232,7 +232,7 @@ public class BoardsDatabaseBase extends PoemDatabase {
  /**
   * Retrieves the SettingTable table.
   *
-  * @generator org.melati.poem.prepro.TableDef#generateTableAccessorJava 
+  * @see org.melati.poem.prepro.TableDef#generateTableAccessorJava 
   * @return the org.melati.poem.SettingTable from this database
   */
   public org.melati.poem.SettingTable getSettingTable() {

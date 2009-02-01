@@ -5,13 +5,14 @@ package org.paneris.melati.boards.model.generated;
 
 import org.melati.poem.Setting;
 import org.paneris.melati.boards.model.BoardsDatabaseTables;
+import org.paneris.melati.boards.model.SettingTable;
 
 
 /**
  * Melati POEM generated abstract base class for a <code>Persistent</code> 
  * <code>Setting</code> Object.
  *
- * @generator org.melati.poem.prepro.TableDef#generatePersistentBaseJava 
+ * @see org.melati.poem.prepro.TableDef#generatePersistentBaseJava 
  */
 public abstract class SettingBase extends Setting {
 
@@ -19,7 +20,7 @@ public abstract class SettingBase extends Setting {
  /**
   * Retrieves the Database object.
   * 
-  * @generator org.melati.poem.prepro.TableDef#generatePersistentBaseJava 
+  * @see org.melati.poem.prepro.TableDef#generatePersistentBaseJava 
   * @return the database
   */
   public BoardsDatabaseTables getBoardsDatabaseTables() {
@@ -31,7 +32,7 @@ public abstract class SettingBase extends Setting {
   * Retrieves the  <code>SettingTable</code> table 
   * which this <code>Persistent</code> is from.
   * 
-  * @generator org.melati.poem.prepro.TableDef#generatePersistentBaseJava 
+  * @see org.melati.poem.prepro.TableDef#generatePersistentBaseJava 
   * @return the org.melati.poem.SettingTable
   */
   public org.melati.poem.SettingTable getSettingTable() {

@@ -16,7 +16,7 @@ import org.paneris.melati.boards.model.BoardsDatabaseTables;
  * Melati POEM generated abstract base class for a <code>Persistent</code> 
  * <code>BoardType</code> Object.
  *
- * @generator org.melati.poem.prepro.TableDef#generatePersistentBaseJava 
+ * @see org.melati.poem.prepro.TableDef#generatePersistentBaseJava 
  */
 public abstract class BoardTypeBase extends JdbcPersistent {
 
@@ -24,7 +24,7 @@ public abstract class BoardTypeBase extends JdbcPersistent {
  /**
   * Retrieves the Database object.
   * 
-  * @generator org.melati.poem.prepro.TableDef#generatePersistentBaseJava 
+  * @see org.melati.poem.prepro.TableDef#generatePersistentBaseJava 
   * @return the database
   */
   public BoardsDatabaseTables getBoardsDatabaseTables() {
@@ -36,7 +36,7 @@ public abstract class BoardTypeBase extends JdbcPersistent {
   * Retrieves the  <code>BoardTypeTable</code> table 
   * which this <code>Persistent</code> is from.
   * 
-  * @generator org.melati.poem.prepro.TableDef#generatePersistentBaseJava 
+  * @see org.melati.poem.prepro.TableDef#generatePersistentBaseJava 
   * @return the BoardTypeTable
   */
   public BoardTypeTable getBoardTypeTable() {
@@ -66,7 +66,7 @@ public abstract class BoardTypeBase extends JdbcPersistent {
   * Retrieves the <code>Id</code> value, without locking, 
   * for this <code>BoardType</code> <code>Persistent</code>.
   *
-  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @see org.melati.poem.prepro.FieldDef#generateBaseMethods 
   * @return the Integer id
   */
   public Integer getId_unsafe() {
@@ -78,7 +78,7 @@ public abstract class BoardTypeBase extends JdbcPersistent {
   * Sets the <code>Id</code> value directly, without checking, 
   * for this BoardType <code>Persistent</code>.
   * 
-  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @see org.melati.poem.prepro.FieldDef#generateBaseMethods 
   * @param cooked  the pre-validated value to set
   */
   public void setId_unsafe(Integer cooked) {
@@ -147,7 +147,7 @@ public abstract class BoardTypeBase extends JdbcPersistent {
   * Retrieves the <code>Id</code> value as a <code>Field</code>
   * from this <code>BoardType</code> <code>Persistent</code>.
   * 
-  * @generator org.melati.poem.prepro.FieldDef#generateFieldCreator 
+  * @see org.melati.poem.prepro.FieldDef#generateFieldCreator 
   * @throws AccessPoemException 
   *         if the current <code>AccessToken</code> 
   *         does not confer write access rights
@@ -163,7 +163,7 @@ public abstract class BoardTypeBase extends JdbcPersistent {
   * Retrieves the <code>Type</code> value, without locking, 
   * for this <code>BoardType</code> <code>Persistent</code>.
   *
-  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @see org.melati.poem.prepro.FieldDef#generateBaseMethods 
   * @return the String type
   */
   public String getType_unsafe() {
@@ -175,7 +175,7 @@ public abstract class BoardTypeBase extends JdbcPersistent {
   * Sets the <code>Type</code> value directly, without checking, 
   * for this BoardType <code>Persistent</code>.
   * 
-  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @see org.melati.poem.prepro.FieldDef#generateBaseMethods 
   * @param cooked  the pre-validated value to set
   */
   public void setType_unsafe(String cooked) {
@@ -230,7 +230,7 @@ public abstract class BoardTypeBase extends JdbcPersistent {
   * Retrieves the <code>Type</code> value as a <code>Field</code>
   * from this <code>BoardType</code> <code>Persistent</code>.
   * 
-  * @generator org.melati.poem.prepro.FieldDef#generateFieldCreator 
+  * @see org.melati.poem.prepro.FieldDef#generateFieldCreator 
   * @throws AccessPoemException 
   *         if the current <code>AccessToken</code> 
   *         does not confer write access rights
@@ -246,7 +246,7 @@ public abstract class BoardTypeBase extends JdbcPersistent {
   * Retrieves the <code>Description</code> value, without locking, 
   * for this <code>BoardType</code> <code>Persistent</code>.
   *
-  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @see org.melati.poem.prepro.FieldDef#generateBaseMethods 
   * @return the String description
   */
   public String getDescription_unsafe() {
@@ -258,7 +258,7 @@ public abstract class BoardTypeBase extends JdbcPersistent {
   * Sets the <code>Description</code> value directly, without checking, 
   * for this BoardType <code>Persistent</code>.
   * 
-  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @see org.melati.poem.prepro.FieldDef#generateBaseMethods 
   * @param cooked  the pre-validated value to set
   */
   public void setDescription_unsafe(String cooked) {
@@ -313,7 +313,7 @@ public abstract class BoardTypeBase extends JdbcPersistent {
   * Retrieves the <code>Description</code> value as a <code>Field</code>
   * from this <code>BoardType</code> <code>Persistent</code>.
   * 
-  * @generator org.melati.poem.prepro.FieldDef#generateFieldCreator 
+  * @see org.melati.poem.prepro.FieldDef#generateFieldCreator 
   * @throws AccessPoemException 
   *         if the current <code>AccessToken</code> 
   *         does not confer write access rights
