@@ -21,7 +21,7 @@ import org.paneris.melati.boards.model.User;
  * Melati POEM generated abstract base class for a <code>Persistent</code> 
  * <code>Message</code> Object.
  *
- * @generator org.melati.poem.prepro.TableDef#generatePersistentBaseJava 
+ * @see org.melati.poem.prepro.TableDef#generatePersistentBaseJava 
  */
 public abstract class MessageBase extends JdbcPersistent {
 
@@ -29,7 +29,7 @@ public abstract class MessageBase extends JdbcPersistent {
  /**
   * Retrieves the Database object.
   * 
-  * @generator org.melati.poem.prepro.TableDef#generatePersistentBaseJava 
+  * @see org.melati.poem.prepro.TableDef#generatePersistentBaseJava 
   * @return the database
   */
   public BoardsDatabaseTables getBoardsDatabaseTables() {
@@ -41,7 +41,7 @@ public abstract class MessageBase extends JdbcPersistent {
   * Retrieves the  <code>MessageTable</code> table 
   * which this <code>Persistent</code> is from.
   * 
-  * @generator org.melati.poem.prepro.TableDef#generatePersistentBaseJava 
+  * @see org.melati.poem.prepro.TableDef#generatePersistentBaseJava 
   * @return the MessageTable
   */
   public MessageTable getMessageTable() {
@@ -96,7 +96,7 @@ public abstract class MessageBase extends JdbcPersistent {
   * Retrieves the <code>Id</code> value, without locking, 
   * for this <code>Message</code> <code>Persistent</code>.
   *
-  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @see org.melati.poem.prepro.FieldDef#generateBaseMethods 
   * @return the Integer id
   */
   public Integer getId_unsafe() {
@@ -108,7 +108,7 @@ public abstract class MessageBase extends JdbcPersistent {
   * Sets the <code>Id</code> value directly, without checking, 
   * for this Message <code>Persistent</code>.
   * 
-  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @see org.melati.poem.prepro.FieldDef#generateBaseMethods 
   * @param cooked  the pre-validated value to set
   */
   public void setId_unsafe(Integer cooked) {
@@ -177,7 +177,7 @@ public abstract class MessageBase extends JdbcPersistent {
   * Retrieves the <code>Id</code> value as a <code>Field</code>
   * from this <code>Message</code> <code>Persistent</code>.
   * 
-  * @generator org.melati.poem.prepro.FieldDef#generateFieldCreator 
+  * @see org.melati.poem.prepro.FieldDef#generateFieldCreator 
   * @throws AccessPoemException 
   *         if the current <code>AccessToken</code> 
   *         does not confer write access rights
@@ -193,7 +193,7 @@ public abstract class MessageBase extends JdbcPersistent {
   * Retrieves the <code>Board</code> value, without locking, 
   * for this <code>Message</code> <code>Persistent</code>.
   *
-  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @see org.melati.poem.prepro.FieldDef#generateBaseMethods 
   * @return the Integer board
   */
   public Integer getBoard_unsafe() {
@@ -205,7 +205,7 @@ public abstract class MessageBase extends JdbcPersistent {
   * Sets the <code>Board</code> value directly, without checking, 
   * for this Message <code>Persistent</code>.
   * 
-  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @see org.melati.poem.prepro.FieldDef#generateBaseMethods 
   * @param cooked  the pre-validated value to set
   */
   public void setBoard_unsafe(Integer cooked) {
@@ -292,7 +292,7 @@ public abstract class MessageBase extends JdbcPersistent {
   * Retrieves the <code>Board</code> value as a <code>Field</code>
   * from this <code>Message</code> <code>Persistent</code>.
   * 
-  * @generator org.melati.poem.prepro.FieldDef#generateFieldCreator 
+  * @see org.melati.poem.prepro.FieldDef#generateFieldCreator 
   * @throws AccessPoemException 
   *         if the current <code>AccessToken</code> 
   *         does not confer write access rights
@@ -308,7 +308,7 @@ public abstract class MessageBase extends JdbcPersistent {
   * Retrieves the <code>Date</code> value, without locking, 
   * for this <code>Message</code> <code>Persistent</code>.
   *
-  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @see org.melati.poem.prepro.FieldDef#generateBaseMethods 
   * @return the Timestamp date
   */
   public Timestamp getDate_unsafe() {
@@ -320,7 +320,7 @@ public abstract class MessageBase extends JdbcPersistent {
   * Sets the <code>Date</code> value directly, without checking, 
   * for this Message <code>Persistent</code>.
   * 
-  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @see org.melati.poem.prepro.FieldDef#generateBaseMethods 
   * @param cooked  the pre-validated value to set
   */
   public void setDate_unsafe(Timestamp cooked) {
@@ -375,7 +375,7 @@ public abstract class MessageBase extends JdbcPersistent {
   * Retrieves the <code>Date</code> value as a <code>Field</code>
   * from this <code>Message</code> <code>Persistent</code>.
   * 
-  * @generator org.melati.poem.prepro.FieldDef#generateFieldCreator 
+  * @see org.melati.poem.prepro.FieldDef#generateFieldCreator 
   * @throws AccessPoemException 
   *         if the current <code>AccessToken</code> 
   *         does not confer write access rights
@@ -391,7 +391,7 @@ public abstract class MessageBase extends JdbcPersistent {
   * Retrieves the <code>Subject</code> value, without locking, 
   * for this <code>Message</code> <code>Persistent</code>.
   *
-  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @see org.melati.poem.prepro.FieldDef#generateBaseMethods 
   * @return the String subject
   */
   public String getSubject_unsafe() {
@@ -403,7 +403,7 @@ public abstract class MessageBase extends JdbcPersistent {
   * Sets the <code>Subject</code> value directly, without checking, 
   * for this Message <code>Persistent</code>.
   * 
-  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @see org.melati.poem.prepro.FieldDef#generateBaseMethods 
   * @param cooked  the pre-validated value to set
   */
   public void setSubject_unsafe(String cooked) {
@@ -458,7 +458,7 @@ public abstract class MessageBase extends JdbcPersistent {
   * Retrieves the <code>Subject</code> value as a <code>Field</code>
   * from this <code>Message</code> <code>Persistent</code>.
   * 
-  * @generator org.melati.poem.prepro.FieldDef#generateFieldCreator 
+  * @see org.melati.poem.prepro.FieldDef#generateFieldCreator 
   * @throws AccessPoemException 
   *         if the current <code>AccessToken</code> 
   *         does not confer write access rights
@@ -474,7 +474,7 @@ public abstract class MessageBase extends JdbcPersistent {
   * Retrieves the <code>Author</code> value, without locking, 
   * for this <code>Message</code> <code>Persistent</code>.
   *
-  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @see org.melati.poem.prepro.FieldDef#generateBaseMethods 
   * @return the Integer author
   */
   public Integer getAuthor_unsafe() {
@@ -486,7 +486,7 @@ public abstract class MessageBase extends JdbcPersistent {
   * Sets the <code>Author</code> value directly, without checking, 
   * for this Message <code>Persistent</code>.
   * 
-  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @see org.melati.poem.prepro.FieldDef#generateBaseMethods 
   * @param cooked  the pre-validated value to set
   */
   public void setAuthor_unsafe(Integer cooked) {
@@ -573,7 +573,7 @@ public abstract class MessageBase extends JdbcPersistent {
   * Retrieves the <code>Author</code> value as a <code>Field</code>
   * from this <code>Message</code> <code>Persistent</code>.
   * 
-  * @generator org.melati.poem.prepro.FieldDef#generateFieldCreator 
+  * @see org.melati.poem.prepro.FieldDef#generateFieldCreator 
   * @throws AccessPoemException 
   *         if the current <code>AccessToken</code> 
   *         does not confer write access rights
@@ -589,7 +589,7 @@ public abstract class MessageBase extends JdbcPersistent {
   * Retrieves the <code>Parent</code> value, without locking, 
   * for this <code>Message</code> <code>Persistent</code>.
   *
-  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @see org.melati.poem.prepro.FieldDef#generateBaseMethods 
   * @return the Integer parent
   */
   public Integer getParent_unsafe() {
@@ -601,7 +601,7 @@ public abstract class MessageBase extends JdbcPersistent {
   * Sets the <code>Parent</code> value directly, without checking, 
   * for this Message <code>Persistent</code>.
   * 
-  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @see org.melati.poem.prepro.FieldDef#generateBaseMethods 
   * @param cooked  the pre-validated value to set
   */
   public void setParent_unsafe(Integer cooked) {
@@ -688,7 +688,7 @@ public abstract class MessageBase extends JdbcPersistent {
   * Retrieves the <code>Parent</code> value as a <code>Field</code>
   * from this <code>Message</code> <code>Persistent</code>.
   * 
-  * @generator org.melati.poem.prepro.FieldDef#generateFieldCreator 
+  * @see org.melati.poem.prepro.FieldDef#generateFieldCreator 
   * @throws AccessPoemException 
   *         if the current <code>AccessToken</code> 
   *         does not confer write access rights
@@ -704,7 +704,7 @@ public abstract class MessageBase extends JdbcPersistent {
   * Retrieves the <code>Body</code> value, without locking, 
   * for this <code>Message</code> <code>Persistent</code>.
   *
-  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @see org.melati.poem.prepro.FieldDef#generateBaseMethods 
   * @return the String body
   */
   public String getBody_unsafe() {
@@ -716,7 +716,7 @@ public abstract class MessageBase extends JdbcPersistent {
   * Sets the <code>Body</code> value directly, without checking, 
   * for this Message <code>Persistent</code>.
   * 
-  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @see org.melati.poem.prepro.FieldDef#generateBaseMethods 
   * @param cooked  the pre-validated value to set
   */
   public void setBody_unsafe(String cooked) {
@@ -771,7 +771,7 @@ public abstract class MessageBase extends JdbcPersistent {
   * Retrieves the <code>Body</code> value as a <code>Field</code>
   * from this <code>Message</code> <code>Persistent</code>.
   * 
-  * @generator org.melati.poem.prepro.FieldDef#generateFieldCreator 
+  * @see org.melati.poem.prepro.FieldDef#generateFieldCreator 
   * @throws AccessPoemException 
   *         if the current <code>AccessToken</code> 
   *         does not confer write access rights
@@ -787,7 +787,7 @@ public abstract class MessageBase extends JdbcPersistent {
   * Retrieves the <code>Deleted</code> value, without locking, 
   * for this <code>Message</code> <code>Persistent</code>.
   *
-  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @see org.melati.poem.prepro.FieldDef#generateBaseMethods 
   * @return the Boolean deleted
   */
   public Boolean getDeleted_unsafe() {
@@ -799,7 +799,7 @@ public abstract class MessageBase extends JdbcPersistent {
   * Sets the <code>Deleted</code> value directly, without checking, 
   * for this Message <code>Persistent</code>.
   * 
-  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @see org.melati.poem.prepro.FieldDef#generateBaseMethods 
   * @param cooked  the pre-validated value to set
   */
   public void setDeleted_unsafe(Boolean cooked) {
@@ -876,7 +876,7 @@ public abstract class MessageBase extends JdbcPersistent {
   * Retrieves the <code>Deleted</code> value as a <code>Field</code>
   * from this <code>Message</code> <code>Persistent</code>.
   * 
-  * @generator org.melati.poem.prepro.FieldDef#generateFieldCreator 
+  * @see org.melati.poem.prepro.FieldDef#generateFieldCreator 
   * @throws AccessPoemException 
   *         if the current <code>AccessToken</code> 
   *         does not confer write access rights
@@ -892,7 +892,7 @@ public abstract class MessageBase extends JdbcPersistent {
   * Retrieves the <code>Approved</code> value, without locking, 
   * for this <code>Message</code> <code>Persistent</code>.
   *
-  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @see org.melati.poem.prepro.FieldDef#generateBaseMethods 
   * @return the Boolean approved
   */
   public Boolean getApproved_unsafe() {
@@ -904,7 +904,7 @@ public abstract class MessageBase extends JdbcPersistent {
   * Sets the <code>Approved</code> value directly, without checking, 
   * for this Message <code>Persistent</code>.
   * 
-  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @see org.melati.poem.prepro.FieldDef#generateBaseMethods 
   * @param cooked  the pre-validated value to set
   */
   public void setApproved_unsafe(Boolean cooked) {
@@ -984,7 +984,7 @@ public abstract class MessageBase extends JdbcPersistent {
   * Retrieves the <code>Approved</code> value as a <code>Field</code>
   * from this <code>Message</code> <code>Persistent</code>.
   * 
-  * @generator org.melati.poem.prepro.FieldDef#generateFieldCreator 
+  * @see org.melati.poem.prepro.FieldDef#generateFieldCreator 
   * @throws AccessPoemException 
   *         if the current <code>AccessToken</code> 
   *         does not confer write access rights

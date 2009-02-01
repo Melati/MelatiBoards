@@ -20,7 +20,7 @@ import org.paneris.melati.boards.model.User;
  * Melati POEM generated abstract base class for a <code>Persistent</code> 
  * <code>Subscription</code> Object.
  *
- * @generator org.melati.poem.prepro.TableDef#generatePersistentBaseJava 
+ * @see org.melati.poem.prepro.TableDef#generatePersistentBaseJava 
  */
 public abstract class SubscriptionBase extends JdbcPersistent {
 
@@ -28,7 +28,7 @@ public abstract class SubscriptionBase extends JdbcPersistent {
  /**
   * Retrieves the Database object.
   * 
-  * @generator org.melati.poem.prepro.TableDef#generatePersistentBaseJava 
+  * @see org.melati.poem.prepro.TableDef#generatePersistentBaseJava 
   * @return the database
   */
   public BoardsDatabaseTables getBoardsDatabaseTables() {
@@ -40,7 +40,7 @@ public abstract class SubscriptionBase extends JdbcPersistent {
   * Retrieves the  <code>SubscriptionTable</code> table 
   * which this <code>Persistent</code> is from.
   * 
-  * @generator org.melati.poem.prepro.TableDef#generatePersistentBaseJava 
+  * @see org.melati.poem.prepro.TableDef#generatePersistentBaseJava 
   * @return the SubscriptionTable
   */
   public SubscriptionTable getSubscriptionTable() {
@@ -84,7 +84,7 @@ public abstract class SubscriptionBase extends JdbcPersistent {
   * Retrieves the <code>Id</code> value, without locking, 
   * for this <code>Subscription</code> <code>Persistent</code>.
   *
-  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @see org.melati.poem.prepro.FieldDef#generateBaseMethods 
   * @return the Integer id
   */
   public Integer getId_unsafe() {
@@ -96,7 +96,7 @@ public abstract class SubscriptionBase extends JdbcPersistent {
   * Sets the <code>Id</code> value directly, without checking, 
   * for this Subscription <code>Persistent</code>.
   * 
-  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @see org.melati.poem.prepro.FieldDef#generateBaseMethods 
   * @param cooked  the pre-validated value to set
   */
   public void setId_unsafe(Integer cooked) {
@@ -165,7 +165,7 @@ public abstract class SubscriptionBase extends JdbcPersistent {
   * Retrieves the <code>Id</code> value as a <code>Field</code>
   * from this <code>Subscription</code> <code>Persistent</code>.
   * 
-  * @generator org.melati.poem.prepro.FieldDef#generateFieldCreator 
+  * @see org.melati.poem.prepro.FieldDef#generateFieldCreator 
   * @throws AccessPoemException 
   *         if the current <code>AccessToken</code> 
   *         does not confer write access rights
@@ -181,7 +181,7 @@ public abstract class SubscriptionBase extends JdbcPersistent {
   * Retrieves the <code>User</code> value, without locking, 
   * for this <code>Subscription</code> <code>Persistent</code>.
   *
-  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @see org.melati.poem.prepro.FieldDef#generateBaseMethods 
   * @return the Integer user
   */
   public Integer getUser_unsafe() {
@@ -193,7 +193,7 @@ public abstract class SubscriptionBase extends JdbcPersistent {
   * Sets the <code>User</code> value directly, without checking, 
   * for this Subscription <code>Persistent</code>.
   * 
-  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @see org.melati.poem.prepro.FieldDef#generateBaseMethods 
   * @param cooked  the pre-validated value to set
   */
   public void setUser_unsafe(Integer cooked) {
@@ -280,7 +280,7 @@ public abstract class SubscriptionBase extends JdbcPersistent {
   * Retrieves the <code>User</code> value as a <code>Field</code>
   * from this <code>Subscription</code> <code>Persistent</code>.
   * 
-  * @generator org.melati.poem.prepro.FieldDef#generateFieldCreator 
+  * @see org.melati.poem.prepro.FieldDef#generateFieldCreator 
   * @throws AccessPoemException 
   *         if the current <code>AccessToken</code> 
   *         does not confer write access rights
@@ -296,7 +296,7 @@ public abstract class SubscriptionBase extends JdbcPersistent {
   * Retrieves the <code>Board</code> value, without locking, 
   * for this <code>Subscription</code> <code>Persistent</code>.
   *
-  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @see org.melati.poem.prepro.FieldDef#generateBaseMethods 
   * @return the Integer board
   */
   public Integer getBoard_unsafe() {
@@ -308,7 +308,7 @@ public abstract class SubscriptionBase extends JdbcPersistent {
   * Sets the <code>Board</code> value directly, without checking, 
   * for this Subscription <code>Persistent</code>.
   * 
-  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @see org.melati.poem.prepro.FieldDef#generateBaseMethods 
   * @param cooked  the pre-validated value to set
   */
   public void setBoard_unsafe(Integer cooked) {
@@ -395,7 +395,7 @@ public abstract class SubscriptionBase extends JdbcPersistent {
   * Retrieves the <code>Board</code> value as a <code>Field</code>
   * from this <code>Subscription</code> <code>Persistent</code>.
   * 
-  * @generator org.melati.poem.prepro.FieldDef#generateFieldCreator 
+  * @see org.melati.poem.prepro.FieldDef#generateFieldCreator 
   * @throws AccessPoemException 
   *         if the current <code>AccessToken</code> 
   *         does not confer write access rights
@@ -411,7 +411,7 @@ public abstract class SubscriptionBase extends JdbcPersistent {
   * Retrieves the <code>Status</code> value, without locking, 
   * for this <code>Subscription</code> <code>Persistent</code>.
   *
-  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @see org.melati.poem.prepro.FieldDef#generateBaseMethods 
   * @return the Integer status
   */
   public Integer getStatus_unsafe() {
@@ -423,7 +423,7 @@ public abstract class SubscriptionBase extends JdbcPersistent {
   * Sets the <code>Status</code> value directly, without checking, 
   * for this Subscription <code>Persistent</code>.
   * 
-  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @see org.melati.poem.prepro.FieldDef#generateBaseMethods 
   * @param cooked  the pre-validated value to set
   */
   public void setStatus_unsafe(Integer cooked) {
@@ -510,7 +510,7 @@ public abstract class SubscriptionBase extends JdbcPersistent {
   * Retrieves the <code>Status</code> value as a <code>Field</code>
   * from this <code>Subscription</code> <code>Persistent</code>.
   * 
-  * @generator org.melati.poem.prepro.FieldDef#generateFieldCreator 
+  * @see org.melati.poem.prepro.FieldDef#generateFieldCreator 
   * @throws AccessPoemException 
   *         if the current <code>AccessToken</code> 
   *         does not confer write access rights
@@ -526,7 +526,7 @@ public abstract class SubscriptionBase extends JdbcPersistent {
   * Retrieves the <code>Ismanager</code> value, without locking, 
   * for this <code>Subscription</code> <code>Persistent</code>.
   *
-  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @see org.melati.poem.prepro.FieldDef#generateBaseMethods 
   * @return the Boolean ismanager
   */
   public Boolean getIsmanager_unsafe() {
@@ -538,7 +538,7 @@ public abstract class SubscriptionBase extends JdbcPersistent {
   * Sets the <code>Ismanager</code> value directly, without checking, 
   * for this Subscription <code>Persistent</code>.
   * 
-  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @see org.melati.poem.prepro.FieldDef#generateBaseMethods 
   * @param cooked  the pre-validated value to set
   */
   public void setIsmanager_unsafe(Boolean cooked) {
@@ -615,7 +615,7 @@ public abstract class SubscriptionBase extends JdbcPersistent {
   * Retrieves the <code>Ismanager</code> value as a <code>Field</code>
   * from this <code>Subscription</code> <code>Persistent</code>.
   * 
-  * @generator org.melati.poem.prepro.FieldDef#generateFieldCreator 
+  * @see org.melati.poem.prepro.FieldDef#generateFieldCreator 
   * @throws AccessPoemException 
   *         if the current <code>AccessToken</code> 
   *         does not confer write access rights
@@ -631,7 +631,7 @@ public abstract class SubscriptionBase extends JdbcPersistent {
   * Retrieves the <code>Approved</code> value, without locking, 
   * for this <code>Subscription</code> <code>Persistent</code>.
   *
-  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @see org.melati.poem.prepro.FieldDef#generateBaseMethods 
   * @return the Boolean approved
   */
   public Boolean getApproved_unsafe() {
@@ -643,7 +643,7 @@ public abstract class SubscriptionBase extends JdbcPersistent {
   * Sets the <code>Approved</code> value directly, without checking, 
   * for this Subscription <code>Persistent</code>.
   * 
-  * @generator org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * @see org.melati.poem.prepro.FieldDef#generateBaseMethods 
   * @param cooked  the pre-validated value to set
   */
   public void setApproved_unsafe(Boolean cooked) {
@@ -723,7 +723,7 @@ public abstract class SubscriptionBase extends JdbcPersistent {
   * Retrieves the <code>Approved</code> value as a <code>Field</code>
   * from this <code>Subscription</code> <code>Persistent</code>.
   * 
-  * @generator org.melati.poem.prepro.FieldDef#generateFieldCreator 
+  * @see org.melati.poem.prepro.FieldDef#generateFieldCreator 
   * @throws AccessPoemException 
   *         if the current <code>AccessToken</code> 
   *         does not confer write access rights

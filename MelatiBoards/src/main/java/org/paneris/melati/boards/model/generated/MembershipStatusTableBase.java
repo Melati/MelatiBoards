@@ -24,7 +24,7 @@ import org.paneris.melati.boards.model.MembershipStatus;
  * Melati POEM generated base class for 
 <code>Table</code> <code>MembershipStatus</code>.
  *
- * @generator org.melati.poem.prepro.TableDef#generateTableBaseJava 
+ * @see org.melati.poem.prepro.TableDef#generateTableBaseJava 
  */
 
 public class MembershipStatusTableBase extends BoardsTable {
@@ -35,7 +35,7 @@ public class MembershipStatusTableBase extends BoardsTable {
  /**
   * Constructor. 
   * 
-  * @generator org.melati.poem.prepro.TableDef#generateTableBaseJava 
+  * @see org.melati.poem.prepro.TableDef#generateTableBaseJava 
   * @param database          the POEM database we are using
   * @param name              the name of this <code>Table</code>
   * @param definitionSource  which definition is being used
@@ -52,7 +52,7 @@ public class MembershipStatusTableBase extends BoardsTable {
  /**
   * Get the database tables.
   *
-  * @generator org.melati.poem.prepro.TableDef#generateTableBaseJava 
+  * @see org.melati.poem.prepro.TableDef#generateTableBaseJava 
   * @return the database tables
   */
   public BoardsDatabaseTables getBoardsDatabaseTables() {
@@ -189,7 +189,7 @@ public class MembershipStatusTableBase extends BoardsTable {
   * Retrieves the <code>Id</code> <code>Column</code> for this 
   * <code>MembershipStatus</code> <code>Table</code>.
   * 
-  * @generator org.melati.poem.prepro.FieldDef#generateColAccessor 
+  * @see org.melati.poem.prepro.FieldDef#generateColAccessor 
   * @return the id <code>Column</code>
   */
   public final Column getIdColumn() {
@@ -201,7 +201,7 @@ public class MembershipStatusTableBase extends BoardsTable {
   * Retrieves the <code>Status</code> <code>Column</code> for this 
   * <code>MembershipStatus</code> <code>Table</code>.
   * 
-  * @generator org.melati.poem.prepro.FieldDef#generateColAccessor 
+  * @see org.melati.poem.prepro.FieldDef#generateColAccessor 
   * @return the status <code>Column</code>
   */
   public final Column getStatusColumn() {
@@ -212,7 +212,7 @@ public class MembershipStatusTableBase extends BoardsTable {
  /**
   * Retrieve the <code>MembershipStatus</code> as a <code>MembershipStatus</code>.
   *
-  * @generator org.melati.poem.prepro.TableDef#generateTableBaseJava 
+  * @see org.melati.poem.prepro.TableDef#generateTableBaseJava 
   * @param troid a Table Row Oject ID
   * @return the <code>Persistent</code> identified by the <code>troid</code>
   */
@@ -225,7 +225,7 @@ public class MembershipStatusTableBase extends BoardsTable {
   * Retrieve the <code>MembershipStatus</code> 
   * as a <code>MembershipStatus</code>.
   *
-  * @generator org.melati.poem.prepro.TableDef#generateTableBaseJava 
+  * @see org.melati.poem.prepro.TableDef#generateTableBaseJava 
   * @param troid a Table Row Object ID
   * @return the <code>Persistent</code> identified   */
   public MembershipStatus getMembershipStatusObject(int troid) {
