@@ -318,7 +318,7 @@ public class BoardAdmin extends TemplateServlet {
       // fair play, i am not logged in, but do i already exist?
       // note that this can mean that people can fake posts to 'anonymous posting'
       // boards, but i guess this is the nature of anonymous posting
-      String email = Form.getFormNulled(context, "field_email");
+      String email = Form.getFieldNulled(context, "field_email");
       user = (User)melati.getDatabase().getUserTable().firstSelection(
                         "UPPER(" +
                         melati.getDatabase().getDbms().getQuotedName("email") +
@@ -366,7 +366,7 @@ public class BoardAdmin extends TemplateServlet {
       throws PoemException {
     String[] messages = melati.getRequest().getParameterValues("message");
     for(int i=0; i < messages.length; i++) {
-      String action = Form.getFormNulled(context, messages[i]);
+      String action = Form.getFieldNulled(context, messages[i]);
       if (action != null) {
         Message message = (Message)
                             ((BoardsDatabaseTables)melati.getDatabase()).
