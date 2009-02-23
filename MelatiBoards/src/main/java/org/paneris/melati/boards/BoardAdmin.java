@@ -282,7 +282,7 @@ public class BoardAdmin extends TemplateServlet {
     if (melati.getUser().isGuest() && !board.getAnonymousposting().booleanValue())
       throw new AccessPoemException(melati.getUser(), new Capability("Logged In"));
 
-    String parent = context.getForm("parent");
+    String parent = context.getFormField("parent");
     if (parent != null && !parent.equals("")) {
       context.put("parent",
                   ((BoardTable)melati.getTable()).getBoardsDatabaseTables().
@@ -467,15 +467,15 @@ public class BoardAdmin extends TemplateServlet {
           getSubscriptionTable().
             getSubscriptionObject(new Integer(subscriptions[i]));
 
-      String delete = context.getForm("delete-" + subscriptions[i]);
+      String delete = context.getFormField("delete-" + subscriptions[i]);
       if ("true".equals(delete)){
         if (sub.getUser() != melati.getUser())
           toDelete.addElement(sub);
       } else {
-        String manager = context.getForm("manager-" + subscriptions[i]);
+        String manager = context.getFormField("manager-" + subscriptions[i]);
         if (sub.getUser() == melati.getUser())
           manager = sub.getIsmanager().toString();
-        String status = context.getForm("status-" + subscriptions[i]);
+        String status = context.getFormField("status-" + subscriptions[i]);
         sub.setIsmanager("true".equals(manager) ? Boolean.TRUE : Boolean.FALSE);
         sub.setStatusTroid(new Integer(status));
       }
@@ -503,7 +503,7 @@ public class BoardAdmin extends TemplateServlet {
     for (int i = 0; i < messages.length; i++) {
       Message mess = ((Board)melati.getObject()).getBoardsDatabaseTables().
                      getMessageTable().getMessageObject(new Integer(messages[i]));
-      String delete = context.getForm("delete-" + messages[i]);
+      String delete = context.getFormField("delete-" + messages[i]);
       if (delete != null) mess.setDeleted(Boolean.TRUE);
     }
     return boardTemplate(context, melati);
@@ -520,8 +520,8 @@ public class BoardAdmin extends TemplateServlet {
     if (others == null || others.length == 0)
       return boardTemplate("MembersEdit");
 
-    Boolean manager = (context.getForm("manager") != null &&
-                       context.getForm("manager").equals("true"))
+    Boolean manager = (context.getFormField("manager") != null &&
+                       context.getFormField("manager").equals("true"))
                        ? Boolean.TRUE
                        : Boolean.FALSE;
     MembershipStatus normal =
@@ -558,7 +558,7 @@ public class BoardAdmin extends TemplateServlet {
       Subscription subscription =
         (Subscription) ((BoardsDatabaseTables)melati.getDatabase()).
            getSubscriptionTable().getObject(new Integer(subscriptions[i]));
-      String action = context.getForm(subscriptions[i]);
+      String action = context.getFormField(subscriptions[i]);
 
       if (action.equals("normal") || action.equals("manager")) {
         if (action.equals("manager"))
@@ -616,7 +616,7 @@ public class BoardAdmin extends TemplateServlet {
 
     context.put("start",
       getBoardStart(board, melati.getRequest().getSession(true),
-                             context.getForm("start")));
+                             context.getFormField("start")));
 
     if (melati.getTable() == null) {
       if (melati.getMethod() != null) {
