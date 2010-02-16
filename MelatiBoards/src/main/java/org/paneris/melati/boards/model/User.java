@@ -51,7 +51,7 @@
 package org.paneris.melati.boards.model;
 
 import org.melati.poem.Column;
-import org.melati.util.StringUtils;
+import org.melati.poem.util.StringUtils;
 import org.paneris.melati.boards.model.generated.UserBase;
 
 /**

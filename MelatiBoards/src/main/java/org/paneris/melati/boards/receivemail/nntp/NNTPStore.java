@@ -83,7 +83,7 @@ import org.paneris.melati.boards.receivemail.Log;
  * Boards database broker for a particular session.
  *
  * @author  Vasily Pozhidaev <vasilyp@paneris.org>
- * @todo generalize and make an interface (like BoardStore)
+ * TODO generalize and make an interface (like BoardStore)
  */
 public class NNTPStore {
 
