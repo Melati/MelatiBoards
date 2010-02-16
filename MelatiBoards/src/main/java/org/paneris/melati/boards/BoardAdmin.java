@@ -79,7 +79,7 @@ import org.melati.template.ServletTemplateContext;
 import org.melati.template.TemplateEngine;
 import org.melati.util.Email;
 import org.melati.util.MelatiStringWriter;
-import org.melati.util.StringUtils;
+import org.melati.poem.util.StringUtils;
 import org.paneris.melati.boards.model.Board;
 import org.paneris.melati.boards.model.BoardTable;
 import org.paneris.melati.boards.model.BoardsDatabaseTables;

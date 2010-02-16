@@ -67,9 +67,9 @@ import org.melati.LogicalDatabase;
 import org.melati.poem.AccessToken;
 import org.melati.poem.Database;
 import org.melati.poem.PoemTask;
+import org.melati.poem.util.StringUtils;
 import org.melati.util.DatabaseInitException;
 import org.melati.util.ExceptionUtils;
-import org.melati.util.StringUtils;
 
 /**
  * An SMTP session for receiving one or more incoming emails from a client (in
