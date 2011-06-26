@@ -151,10 +151,10 @@ public class SettingTable extends SettingTableBase {
   * Ensure that default settings are present.
   * 
   */
-  public synchronized void unifyWithDB(ResultSet colDescs)
+  public synchronized void unifyWithDB(ResultSet colDescs, String troidColumnName)
       throws PoemException {
 
-    super.unifyWithDB(colDescs);
+    super.unifyWithDB(colDescs, troidColumnName);
 
     for (int i = 0; i < names.length; i++) {
        ensure(names[i], PoemTypeFactory.STRING, values[i],
