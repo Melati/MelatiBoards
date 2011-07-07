@@ -142,16 +142,16 @@ public class SubscriptionTable extends SubscriptionTableBase {
   * Convenience method to unsubscribe a user to a board.
   */
   public void unsubscribe(User user, Board board) {
-    List toDelete = new ArrayList();
-    for (Enumeration e = selection(
+    List<Subscription> toDelete = new ArrayList<Subscription>();
+    for (Enumeration<Subscription> e = selection(
                              getUserColumn().eqClause(user.troid()) + 
                              " AND " +
                              getBoardColumn().eqClause(board.troid()));
        e.hasMoreElements();) {
        toDelete.add(e.nextElement());
     }
-    for (Iterator it = toDelete.iterator(); it.hasNext();) {
-      Subscription s = (Subscription)it.next();
+    for (Iterator<Subscription> it = toDelete.iterator(); it.hasNext();) {
+      Subscription s = it.next();
       s.deleteAndCommit();
     }
   }
@@ -160,7 +160,7 @@ public class SubscriptionTable extends SubscriptionTableBase {
    * @return the subscription for a user to a board
    */
   public Subscription getUserSubscription(User user, Board board) {
-    Enumeration e = selection(
+    Enumeration<Subscription> e = selection(
                       getUserColumn().eqClause(user.troid()) + " AND " +
                       getBoardColumn().eqClause(board.troid()));
     if (e.hasMoreElements())
@@ -248,21 +248,21 @@ public class SubscriptionTable extends SubscriptionTableBase {
  /**
   * @return a <tt>CachedSelection</tt> of the Managers.
   */
-  public CachedSelection cachedManagers(Board board) {
+  public CachedSelection<Subscription> cachedManagers(Board board) {
     return cachedSelection(managerSQL(board), null);
   }
 
  /**
   * @return a <tt>CachedSelection</tt> of the Members.
   */
-  public CachedSelection cachedMembers(Board board) {
+  public CachedSelection<Subscription> cachedMembers(Board board) {
     return cachedSelection(memberSQL(board), null);
   }
 
  /**
   * @return a <tt>CachedSelection</tt> of the PendingSubscriptions.
   */
-  public CachedSelection cachedPendingSubscriptions(Board board) {
+  public CachedSelection<Subscription> cachedPendingSubscriptions(Board board) {
     return cachedSelection(pendingSubscriptionSQL(board), null);
   }
 
@@ -298,7 +298,7 @@ public class SubscriptionTable extends SubscriptionTableBase {
   }
 
  /**
-  * @return an <tt>enumeration</tt> of the Digest Memebers.
+  * @return an <tt>enumeration</tt> of the Digest Members.
   */
   public Enumeration getDigestDistributionList(Board board) {
     return selection(memberSQL(board) + " AND " +
