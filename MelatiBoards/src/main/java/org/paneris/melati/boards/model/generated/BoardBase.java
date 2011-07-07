@@ -3,15 +3,22 @@
 package org.paneris.melati.boards.model.generated;
 
 
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.List;
 import org.melati.poem.AccessPoemException;
+import org.melati.poem.CachedSelection;
 import org.melati.poem.Column;
 import org.melati.poem.Field;
 import org.melati.poem.JdbcPersistent;
 import org.melati.poem.NoSuchRowPoemException;
 import org.melati.poem.ValidationPoemException;
+import org.melati.poem.util.EmptyEnumeration;
 import org.paneris.melati.boards.model.BoardTable;
 import org.paneris.melati.boards.model.BoardType;
 import org.paneris.melati.boards.model.BoardsDatabaseTables;
+import org.paneris.melati.boards.model.Message;
+import org.paneris.melati.boards.model.Subscription;
 
 
 /**
@@ -1718,5 +1725,50 @@ public abstract class BoardBase extends JdbcPersistent {
     Column c = _getBoardTable().getAttachmentsurlColumn();
     return new Field(c.getRaw(this), c);
   }
+
+  private CachedSelection<Subscription> boardSubscriptions = null;
+  /** References to this in the Subscription table via its board field.*/
+  @SuppressWarnings("unchecked")
+  public Enumeration<Subscription> getBoardSubscriptions() {
+    if (getTroid() == null)
+      return EmptyEnumeration.it;
+    else {
+      if (boardSubscriptions == null)
+        boardSubscriptions =
+          getBoardsDatabaseTables().getSubscriptionTable().getBoardColumn().cachedSelectionWhereEq(getTroid());
+      return boardSubscriptions.objects();
+    }
+  }
+
+
+  /** References to this in the Subscription table via its board field, as a List.*/
+  public List<Subscription> getBoardSubscriptionsList() {
+    return Collections.list(getBoardSubscriptions());
+  }
+
+
+
+  private CachedSelection<Message> boardMessages = null;
+  /** References to this in the Message table via its board field.*/
+  @SuppressWarnings("unchecked")
+  public Enumeration<Message> getBoardMessages() {
+    if (getTroid() == null)
+      return EmptyEnumeration.it;
+    else {
+      if (boardMessages == null)
+        boardMessages =
+          getBoardsDatabaseTables().getMessageTable().getBoardColumn().cachedSelectionWhereEq(getTroid());
+      return boardMessages.objects();
+    }
+  }
+
+
+  /** References to this in the Message table via its board field, as a List.*/
+  public List<Message> getBoardMessagesList() {
+    return Collections.list(getBoardMessages());
+  }
+
+
+
 }
 

@@ -759,5 +759,6 @@ public abstract class AttachmentBase extends JdbcPersistent {
     Column c = _getAttachmentTable().getTypeColumn();
     return new Field(c.getRaw(this), c);
   }
+
 }
 

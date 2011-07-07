@@ -5,6 +5,7 @@ package org.paneris.melati.boards.model.generated;
 
 import org.melati.poem.Setting;
 import org.paneris.melati.boards.model.BoardsDatabaseTables;
+import org.paneris.melati.boards.model.SettingTable;
 
 
 /**
@@ -39,5 +40,6 @@ public abstract class SettingBase extends Setting {
   }
 
   // There are no Fields in this table, only in its ancestors 
+
 }
 

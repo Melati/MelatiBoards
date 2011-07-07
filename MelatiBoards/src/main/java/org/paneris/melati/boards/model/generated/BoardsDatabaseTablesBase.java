@@ -2,6 +2,7 @@
 
 package org.paneris.melati.boards.model.generated;
 
+
 // 19 tables in database
 // hidden import org.melati.poem.UserTable;
 import org.melati.poem.GroupTable;

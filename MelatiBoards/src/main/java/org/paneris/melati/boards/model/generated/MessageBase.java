@@ -4,12 +4,18 @@ package org.paneris.melati.boards.model.generated;
 
 
 import java.sql.Timestamp;
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.List;
 import org.melati.poem.AccessPoemException;
+import org.melati.poem.CachedSelection;
 import org.melati.poem.Column;
 import org.melati.poem.Field;
 import org.melati.poem.JdbcPersistent;
 import org.melati.poem.NoSuchRowPoemException;
 import org.melati.poem.ValidationPoemException;
+import org.melati.poem.util.EmptyEnumeration;
+import org.paneris.melati.boards.model.Attachment;
 import org.paneris.melati.boards.model.Board;
 import org.paneris.melati.boards.model.BoardsDatabaseTables;
 import org.paneris.melati.boards.model.Message;
@@ -994,5 +1000,50 @@ public abstract class MessageBase extends JdbcPersistent {
     Column c = _getMessageTable().getApprovedColumn();
     return new Field(c.getRaw(this), c);
   }
+
+  private CachedSelection<Message> parentMessages = null;
+  /** References to this in the Message table via its parent field.*/
+  @SuppressWarnings("unchecked")
+  public Enumeration<Message> getParentMessages() {
+    if (getTroid() == null)
+      return EmptyEnumeration.it;
+    else {
+      if (parentMessages == null)
+        parentMessages =
+          getBoardsDatabaseTables().getMessageTable().getParentColumn().cachedSelectionWhereEq(getTroid());
+      return parentMessages.objects();
+    }
+  }
+
+
+  /** References to this in the Message table via its parent field, as a List.*/
+  public List<Message> getParentMessagesList() {
+    return Collections.list(getParentMessages());
+  }
+
+
+
+  private CachedSelection<Attachment> messageAttachments = null;
+  /** References to this in the Attachment table via its message field.*/
+  @SuppressWarnings("unchecked")
+  public Enumeration<Attachment> getMessageAttachments() {
+    if (getTroid() == null)
+      return EmptyEnumeration.it;
+    else {
+      if (messageAttachments == null)
+        messageAttachments =
+          getBoardsDatabaseTables().getAttachmentTable().getMessageColumn().cachedSelectionWhereEq(getTroid());
+      return messageAttachments.objects();
+    }
+  }
+
+
+  /** References to this in the Attachment table via its message field, as a List.*/
+  public List<Attachment> getMessageAttachmentsList() {
+    return Collections.list(getMessageAttachments());
+  }
+
+
+
 }
 

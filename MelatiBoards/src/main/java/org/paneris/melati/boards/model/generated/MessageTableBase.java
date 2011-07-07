@@ -2,6 +2,7 @@
 
 package org.paneris.melati.boards.model.generated;
 
+
 import java.sql.Timestamp;
 import org.melati.poem.AccessPoemException;
 import org.melati.poem.BooleanPoemType;

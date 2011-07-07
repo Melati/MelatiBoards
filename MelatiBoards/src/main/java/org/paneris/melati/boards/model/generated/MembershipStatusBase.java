@@ -3,13 +3,19 @@
 package org.paneris.melati.boards.model.generated;
 
 
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.List;
 import org.melati.poem.AccessPoemException;
+import org.melati.poem.CachedSelection;
 import org.melati.poem.Column;
 import org.melati.poem.Field;
 import org.melati.poem.JdbcPersistent;
 import org.melati.poem.ValidationPoemException;
+import org.melati.poem.util.EmptyEnumeration;
 import org.paneris.melati.boards.model.BoardsDatabaseTables;
 import org.paneris.melati.boards.model.MembershipStatusTable;
+import org.paneris.melati.boards.model.Subscription;
 
 
 /**
@@ -236,5 +242,28 @@ public abstract class MembershipStatusBase extends JdbcPersistent {
     Column c = _getMembershipStatusTable().getStatusColumn();
     return new Field(c.getRaw(this), c);
   }
+
+  private CachedSelection<Subscription> statusSubscriptions = null;
+  /** References to this in the Subscription table via its status field.*/
+  @SuppressWarnings("unchecked")
+  public Enumeration<Subscription> getStatusSubscriptions() {
+    if (getTroid() == null)
+      return EmptyEnumeration.it;
+    else {
+      if (statusSubscriptions == null)
+        statusSubscriptions =
+          getBoardsDatabaseTables().getSubscriptionTable().getStatusColumn().cachedSelectionWhereEq(getTroid());
+      return statusSubscriptions.objects();
+    }
+  }
+
+
+  /** References to this in the Subscription table via its status field, as a List.*/
+  public List<Subscription> getStatusSubscriptionsList() {
+    return Collections.list(getStatusSubscriptions());
+  }
+
+
+
 }
 
