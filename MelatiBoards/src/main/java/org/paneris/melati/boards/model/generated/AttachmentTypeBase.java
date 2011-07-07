@@ -3,11 +3,17 @@
 package org.paneris.melati.boards.model.generated;
 
 
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.List;
 import org.melati.poem.AccessPoemException;
+import org.melati.poem.CachedSelection;
 import org.melati.poem.Column;
 import org.melati.poem.Field;
 import org.melati.poem.JdbcPersistent;
 import org.melati.poem.ValidationPoemException;
+import org.melati.poem.util.EmptyEnumeration;
+import org.paneris.melati.boards.model.Attachment;
 import org.paneris.melati.boards.model.AttachmentTypeTable;
 import org.paneris.melati.boards.model.BoardsDatabaseTables;
 
@@ -236,5 +242,28 @@ public abstract class AttachmentTypeBase extends JdbcPersistent {
     Column c = _getAttachmentTypeTable().getTypeColumn();
     return new Field(c.getRaw(this), c);
   }
+
+  private CachedSelection<Attachment> typeAttachments = null;
+  /** References to this in the Attachment table via its type field.*/
+  @SuppressWarnings("unchecked")
+  public Enumeration<Attachment> getTypeAttachments() {
+    if (getTroid() == null)
+      return EmptyEnumeration.it;
+    else {
+      if (typeAttachments == null)
+        typeAttachments =
+          getBoardsDatabaseTables().getAttachmentTable().getTypeColumn().cachedSelectionWhereEq(getTroid());
+      return typeAttachments.objects();
+    }
+  }
+
+
+  /** References to this in the Attachment table via its type field, as a List.*/
+  public List<Attachment> getTypeAttachmentsList() {
+    return Collections.list(getTypeAttachments());
+  }
+
+
+
 }
 

@@ -733,5 +733,6 @@ public abstract class SubscriptionBase extends JdbcPersistent {
     Column c = _getSubscriptionTable().getApprovedColumn();
     return new Field(c.getRaw(this), c);
   }
+
 }
 

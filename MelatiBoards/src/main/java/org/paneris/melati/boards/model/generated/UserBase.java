@@ -3,12 +3,20 @@
 package org.paneris.melati.boards.model.generated;
 
 
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.List;
 import org.melati.poem.AccessPoemException;
+import org.melati.poem.CachedSelection;
 import org.melati.poem.Column;
 import org.melati.poem.Field;
+import org.melati.poem.GroupMembership;
 import org.melati.poem.User;
 import org.melati.poem.ValidationPoemException;
+import org.melati.poem.util.EmptyEnumeration;
 import org.paneris.melati.boards.model.BoardsDatabaseTables;
+import org.paneris.melati.boards.model.Message;
+import org.paneris.melati.boards.model.Subscription;
 import org.paneris.melati.boards.model.UserTable;
 
 
@@ -135,5 +143,72 @@ public abstract class UserBase extends User {
     Column c = _getUserTable().getEmailColumn();
     return new Field(c.getRaw(this), c);
   }
+
+  private CachedSelection<GroupMembership> userGroupMemberships = null;
+  /** References to this in the GroupMembership table via its user field.*/
+  @SuppressWarnings("unchecked")
+  public Enumeration<GroupMembership> getUserGroupMemberships() {
+    if (getTroid() == null)
+      return EmptyEnumeration.it;
+    else {
+      if (userGroupMemberships == null)
+        userGroupMemberships =
+          getBoardsDatabaseTables().getGroupMembershipTable().getUserColumn().cachedSelectionWhereEq(getTroid());
+      return userGroupMemberships.objects();
+    }
+  }
+
+
+  /** References to this in the GroupMembership table via its user field, as a List.*/
+  public List<GroupMembership> getUserGroupMembershipsList() {
+    return Collections.list(getUserGroupMemberships());
+  }
+
+
+
+  private CachedSelection<Subscription> userSubscriptions = null;
+  /** References to this in the Subscription table via its user field.*/
+  @SuppressWarnings("unchecked")
+  public Enumeration<Subscription> getUserSubscriptions() {
+    if (getTroid() == null)
+      return EmptyEnumeration.it;
+    else {
+      if (userSubscriptions == null)
+        userSubscriptions =
+          getBoardsDatabaseTables().getSubscriptionTable().getUserColumn().cachedSelectionWhereEq(getTroid());
+      return userSubscriptions.objects();
+    }
+  }
+
+
+  /** References to this in the Subscription table via its user field, as a List.*/
+  public List<Subscription> getUserSubscriptionsList() {
+    return Collections.list(getUserSubscriptions());
+  }
+
+
+
+  private CachedSelection<Message> authorMessages = null;
+  /** References to this in the Message table via its author field.*/
+  @SuppressWarnings("unchecked")
+  public Enumeration<Message> getAuthorMessages() {
+    if (getTroid() == null)
+      return EmptyEnumeration.it;
+    else {
+      if (authorMessages == null)
+        authorMessages =
+          getBoardsDatabaseTables().getMessageTable().getAuthorColumn().cachedSelectionWhereEq(getTroid());
+      return authorMessages.objects();
+    }
+  }
+
+
+  /** References to this in the Message table via its author field, as a List.*/
+  public List<Message> getAuthorMessagesList() {
+    return Collections.list(getAuthorMessages());
+  }
+
+
+
 }
 

@@ -2,6 +2,7 @@
 
 package org.paneris.melati.boards.model.generated;
 
+
 import org.melati.poem.AccessPoemException;
 import org.melati.poem.Column;
 import org.melati.poem.Database;

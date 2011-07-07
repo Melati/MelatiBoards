@@ -2,6 +2,7 @@
 
 package org.paneris.melati.boards.model.generated;
 
+
 import org.melati.poem.PoemDatabase;
 import org.melati.poem.DefinitionSource;
 import org.melati.poem.GroupTable;

@@ -3,11 +3,17 @@
 package org.paneris.melati.boards.model.generated;
 
 
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.List;
 import org.melati.poem.AccessPoemException;
+import org.melati.poem.CachedSelection;
 import org.melati.poem.Column;
 import org.melati.poem.Field;
 import org.melati.poem.JdbcPersistent;
 import org.melati.poem.ValidationPoemException;
+import org.melati.poem.util.EmptyEnumeration;
+import org.paneris.melati.boards.model.Board;
 import org.paneris.melati.boards.model.BoardTypeTable;
 import org.paneris.melati.boards.model.BoardsDatabaseTables;
 
@@ -323,5 +329,28 @@ public abstract class BoardTypeBase extends JdbcPersistent {
     Column c = _getBoardTypeTable().getDescriptionColumn();
     return new Field(c.getRaw(this), c);
   }
+
+  private CachedSelection<Board> typeBoards = null;
+  /** References to this in the Board table via its type field.*/
+  @SuppressWarnings("unchecked")
+  public Enumeration<Board> getTypeBoards() {
+    if (getTroid() == null)
+      return EmptyEnumeration.it;
+    else {
+      if (typeBoards == null)
+        typeBoards =
+          getBoardsDatabaseTables().getBoardTable().getTypeColumn().cachedSelectionWhereEq(getTroid());
+      return typeBoards.objects();
+    }
+  }
+
+
+  /** References to this in the Board table via its type field, as a List.*/
+  public List<Board> getTypeBoardsList() {
+    return Collections.list(getTypeBoards());
+  }
+
+
+
 }
 
