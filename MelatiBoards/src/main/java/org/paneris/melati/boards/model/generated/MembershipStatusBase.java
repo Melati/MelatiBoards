@@ -22,7 +22,7 @@ import org.paneris.melati.boards.model.Subscription;
  * Melati POEM generated abstract base class for a <code>Persistent</code> 
  * <code>MembershipStatus</code> Object.
  *
- * @see org.melati.poem.prepro.TableDef#generatePersistentBaseJava 
+ * see org.melati.poem.prepro.TableDef#generatePersistentBaseJava 
  */
 public abstract class MembershipStatusBase extends JdbcPersistent {
 
@@ -30,7 +30,7 @@ public abstract class MembershipStatusBase extends JdbcPersistent {
  /**
   * Retrieves the Database object.
   * 
-  * @see org.melati.poem.prepro.TableDef#generatePersistentBaseJava 
+  * see org.melati.poem.prepro.TableDef#generatePersistentBaseJava 
   * @return the database
   */
   public BoardsDatabaseTables getBoardsDatabaseTables() {
@@ -42,7 +42,7 @@ public abstract class MembershipStatusBase extends JdbcPersistent {
   * Retrieves the  <code>MembershipStatusTable</code> table 
   * which this <code>Persistent</code> is from.
   * 
-  * @see org.melati.poem.prepro.TableDef#generatePersistentBaseJava 
+  * see org.melati.poem.prepro.TableDef#generatePersistentBaseJava 
   * @return the MembershipStatusTable
   */
   public MembershipStatusTable getMembershipStatusTable() {
@@ -68,7 +68,7 @@ public abstract class MembershipStatusBase extends JdbcPersistent {
   * Retrieves the <code>Id</code> value, without locking, 
   * for this <code>MembershipStatus</code> <code>Persistent</code>.
   *
-  * @see org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * see org.melati.poem.prepro.FieldDef#generateBaseMethods 
   * @return the Integer id
   */
   public Integer getId_unsafe() {
@@ -80,7 +80,7 @@ public abstract class MembershipStatusBase extends JdbcPersistent {
   * Sets the <code>Id</code> value directly, without checking, 
   * for this MembershipStatus <code>Persistent</code>.
   * 
-  * @see org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * see org.melati.poem.prepro.FieldDef#generateBaseMethods 
   * @param cooked  the pre-validated value to set
   */
   public void setId_unsafe(Integer cooked) {
@@ -149,7 +149,7 @@ public abstract class MembershipStatusBase extends JdbcPersistent {
   * Retrieves the <code>Id</code> value as a <code>Field</code>
   * from this <code>MembershipStatus</code> <code>Persistent</code>.
   * 
-  * @see org.melati.poem.prepro.FieldDef#generateFieldCreator 
+  * see org.melati.poem.prepro.FieldDef#generateFieldCreator 
   * @throws AccessPoemException 
   *         if the current <code>AccessToken</code> 
   *         does not confer write access rights
@@ -165,7 +165,7 @@ public abstract class MembershipStatusBase extends JdbcPersistent {
   * Retrieves the <code>Status</code> value, without locking, 
   * for this <code>MembershipStatus</code> <code>Persistent</code>.
   *
-  * @see org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * see org.melati.poem.prepro.FieldDef#generateBaseMethods 
   * @return the String status
   */
   public String getStatus_unsafe() {
@@ -177,7 +177,7 @@ public abstract class MembershipStatusBase extends JdbcPersistent {
   * Sets the <code>Status</code> value directly, without checking, 
   * for this MembershipStatus <code>Persistent</code>.
   * 
-  * @see org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * see org.melati.poem.prepro.FieldDef#generateBaseMethods 
   * @param cooked  the pre-validated value to set
   */
   public void setStatus_unsafe(String cooked) {
@@ -232,7 +232,7 @@ public abstract class MembershipStatusBase extends JdbcPersistent {
   * Retrieves the <code>Status</code> value as a <code>Field</code>
   * from this <code>MembershipStatus</code> <code>Persistent</code>.
   * 
-  * @see org.melati.poem.prepro.FieldDef#generateFieldCreator 
+  * see org.melati.poem.prepro.FieldDef#generateFieldCreator 
   * @throws AccessPoemException 
   *         if the current <code>AccessToken</code> 
   *         does not confer write access rights

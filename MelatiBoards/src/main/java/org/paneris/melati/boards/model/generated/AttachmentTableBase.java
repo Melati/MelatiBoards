@@ -30,7 +30,7 @@ import org.paneris.melati.boards.model.Message;
  * Melati POEM generated base class for 
 <code>Table</code> <code>Attachment</code>.
  *
- * @see org.melati.poem.prepro.TableDef#generateTableBaseJava 
+ * see org.melati.poem.prepro.TableDef#generateTableBaseJava 
  */
 
 public class AttachmentTableBase extends BoardsTable {
@@ -46,7 +46,7 @@ public class AttachmentTableBase extends BoardsTable {
  /**
   * Constructor. 
   * 
-  * @see org.melati.poem.prepro.TableDef#generateTableBaseJava 
+  * see org.melati.poem.prepro.TableDef#generateTableBaseJava 
   * @param database          the POEM database we are using
   * @param name              the name of this <code>Table</code>
   * @param definitionSource  which definition is being used
@@ -63,7 +63,7 @@ public class AttachmentTableBase extends BoardsTable {
  /**
   * Get the database tables.
   *
-  * @see org.melati.poem.prepro.TableDef#generateTableBaseJava 
+  * see org.melati.poem.prepro.TableDef#generateTableBaseJava 
   * @return the database tables
   */
   public BoardsDatabaseTables getBoardsDatabaseTables() {
@@ -517,7 +517,7 @@ public class AttachmentTableBase extends BoardsTable {
   * Retrieves the <code>Id</code> <code>Column</code> for this 
   * <code>Attachment</code> <code>Table</code>.
   * 
-  * @see org.melati.poem.prepro.FieldDef#generateColAccessor 
+  * see org.melati.poem.prepro.FieldDef#generateColAccessor 
   * @return the id <code>Column</code>
   */
   public final Column<Integer> getIdColumn() {
@@ -529,7 +529,7 @@ public class AttachmentTableBase extends BoardsTable {
   * Retrieves the <code>Message</code> <code>Column</code> for this 
   * <code>Attachment</code> <code>Table</code>.
   * 
-  * @see org.melati.poem.prepro.FieldDef#generateColAccessor 
+  * see org.melati.poem.prepro.FieldDef#generateColAccessor 
   * @return the message <code>Column</code>
   */
   public final Column<Integer> getMessageColumn() {
@@ -541,7 +541,7 @@ public class AttachmentTableBase extends BoardsTable {
   * Retrieves the <code>Filename</code> <code>Column</code> for this 
   * <code>Attachment</code> <code>Table</code>.
   * 
-  * @see org.melati.poem.prepro.FieldDef#generateColAccessor 
+  * see org.melati.poem.prepro.FieldDef#generateColAccessor 
   * @return the filename <code>Column</code>
   */
   public final Column<String> getFilenameColumn() {
@@ -553,7 +553,7 @@ public class AttachmentTableBase extends BoardsTable {
   * Retrieves the <code>Path</code> <code>Column</code> for this 
   * <code>Attachment</code> <code>Table</code>.
   * 
-  * @see org.melati.poem.prepro.FieldDef#generateColAccessor 
+  * see org.melati.poem.prepro.FieldDef#generateColAccessor 
   * @return the path <code>Column</code>
   */
   public final Column<String> getPathColumn() {
@@ -565,7 +565,7 @@ public class AttachmentTableBase extends BoardsTable {
   * Retrieves the <code>Url</code> <code>Column</code> for this 
   * <code>Attachment</code> <code>Table</code>.
   * 
-  * @see org.melati.poem.prepro.FieldDef#generateColAccessor 
+  * see org.melati.poem.prepro.FieldDef#generateColAccessor 
   * @return the url <code>Column</code>
   */
   public final Column<String> getUrlColumn() {
@@ -577,7 +577,7 @@ public class AttachmentTableBase extends BoardsTable {
   * Retrieves the <code>Size</code> <code>Column</code> for this 
   * <code>Attachment</code> <code>Table</code>.
   * 
-  * @see org.melati.poem.prepro.FieldDef#generateColAccessor 
+  * see org.melati.poem.prepro.FieldDef#generateColAccessor 
   * @return the size <code>Column</code>
   */
   public final Column<Integer> getSizeColumn() {
@@ -589,7 +589,7 @@ public class AttachmentTableBase extends BoardsTable {
   * Retrieves the <code>Type</code> <code>Column</code> for this 
   * <code>Attachment</code> <code>Table</code>.
   * 
-  * @see org.melati.poem.prepro.FieldDef#generateColAccessor 
+  * see org.melati.poem.prepro.FieldDef#generateColAccessor 
   * @return the type <code>Column</code>
   */
   public final Column<Integer> getTypeColumn() {
@@ -600,7 +600,7 @@ public class AttachmentTableBase extends BoardsTable {
  /**
   * Retrieve the <code>Attachment</code> as a <code>Attachment</code>.
   *
-  * @see org.melati.poem.prepro.TableDef#generateTableBaseJava 
+  * see org.melati.poem.prepro.TableDef#generateTableBaseJava 
   * @param troid a Table Row Oject ID
   * @return the <code>Persistent</code> identified by the <code>troid</code>
   */
@@ -613,7 +613,7 @@ public class AttachmentTableBase extends BoardsTable {
   * Retrieve the <code>Attachment</code> 
   * as a <code>Attachment</code>.
   *
-  * @see org.melati.poem.prepro.TableDef#generateTableBaseJava 
+  * see org.melati.poem.prepro.TableDef#generateTableBaseJava 
   * @param troid a Table Row Object ID
   * @return the <code>Persistent</code> identified   */
   public Attachment getAttachmentObject(int troid) {

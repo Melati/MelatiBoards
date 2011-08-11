@@ -25,7 +25,7 @@ import org.paneris.melati.boards.model.BoardsTable;
  * Melati POEM generated base class for 
 <code>Table</code> <code>BoardType</code>.
  *
- * @see org.melati.poem.prepro.TableDef#generateTableBaseJava 
+ * see org.melati.poem.prepro.TableDef#generateTableBaseJava 
  */
 
 public class BoardTypeTableBase extends BoardsTable {
@@ -37,7 +37,7 @@ public class BoardTypeTableBase extends BoardsTable {
  /**
   * Constructor. 
   * 
-  * @see org.melati.poem.prepro.TableDef#generateTableBaseJava 
+  * see org.melati.poem.prepro.TableDef#generateTableBaseJava 
   * @param database          the POEM database we are using
   * @param name              the name of this <code>Table</code>
   * @param definitionSource  which definition is being used
@@ -54,7 +54,7 @@ public class BoardTypeTableBase extends BoardsTable {
  /**
   * Get the database tables.
   *
-  * @see org.melati.poem.prepro.TableDef#generateTableBaseJava 
+  * see org.melati.poem.prepro.TableDef#generateTableBaseJava 
   * @return the database tables
   */
   public BoardsDatabaseTables getBoardsDatabaseTables() {
@@ -258,7 +258,7 @@ public class BoardTypeTableBase extends BoardsTable {
   * Retrieves the <code>Id</code> <code>Column</code> for this 
   * <code>BoardType</code> <code>Table</code>.
   * 
-  * @see org.melati.poem.prepro.FieldDef#generateColAccessor 
+  * see org.melati.poem.prepro.FieldDef#generateColAccessor 
   * @return the id <code>Column</code>
   */
   public final Column<Integer> getIdColumn() {
@@ -270,7 +270,7 @@ public class BoardTypeTableBase extends BoardsTable {
   * Retrieves the <code>Type</code> <code>Column</code> for this 
   * <code>BoardType</code> <code>Table</code>.
   * 
-  * @see org.melati.poem.prepro.FieldDef#generateColAccessor 
+  * see org.melati.poem.prepro.FieldDef#generateColAccessor 
   * @return the type <code>Column</code>
   */
   public final Column<String> getTypeColumn() {
@@ -282,7 +282,7 @@ public class BoardTypeTableBase extends BoardsTable {
   * Retrieves the <code>Description</code> <code>Column</code> for this 
   * <code>BoardType</code> <code>Table</code>.
   * 
-  * @see org.melati.poem.prepro.FieldDef#generateColAccessor 
+  * see org.melati.poem.prepro.FieldDef#generateColAccessor 
   * @return the description <code>Column</code>
   */
   public final Column<String> getDescriptionColumn() {
@@ -293,7 +293,7 @@ public class BoardTypeTableBase extends BoardsTable {
  /**
   * Retrieve the <code>BoardType</code> as a <code>BoardType</code>.
   *
-  * @see org.melati.poem.prepro.TableDef#generateTableBaseJava 
+  * see org.melati.poem.prepro.TableDef#generateTableBaseJava 
   * @param troid a Table Row Oject ID
   * @return the <code>Persistent</code> identified by the <code>troid</code>
   */
@@ -306,7 +306,7 @@ public class BoardTypeTableBase extends BoardsTable {
   * Retrieve the <code>BoardType</code> 
   * as a <code>BoardType</code>.
   *
-  * @see org.melati.poem.prepro.TableDef#generateTableBaseJava 
+  * see org.melati.poem.prepro.TableDef#generateTableBaseJava 
   * @param troid a Table Row Object ID
   * @return the <code>Persistent</code> identified   */
   public BoardType getBoardTypeObject(int troid) {
