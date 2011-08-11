@@ -25,7 +25,7 @@ import org.paneris.melati.boards.model.BoardsTable;
  * Melati POEM generated base class for 
 <code>Table</code> <code>AttachmentType</code>.
  *
- * @see org.melati.poem.prepro.TableDef#generateTableBaseJava 
+ * see org.melati.poem.prepro.TableDef#generateTableBaseJava 
  */
 
 public class AttachmentTypeTableBase extends BoardsTable {
@@ -36,7 +36,7 @@ public class AttachmentTypeTableBase extends BoardsTable {
  /**
   * Constructor. 
   * 
-  * @see org.melati.poem.prepro.TableDef#generateTableBaseJava 
+  * see org.melati.poem.prepro.TableDef#generateTableBaseJava 
   * @param database          the POEM database we are using
   * @param name              the name of this <code>Table</code>
   * @param definitionSource  which definition is being used
@@ -53,7 +53,7 @@ public class AttachmentTypeTableBase extends BoardsTable {
  /**
   * Get the database tables.
   *
-  * @see org.melati.poem.prepro.TableDef#generateTableBaseJava 
+  * see org.melati.poem.prepro.TableDef#generateTableBaseJava 
   * @return the database tables
   */
   public BoardsDatabaseTables getBoardsDatabaseTables() {
@@ -190,7 +190,7 @@ public class AttachmentTypeTableBase extends BoardsTable {
   * Retrieves the <code>Id</code> <code>Column</code> for this 
   * <code>AttachmentType</code> <code>Table</code>.
   * 
-  * @see org.melati.poem.prepro.FieldDef#generateColAccessor 
+  * see org.melati.poem.prepro.FieldDef#generateColAccessor 
   * @return the id <code>Column</code>
   */
   public final Column<Integer> getIdColumn() {
@@ -202,7 +202,7 @@ public class AttachmentTypeTableBase extends BoardsTable {
   * Retrieves the <code>Type</code> <code>Column</code> for this 
   * <code>AttachmentType</code> <code>Table</code>.
   * 
-  * @see org.melati.poem.prepro.FieldDef#generateColAccessor 
+  * see org.melati.poem.prepro.FieldDef#generateColAccessor 
   * @return the type <code>Column</code>
   */
   public final Column<String> getTypeColumn() {
@@ -213,7 +213,7 @@ public class AttachmentTypeTableBase extends BoardsTable {
  /**
   * Retrieve the <code>AttachmentType</code> as a <code>AttachmentType</code>.
   *
-  * @see org.melati.poem.prepro.TableDef#generateTableBaseJava 
+  * see org.melati.poem.prepro.TableDef#generateTableBaseJava 
   * @param troid a Table Row Oject ID
   * @return the <code>Persistent</code> identified by the <code>troid</code>
   */
@@ -226,7 +226,7 @@ public class AttachmentTypeTableBase extends BoardsTable {
   * Retrieve the <code>AttachmentType</code> 
   * as a <code>AttachmentType</code>.
   *
-  * @see org.melati.poem.prepro.TableDef#generateTableBaseJava 
+  * see org.melati.poem.prepro.TableDef#generateTableBaseJava 
   * @param troid a Table Row Object ID
   * @return the <code>Persistent</code> identified   */
   public AttachmentType getAttachmentTypeObject(int troid) {

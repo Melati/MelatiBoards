@@ -24,7 +24,7 @@ import org.paneris.melati.boards.model.User;
  * Melati POEM generated base class for 
 <code>Table</code> <code>User</code>.
  *
- * @see org.melati.poem.prepro.TableDef#generateTableBaseJava 
+ * see org.melati.poem.prepro.TableDef#generateTableBaseJava 
  */
 
 public class UserTableBase extends UserTable {
@@ -34,7 +34,7 @@ public class UserTableBase extends UserTable {
  /**
   * Constructor. 
   * 
-  * @see org.melati.poem.prepro.TableDef#generateTableBaseJava 
+  * see org.melati.poem.prepro.TableDef#generateTableBaseJava 
   * @param database          the POEM database we are using
   * @param name              the name of this <code>Table</code>
   * @param definitionSource  which definition is being used
@@ -51,7 +51,7 @@ public class UserTableBase extends UserTable {
  /**
   * Get the database tables.
   *
-  * @see org.melati.poem.prepro.TableDef#generateTableBaseJava 
+  * see org.melati.poem.prepro.TableDef#generateTableBaseJava 
   * @return the database tables
   */
   public BoardsDatabaseTables getBoardsDatabaseTables() {
@@ -125,7 +125,7 @@ public class UserTableBase extends UserTable {
   * Retrieves the <code>Email</code> <code>Column</code> for this 
   * <code>User</code> <code>Table</code>.
   * 
-  * @see org.melati.poem.prepro.FieldDef#generateColAccessor 
+  * see org.melati.poem.prepro.FieldDef#generateColAccessor 
   * @return the email <code>Column</code>
   */
   public final Column<String> getEmailColumn() {
@@ -136,7 +136,7 @@ public class UserTableBase extends UserTable {
  /**
   * Retrieve the <code>User</code> as a <code>org.melati.poem.User</code>.
   *
-  * @see org.melati.poem.prepro.TableDef#generateTableBaseJava 
+  * see org.melati.poem.prepro.TableDef#generateTableBaseJava 
   * @param troid a Table Row Oject ID
   * @return the <code>Persistent</code> identified by the <code>troid</code>
   */
@@ -149,7 +149,7 @@ public class UserTableBase extends UserTable {
   * Retrieve the <code>User</code> 
   * as a <code>org.melati.poem.User</code>.
   *
-  * @see org.melati.poem.prepro.TableDef#generateTableBaseJava 
+  * see org.melati.poem.prepro.TableDef#generateTableBaseJava 
   * @param troid a Table Row Object ID
   * @return the <code>Persistent</code> identified   */
   public org.melati.poem.User getUserObject(int troid) {

@@ -30,7 +30,7 @@ import org.paneris.melati.boards.model.User;
  * Melati POEM generated base class for 
 <code>Table</code> <code>Subscription</code>.
  *
- * @see org.melati.poem.prepro.TableDef#generateTableBaseJava 
+ * see org.melati.poem.prepro.TableDef#generateTableBaseJava 
  */
 
 public class SubscriptionTableBase extends BoardsTable {
@@ -45,7 +45,7 @@ public class SubscriptionTableBase extends BoardsTable {
  /**
   * Constructor. 
   * 
-  * @see org.melati.poem.prepro.TableDef#generateTableBaseJava 
+  * see org.melati.poem.prepro.TableDef#generateTableBaseJava 
   * @param database          the POEM database we are using
   * @param name              the name of this <code>Table</code>
   * @param definitionSource  which definition is being used
@@ -62,7 +62,7 @@ public class SubscriptionTableBase extends BoardsTable {
  /**
   * Get the database tables.
   *
-  * @see org.melati.poem.prepro.TableDef#generateTableBaseJava 
+  * see org.melati.poem.prepro.TableDef#generateTableBaseJava 
   * @return the database tables
   */
   public BoardsDatabaseTables getBoardsDatabaseTables() {
@@ -450,7 +450,7 @@ public class SubscriptionTableBase extends BoardsTable {
   * Retrieves the <code>Id</code> <code>Column</code> for this 
   * <code>Subscription</code> <code>Table</code>.
   * 
-  * @see org.melati.poem.prepro.FieldDef#generateColAccessor 
+  * see org.melati.poem.prepro.FieldDef#generateColAccessor 
   * @return the id <code>Column</code>
   */
   public final Column<Integer> getIdColumn() {
@@ -462,7 +462,7 @@ public class SubscriptionTableBase extends BoardsTable {
   * Retrieves the <code>User</code> <code>Column</code> for this 
   * <code>Subscription</code> <code>Table</code>.
   * 
-  * @see org.melati.poem.prepro.FieldDef#generateColAccessor 
+  * see org.melati.poem.prepro.FieldDef#generateColAccessor 
   * @return the user <code>Column</code>
   */
   public final Column<Integer> getUserColumn() {
@@ -474,7 +474,7 @@ public class SubscriptionTableBase extends BoardsTable {
   * Retrieves the <code>Board</code> <code>Column</code> for this 
   * <code>Subscription</code> <code>Table</code>.
   * 
-  * @see org.melati.poem.prepro.FieldDef#generateColAccessor 
+  * see org.melati.poem.prepro.FieldDef#generateColAccessor 
   * @return the board <code>Column</code>
   */
   public final Column<Integer> getBoardColumn() {
@@ -486,7 +486,7 @@ public class SubscriptionTableBase extends BoardsTable {
   * Retrieves the <code>Status</code> <code>Column</code> for this 
   * <code>Subscription</code> <code>Table</code>.
   * 
-  * @see org.melati.poem.prepro.FieldDef#generateColAccessor 
+  * see org.melati.poem.prepro.FieldDef#generateColAccessor 
   * @return the status <code>Column</code>
   */
   public final Column<Integer> getStatusColumn() {
@@ -498,7 +498,7 @@ public class SubscriptionTableBase extends BoardsTable {
   * Retrieves the <code>Ismanager</code> <code>Column</code> for this 
   * <code>Subscription</code> <code>Table</code>.
   * 
-  * @see org.melati.poem.prepro.FieldDef#generateColAccessor 
+  * see org.melati.poem.prepro.FieldDef#generateColAccessor 
   * @return the ismanager <code>Column</code>
   */
   public final Column<Boolean> getIsmanagerColumn() {
@@ -510,7 +510,7 @@ public class SubscriptionTableBase extends BoardsTable {
   * Retrieves the <code>Approved</code> <code>Column</code> for this 
   * <code>Subscription</code> <code>Table</code>.
   * 
-  * @see org.melati.poem.prepro.FieldDef#generateColAccessor 
+  * see org.melati.poem.prepro.FieldDef#generateColAccessor 
   * @return the approved <code>Column</code>
   */
   public final Column<Boolean> getApprovedColumn() {
@@ -521,7 +521,7 @@ public class SubscriptionTableBase extends BoardsTable {
  /**
   * Retrieve the <code>Subscription</code> as a <code>Subscription</code>.
   *
-  * @see org.melati.poem.prepro.TableDef#generateTableBaseJava 
+  * see org.melati.poem.prepro.TableDef#generateTableBaseJava 
   * @param troid a Table Row Oject ID
   * @return the <code>Persistent</code> identified by the <code>troid</code>
   */
@@ -534,7 +534,7 @@ public class SubscriptionTableBase extends BoardsTable {
   * Retrieve the <code>Subscription</code> 
   * as a <code>Subscription</code>.
   *
-  * @see org.melati.poem.prepro.TableDef#generateTableBaseJava 
+  * see org.melati.poem.prepro.TableDef#generateTableBaseJava 
   * @param troid a Table Row Object ID
   * @return the <code>Persistent</code> identified   */
   public Subscription getSubscriptionObject(int troid) {

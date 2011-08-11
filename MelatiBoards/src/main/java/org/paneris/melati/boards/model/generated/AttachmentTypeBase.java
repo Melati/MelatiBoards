@@ -22,7 +22,7 @@ import org.paneris.melati.boards.model.BoardsDatabaseTables;
  * Melati POEM generated abstract base class for a <code>Persistent</code> 
  * <code>AttachmentType</code> Object.
  *
- * @see org.melati.poem.prepro.TableDef#generatePersistentBaseJava 
+ * see org.melati.poem.prepro.TableDef#generatePersistentBaseJava 
  */
 public abstract class AttachmentTypeBase extends JdbcPersistent {
 
@@ -30,7 +30,7 @@ public abstract class AttachmentTypeBase extends JdbcPersistent {
  /**
   * Retrieves the Database object.
   * 
-  * @see org.melati.poem.prepro.TableDef#generatePersistentBaseJava 
+  * see org.melati.poem.prepro.TableDef#generatePersistentBaseJava 
   * @return the database
   */
   public BoardsDatabaseTables getBoardsDatabaseTables() {
@@ -42,7 +42,7 @@ public abstract class AttachmentTypeBase extends JdbcPersistent {
   * Retrieves the  <code>AttachmentTypeTable</code> table 
   * which this <code>Persistent</code> is from.
   * 
-  * @see org.melati.poem.prepro.TableDef#generatePersistentBaseJava 
+  * see org.melati.poem.prepro.TableDef#generatePersistentBaseJava 
   * @return the AttachmentTypeTable
   */
   public AttachmentTypeTable getAttachmentTypeTable() {
@@ -68,7 +68,7 @@ public abstract class AttachmentTypeBase extends JdbcPersistent {
   * Retrieves the <code>Id</code> value, without locking, 
   * for this <code>AttachmentType</code> <code>Persistent</code>.
   *
-  * @see org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * see org.melati.poem.prepro.FieldDef#generateBaseMethods 
   * @return the Integer id
   */
   public Integer getId_unsafe() {
@@ -80,7 +80,7 @@ public abstract class AttachmentTypeBase extends JdbcPersistent {
   * Sets the <code>Id</code> value directly, without checking, 
   * for this AttachmentType <code>Persistent</code>.
   * 
-  * @see org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * see org.melati.poem.prepro.FieldDef#generateBaseMethods 
   * @param cooked  the pre-validated value to set
   */
   public void setId_unsafe(Integer cooked) {
@@ -149,7 +149,7 @@ public abstract class AttachmentTypeBase extends JdbcPersistent {
   * Retrieves the <code>Id</code> value as a <code>Field</code>
   * from this <code>AttachmentType</code> <code>Persistent</code>.
   * 
-  * @see org.melati.poem.prepro.FieldDef#generateFieldCreator 
+  * see org.melati.poem.prepro.FieldDef#generateFieldCreator 
   * @throws AccessPoemException 
   *         if the current <code>AccessToken</code> 
   *         does not confer write access rights
@@ -165,7 +165,7 @@ public abstract class AttachmentTypeBase extends JdbcPersistent {
   * Retrieves the <code>Type</code> value, without locking, 
   * for this <code>AttachmentType</code> <code>Persistent</code>.
   *
-  * @see org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * see org.melati.poem.prepro.FieldDef#generateBaseMethods 
   * @return the String type
   */
   public String getType_unsafe() {
@@ -177,7 +177,7 @@ public abstract class AttachmentTypeBase extends JdbcPersistent {
   * Sets the <code>Type</code> value directly, without checking, 
   * for this AttachmentType <code>Persistent</code>.
   * 
-  * @see org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * see org.melati.poem.prepro.FieldDef#generateBaseMethods 
   * @param cooked  the pre-validated value to set
   */
   public void setType_unsafe(String cooked) {
@@ -232,7 +232,7 @@ public abstract class AttachmentTypeBase extends JdbcPersistent {
   * Retrieves the <code>Type</code> value as a <code>Field</code>
   * from this <code>AttachmentType</code> <code>Persistent</code>.
   * 
-  * @see org.melati.poem.prepro.FieldDef#generateFieldCreator 
+  * see org.melati.poem.prepro.FieldDef#generateFieldCreator 
   * @throws AccessPoemException 
   *         if the current <code>AccessToken</code> 
   *         does not confer write access rights

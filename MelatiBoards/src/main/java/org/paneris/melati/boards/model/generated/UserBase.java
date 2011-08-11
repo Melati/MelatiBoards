@@ -24,7 +24,7 @@ import org.paneris.melati.boards.model.UserTable;
  * Melati POEM generated abstract base class for a <code>Persistent</code> 
  * <code>User</code> Object.
  *
- * @see org.melati.poem.prepro.TableDef#generatePersistentBaseJava 
+ * see org.melati.poem.prepro.TableDef#generatePersistentBaseJava 
  */
 public abstract class UserBase extends User {
 
@@ -32,7 +32,7 @@ public abstract class UserBase extends User {
  /**
   * Retrieves the Database object.
   * 
-  * @see org.melati.poem.prepro.TableDef#generatePersistentBaseJava 
+  * see org.melati.poem.prepro.TableDef#generatePersistentBaseJava 
   * @return the database
   */
   public BoardsDatabaseTables getBoardsDatabaseTables() {
@@ -44,7 +44,7 @@ public abstract class UserBase extends User {
   * Retrieves the  <code>UserTable</code> table 
   * which this <code>Persistent</code> is from.
   * 
-  * @see org.melati.poem.prepro.TableDef#generatePersistentBaseJava 
+  * see org.melati.poem.prepro.TableDef#generatePersistentBaseJava 
   * @return the org.melati.poem.UserTable
   */
   public org.melati.poem.UserTable getUserTable() {
@@ -66,7 +66,7 @@ public abstract class UserBase extends User {
   * Retrieves the <code>Email</code> value, without locking, 
   * for this <code>User</code> <code>Persistent</code>.
   *
-  * @see org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * see org.melati.poem.prepro.FieldDef#generateBaseMethods 
   * @return the String email
   */
   public String getEmail_unsafe() {
@@ -78,7 +78,7 @@ public abstract class UserBase extends User {
   * Sets the <code>Email</code> value directly, without checking, 
   * for this User <code>Persistent</code>.
   * 
-  * @see org.melati.poem.prepro.FieldDef#generateBaseMethods 
+  * see org.melati.poem.prepro.FieldDef#generateBaseMethods 
   * @param cooked  the pre-validated value to set
   */
   public void setEmail_unsafe(String cooked) {
@@ -133,7 +133,7 @@ public abstract class UserBase extends User {
   * Retrieves the <code>Email</code> value as a <code>Field</code>
   * from this <code>User</code> <code>Persistent</code>.
   * 
-  * @see org.melati.poem.prepro.FieldDef#generateFieldCreator 
+  * see org.melati.poem.prepro.FieldDef#generateFieldCreator 
   * @throws AccessPoemException 
   *         if the current <code>AccessToken</code> 
   *         does not confer write access rights
