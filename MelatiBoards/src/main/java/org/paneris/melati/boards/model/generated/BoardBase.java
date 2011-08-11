@@ -225,9 +225,9 @@ public abstract class BoardBase extends JdbcPersistent {
   *         does not confer write access rights
   * @return the Integer id
   */
-  public Field getIdField() throws AccessPoemException {
-    Column c = _getBoardTable().getIdColumn();
-    return new Field(c.getRaw(this), c);
+  public Field<Integer> getIdField() throws AccessPoemException {
+    Column<Integer> c = _getBoardTable().getIdColumn();
+    return new Field<Integer>((Integer)c.getRaw(this), c);
   }
 
 
@@ -340,9 +340,9 @@ public abstract class BoardBase extends JdbcPersistent {
   *         does not confer write access rights
   * @return the Integer type
   */
-  public Field getTypeField() throws AccessPoemException {
-    Column c = _getBoardTable().getTypeColumn();
-    return new Field(c.getRaw(this), c);
+  public Field<Integer> getTypeField() throws AccessPoemException {
+    Column<Integer> c = _getBoardTable().getTypeColumn();
+    return new Field<Integer>((Integer)c.getRaw(this), c);
   }
 
 
@@ -423,9 +423,9 @@ public abstract class BoardBase extends JdbcPersistent {
   *         does not confer write access rights
   * @return the String name
   */
-  public Field getNameField() throws AccessPoemException {
-    Column c = _getBoardTable().getNameColumn();
-    return new Field(c.getRaw(this), c);
+  public Field<String> getNameField() throws AccessPoemException {
+    Column<String> c = _getBoardTable().getNameColumn();
+    return new Field<String>((String)c.getRaw(this), c);
   }
 
 
@@ -506,9 +506,9 @@ public abstract class BoardBase extends JdbcPersistent {
   *         does not confer write access rights
   * @return the String displayname
   */
-  public Field getDisplaynameField() throws AccessPoemException {
-    Column c = _getBoardTable().getDisplaynameColumn();
-    return new Field(c.getRaw(this), c);
+  public Field<String> getDisplaynameField() throws AccessPoemException {
+    Column<String> c = _getBoardTable().getDisplaynameColumn();
+    return new Field<String>((String)c.getRaw(this), c);
   }
 
 
@@ -589,9 +589,9 @@ public abstract class BoardBase extends JdbcPersistent {
   *         does not confer write access rights
   * @return the String purpose
   */
-  public Field getPurposeField() throws AccessPoemException {
-    Column c = _getBoardTable().getPurposeColumn();
-    return new Field(c.getRaw(this), c);
+  public Field<String> getPurposeField() throws AccessPoemException {
+    Column<String> c = _getBoardTable().getPurposeColumn();
+    return new Field<String>((String)c.getRaw(this), c);
   }
 
 
@@ -697,9 +697,9 @@ public abstract class BoardBase extends JdbcPersistent {
   *         does not confer write access rights
   * @return the Boolean archived
   */
-  public Field getArchivedField() throws AccessPoemException {
-    Column c = _getBoardTable().getArchivedColumn();
-    return new Field(c.getRaw(this), c);
+  public Field<Boolean> getArchivedField() throws AccessPoemException {
+    Column<Boolean> c = _getBoardTable().getArchivedColumn();
+    return new Field<Boolean>((Boolean)c.getRaw(this), c);
   }
 
 
@@ -805,9 +805,9 @@ public abstract class BoardBase extends JdbcPersistent {
   *         does not confer write access rights
   * @return the Boolean opensubscription
   */
-  public Field getOpensubscriptionField() throws AccessPoemException {
-    Column c = _getBoardTable().getOpensubscriptionColumn();
-    return new Field(c.getRaw(this), c);
+  public Field<Boolean> getOpensubscriptionField() throws AccessPoemException {
+    Column<Boolean> c = _getBoardTable().getOpensubscriptionColumn();
+    return new Field<Boolean>((Boolean)c.getRaw(this), c);
   }
 
 
@@ -913,9 +913,9 @@ public abstract class BoardBase extends JdbcPersistent {
   *         does not confer write access rights
   * @return the Boolean moderatedsubscription
   */
-  public Field getModeratedsubscriptionField() throws AccessPoemException {
-    Column c = _getBoardTable().getModeratedsubscriptionColumn();
-    return new Field(c.getRaw(this), c);
+  public Field<Boolean> getModeratedsubscriptionField() throws AccessPoemException {
+    Column<Boolean> c = _getBoardTable().getModeratedsubscriptionColumn();
+    return new Field<Boolean>((Boolean)c.getRaw(this), c);
   }
 
 
@@ -1021,9 +1021,9 @@ public abstract class BoardBase extends JdbcPersistent {
   *         does not confer write access rights
   * @return the Boolean openposting
   */
-  public Field getOpenpostingField() throws AccessPoemException {
-    Column c = _getBoardTable().getOpenpostingColumn();
-    return new Field(c.getRaw(this), c);
+  public Field<Boolean> getOpenpostingField() throws AccessPoemException {
+    Column<Boolean> c = _getBoardTable().getOpenpostingColumn();
+    return new Field<Boolean>((Boolean)c.getRaw(this), c);
   }
 
 
@@ -1126,9 +1126,9 @@ public abstract class BoardBase extends JdbcPersistent {
   *         does not confer write access rights
   * @return the Boolean moderatedposting
   */
-  public Field getModeratedpostingField() throws AccessPoemException {
-    Column c = _getBoardTable().getModeratedpostingColumn();
-    return new Field(c.getRaw(this), c);
+  public Field<Boolean> getModeratedpostingField() throws AccessPoemException {
+    Column<Boolean> c = _getBoardTable().getModeratedpostingColumn();
+    return new Field<Boolean>((Boolean)c.getRaw(this), c);
   }
 
 
@@ -1234,9 +1234,9 @@ public abstract class BoardBase extends JdbcPersistent {
   *         does not confer write access rights
   * @return the Boolean openmessageviewing
   */
-  public Field getOpenmessageviewingField() throws AccessPoemException {
-    Column c = _getBoardTable().getOpenmessageviewingColumn();
-    return new Field(c.getRaw(this), c);
+  public Field<Boolean> getOpenmessageviewingField() throws AccessPoemException {
+    Column<Boolean> c = _getBoardTable().getOpenmessageviewingColumn();
+    return new Field<Boolean>((Boolean)c.getRaw(this), c);
   }
 
 
@@ -1342,9 +1342,9 @@ public abstract class BoardBase extends JdbcPersistent {
   *         does not confer write access rights
   * @return the Boolean openmemberlist
   */
-  public Field getOpenmemberlistField() throws AccessPoemException {
-    Column c = _getBoardTable().getOpenmemberlistColumn();
-    return new Field(c.getRaw(this), c);
+  public Field<Boolean> getOpenmemberlistField() throws AccessPoemException {
+    Column<Boolean> c = _getBoardTable().getOpenmemberlistColumn();
+    return new Field<Boolean>((Boolean)c.getRaw(this), c);
   }
 
 
@@ -1447,9 +1447,9 @@ public abstract class BoardBase extends JdbcPersistent {
   *         does not confer write access rights
   * @return the Boolean attachmentsallowed
   */
-  public Field getAttachmentsallowedField() throws AccessPoemException {
-    Column c = _getBoardTable().getAttachmentsallowedColumn();
-    return new Field(c.getRaw(this), c);
+  public Field<Boolean> getAttachmentsallowedField() throws AccessPoemException {
+    Column<Boolean> c = _getBoardTable().getAttachmentsallowedColumn();
+    return new Field<Boolean>((Boolean)c.getRaw(this), c);
   }
 
 
@@ -1555,9 +1555,9 @@ public abstract class BoardBase extends JdbcPersistent {
   *         does not confer write access rights
   * @return the Boolean anonymousposting
   */
-  public Field getAnonymouspostingField() throws AccessPoemException {
-    Column c = _getBoardTable().getAnonymouspostingColumn();
-    return new Field(c.getRaw(this), c);
+  public Field<Boolean> getAnonymouspostingField() throws AccessPoemException {
+    Column<Boolean> c = _getBoardTable().getAnonymouspostingColumn();
+    return new Field<Boolean>((Boolean)c.getRaw(this), c);
   }
 
 
@@ -1638,9 +1638,9 @@ public abstract class BoardBase extends JdbcPersistent {
   *         does not confer write access rights
   * @return the String attachmentspath
   */
-  public Field getAttachmentspathField() throws AccessPoemException {
-    Column c = _getBoardTable().getAttachmentspathColumn();
-    return new Field(c.getRaw(this), c);
+  public Field<String> getAttachmentspathField() throws AccessPoemException {
+    Column<String> c = _getBoardTable().getAttachmentspathColumn();
+    return new Field<String>((String)c.getRaw(this), c);
   }
 
 
@@ -1721,17 +1721,17 @@ public abstract class BoardBase extends JdbcPersistent {
   *         does not confer write access rights
   * @return the String attachmentsurl
   */
-  public Field getAttachmentsurlField() throws AccessPoemException {
-    Column c = _getBoardTable().getAttachmentsurlColumn();
-    return new Field(c.getRaw(this), c);
+  public Field<String> getAttachmentsurlField() throws AccessPoemException {
+    Column<String> c = _getBoardTable().getAttachmentsurlColumn();
+    return new Field<String>((String)c.getRaw(this), c);
   }
 
   private CachedSelection<Subscription> boardSubscriptions = null;
-  /** References to this in the Subscription table via its board field.*/
+  /** References to this Board in the Subscription table via its board field.*/
   @SuppressWarnings("unchecked")
   public Enumeration<Subscription> getBoardSubscriptions() {
     if (getTroid() == null)
-      return EmptyEnumeration.it;
+      return new EmptyEnumeration<Subscription>();
     else {
       if (boardSubscriptions == null)
         boardSubscriptions =
@@ -1741,19 +1741,19 @@ public abstract class BoardBase extends JdbcPersistent {
   }
 
 
-  /** References to this in the Subscription table via its board field, as a List.*/
-  public List<Subscription> getBoardSubscriptionsList() {
+  /** References to this Board in the Subscription table via its board field, as a List.*/
+  public List<Subscription> getBoardSubscriptionList() {
     return Collections.list(getBoardSubscriptions());
   }
 
 
 
   private CachedSelection<Message> boardMessages = null;
-  /** References to this in the Message table via its board field.*/
+  /** References to this Board in the Message table via its board field.*/
   @SuppressWarnings("unchecked")
   public Enumeration<Message> getBoardMessages() {
     if (getTroid() == null)
-      return EmptyEnumeration.it;
+      return new EmptyEnumeration<Message>();
     else {
       if (boardMessages == null)
         boardMessages =
@@ -1763,8 +1763,8 @@ public abstract class BoardBase extends JdbcPersistent {
   }
 
 
-  /** References to this in the Message table via its board field, as a List.*/
-  public List<Message> getBoardMessagesList() {
+  /** References to this Board in the Message table via its board field, as a List.*/
+  public List<Message> getBoardMessageList() {
     return Collections.list(getBoardMessages());
   }
 

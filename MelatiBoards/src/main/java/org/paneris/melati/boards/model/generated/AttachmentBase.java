@@ -172,9 +172,9 @@ public abstract class AttachmentBase extends JdbcPersistent {
   *         does not confer write access rights
   * @return the Integer id
   */
-  public Field getIdField() throws AccessPoemException {
-    Column c = _getAttachmentTable().getIdColumn();
-    return new Field(c.getRaw(this), c);
+  public Field<Integer> getIdField() throws AccessPoemException {
+    Column<Integer> c = _getAttachmentTable().getIdColumn();
+    return new Field<Integer>((Integer)c.getRaw(this), c);
   }
 
 
@@ -287,9 +287,9 @@ public abstract class AttachmentBase extends JdbcPersistent {
   *         does not confer write access rights
   * @return the Integer message
   */
-  public Field getMessageField() throws AccessPoemException {
-    Column c = _getAttachmentTable().getMessageColumn();
-    return new Field(c.getRaw(this), c);
+  public Field<Integer> getMessageField() throws AccessPoemException {
+    Column<Integer> c = _getAttachmentTable().getMessageColumn();
+    return new Field<Integer>((Integer)c.getRaw(this), c);
   }
 
 
@@ -370,9 +370,9 @@ public abstract class AttachmentBase extends JdbcPersistent {
   *         does not confer write access rights
   * @return the String filename
   */
-  public Field getFilenameField() throws AccessPoemException {
-    Column c = _getAttachmentTable().getFilenameColumn();
-    return new Field(c.getRaw(this), c);
+  public Field<String> getFilenameField() throws AccessPoemException {
+    Column<String> c = _getAttachmentTable().getFilenameColumn();
+    return new Field<String>((String)c.getRaw(this), c);
   }
 
 
@@ -453,9 +453,9 @@ public abstract class AttachmentBase extends JdbcPersistent {
   *         does not confer write access rights
   * @return the String path
   */
-  public Field getPathField() throws AccessPoemException {
-    Column c = _getAttachmentTable().getPathColumn();
-    return new Field(c.getRaw(this), c);
+  public Field<String> getPathField() throws AccessPoemException {
+    Column<String> c = _getAttachmentTable().getPathColumn();
+    return new Field<String>((String)c.getRaw(this), c);
   }
 
 
@@ -536,9 +536,9 @@ public abstract class AttachmentBase extends JdbcPersistent {
   *         does not confer write access rights
   * @return the String url
   */
-  public Field getUrlField() throws AccessPoemException {
-    Column c = _getAttachmentTable().getUrlColumn();
-    return new Field(c.getRaw(this), c);
+  public Field<String> getUrlField() throws AccessPoemException {
+    Column<String> c = _getAttachmentTable().getUrlColumn();
+    return new Field<String>((String)c.getRaw(this), c);
   }
 
 
@@ -640,9 +640,9 @@ public abstract class AttachmentBase extends JdbcPersistent {
   *         does not confer write access rights
   * @return the Integer size
   */
-  public Field getSizeField() throws AccessPoemException {
-    Column c = _getAttachmentTable().getSizeColumn();
-    return new Field(c.getRaw(this), c);
+  public Field<Integer> getSizeField() throws AccessPoemException {
+    Column<Integer> c = _getAttachmentTable().getSizeColumn();
+    return new Field<Integer>((Integer)c.getRaw(this), c);
   }
 
 
@@ -755,9 +755,9 @@ public abstract class AttachmentBase extends JdbcPersistent {
   *         does not confer write access rights
   * @return the Integer type
   */
-  public Field getTypeField() throws AccessPoemException {
-    Column c = _getAttachmentTable().getTypeColumn();
-    return new Field(c.getRaw(this), c);
+  public Field<Integer> getTypeField() throws AccessPoemException {
+    Column<Integer> c = _getAttachmentTable().getTypeColumn();
+    return new Field<Integer>((Integer)c.getRaw(this), c);
   }
 
 }

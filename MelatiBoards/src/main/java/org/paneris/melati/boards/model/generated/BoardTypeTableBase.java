@@ -30,9 +30,9 @@ import org.paneris.melati.boards.model.BoardsTable;
 
 public class BoardTypeTableBase extends BoardsTable {
 
-  private Column col_id = null;
-  private Column col_type = null;
-  private Column col_description = null;
+  private Column<Integer> col_id = null;
+  private Column<String> col_type = null;
+  private Column<String> col_description = null;
 
  /**
   * Constructor. 
@@ -64,7 +64,7 @@ public class BoardTypeTableBase extends BoardsTable {
   public void init() throws PoemException {
     super.init();
     defineColumn(col_id =
-        new Column(this, "id",
+        new Column<Integer>(this, "id",
                    new TroidPoemType(),
                    DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
@@ -77,7 +77,7 @@ public class BoardTypeTableBase extends BoardsTable {
             ((BoardType)g).setId((Integer)cooked);
           }
 
-          public Field asField(Persistent g) {
+          public Field<Integer> asField(Persistent g) {
             return ((BoardType)g).getIdField();
           }
 
@@ -119,7 +119,7 @@ public class BoardTypeTableBase extends BoardsTable {
         });
 
     defineColumn(col_type =
-        new Column(this, "type",
+        new Column<String>(this, "type",
                    new StringPoemType(false, -1),
                    DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
@@ -132,7 +132,7 @@ public class BoardTypeTableBase extends BoardsTable {
             ((BoardType)g).setType((String)cooked);
           }
 
-          public Field asField(Persistent g) {
+          public Field<String> asField(Persistent g) {
             return ((BoardType)g).getTypeField();
           }
 
@@ -186,7 +186,7 @@ public class BoardTypeTableBase extends BoardsTable {
         });
 
     defineColumn(col_description =
-        new Column(this, "description",
+        new Column<String>(this, "description",
                    new StringPoemType(false, -1),
                    DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
@@ -199,7 +199,7 @@ public class BoardTypeTableBase extends BoardsTable {
             ((BoardType)g).setDescription((String)cooked);
           }
 
-          public Field asField(Persistent g) {
+          public Field<String> asField(Persistent g) {
             return ((BoardType)g).getDescriptionField();
           }
 
@@ -261,7 +261,7 @@ public class BoardTypeTableBase extends BoardsTable {
   * @see org.melati.poem.prepro.FieldDef#generateColAccessor 
   * @return the id <code>Column</code>
   */
-  public final Column getIdColumn() {
+  public final Column<Integer> getIdColumn() {
     return col_id;
   }
 
@@ -273,7 +273,7 @@ public class BoardTypeTableBase extends BoardsTable {
   * @see org.melati.poem.prepro.FieldDef#generateColAccessor 
   * @return the type <code>Column</code>
   */
-  public final Column getTypeColumn() {
+  public final Column<String> getTypeColumn() {
     return col_type;
   }
 
@@ -285,7 +285,7 @@ public class BoardTypeTableBase extends BoardsTable {
   * @see org.melati.poem.prepro.FieldDef#generateColAccessor 
   * @return the description <code>Column</code>
   */
-  public final Column getDescriptionColumn() {
+  public final Column<String> getDescriptionColumn() {
     return col_description;
   }
 

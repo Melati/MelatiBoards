@@ -155,9 +155,9 @@ public abstract class MembershipStatusBase extends JdbcPersistent {
   *         does not confer write access rights
   * @return the Integer id
   */
-  public Field getIdField() throws AccessPoemException {
-    Column c = _getMembershipStatusTable().getIdColumn();
-    return new Field(c.getRaw(this), c);
+  public Field<Integer> getIdField() throws AccessPoemException {
+    Column<Integer> c = _getMembershipStatusTable().getIdColumn();
+    return new Field<Integer>((Integer)c.getRaw(this), c);
   }
 
 
@@ -238,17 +238,17 @@ public abstract class MembershipStatusBase extends JdbcPersistent {
   *         does not confer write access rights
   * @return the String status
   */
-  public Field getStatusField() throws AccessPoemException {
-    Column c = _getMembershipStatusTable().getStatusColumn();
-    return new Field(c.getRaw(this), c);
+  public Field<String> getStatusField() throws AccessPoemException {
+    Column<String> c = _getMembershipStatusTable().getStatusColumn();
+    return new Field<String>((String)c.getRaw(this), c);
   }
 
   private CachedSelection<Subscription> statusSubscriptions = null;
-  /** References to this in the Subscription table via its status field.*/
+  /** References to this MembershipStatus in the Subscription table via its status field.*/
   @SuppressWarnings("unchecked")
   public Enumeration<Subscription> getStatusSubscriptions() {
     if (getTroid() == null)
-      return EmptyEnumeration.it;
+      return new EmptyEnumeration<Subscription>();
     else {
       if (statusSubscriptions == null)
         statusSubscriptions =
@@ -258,8 +258,8 @@ public abstract class MembershipStatusBase extends JdbcPersistent {
   }
 
 
-  /** References to this in the Subscription table via its status field, as a List.*/
-  public List<Subscription> getStatusSubscriptionsList() {
+  /** References to this MembershipStatus in the Subscription table via its status field, as a List.*/
+  public List<Subscription> getStatusSubscriptionList() {
     return Collections.list(getStatusSubscriptions());
   }
 

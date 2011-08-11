@@ -155,9 +155,9 @@ public abstract class AttachmentTypeBase extends JdbcPersistent {
   *         does not confer write access rights
   * @return the Integer id
   */
-  public Field getIdField() throws AccessPoemException {
-    Column c = _getAttachmentTypeTable().getIdColumn();
-    return new Field(c.getRaw(this), c);
+  public Field<Integer> getIdField() throws AccessPoemException {
+    Column<Integer> c = _getAttachmentTypeTable().getIdColumn();
+    return new Field<Integer>((Integer)c.getRaw(this), c);
   }
 
 
@@ -238,17 +238,17 @@ public abstract class AttachmentTypeBase extends JdbcPersistent {
   *         does not confer write access rights
   * @return the String type
   */
-  public Field getTypeField() throws AccessPoemException {
-    Column c = _getAttachmentTypeTable().getTypeColumn();
-    return new Field(c.getRaw(this), c);
+  public Field<String> getTypeField() throws AccessPoemException {
+    Column<String> c = _getAttachmentTypeTable().getTypeColumn();
+    return new Field<String>((String)c.getRaw(this), c);
   }
 
   private CachedSelection<Attachment> typeAttachments = null;
-  /** References to this in the Attachment table via its type field.*/
+  /** References to this AttachmentType in the Attachment table via its type field.*/
   @SuppressWarnings("unchecked")
   public Enumeration<Attachment> getTypeAttachments() {
     if (getTroid() == null)
-      return EmptyEnumeration.it;
+      return new EmptyEnumeration<Attachment>();
     else {
       if (typeAttachments == null)
         typeAttachments =
@@ -258,8 +258,8 @@ public abstract class AttachmentTypeBase extends JdbcPersistent {
   }
 
 
-  /** References to this in the Attachment table via its type field, as a List.*/
-  public List<Attachment> getTypeAttachmentsList() {
+  /** References to this AttachmentType in the Attachment table via its type field, as a List.*/
+  public List<Attachment> getTypeAttachmentList() {
     return Collections.list(getTypeAttachments());
   }
 

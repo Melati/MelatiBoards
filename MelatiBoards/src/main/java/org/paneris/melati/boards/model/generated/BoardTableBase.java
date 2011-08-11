@@ -33,22 +33,22 @@ import org.paneris.melati.boards.model.BoardsTable;
 
 public class BoardTableBase extends BoardsTable {
 
-  private Column col_id = null;
-  private Column col_type = null;
-  private Column col_name = null;
-  private Column col_displayname = null;
-  private Column col_purpose = null;
-  private Column col_archived = null;
-  private Column col_opensubscription = null;
-  private Column col_moderatedsubscription = null;
-  private Column col_openposting = null;
-  private Column col_moderatedposting = null;
-  private Column col_openmessageviewing = null;
-  private Column col_openmemberlist = null;
-  private Column col_attachmentsallowed = null;
-  private Column col_anonymousposting = null;
-  private Column col_attachmentspath = null;
-  private Column col_attachmentsurl = null;
+  private Column<Integer> col_id = null;
+  private Column<Integer> col_type = null;
+  private Column<String> col_name = null;
+  private Column<String> col_displayname = null;
+  private Column<String> col_purpose = null;
+  private Column<Boolean> col_archived = null;
+  private Column<Boolean> col_opensubscription = null;
+  private Column<Boolean> col_moderatedsubscription = null;
+  private Column<Boolean> col_openposting = null;
+  private Column<Boolean> col_moderatedposting = null;
+  private Column<Boolean> col_openmessageviewing = null;
+  private Column<Boolean> col_openmemberlist = null;
+  private Column<Boolean> col_attachmentsallowed = null;
+  private Column<Boolean> col_anonymousposting = null;
+  private Column<String> col_attachmentspath = null;
+  private Column<String> col_attachmentsurl = null;
 
  /**
   * Constructor. 
@@ -80,7 +80,7 @@ public class BoardTableBase extends BoardsTable {
   public void init() throws PoemException {
     super.init();
     defineColumn(col_id =
-        new Column(this, "id",
+        new Column<Integer>(this, "id",
                    new TroidPoemType(),
                    DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
@@ -93,7 +93,7 @@ public class BoardTableBase extends BoardsTable {
             ((Board)g).setId((Integer)cooked);
           }
 
-          public Field asField(Persistent g) {
+          public Field<Integer> asField(Persistent g) {
             return ((Board)g).getIdField();
           }
 
@@ -131,7 +131,7 @@ public class BoardTableBase extends BoardsTable {
         });
 
     defineColumn(col_type =
-        new Column(this, "type",
+        new Column<Integer>(this, "type",
                    new ReferencePoemType(getBoardsDatabaseTables().
                                              getBoardTypeTable(), false),
                    DefinitionSource.dsd) { 
@@ -145,7 +145,7 @@ public class BoardTableBase extends BoardsTable {
             ((Board)g).setType((BoardType)cooked);
           }
 
-          public Field asField(Persistent g) {
+          public Field<Integer> asField(Persistent g) {
             return ((Board)g).getTypeField();
           }
 
@@ -195,7 +195,7 @@ public class BoardTableBase extends BoardsTable {
         });
 
     defineColumn(col_name =
-        new Column(this, "name",
+        new Column<String>(this, "name",
                    new StringPoemType(false, -1),
                    DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
@@ -208,7 +208,7 @@ public class BoardTableBase extends BoardsTable {
             ((Board)g).setName((String)cooked);
           }
 
-          public Field asField(Persistent g) {
+          public Field<String> asField(Persistent g) {
             return ((Board)g).getNameField();
           }
 
@@ -266,7 +266,7 @@ public class BoardTableBase extends BoardsTable {
         });
 
     defineColumn(col_displayname =
-        new Column(this, "displayname",
+        new Column<String>(this, "displayname",
                    new StringPoemType(false, -1),
                    DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
@@ -279,7 +279,7 @@ public class BoardTableBase extends BoardsTable {
             ((Board)g).setDisplayname((String)cooked);
           }
 
-          public Field asField(Persistent g) {
+          public Field<String> asField(Persistent g) {
             return ((Board)g).getDisplaynameField();
           }
 
@@ -329,7 +329,7 @@ public class BoardTableBase extends BoardsTable {
         });
 
     defineColumn(col_purpose =
-        new Column(this, "purpose",
+        new Column<String>(this, "purpose",
                    new StringPoemType(true, -1),
                    DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
@@ -342,7 +342,7 @@ public class BoardTableBase extends BoardsTable {
             ((Board)g).setPurpose((String)cooked);
           }
 
-          public Field asField(Persistent g) {
+          public Field<String> asField(Persistent g) {
             return ((Board)g).getPurposeField();
           }
 
@@ -392,7 +392,7 @@ public class BoardTableBase extends BoardsTable {
         });
 
     defineColumn(col_archived =
-        new Column(this, "archived",
+        new Column<Boolean>(this, "archived",
                    new BooleanPoemType(false),
                    DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
@@ -405,7 +405,7 @@ public class BoardTableBase extends BoardsTable {
             ((Board)g).setArchived((Boolean)cooked);
           }
 
-          public Field asField(Persistent g) {
+          public Field<Boolean> asField(Persistent g) {
             return ((Board)g).getArchivedField();
           }
 
@@ -447,7 +447,7 @@ public class BoardTableBase extends BoardsTable {
         });
 
     defineColumn(col_opensubscription =
-        new Column(this, "opensubscription",
+        new Column<Boolean>(this, "opensubscription",
                    new BooleanPoemType(false),
                    DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
@@ -460,7 +460,7 @@ public class BoardTableBase extends BoardsTable {
             ((Board)g).setOpensubscription((Boolean)cooked);
           }
 
-          public Field asField(Persistent g) {
+          public Field<Boolean> asField(Persistent g) {
             return ((Board)g).getOpensubscriptionField();
           }
 
@@ -506,7 +506,7 @@ public class BoardTableBase extends BoardsTable {
         });
 
     defineColumn(col_moderatedsubscription =
-        new Column(this, "moderatedsubscription",
+        new Column<Boolean>(this, "moderatedsubscription",
                    new BooleanPoemType(false),
                    DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
@@ -519,7 +519,7 @@ public class BoardTableBase extends BoardsTable {
             ((Board)g).setModeratedsubscription((Boolean)cooked);
           }
 
-          public Field asField(Persistent g) {
+          public Field<Boolean> asField(Persistent g) {
             return ((Board)g).getModeratedsubscriptionField();
           }
 
@@ -565,7 +565,7 @@ public class BoardTableBase extends BoardsTable {
         });
 
     defineColumn(col_openposting =
-        new Column(this, "openposting",
+        new Column<Boolean>(this, "openposting",
                    new BooleanPoemType(false),
                    DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
@@ -578,7 +578,7 @@ public class BoardTableBase extends BoardsTable {
             ((Board)g).setOpenposting((Boolean)cooked);
           }
 
-          public Field asField(Persistent g) {
+          public Field<Boolean> asField(Persistent g) {
             return ((Board)g).getOpenpostingField();
           }
 
@@ -624,7 +624,7 @@ public class BoardTableBase extends BoardsTable {
         });
 
     defineColumn(col_moderatedposting =
-        new Column(this, "moderatedposting",
+        new Column<Boolean>(this, "moderatedposting",
                    new BooleanPoemType(false),
                    DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
@@ -637,7 +637,7 @@ public class BoardTableBase extends BoardsTable {
             ((Board)g).setModeratedposting((Boolean)cooked);
           }
 
-          public Field asField(Persistent g) {
+          public Field<Boolean> asField(Persistent g) {
             return ((Board)g).getModeratedpostingField();
           }
 
@@ -683,7 +683,7 @@ public class BoardTableBase extends BoardsTable {
         });
 
     defineColumn(col_openmessageviewing =
-        new Column(this, "openmessageviewing",
+        new Column<Boolean>(this, "openmessageviewing",
                    new BooleanPoemType(false),
                    DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
@@ -696,7 +696,7 @@ public class BoardTableBase extends BoardsTable {
             ((Board)g).setOpenmessageviewing((Boolean)cooked);
           }
 
-          public Field asField(Persistent g) {
+          public Field<Boolean> asField(Persistent g) {
             return ((Board)g).getOpenmessageviewingField();
           }
 
@@ -742,7 +742,7 @@ public class BoardTableBase extends BoardsTable {
         });
 
     defineColumn(col_openmemberlist =
-        new Column(this, "openmemberlist",
+        new Column<Boolean>(this, "openmemberlist",
                    new BooleanPoemType(false),
                    DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
@@ -755,7 +755,7 @@ public class BoardTableBase extends BoardsTable {
             ((Board)g).setOpenmemberlist((Boolean)cooked);
           }
 
-          public Field asField(Persistent g) {
+          public Field<Boolean> asField(Persistent g) {
             return ((Board)g).getOpenmemberlistField();
           }
 
@@ -801,7 +801,7 @@ public class BoardTableBase extends BoardsTable {
         });
 
     defineColumn(col_attachmentsallowed =
-        new Column(this, "attachmentsallowed",
+        new Column<Boolean>(this, "attachmentsallowed",
                    new BooleanPoemType(false),
                    DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
@@ -814,7 +814,7 @@ public class BoardTableBase extends BoardsTable {
             ((Board)g).setAttachmentsallowed((Boolean)cooked);
           }
 
-          public Field asField(Persistent g) {
+          public Field<Boolean> asField(Persistent g) {
             return ((Board)g).getAttachmentsallowedField();
           }
 
@@ -860,7 +860,7 @@ public class BoardTableBase extends BoardsTable {
         });
 
     defineColumn(col_anonymousposting =
-        new Column(this, "anonymousposting",
+        new Column<Boolean>(this, "anonymousposting",
                    new BooleanPoemType(false),
                    DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
@@ -873,7 +873,7 @@ public class BoardTableBase extends BoardsTable {
             ((Board)g).setAnonymousposting((Boolean)cooked);
           }
 
-          public Field asField(Persistent g) {
+          public Field<Boolean> asField(Persistent g) {
             return ((Board)g).getAnonymouspostingField();
           }
 
@@ -919,7 +919,7 @@ public class BoardTableBase extends BoardsTable {
         });
 
     defineColumn(col_attachmentspath =
-        new Column(this, "attachmentspath",
+        new Column<String>(this, "attachmentspath",
                    new StringPoemType(false, -1),
                    DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
@@ -932,7 +932,7 @@ public class BoardTableBase extends BoardsTable {
             ((Board)g).setAttachmentspath((String)cooked);
           }
 
-          public Field asField(Persistent g) {
+          public Field<String> asField(Persistent g) {
             return ((Board)g).getAttachmentspathField();
           }
 
@@ -986,7 +986,7 @@ public class BoardTableBase extends BoardsTable {
         });
 
     defineColumn(col_attachmentsurl =
-        new Column(this, "attachmentsurl",
+        new Column<String>(this, "attachmentsurl",
                    new StringPoemType(false, -1),
                    DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
@@ -999,7 +999,7 @@ public class BoardTableBase extends BoardsTable {
             ((Board)g).setAttachmentsurl((String)cooked);
           }
 
-          public Field asField(Persistent g) {
+          public Field<String> asField(Persistent g) {
             return ((Board)g).getAttachmentsurlField();
           }
 
@@ -1061,7 +1061,7 @@ public class BoardTableBase extends BoardsTable {
   * @see org.melati.poem.prepro.FieldDef#generateColAccessor 
   * @return the id <code>Column</code>
   */
-  public final Column getIdColumn() {
+  public final Column<Integer> getIdColumn() {
     return col_id;
   }
 
@@ -1073,7 +1073,7 @@ public class BoardTableBase extends BoardsTable {
   * @see org.melati.poem.prepro.FieldDef#generateColAccessor 
   * @return the type <code>Column</code>
   */
-  public final Column getTypeColumn() {
+  public final Column<Integer> getTypeColumn() {
     return col_type;
   }
 
@@ -1085,7 +1085,7 @@ public class BoardTableBase extends BoardsTable {
   * @see org.melati.poem.prepro.FieldDef#generateColAccessor 
   * @return the name <code>Column</code>
   */
-  public final Column getNameColumn() {
+  public final Column<String> getNameColumn() {
     return col_name;
   }
 
@@ -1097,7 +1097,7 @@ public class BoardTableBase extends BoardsTable {
   * @see org.melati.poem.prepro.FieldDef#generateColAccessor 
   * @return the displayname <code>Column</code>
   */
-  public final Column getDisplaynameColumn() {
+  public final Column<String> getDisplaynameColumn() {
     return col_displayname;
   }
 
@@ -1109,7 +1109,7 @@ public class BoardTableBase extends BoardsTable {
   * @see org.melati.poem.prepro.FieldDef#generateColAccessor 
   * @return the purpose <code>Column</code>
   */
-  public final Column getPurposeColumn() {
+  public final Column<String> getPurposeColumn() {
     return col_purpose;
   }
 
@@ -1121,7 +1121,7 @@ public class BoardTableBase extends BoardsTable {
   * @see org.melati.poem.prepro.FieldDef#generateColAccessor 
   * @return the archived <code>Column</code>
   */
-  public final Column getArchivedColumn() {
+  public final Column<Boolean> getArchivedColumn() {
     return col_archived;
   }
 
@@ -1133,7 +1133,7 @@ public class BoardTableBase extends BoardsTable {
   * @see org.melati.poem.prepro.FieldDef#generateColAccessor 
   * @return the opensubscription <code>Column</code>
   */
-  public final Column getOpensubscriptionColumn() {
+  public final Column<Boolean> getOpensubscriptionColumn() {
     return col_opensubscription;
   }
 
@@ -1145,7 +1145,7 @@ public class BoardTableBase extends BoardsTable {
   * @see org.melati.poem.prepro.FieldDef#generateColAccessor 
   * @return the moderatedsubscription <code>Column</code>
   */
-  public final Column getModeratedsubscriptionColumn() {
+  public final Column<Boolean> getModeratedsubscriptionColumn() {
     return col_moderatedsubscription;
   }
 
@@ -1157,7 +1157,7 @@ public class BoardTableBase extends BoardsTable {
   * @see org.melati.poem.prepro.FieldDef#generateColAccessor 
   * @return the openposting <code>Column</code>
   */
-  public final Column getOpenpostingColumn() {
+  public final Column<Boolean> getOpenpostingColumn() {
     return col_openposting;
   }
 
@@ -1169,7 +1169,7 @@ public class BoardTableBase extends BoardsTable {
   * @see org.melati.poem.prepro.FieldDef#generateColAccessor 
   * @return the moderatedposting <code>Column</code>
   */
-  public final Column getModeratedpostingColumn() {
+  public final Column<Boolean> getModeratedpostingColumn() {
     return col_moderatedposting;
   }
 
@@ -1181,7 +1181,7 @@ public class BoardTableBase extends BoardsTable {
   * @see org.melati.poem.prepro.FieldDef#generateColAccessor 
   * @return the openmessageviewing <code>Column</code>
   */
-  public final Column getOpenmessageviewingColumn() {
+  public final Column<Boolean> getOpenmessageviewingColumn() {
     return col_openmessageviewing;
   }
 
@@ -1193,7 +1193,7 @@ public class BoardTableBase extends BoardsTable {
   * @see org.melati.poem.prepro.FieldDef#generateColAccessor 
   * @return the openmemberlist <code>Column</code>
   */
-  public final Column getOpenmemberlistColumn() {
+  public final Column<Boolean> getOpenmemberlistColumn() {
     return col_openmemberlist;
   }
 
@@ -1205,7 +1205,7 @@ public class BoardTableBase extends BoardsTable {
   * @see org.melati.poem.prepro.FieldDef#generateColAccessor 
   * @return the attachmentsallowed <code>Column</code>
   */
-  public final Column getAttachmentsallowedColumn() {
+  public final Column<Boolean> getAttachmentsallowedColumn() {
     return col_attachmentsallowed;
   }
 
@@ -1217,7 +1217,7 @@ public class BoardTableBase extends BoardsTable {
   * @see org.melati.poem.prepro.FieldDef#generateColAccessor 
   * @return the anonymousposting <code>Column</code>
   */
-  public final Column getAnonymouspostingColumn() {
+  public final Column<Boolean> getAnonymouspostingColumn() {
     return col_anonymousposting;
   }
 
@@ -1229,7 +1229,7 @@ public class BoardTableBase extends BoardsTable {
   * @see org.melati.poem.prepro.FieldDef#generateColAccessor 
   * @return the attachmentspath <code>Column</code>
   */
-  public final Column getAttachmentspathColumn() {
+  public final Column<String> getAttachmentspathColumn() {
     return col_attachmentspath;
   }
 
@@ -1241,7 +1241,7 @@ public class BoardTableBase extends BoardsTable {
   * @see org.melati.poem.prepro.FieldDef#generateColAccessor 
   * @return the attachmentsurl <code>Column</code>
   */
-  public final Column getAttachmentsurlColumn() {
+  public final Column<String> getAttachmentsurlColumn() {
     return col_attachmentsurl;
   }
 

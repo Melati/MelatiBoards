@@ -139,17 +139,17 @@ public abstract class UserBase extends User {
   *         does not confer write access rights
   * @return the String email
   */
-  public Field getEmailField() throws AccessPoemException {
-    Column c = _getUserTable().getEmailColumn();
-    return new Field(c.getRaw(this), c);
+  public Field<String> getEmailField() throws AccessPoemException {
+    Column<String> c = _getUserTable().getEmailColumn();
+    return new Field<String>((String)c.getRaw(this), c);
   }
 
   private CachedSelection<GroupMembership> userGroupMemberships = null;
-  /** References to this in the GroupMembership table via its user field.*/
+  /** References to this User in the GroupMembership table via its user field.*/
   @SuppressWarnings("unchecked")
   public Enumeration<GroupMembership> getUserGroupMemberships() {
     if (getTroid() == null)
-      return EmptyEnumeration.it;
+      return new EmptyEnumeration<GroupMembership>();
     else {
       if (userGroupMemberships == null)
         userGroupMemberships =
@@ -159,19 +159,19 @@ public abstract class UserBase extends User {
   }
 
 
-  /** References to this in the GroupMembership table via its user field, as a List.*/
-  public List<GroupMembership> getUserGroupMembershipsList() {
+  /** References to this User in the GroupMembership table via its user field, as a List.*/
+  public List<GroupMembership> getUserGroupMembershipList() {
     return Collections.list(getUserGroupMemberships());
   }
 
 
 
   private CachedSelection<Subscription> userSubscriptions = null;
-  /** References to this in the Subscription table via its user field.*/
+  /** References to this User in the Subscription table via its user field.*/
   @SuppressWarnings("unchecked")
   public Enumeration<Subscription> getUserSubscriptions() {
     if (getTroid() == null)
-      return EmptyEnumeration.it;
+      return new EmptyEnumeration<Subscription>();
     else {
       if (userSubscriptions == null)
         userSubscriptions =
@@ -181,19 +181,19 @@ public abstract class UserBase extends User {
   }
 
 
-  /** References to this in the Subscription table via its user field, as a List.*/
-  public List<Subscription> getUserSubscriptionsList() {
+  /** References to this User in the Subscription table via its user field, as a List.*/
+  public List<Subscription> getUserSubscriptionList() {
     return Collections.list(getUserSubscriptions());
   }
 
 
 
   private CachedSelection<Message> authorMessages = null;
-  /** References to this in the Message table via its author field.*/
+  /** References to this User in the Message table via its author field.*/
   @SuppressWarnings("unchecked")
   public Enumeration<Message> getAuthorMessages() {
     if (getTroid() == null)
-      return EmptyEnumeration.it;
+      return new EmptyEnumeration<Message>();
     else {
       if (authorMessages == null)
         authorMessages =
@@ -203,8 +203,8 @@ public abstract class UserBase extends User {
   }
 
 
-  /** References to this in the Message table via its author field, as a List.*/
-  public List<Message> getAuthorMessagesList() {
+  /** References to this User in the Message table via its author field, as a List.*/
+  public List<Message> getAuthorMessageList() {
     return Collections.list(getAuthorMessages());
   }
 

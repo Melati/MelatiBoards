@@ -47,18 +47,18 @@ public class BoardsDatabaseBase extends PoemDatabase {
   protected BoardsDatabaseBase() {
     redefineTable(tab_group = new GroupTable(this, "group", DefinitionSource.dsd));
     redefineTable(tab_capability = new CapabilityTable(this, "capability", DefinitionSource.dsd));
-    redefineTable(tab_groupmembership = new GroupMembershipTable(this, "groupmembership", DefinitionSource.dsd));
-    redefineTable(tab_groupcapability = new GroupCapabilityTable(this, "groupcapability", DefinitionSource.dsd));
-    redefineTable(tab_tablecategory = new TableCategoryTable(this, "tablecategory", DefinitionSource.dsd));
-    redefineTable(tab_tableinfo = new TableInfoTable(this, "tableinfo", DefinitionSource.dsd));
-    redefineTable(tab_columninfo = new ColumnInfoTable(this, "columninfo", DefinitionSource.dsd));
-    redefineTable(tab_boardtype = new BoardTypeTable(this, "boardtype", DefinitionSource.dsd));
+    redefineTable(tab_groupmembership = new GroupMembershipTable(this, "groupMembership", DefinitionSource.dsd));
+    redefineTable(tab_groupcapability = new GroupCapabilityTable(this, "groupCapability", DefinitionSource.dsd));
+    redefineTable(tab_tablecategory = new TableCategoryTable(this, "tableCategory", DefinitionSource.dsd));
+    redefineTable(tab_tableinfo = new TableInfoTable(this, "tableInfo", DefinitionSource.dsd));
+    redefineTable(tab_columninfo = new ColumnInfoTable(this, "columnInfo", DefinitionSource.dsd));
+    redefineTable(tab_boardtype = new BoardTypeTable(this, "boardType", DefinitionSource.dsd));
     redefineTable(tab_board = new BoardTable(this, "board", DefinitionSource.dsd));
     redefineTable(tab_user = new UserTable(this, "user", DefinitionSource.dsd));
-    redefineTable(tab_membershipstatus = new MembershipStatusTable(this, "membershipstatus", DefinitionSource.dsd));
+    redefineTable(tab_membershipstatus = new MembershipStatusTable(this, "membershipStatus", DefinitionSource.dsd));
     redefineTable(tab_subscription = new SubscriptionTable(this, "subscription", DefinitionSource.dsd));
     redefineTable(tab_message = new MessageTable(this, "message", DefinitionSource.dsd));
-    redefineTable(tab_attachmenttype = new AttachmentTypeTable(this, "attachmenttype", DefinitionSource.dsd));
+    redefineTable(tab_attachmenttype = new AttachmentTypeTable(this, "attachmentType", DefinitionSource.dsd));
     redefineTable(tab_attachment = new AttachmentTable(this, "attachment", DefinitionSource.dsd));
     redefineTable(tab_setting = new SettingTable(this, "setting", DefinitionSource.dsd));
   }

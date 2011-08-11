@@ -35,12 +35,12 @@ import org.paneris.melati.boards.model.User;
 
 public class SubscriptionTableBase extends BoardsTable {
 
-  private Column col_id = null;
-  private Column col_user = null;
-  private Column col_board = null;
-  private Column col_status = null;
-  private Column col_ismanager = null;
-  private Column col_approved = null;
+  private Column<Integer> col_id = null;
+  private Column<Integer> col_user = null;
+  private Column<Integer> col_board = null;
+  private Column<Integer> col_status = null;
+  private Column<Boolean> col_ismanager = null;
+  private Column<Boolean> col_approved = null;
 
  /**
   * Constructor. 
@@ -72,7 +72,7 @@ public class SubscriptionTableBase extends BoardsTable {
   public void init() throws PoemException {
     super.init();
     defineColumn(col_id =
-        new Column(this, "id",
+        new Column<Integer>(this, "id",
                    new TroidPoemType(),
                    DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
@@ -85,7 +85,7 @@ public class SubscriptionTableBase extends BoardsTable {
             ((Subscription)g).setId((Integer)cooked);
           }
 
-          public Field asField(Persistent g) {
+          public Field<Integer> asField(Persistent g) {
             return ((Subscription)g).getIdField();
           }
 
@@ -127,7 +127,7 @@ public class SubscriptionTableBase extends BoardsTable {
         });
 
     defineColumn(col_user =
-        new Column(this, "user",
+        new Column<Integer>(this, "user",
                    new ReferencePoemType(getBoardsDatabaseTables().
                                              getUserTable(), false),
                    DefinitionSource.dsd) { 
@@ -141,7 +141,7 @@ public class SubscriptionTableBase extends BoardsTable {
             ((Subscription)g).setUser((User)cooked);
           }
 
-          public Field asField(Persistent g) {
+          public Field<Integer> asField(Persistent g) {
             return ((Subscription)g).getUserField();
           }
 
@@ -195,7 +195,7 @@ public class SubscriptionTableBase extends BoardsTable {
         });
 
     defineColumn(col_board =
-        new Column(this, "board",
+        new Column<Integer>(this, "board",
                    new ReferencePoemType(getBoardsDatabaseTables().
                                              getBoardTable(), false),
                    DefinitionSource.dsd) { 
@@ -209,7 +209,7 @@ public class SubscriptionTableBase extends BoardsTable {
             ((Subscription)g).setBoard((Board)cooked);
           }
 
-          public Field asField(Persistent g) {
+          public Field<Integer> asField(Persistent g) {
             return ((Subscription)g).getBoardField();
           }
 
@@ -263,7 +263,7 @@ public class SubscriptionTableBase extends BoardsTable {
         });
 
     defineColumn(col_status =
-        new Column(this, "status",
+        new Column<Integer>(this, "status",
                    new ReferencePoemType(getBoardsDatabaseTables().
                                              getMembershipStatusTable(), false),
                    DefinitionSource.dsd) { 
@@ -277,7 +277,7 @@ public class SubscriptionTableBase extends BoardsTable {
             ((Subscription)g).setStatus((MembershipStatus)cooked);
           }
 
-          public Field asField(Persistent g) {
+          public Field<Integer> asField(Persistent g) {
             return ((Subscription)g).getStatusField();
           }
 
@@ -323,7 +323,7 @@ public class SubscriptionTableBase extends BoardsTable {
         });
 
     defineColumn(col_ismanager =
-        new Column(this, "ismanager",
+        new Column<Boolean>(this, "ismanager",
                    new BooleanPoemType(false),
                    DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
@@ -336,7 +336,7 @@ public class SubscriptionTableBase extends BoardsTable {
             ((Subscription)g).setIsmanager((Boolean)cooked);
           }
 
-          public Field asField(Persistent g) {
+          public Field<Boolean> asField(Persistent g) {
             return ((Subscription)g).getIsmanagerField();
           }
 
@@ -382,7 +382,7 @@ public class SubscriptionTableBase extends BoardsTable {
         });
 
     defineColumn(col_approved =
-        new Column(this, "approved",
+        new Column<Boolean>(this, "approved",
                    new BooleanPoemType(false),
                    DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
@@ -395,7 +395,7 @@ public class SubscriptionTableBase extends BoardsTable {
             ((Subscription)g).setApproved((Boolean)cooked);
           }
 
-          public Field asField(Persistent g) {
+          public Field<Boolean> asField(Persistent g) {
             return ((Subscription)g).getApprovedField();
           }
 
@@ -453,7 +453,7 @@ public class SubscriptionTableBase extends BoardsTable {
   * @see org.melati.poem.prepro.FieldDef#generateColAccessor 
   * @return the id <code>Column</code>
   */
-  public final Column getIdColumn() {
+  public final Column<Integer> getIdColumn() {
     return col_id;
   }
 
@@ -465,7 +465,7 @@ public class SubscriptionTableBase extends BoardsTable {
   * @see org.melati.poem.prepro.FieldDef#generateColAccessor 
   * @return the user <code>Column</code>
   */
-  public final Column getUserColumn() {
+  public final Column<Integer> getUserColumn() {
     return col_user;
   }
 
@@ -477,7 +477,7 @@ public class SubscriptionTableBase extends BoardsTable {
   * @see org.melati.poem.prepro.FieldDef#generateColAccessor 
   * @return the board <code>Column</code>
   */
-  public final Column getBoardColumn() {
+  public final Column<Integer> getBoardColumn() {
     return col_board;
   }
 
@@ -489,7 +489,7 @@ public class SubscriptionTableBase extends BoardsTable {
   * @see org.melati.poem.prepro.FieldDef#generateColAccessor 
   * @return the status <code>Column</code>
   */
-  public final Column getStatusColumn() {
+  public final Column<Integer> getStatusColumn() {
     return col_status;
   }
 
@@ -501,7 +501,7 @@ public class SubscriptionTableBase extends BoardsTable {
   * @see org.melati.poem.prepro.FieldDef#generateColAccessor 
   * @return the ismanager <code>Column</code>
   */
-  public final Column getIsmanagerColumn() {
+  public final Column<Boolean> getIsmanagerColumn() {
     return col_ismanager;
   }
 
@@ -513,7 +513,7 @@ public class SubscriptionTableBase extends BoardsTable {
   * @see org.melati.poem.prepro.FieldDef#generateColAccessor 
   * @return the approved <code>Column</code>
   */
-  public final Column getApprovedColumn() {
+  public final Column<Boolean> getApprovedColumn() {
     return col_approved;
   }
 
