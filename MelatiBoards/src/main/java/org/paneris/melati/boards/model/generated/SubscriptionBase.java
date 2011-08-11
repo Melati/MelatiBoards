@@ -171,9 +171,9 @@ public abstract class SubscriptionBase extends JdbcPersistent {
   *         does not confer write access rights
   * @return the Integer id
   */
-  public Field getIdField() throws AccessPoemException {
-    Column c = _getSubscriptionTable().getIdColumn();
-    return new Field(c.getRaw(this), c);
+  public Field<Integer> getIdField() throws AccessPoemException {
+    Column<Integer> c = _getSubscriptionTable().getIdColumn();
+    return new Field<Integer>((Integer)c.getRaw(this), c);
   }
 
 
@@ -286,9 +286,9 @@ public abstract class SubscriptionBase extends JdbcPersistent {
   *         does not confer write access rights
   * @return the Integer user
   */
-  public Field getUserField() throws AccessPoemException {
-    Column c = _getSubscriptionTable().getUserColumn();
-    return new Field(c.getRaw(this), c);
+  public Field<Integer> getUserField() throws AccessPoemException {
+    Column<Integer> c = _getSubscriptionTable().getUserColumn();
+    return new Field<Integer>((Integer)c.getRaw(this), c);
   }
 
 
@@ -401,9 +401,9 @@ public abstract class SubscriptionBase extends JdbcPersistent {
   *         does not confer write access rights
   * @return the Integer board
   */
-  public Field getBoardField() throws AccessPoemException {
-    Column c = _getSubscriptionTable().getBoardColumn();
-    return new Field(c.getRaw(this), c);
+  public Field<Integer> getBoardField() throws AccessPoemException {
+    Column<Integer> c = _getSubscriptionTable().getBoardColumn();
+    return new Field<Integer>((Integer)c.getRaw(this), c);
   }
 
 
@@ -516,9 +516,9 @@ public abstract class SubscriptionBase extends JdbcPersistent {
   *         does not confer write access rights
   * @return the Integer status
   */
-  public Field getStatusField() throws AccessPoemException {
-    Column c = _getSubscriptionTable().getStatusColumn();
-    return new Field(c.getRaw(this), c);
+  public Field<Integer> getStatusField() throws AccessPoemException {
+    Column<Integer> c = _getSubscriptionTable().getStatusColumn();
+    return new Field<Integer>((Integer)c.getRaw(this), c);
   }
 
 
@@ -621,9 +621,9 @@ public abstract class SubscriptionBase extends JdbcPersistent {
   *         does not confer write access rights
   * @return the Boolean ismanager
   */
-  public Field getIsmanagerField() throws AccessPoemException {
-    Column c = _getSubscriptionTable().getIsmanagerColumn();
-    return new Field(c.getRaw(this), c);
+  public Field<Boolean> getIsmanagerField() throws AccessPoemException {
+    Column<Boolean> c = _getSubscriptionTable().getIsmanagerColumn();
+    return new Field<Boolean>((Boolean)c.getRaw(this), c);
   }
 
 
@@ -729,9 +729,9 @@ public abstract class SubscriptionBase extends JdbcPersistent {
   *         does not confer write access rights
   * @return the Boolean approved
   */
-  public Field getApprovedField() throws AccessPoemException {
-    Column c = _getSubscriptionTable().getApprovedColumn();
-    return new Field(c.getRaw(this), c);
+  public Field<Boolean> getApprovedField() throws AccessPoemException {
+    Column<Boolean> c = _getSubscriptionTable().getApprovedColumn();
+    return new Field<Boolean>((Boolean)c.getRaw(this), c);
   }
 
 }

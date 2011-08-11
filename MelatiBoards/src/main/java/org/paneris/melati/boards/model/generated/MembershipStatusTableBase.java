@@ -30,8 +30,8 @@ import org.paneris.melati.boards.model.MembershipStatus;
 
 public class MembershipStatusTableBase extends BoardsTable {
 
-  private Column col_id = null;
-  private Column col_status = null;
+  private Column<Integer> col_id = null;
+  private Column<String> col_status = null;
 
  /**
   * Constructor. 
@@ -63,7 +63,7 @@ public class MembershipStatusTableBase extends BoardsTable {
   public void init() throws PoemException {
     super.init();
     defineColumn(col_id =
-        new Column(this, "id",
+        new Column<Integer>(this, "id",
                    new TroidPoemType(),
                    DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
@@ -76,7 +76,7 @@ public class MembershipStatusTableBase extends BoardsTable {
             ((MembershipStatus)g).setId((Integer)cooked);
           }
 
-          public Field asField(Persistent g) {
+          public Field<Integer> asField(Persistent g) {
             return ((MembershipStatus)g).getIdField();
           }
 
@@ -122,7 +122,7 @@ public class MembershipStatusTableBase extends BoardsTable {
         });
 
     defineColumn(col_status =
-        new Column(this, "status",
+        new Column<String>(this, "status",
                    new StringPoemType(false, -1),
                    DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
@@ -135,7 +135,7 @@ public class MembershipStatusTableBase extends BoardsTable {
             ((MembershipStatus)g).setStatus((String)cooked);
           }
 
-          public Field asField(Persistent g) {
+          public Field<String> asField(Persistent g) {
             return ((MembershipStatus)g).getStatusField();
           }
 
@@ -193,7 +193,7 @@ public class MembershipStatusTableBase extends BoardsTable {
   * @see org.melati.poem.prepro.FieldDef#generateColAccessor 
   * @return the id <code>Column</code>
   */
-  public final Column getIdColumn() {
+  public final Column<Integer> getIdColumn() {
     return col_id;
   }
 
@@ -205,7 +205,7 @@ public class MembershipStatusTableBase extends BoardsTable {
   * @see org.melati.poem.prepro.FieldDef#generateColAccessor 
   * @return the status <code>Column</code>
   */
-  public final Column getStatusColumn() {
+  public final Column<String> getStatusColumn() {
     return col_status;
   }
 

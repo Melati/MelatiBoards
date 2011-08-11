@@ -159,9 +159,9 @@ public abstract class BoardTypeBase extends JdbcPersistent {
   *         does not confer write access rights
   * @return the Integer id
   */
-  public Field getIdField() throws AccessPoemException {
-    Column c = _getBoardTypeTable().getIdColumn();
-    return new Field(c.getRaw(this), c);
+  public Field<Integer> getIdField() throws AccessPoemException {
+    Column<Integer> c = _getBoardTypeTable().getIdColumn();
+    return new Field<Integer>((Integer)c.getRaw(this), c);
   }
 
 
@@ -242,9 +242,9 @@ public abstract class BoardTypeBase extends JdbcPersistent {
   *         does not confer write access rights
   * @return the String type
   */
-  public Field getTypeField() throws AccessPoemException {
-    Column c = _getBoardTypeTable().getTypeColumn();
-    return new Field(c.getRaw(this), c);
+  public Field<String> getTypeField() throws AccessPoemException {
+    Column<String> c = _getBoardTypeTable().getTypeColumn();
+    return new Field<String>((String)c.getRaw(this), c);
   }
 
 
@@ -325,17 +325,17 @@ public abstract class BoardTypeBase extends JdbcPersistent {
   *         does not confer write access rights
   * @return the String description
   */
-  public Field getDescriptionField() throws AccessPoemException {
-    Column c = _getBoardTypeTable().getDescriptionColumn();
-    return new Field(c.getRaw(this), c);
+  public Field<String> getDescriptionField() throws AccessPoemException {
+    Column<String> c = _getBoardTypeTable().getDescriptionColumn();
+    return new Field<String>((String)c.getRaw(this), c);
   }
 
   private CachedSelection<Board> typeBoards = null;
-  /** References to this in the Board table via its type field.*/
+  /** References to this BoardType in the Board table via its type field.*/
   @SuppressWarnings("unchecked")
   public Enumeration<Board> getTypeBoards() {
     if (getTroid() == null)
-      return EmptyEnumeration.it;
+      return new EmptyEnumeration<Board>();
     else {
       if (typeBoards == null)
         typeBoards =
@@ -345,8 +345,8 @@ public abstract class BoardTypeBase extends JdbcPersistent {
   }
 
 
-  /** References to this in the Board table via its type field, as a List.*/
-  public List<Board> getTypeBoardsList() {
+  /** References to this BoardType in the Board table via its type field, as a List.*/
+  public List<Board> getTypeBoardList() {
     return Collections.list(getTypeBoards());
   }
 

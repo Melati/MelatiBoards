@@ -37,15 +37,15 @@ import org.paneris.melati.boards.model.User;
 
 public class MessageTableBase extends BoardsTable {
 
-  private Column col_id = null;
-  private Column col_board = null;
-  private Column col_date = null;
-  private Column col_subject = null;
-  private Column col_author = null;
-  private Column col_parent = null;
-  private Column col_body = null;
-  private Column col_deleted = null;
-  private Column col_approved = null;
+  private Column<Integer> col_id = null;
+  private Column<Integer> col_board = null;
+  private Column<Timestamp> col_date = null;
+  private Column<String> col_subject = null;
+  private Column<Integer> col_author = null;
+  private Column<Integer> col_parent = null;
+  private Column<String> col_body = null;
+  private Column<Boolean> col_deleted = null;
+  private Column<Boolean> col_approved = null;
 
  /**
   * Constructor. 
@@ -77,7 +77,7 @@ public class MessageTableBase extends BoardsTable {
   public void init() throws PoemException {
     super.init();
     defineColumn(col_id =
-        new Column(this, "id",
+        new Column<Integer>(this, "id",
                    new TroidPoemType(),
                    DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
@@ -90,7 +90,7 @@ public class MessageTableBase extends BoardsTable {
             ((Message)g).setId((Integer)cooked);
           }
 
-          public Field asField(Persistent g) {
+          public Field<Integer> asField(Persistent g) {
             return ((Message)g).getIdField();
           }
 
@@ -128,7 +128,7 @@ public class MessageTableBase extends BoardsTable {
         });
 
     defineColumn(col_board =
-        new Column(this, "board",
+        new Column<Integer>(this, "board",
                    new ReferencePoemType(getBoardsDatabaseTables().
                                              getBoardTable(), false),
                    DefinitionSource.dsd) { 
@@ -142,7 +142,7 @@ public class MessageTableBase extends BoardsTable {
             ((Message)g).setBoard((Board)cooked);
           }
 
-          public Field asField(Persistent g) {
+          public Field<Integer> asField(Persistent g) {
             return ((Message)g).getBoardField();
           }
 
@@ -200,7 +200,7 @@ public class MessageTableBase extends BoardsTable {
         });
 
     defineColumn(col_date =
-        new Column(this, "date",
+        new Column<Timestamp>(this, "date",
                    new TimestampPoemType(false),
                    DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
@@ -213,7 +213,7 @@ public class MessageTableBase extends BoardsTable {
             ((Message)g).setDate((Timestamp)cooked);
           }
 
-          public Field asField(Persistent g) {
+          public Field<Timestamp> asField(Persistent g) {
             return ((Message)g).getDateField();
           }
 
@@ -271,7 +271,7 @@ public class MessageTableBase extends BoardsTable {
         });
 
     defineColumn(col_subject =
-        new Column(this, "subject",
+        new Column<String>(this, "subject",
                    new StringPoemType(false, -1),
                    DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
@@ -284,7 +284,7 @@ public class MessageTableBase extends BoardsTable {
             ((Message)g).setSubject((String)cooked);
           }
 
-          public Field asField(Persistent g) {
+          public Field<String> asField(Persistent g) {
             return ((Message)g).getSubjectField();
           }
 
@@ -330,7 +330,7 @@ public class MessageTableBase extends BoardsTable {
         });
 
     defineColumn(col_author =
-        new Column(this, "author",
+        new Column<Integer>(this, "author",
                    new ReferencePoemType(getBoardsDatabaseTables().
                                              getUserTable(), false),
                    DefinitionSource.dsd) { 
@@ -344,7 +344,7 @@ public class MessageTableBase extends BoardsTable {
             ((Message)g).setAuthor((User)cooked);
           }
 
-          public Field asField(Persistent g) {
+          public Field<Integer> asField(Persistent g) {
             return ((Message)g).getAuthorField();
           }
 
@@ -394,7 +394,7 @@ public class MessageTableBase extends BoardsTable {
         });
 
     defineColumn(col_parent =
-        new Column(this, "parent",
+        new Column<Integer>(this, "parent",
                    new ReferencePoemType(getBoardsDatabaseTables().
                                              getMessageTable(), true),
                    DefinitionSource.dsd) { 
@@ -408,7 +408,7 @@ public class MessageTableBase extends BoardsTable {
             ((Message)g).setParent((Message)cooked);
           }
 
-          public Field asField(Persistent g) {
+          public Field<Integer> asField(Persistent g) {
             return ((Message)g).getParentField();
           }
 
@@ -462,7 +462,7 @@ public class MessageTableBase extends BoardsTable {
         });
 
     defineColumn(col_body =
-        new Column(this, "body",
+        new Column<String>(this, "body",
                    new StringPoemType(false, -1),
                    DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
@@ -475,7 +475,7 @@ public class MessageTableBase extends BoardsTable {
             ((Message)g).setBody((String)cooked);
           }
 
-          public Field asField(Persistent g) {
+          public Field<String> asField(Persistent g) {
             return ((Message)g).getBodyField();
           }
 
@@ -525,7 +525,7 @@ public class MessageTableBase extends BoardsTable {
         });
 
     defineColumn(col_deleted =
-        new Column(this, "deleted",
+        new Column<Boolean>(this, "deleted",
                    new BooleanPoemType(false),
                    DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
@@ -538,7 +538,7 @@ public class MessageTableBase extends BoardsTable {
             ((Message)g).setDeleted((Boolean)cooked);
           }
 
-          public Field asField(Persistent g) {
+          public Field<Boolean> asField(Persistent g) {
             return ((Message)g).getDeletedField();
           }
 
@@ -584,7 +584,7 @@ public class MessageTableBase extends BoardsTable {
         });
 
     defineColumn(col_approved =
-        new Column(this, "approved",
+        new Column<Boolean>(this, "approved",
                    new BooleanPoemType(false),
                    DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
@@ -597,7 +597,7 @@ public class MessageTableBase extends BoardsTable {
             ((Message)g).setApproved((Boolean)cooked);
           }
 
-          public Field asField(Persistent g) {
+          public Field<Boolean> asField(Persistent g) {
             return ((Message)g).getApprovedField();
           }
 
@@ -655,7 +655,7 @@ public class MessageTableBase extends BoardsTable {
   * @see org.melati.poem.prepro.FieldDef#generateColAccessor 
   * @return the id <code>Column</code>
   */
-  public final Column getIdColumn() {
+  public final Column<Integer> getIdColumn() {
     return col_id;
   }
 
@@ -667,7 +667,7 @@ public class MessageTableBase extends BoardsTable {
   * @see org.melati.poem.prepro.FieldDef#generateColAccessor 
   * @return the board <code>Column</code>
   */
-  public final Column getBoardColumn() {
+  public final Column<Integer> getBoardColumn() {
     return col_board;
   }
 
@@ -679,7 +679,7 @@ public class MessageTableBase extends BoardsTable {
   * @see org.melati.poem.prepro.FieldDef#generateColAccessor 
   * @return the date <code>Column</code>
   */
-  public final Column getDateColumn() {
+  public final Column<Timestamp> getDateColumn() {
     return col_date;
   }
 
@@ -691,7 +691,7 @@ public class MessageTableBase extends BoardsTable {
   * @see org.melati.poem.prepro.FieldDef#generateColAccessor 
   * @return the subject <code>Column</code>
   */
-  public final Column getSubjectColumn() {
+  public final Column<String> getSubjectColumn() {
     return col_subject;
   }
 
@@ -703,7 +703,7 @@ public class MessageTableBase extends BoardsTable {
   * @see org.melati.poem.prepro.FieldDef#generateColAccessor 
   * @return the author <code>Column</code>
   */
-  public final Column getAuthorColumn() {
+  public final Column<Integer> getAuthorColumn() {
     return col_author;
   }
 
@@ -715,7 +715,7 @@ public class MessageTableBase extends BoardsTable {
   * @see org.melati.poem.prepro.FieldDef#generateColAccessor 
   * @return the parent <code>Column</code>
   */
-  public final Column getParentColumn() {
+  public final Column<Integer> getParentColumn() {
     return col_parent;
   }
 
@@ -727,7 +727,7 @@ public class MessageTableBase extends BoardsTable {
   * @see org.melati.poem.prepro.FieldDef#generateColAccessor 
   * @return the body <code>Column</code>
   */
-  public final Column getBodyColumn() {
+  public final Column<String> getBodyColumn() {
     return col_body;
   }
 
@@ -739,7 +739,7 @@ public class MessageTableBase extends BoardsTable {
   * @see org.melati.poem.prepro.FieldDef#generateColAccessor 
   * @return the deleted <code>Column</code>
   */
-  public final Column getDeletedColumn() {
+  public final Column<Boolean> getDeletedColumn() {
     return col_deleted;
   }
 
@@ -751,7 +751,7 @@ public class MessageTableBase extends BoardsTable {
   * @see org.melati.poem.prepro.FieldDef#generateColAccessor 
   * @return the approved <code>Column</code>
   */
-  public final Column getApprovedColumn() {
+  public final Column<Boolean> getApprovedColumn() {
     return col_approved;
   }
 

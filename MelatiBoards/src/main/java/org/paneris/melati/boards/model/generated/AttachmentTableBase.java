@@ -35,13 +35,13 @@ import org.paneris.melati.boards.model.Message;
 
 public class AttachmentTableBase extends BoardsTable {
 
-  private Column col_id = null;
-  private Column col_message = null;
-  private Column col_filename = null;
-  private Column col_path = null;
-  private Column col_url = null;
-  private Column col_size = null;
-  private Column col_type = null;
+  private Column<Integer> col_id = null;
+  private Column<Integer> col_message = null;
+  private Column<String> col_filename = null;
+  private Column<String> col_path = null;
+  private Column<String> col_url = null;
+  private Column<Integer> col_size = null;
+  private Column<Integer> col_type = null;
 
  /**
   * Constructor. 
@@ -73,7 +73,7 @@ public class AttachmentTableBase extends BoardsTable {
   public void init() throws PoemException {
     super.init();
     defineColumn(col_id =
-        new Column(this, "id",
+        new Column<Integer>(this, "id",
                    new TroidPoemType(),
                    DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
@@ -86,7 +86,7 @@ public class AttachmentTableBase extends BoardsTable {
             ((Attachment)g).setId((Integer)cooked);
           }
 
-          public Field asField(Persistent g) {
+          public Field<Integer> asField(Persistent g) {
             return ((Attachment)g).getIdField();
           }
 
@@ -124,7 +124,7 @@ public class AttachmentTableBase extends BoardsTable {
         });
 
     defineColumn(col_message =
-        new Column(this, "message",
+        new Column<Integer>(this, "message",
                    new ReferencePoemType(getBoardsDatabaseTables().
                                              getMessageTable(), false),
                    DefinitionSource.dsd) { 
@@ -138,7 +138,7 @@ public class AttachmentTableBase extends BoardsTable {
             ((Attachment)g).setMessage((Message)cooked);
           }
 
-          public Field asField(Persistent g) {
+          public Field<Integer> asField(Persistent g) {
             return ((Attachment)g).getMessageField();
           }
 
@@ -196,7 +196,7 @@ public class AttachmentTableBase extends BoardsTable {
         });
 
     defineColumn(col_filename =
-        new Column(this, "filename",
+        new Column<String>(this, "filename",
                    new StringPoemType(false, -1),
                    DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
@@ -209,7 +209,7 @@ public class AttachmentTableBase extends BoardsTable {
             ((Attachment)g).setFilename((String)cooked);
           }
 
-          public Field asField(Persistent g) {
+          public Field<String> asField(Persistent g) {
             return ((Attachment)g).getFilenameField();
           }
 
@@ -267,7 +267,7 @@ public class AttachmentTableBase extends BoardsTable {
         });
 
     defineColumn(col_path =
-        new Column(this, "path",
+        new Column<String>(this, "path",
                    new StringPoemType(false, -1),
                    DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
@@ -280,7 +280,7 @@ public class AttachmentTableBase extends BoardsTable {
             ((Attachment)g).setPath((String)cooked);
           }
 
-          public Field asField(Persistent g) {
+          public Field<String> asField(Persistent g) {
             return ((Attachment)g).getPathField();
           }
 
@@ -330,7 +330,7 @@ public class AttachmentTableBase extends BoardsTable {
         });
 
     defineColumn(col_url =
-        new Column(this, "url",
+        new Column<String>(this, "url",
                    new StringPoemType(false, -1),
                    DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
@@ -343,7 +343,7 @@ public class AttachmentTableBase extends BoardsTable {
             ((Attachment)g).setUrl((String)cooked);
           }
 
-          public Field asField(Persistent g) {
+          public Field<String> asField(Persistent g) {
             return ((Attachment)g).getUrlField();
           }
 
@@ -393,7 +393,7 @@ public class AttachmentTableBase extends BoardsTable {
         });
 
     defineColumn(col_size =
-        new Column(this, "size",
+        new Column<Integer>(this, "size",
                    new IntegerPoemType(false),
                    DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
@@ -406,7 +406,7 @@ public class AttachmentTableBase extends BoardsTable {
             ((Attachment)g).setSize((Integer)cooked);
           }
 
-          public Field asField(Persistent g) {
+          public Field<Integer> asField(Persistent g) {
             return ((Attachment)g).getSizeField();
           }
 
@@ -456,7 +456,7 @@ public class AttachmentTableBase extends BoardsTable {
         });
 
     defineColumn(col_type =
-        new Column(this, "type",
+        new Column<Integer>(this, "type",
                    new ReferencePoemType(getBoardsDatabaseTables().
                                              getAttachmentTypeTable(), false),
                    DefinitionSource.dsd) { 
@@ -470,7 +470,7 @@ public class AttachmentTableBase extends BoardsTable {
             ((Attachment)g).setType((AttachmentType)cooked);
           }
 
-          public Field asField(Persistent g) {
+          public Field<Integer> asField(Persistent g) {
             return ((Attachment)g).getTypeField();
           }
 
@@ -520,7 +520,7 @@ public class AttachmentTableBase extends BoardsTable {
   * @see org.melati.poem.prepro.FieldDef#generateColAccessor 
   * @return the id <code>Column</code>
   */
-  public final Column getIdColumn() {
+  public final Column<Integer> getIdColumn() {
     return col_id;
   }
 
@@ -532,7 +532,7 @@ public class AttachmentTableBase extends BoardsTable {
   * @see org.melati.poem.prepro.FieldDef#generateColAccessor 
   * @return the message <code>Column</code>
   */
-  public final Column getMessageColumn() {
+  public final Column<Integer> getMessageColumn() {
     return col_message;
   }
 
@@ -544,7 +544,7 @@ public class AttachmentTableBase extends BoardsTable {
   * @see org.melati.poem.prepro.FieldDef#generateColAccessor 
   * @return the filename <code>Column</code>
   */
-  public final Column getFilenameColumn() {
+  public final Column<String> getFilenameColumn() {
     return col_filename;
   }
 
@@ -556,7 +556,7 @@ public class AttachmentTableBase extends BoardsTable {
   * @see org.melati.poem.prepro.FieldDef#generateColAccessor 
   * @return the path <code>Column</code>
   */
-  public final Column getPathColumn() {
+  public final Column<String> getPathColumn() {
     return col_path;
   }
 
@@ -568,7 +568,7 @@ public class AttachmentTableBase extends BoardsTable {
   * @see org.melati.poem.prepro.FieldDef#generateColAccessor 
   * @return the url <code>Column</code>
   */
-  public final Column getUrlColumn() {
+  public final Column<String> getUrlColumn() {
     return col_url;
   }
 
@@ -580,7 +580,7 @@ public class AttachmentTableBase extends BoardsTable {
   * @see org.melati.poem.prepro.FieldDef#generateColAccessor 
   * @return the size <code>Column</code>
   */
-  public final Column getSizeColumn() {
+  public final Column<Integer> getSizeColumn() {
     return col_size;
   }
 
@@ -592,7 +592,7 @@ public class AttachmentTableBase extends BoardsTable {
   * @see org.melati.poem.prepro.FieldDef#generateColAccessor 
   * @return the type <code>Column</code>
   */
-  public final Column getTypeColumn() {
+  public final Column<Integer> getTypeColumn() {
     return col_type;
   }
 

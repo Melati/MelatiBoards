@@ -29,7 +29,7 @@ import org.paneris.melati.boards.model.User;
 
 public class UserTableBase extends UserTable {
 
-  private Column col_email = null;
+  private Column<String> col_email = null;
 
  /**
   * Constructor. 
@@ -61,7 +61,7 @@ public class UserTableBase extends UserTable {
   public void init() throws PoemException {
     super.init();
     defineColumn(col_email =
-        new Column(this, "email",
+        new Column<String>(this, "email",
                    new StringPoemType(false, -1),
                    DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
@@ -74,7 +74,7 @@ public class UserTableBase extends UserTable {
             ((User)g).setEmail((String)cooked);
           }
 
-          public Field asField(Persistent g) {
+          public Field<String> asField(Persistent g) {
             return ((User)g).getEmailField();
           }
 
@@ -128,7 +128,7 @@ public class UserTableBase extends UserTable {
   * @see org.melati.poem.prepro.FieldDef#generateColAccessor 
   * @return the email <code>Column</code>
   */
-  public final Column getEmailColumn() {
+  public final Column<String> getEmailColumn() {
     return col_email;
   }
 

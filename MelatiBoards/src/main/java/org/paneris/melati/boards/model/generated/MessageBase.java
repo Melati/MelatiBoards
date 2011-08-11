@@ -189,9 +189,9 @@ public abstract class MessageBase extends JdbcPersistent {
   *         does not confer write access rights
   * @return the Integer id
   */
-  public Field getIdField() throws AccessPoemException {
-    Column c = _getMessageTable().getIdColumn();
-    return new Field(c.getRaw(this), c);
+  public Field<Integer> getIdField() throws AccessPoemException {
+    Column<Integer> c = _getMessageTable().getIdColumn();
+    return new Field<Integer>((Integer)c.getRaw(this), c);
   }
 
 
@@ -304,9 +304,9 @@ public abstract class MessageBase extends JdbcPersistent {
   *         does not confer write access rights
   * @return the Integer board
   */
-  public Field getBoardField() throws AccessPoemException {
-    Column c = _getMessageTable().getBoardColumn();
-    return new Field(c.getRaw(this), c);
+  public Field<Integer> getBoardField() throws AccessPoemException {
+    Column<Integer> c = _getMessageTable().getBoardColumn();
+    return new Field<Integer>((Integer)c.getRaw(this), c);
   }
 
 
@@ -387,9 +387,9 @@ public abstract class MessageBase extends JdbcPersistent {
   *         does not confer write access rights
   * @return the Timestamp date
   */
-  public Field getDateField() throws AccessPoemException {
-    Column c = _getMessageTable().getDateColumn();
-    return new Field(c.getRaw(this), c);
+  public Field<Timestamp> getDateField() throws AccessPoemException {
+    Column<Timestamp> c = _getMessageTable().getDateColumn();
+    return new Field<Timestamp>((Timestamp)c.getRaw(this), c);
   }
 
 
@@ -470,9 +470,9 @@ public abstract class MessageBase extends JdbcPersistent {
   *         does not confer write access rights
   * @return the String subject
   */
-  public Field getSubjectField() throws AccessPoemException {
-    Column c = _getMessageTable().getSubjectColumn();
-    return new Field(c.getRaw(this), c);
+  public Field<String> getSubjectField() throws AccessPoemException {
+    Column<String> c = _getMessageTable().getSubjectColumn();
+    return new Field<String>((String)c.getRaw(this), c);
   }
 
 
@@ -585,9 +585,9 @@ public abstract class MessageBase extends JdbcPersistent {
   *         does not confer write access rights
   * @return the Integer author
   */
-  public Field getAuthorField() throws AccessPoemException {
-    Column c = _getMessageTable().getAuthorColumn();
-    return new Field(c.getRaw(this), c);
+  public Field<Integer> getAuthorField() throws AccessPoemException {
+    Column<Integer> c = _getMessageTable().getAuthorColumn();
+    return new Field<Integer>((Integer)c.getRaw(this), c);
   }
 
 
@@ -700,9 +700,9 @@ public abstract class MessageBase extends JdbcPersistent {
   *         does not confer write access rights
   * @return the Integer parent
   */
-  public Field getParentField() throws AccessPoemException {
-    Column c = _getMessageTable().getParentColumn();
-    return new Field(c.getRaw(this), c);
+  public Field<Integer> getParentField() throws AccessPoemException {
+    Column<Integer> c = _getMessageTable().getParentColumn();
+    return new Field<Integer>((Integer)c.getRaw(this), c);
   }
 
 
@@ -783,9 +783,9 @@ public abstract class MessageBase extends JdbcPersistent {
   *         does not confer write access rights
   * @return the String body
   */
-  public Field getBodyField() throws AccessPoemException {
-    Column c = _getMessageTable().getBodyColumn();
-    return new Field(c.getRaw(this), c);
+  public Field<String> getBodyField() throws AccessPoemException {
+    Column<String> c = _getMessageTable().getBodyColumn();
+    return new Field<String>((String)c.getRaw(this), c);
   }
 
 
@@ -888,9 +888,9 @@ public abstract class MessageBase extends JdbcPersistent {
   *         does not confer write access rights
   * @return the Boolean deleted
   */
-  public Field getDeletedField() throws AccessPoemException {
-    Column c = _getMessageTable().getDeletedColumn();
-    return new Field(c.getRaw(this), c);
+  public Field<Boolean> getDeletedField() throws AccessPoemException {
+    Column<Boolean> c = _getMessageTable().getDeletedColumn();
+    return new Field<Boolean>((Boolean)c.getRaw(this), c);
   }
 
 
@@ -996,17 +996,17 @@ public abstract class MessageBase extends JdbcPersistent {
   *         does not confer write access rights
   * @return the Boolean approved
   */
-  public Field getApprovedField() throws AccessPoemException {
-    Column c = _getMessageTable().getApprovedColumn();
-    return new Field(c.getRaw(this), c);
+  public Field<Boolean> getApprovedField() throws AccessPoemException {
+    Column<Boolean> c = _getMessageTable().getApprovedColumn();
+    return new Field<Boolean>((Boolean)c.getRaw(this), c);
   }
 
   private CachedSelection<Message> parentMessages = null;
-  /** References to this in the Message table via its parent field.*/
+  /** References to this Message in the Message table via its parent field.*/
   @SuppressWarnings("unchecked")
   public Enumeration<Message> getParentMessages() {
     if (getTroid() == null)
-      return EmptyEnumeration.it;
+      return new EmptyEnumeration<Message>();
     else {
       if (parentMessages == null)
         parentMessages =
@@ -1016,19 +1016,19 @@ public abstract class MessageBase extends JdbcPersistent {
   }
 
 
-  /** References to this in the Message table via its parent field, as a List.*/
-  public List<Message> getParentMessagesList() {
+  /** References to this Message in the Message table via its parent field, as a List.*/
+  public List<Message> getParentMessageList() {
     return Collections.list(getParentMessages());
   }
 
 
 
   private CachedSelection<Attachment> messageAttachments = null;
-  /** References to this in the Attachment table via its message field.*/
+  /** References to this Message in the Attachment table via its message field.*/
   @SuppressWarnings("unchecked")
   public Enumeration<Attachment> getMessageAttachments() {
     if (getTroid() == null)
-      return EmptyEnumeration.it;
+      return new EmptyEnumeration<Attachment>();
     else {
       if (messageAttachments == null)
         messageAttachments =
@@ -1038,8 +1038,8 @@ public abstract class MessageBase extends JdbcPersistent {
   }
 
 
-  /** References to this in the Attachment table via its message field, as a List.*/
-  public List<Attachment> getMessageAttachmentsList() {
+  /** References to this Message in the Attachment table via its message field, as a List.*/
+  public List<Attachment> getMessageAttachmentList() {
     return Collections.list(getMessageAttachments());
   }
 
