@@ -736,7 +736,7 @@ public class BoardAdmin extends TemplateServlet {
     }
     MelatiStringWriter sw = tEngine.getStringWriter();
     Melati melati = new Melati(mConfig, sw);
-    ServletTemplateContext context = (ServletTemplateContext)tEngine.getTemplateContext(melati);
+    ServletTemplateContext context = (ServletTemplateContext)tEngine.getTemplateContext();
     context.put("melati", melati);
     context.put("board", board);
     context.put("user", user);
