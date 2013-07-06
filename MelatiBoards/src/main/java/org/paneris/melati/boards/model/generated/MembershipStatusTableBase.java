@@ -22,13 +22,12 @@ import org.paneris.melati.boards.model.MembershipStatus;
 
 
 /**
- * Melati POEM generated base class for 
-<code>Table</code> <code>MembershipStatus</code>.
+ * Melati POEM generated base class for <code>Table</code> <code>MembershipStatus</code>.
  *
  * see org.melati.poem.prepro.TableDef#generateTableBaseJava 
  */
 
-public class MembershipStatusTableBase extends BoardsTable {
+public class MembershipStatusTableBase<T extends MembershipStatus> extends BoardsTable<T> {
 
   private Column<Integer> col_id = null;
   private Column<String> col_status = null;
@@ -60,6 +59,12 @@ public class MembershipStatusTableBase extends BoardsTable {
     return (BoardsDatabaseTables)getDatabase();
   }
 
+
+ /**
+  * Initialise this table by defining its columns.
+  *
+  * see org.melati.poem.prepro.TableDef#generateTableBaseJava 
+  */
   public void init() throws PoemException {
     super.init();
     defineColumn(col_id =
@@ -80,23 +85,23 @@ public class MembershipStatusTableBase extends BoardsTable {
             return ((MembershipStatus)g).getIdField();
           }
 
-          protected boolean defaultUserEditable() {
+          public boolean defaultUserEditable() {
             return false;
           }
 
-          protected boolean defaultUserCreateable() {
+          public boolean defaultUserCreateable() {
             return false;
           }
 
-          protected DisplayLevel defaultDisplayLevel() {
+          public DisplayLevel defaultDisplayLevel() {
             return DisplayLevel.record;
           }
 
-          protected Integer defaultDisplayOrderPriority() {
+          public Integer defaultDisplayOrderPriority() {
             return new Integer(0);
           }
 
-          protected int defaultDisplayOrder() {
+          public int defaultDisplayOrder() {
             return 0;
           }
 
@@ -139,27 +144,27 @@ public class MembershipStatusTableBase extends BoardsTable {
             return ((MembershipStatus)g).getStatusField();
           }
 
-          protected DisplayLevel defaultDisplayLevel() {
+          public DisplayLevel defaultDisplayLevel() {
             return DisplayLevel.primary;
           }
 
-          protected Searchability defaultSearchability() {
+          public Searchability defaultSearchability() {
             return Searchability.yes;
           }
 
-          protected int defaultDisplayOrder() {
+          public int defaultDisplayOrder() {
             return 1;
           }
 
-          protected String defaultDescription() {
+          public String defaultDescription() {
             return "The name of a status";
           }
 
-          protected boolean defaultUnique() {
+          public boolean defaultUnique() {
             return true;
           }
 
-          protected int defaultWidth() {
+          public int defaultWidth() {
             return 40;
           }
 
@@ -236,27 +241,27 @@ public class MembershipStatusTableBase extends BoardsTable {
   protected JdbcPersistent _newPersistent() {
     return new MembershipStatus();
   }
-  protected String defaultDisplayName() {
+  public String defaultDisplayName() {
     return "Membership Status";
   }
 
-  protected String defaultDescription() {
+  public String defaultDescription() {
     return "The status of a user's subscription to a board";
   }
 
-  protected boolean defaultRememberAllTroids() {
+  public boolean defaultRememberAllTroids() {
     return true;
   }
 
-  protected Integer defaultCacheLimit() {
+  public Integer defaultCacheLimit() {
     return new Integer(999999999);
   }
 
-  protected String defaultCategory() {
+  public String defaultCategory() {
     return "Boards";
   }
 
-  protected int defaultDisplayOrder() {
+  public int defaultDisplayOrder() {
     return 1030;
   }
 }

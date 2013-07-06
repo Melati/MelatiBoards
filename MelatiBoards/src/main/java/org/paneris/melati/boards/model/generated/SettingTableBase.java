@@ -8,19 +8,20 @@ import org.melati.poem.DefinitionSource;
 import org.melati.poem.JdbcPersistent;
 import org.melati.poem.Persistent;
 import org.melati.poem.PoemException;
+// FIXME extended table 
 import org.melati.poem.SettingTable;
 import org.paneris.melati.boards.model.BoardsDatabaseTables;
+// FIXME extended table 
 import org.paneris.melati.boards.model.Setting;
 
 
 /**
- * Melati POEM generated base class for 
-<code>Table</code> <code>Setting</code>.
+ * Melati POEM generated base class for <code>Table</code> <code>Setting</code>.
  *
  * see org.melati.poem.prepro.TableDef#generateTableBaseJava 
  */
 
-public class SettingTableBase extends SettingTable {
+public class SettingTableBase<T extends Setting> extends SettingTable<T> {
 
 
  /**
@@ -50,6 +51,12 @@ public class SettingTableBase extends SettingTable {
     return (BoardsDatabaseTables)getDatabase();
   }
 
+
+ /**
+  * Initialise this table by defining its columns.
+  *
+  * see org.melati.poem.prepro.TableDef#generateTableBaseJava 
+  */
   public void init() throws PoemException {
     super.init();
   }
@@ -79,9 +86,9 @@ public class SettingTableBase extends SettingTable {
   }
 
   protected JdbcPersistent _newPersistent() {
-    return new Setting();
+    return new org.paneris.melati.boards.model.Setting();
   }
-  protected int defaultDisplayOrder() {
+  public int defaultDisplayOrder() {
     return 3040;
   }
 }

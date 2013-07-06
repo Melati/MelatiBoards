@@ -101,7 +101,7 @@ import org.paneris.melati.boards.model.generated.MessageBase;
  * moderated postings) </td></tr> 
  * </table> 
  * 
- * @generator org.melati.poem.prepro.TableDef#generateMainJava 
+ * see org.melati.poem.prepro.TableDef#generatePersistentJava 
  */
 public class Message extends MessageBase implements Treeable {
 
@@ -113,12 +113,14 @@ public class Message extends MessageBase implements Treeable {
   *   A message posted to a message board. 
   * </p>
   * 
-  * @generator org.melati.poem.prepro.TableDef#generateMainJava 
+  * see org.melati.poem.prepro.TableDef#generatePersistentJava 
   */
-
-  public Message() { }
+  public Message() { 
+    super();
+}
 
   // programmer's domain-specific code here
+  
 
   private static DateFormat localeFormatter =
     new SimpleDateFormat("dd MMM yyyy HH:mm:ss");
@@ -393,4 +395,6 @@ class DistributeThread extends Thread {
         }
       });
   }
+  
 }
+

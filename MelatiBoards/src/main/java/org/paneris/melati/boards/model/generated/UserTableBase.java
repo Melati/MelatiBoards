@@ -14,20 +14,21 @@ import org.melati.poem.Persistent;
 import org.melati.poem.PoemException;
 import org.melati.poem.Searchability;
 import org.melati.poem.StringPoemType;
+// FIXME extended table 
 import org.melati.poem.UserTable;
 import org.melati.poem.ValidationPoemException;
 import org.paneris.melati.boards.model.BoardsDatabaseTables;
+// FIXME extended table 
 import org.paneris.melati.boards.model.User;
 
 
 /**
- * Melati POEM generated base class for 
-<code>Table</code> <code>User</code>.
+ * Melati POEM generated base class for <code>Table</code> <code>User</code>.
  *
  * see org.melati.poem.prepro.TableDef#generateTableBaseJava 
  */
 
-public class UserTableBase extends UserTable {
+public class UserTableBase<T extends User> extends UserTable<T> {
 
   private Column<String> col_email = null;
 
@@ -58,6 +59,12 @@ public class UserTableBase extends UserTable {
     return (BoardsDatabaseTables)getDatabase();
   }
 
+
+ /**
+  * Initialise this table by defining its columns.
+  *
+  * see org.melati.poem.prepro.TableDef#generateTableBaseJava 
+  */
   public void init() throws PoemException {
     super.init();
     defineColumn(col_email =
@@ -66,56 +73,56 @@ public class UserTableBase extends UserTable {
                    DefinitionSource.dsd) { 
           public Object getCooked(Persistent g)
               throws AccessPoemException, PoemException {
-            return ((User)g).getEmail();
+            return ((org.paneris.melati.boards.model.User)g).getEmail();
           }
 
           public void setCooked(Persistent g, Object cooked)
               throws AccessPoemException, ValidationPoemException {
-            ((User)g).setEmail((String)cooked);
+            ((org.paneris.melati.boards.model.User)g).setEmail((String)cooked);
           }
 
           public Field<String> asField(Persistent g) {
-            return ((User)g).getEmailField();
+            return ((org.paneris.melati.boards.model.User)g).getEmailField();
           }
 
-          protected DisplayLevel defaultDisplayLevel() {
+          public DisplayLevel defaultDisplayLevel() {
             return DisplayLevel.summary;
           }
 
-          protected Searchability defaultSearchability() {
+          public Searchability defaultSearchability() {
             return Searchability.yes;
           }
 
-          protected int defaultDisplayOrder() {
+          public int defaultDisplayOrder() {
             return 50;
           }
 
-          protected String defaultDescription() {
+          public String defaultDescription() {
             return "The user's email address";
           }
 
-          protected int defaultWidth() {
+          public int defaultWidth() {
             return 40;
           }
 
           public Object getRaw_unsafe(Persistent g)
               throws AccessPoemException {
-            return ((User)g).getEmail_unsafe();
+            return ((org.paneris.melati.boards.model.User)g).getEmail_unsafe();
           }
 
           public void setRaw_unsafe(Persistent g, Object raw)
               throws AccessPoemException {
-            ((User)g).setEmail_unsafe((String)raw);
+            ((org.paneris.melati.boards.model.User)g).setEmail_unsafe((String)raw);
           }
 
           public Object getRaw(Persistent g)
               throws AccessPoemException {
-            return ((User)g).getEmail();
+            return ((org.paneris.melati.boards.model.User)g).getEmail();
           }
 
           public void setRaw(Persistent g, Object raw)
               throws AccessPoemException {
-            ((User)g).setEmail((String)raw);
+            ((org.paneris.melati.boards.model.User)g).setEmail((String)raw);
           }
         });
   }
@@ -157,17 +164,17 @@ public class UserTableBase extends UserTable {
   }
 
   protected JdbcPersistent _newPersistent() {
-    return new User();
+    return new org.paneris.melati.boards.model.User();
   }
-  protected String defaultDescription() {
+  public String defaultDescription() {
     return "A board user (with an email address)";
   }
 
-  protected String defaultCategory() {
+  public String defaultCategory() {
     return "User";
   }
 
-  protected int defaultDisplayOrder() {
+  public int defaultDisplayOrder() {
     return 2010;
   }
 }

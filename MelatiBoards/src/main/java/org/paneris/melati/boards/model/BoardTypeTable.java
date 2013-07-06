@@ -76,14 +76,14 @@ import org.paneris.melati.boards.model.generated.BoardTypeTableBase;
  * type </td></tr> 
  * </table> 
  * 
- * @generator  org.melati.poem.prepro.TableDef#generateTableMainJava 
+ * see  org.melati.poem.prepro.TableDef#generateTableJava 
  */
-public class BoardTypeTable extends BoardTypeTableBase {
+public class BoardTypeTable<T extends BoardType> extends BoardTypeTableBase<BoardType> {
 
  /**
   * Constructor.
   * 
-  * @generator org.melati.poem.prepro.TableDef#generateTableMainJava 
+  * see org.melati.poem.prepro.TableDef#generateTableJava 
   * @param database          the POEM database we are using
   * @param name              the name of this <code>Table</code>
   * @param definitionSource  which definition is being used
@@ -105,5 +105,5 @@ public class BoardTypeTable extends BoardTypeTableBase {
     if (info.getCancreate() == null)
       info.setCancreate(getDatabase().administerCapability());
   }
-
 }
+

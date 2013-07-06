@@ -3,11 +3,11 @@
   <parent>
     <artifactId>MelatiBoards-parent</artifactId>
     <groupId>org.paneris</groupId>
-    <version>1.2.7</version>
+    <version>1.2.8</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <artifactId>MelatiBoards</artifactId>
-  <version>1.2.7</version>
+  <version>1.2.8</version>
   <packaging>jar</packaging>
   <name>MelatiBoards</name>
   <url>http://boards.paneris.net</url>
@@ -15,7 +15,7 @@
     <dependency>
       <groupId>org.melati</groupId>
       <artifactId>melati</artifactId>
-      <version>0.7.8-RC3-SNAPSHOT</version>
+      <version>0.7.9-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
@@ -66,6 +66,7 @@
       <plugin>
        <groupId>org.melati</groupId>
        <artifactId>maven-dsd-plugin</artifactId>
+       <version>0.7.9-SNAPSHOT</version>
        <executions>
          <execution>
            <phase>generate-sources</phase>
@@ -82,7 +83,7 @@
         <dependency>
          <groupId>org.melati</groupId>
          <artifactId>poem</artifactId>
-         <version>0.7.8-RC3-SNAPSHOT</version>
+         <version>0.7.9-SNAPSHOT</version>
          <scope>compile</scope>
         </dependency>
        </dependencies>
