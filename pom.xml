@@ -4,7 +4,7 @@
   <groupId>org.paneris</groupId>
   <artifactId>MelatiBoards-parent</artifactId>
   <name>MelatiBoards Parent</name>
-  <version>1.2.7</version>
+  <version>1.2.8</version>
   <packaging>pom</packaging>
   <modules>
     <module>MelatiBoards</module>
@@ -74,6 +74,9 @@ A message board system using a Melati SQL database as the message store.
       </roles>
     </developer>
   </developers>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
 
   <reporting>
      <plugins>

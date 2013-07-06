@@ -23,17 +23,17 @@ import org.paneris.melati.boards.model.BoardsDatabaseTables;
 import org.paneris.melati.boards.model.BoardsTable;
 import org.paneris.melati.boards.model.MembershipStatus;
 import org.paneris.melati.boards.model.Subscription;
+// FIXME extended table 
 import org.paneris.melati.boards.model.User;
 
 
 /**
- * Melati POEM generated base class for 
-<code>Table</code> <code>Subscription</code>.
+ * Melati POEM generated base class for <code>Table</code> <code>Subscription</code>.
  *
  * see org.melati.poem.prepro.TableDef#generateTableBaseJava 
  */
 
-public class SubscriptionTableBase extends BoardsTable {
+public class SubscriptionTableBase<T extends Subscription> extends BoardsTable<T> {
 
   private Column<Integer> col_id = null;
   private Column<Integer> col_user = null;
@@ -69,6 +69,12 @@ public class SubscriptionTableBase extends BoardsTable {
     return (BoardsDatabaseTables)getDatabase();
   }
 
+
+ /**
+  * Initialise this table by defining its columns.
+  *
+  * see org.melati.poem.prepro.TableDef#generateTableBaseJava 
+  */
   public void init() throws PoemException {
     super.init();
     defineColumn(col_id =
@@ -89,19 +95,19 @@ public class SubscriptionTableBase extends BoardsTable {
             return ((Subscription)g).getIdField();
           }
 
-          protected boolean defaultUserEditable() {
+          public boolean defaultUserEditable() {
             return false;
           }
 
-          protected boolean defaultUserCreateable() {
+          public boolean defaultUserCreateable() {
             return false;
           }
 
-          protected DisplayLevel defaultDisplayLevel() {
+          public DisplayLevel defaultDisplayLevel() {
             return DisplayLevel.primary;
           }
 
-          protected int defaultDisplayOrder() {
+          public int defaultDisplayOrder() {
             return 0;
           }
 
@@ -145,27 +151,27 @@ public class SubscriptionTableBase extends BoardsTable {
             return ((Subscription)g).getUserField();
           }
 
-          protected DisplayLevel defaultDisplayLevel() {
+          public DisplayLevel defaultDisplayLevel() {
             return DisplayLevel.summary;
           }
 
-          protected Searchability defaultSearchability() {
+          public Searchability defaultSearchability() {
             return Searchability.yes;
           }
 
-          protected int defaultDisplayOrder() {
+          public int defaultDisplayOrder() {
             return 1;
           }
 
-          protected String defaultDescription() {
+          public String defaultDescription() {
             return "The user";
           }
 
-          protected boolean defaultIndexed() {
+          public boolean defaultIndexed() {
             return true;
           }
 
-          protected String defaultRenderinfo() {
+          public String defaultRenderinfo() {
             return "SelectionWindow";
           }
 
@@ -213,27 +219,27 @@ public class SubscriptionTableBase extends BoardsTable {
             return ((Subscription)g).getBoardField();
           }
 
-          protected DisplayLevel defaultDisplayLevel() {
+          public DisplayLevel defaultDisplayLevel() {
             return DisplayLevel.summary;
           }
 
-          protected Searchability defaultSearchability() {
+          public Searchability defaultSearchability() {
             return Searchability.primary;
           }
 
-          protected int defaultDisplayOrder() {
+          public int defaultDisplayOrder() {
             return 2;
           }
 
-          protected String defaultDescription() {
+          public String defaultDescription() {
             return "The board to which this user belongs";
           }
 
-          protected boolean defaultIndexed() {
+          public boolean defaultIndexed() {
             return true;
           }
 
-          protected String defaultRenderinfo() {
+          public String defaultRenderinfo() {
             return "SelectionWindow";
           }
 
@@ -281,23 +287,23 @@ public class SubscriptionTableBase extends BoardsTable {
             return ((Subscription)g).getStatusField();
           }
 
-          protected DisplayLevel defaultDisplayLevel() {
+          public DisplayLevel defaultDisplayLevel() {
             return DisplayLevel.summary;
           }
 
-          protected Searchability defaultSearchability() {
+          public Searchability defaultSearchability() {
             return Searchability.yes;
           }
 
-          protected int defaultDisplayOrder() {
+          public int defaultDisplayOrder() {
             return 3;
           }
 
-          protected String defaultDescription() {
+          public String defaultDescription() {
             return "How users would like to receive emails from this board";
           }
 
-          protected boolean defaultIndexed() {
+          public boolean defaultIndexed() {
             return true;
           }
 
@@ -340,23 +346,23 @@ public class SubscriptionTableBase extends BoardsTable {
             return ((Subscription)g).getIsmanagerField();
           }
 
-          protected DisplayLevel defaultDisplayLevel() {
+          public DisplayLevel defaultDisplayLevel() {
             return DisplayLevel.summary;
           }
 
-          protected Searchability defaultSearchability() {
+          public Searchability defaultSearchability() {
             return Searchability.yes;
           }
 
-          protected String defaultDisplayName() {
+          public String defaultDisplayName() {
             return "Is A Manager";
           }
 
-          protected int defaultDisplayOrder() {
+          public int defaultDisplayOrder() {
             return 4;
           }
 
-          protected String defaultDescription() {
+          public String defaultDescription() {
             return "Can the user administrator the board with manager priviledges?";
           }
 
@@ -399,27 +405,27 @@ public class SubscriptionTableBase extends BoardsTable {
             return ((Subscription)g).getApprovedField();
           }
 
-          protected boolean defaultUserCreateable() {
+          public boolean defaultUserCreateable() {
             return false;
           }
 
-          protected DisplayLevel defaultDisplayLevel() {
+          public DisplayLevel defaultDisplayLevel() {
             return DisplayLevel.summary;
           }
 
-          protected Searchability defaultSearchability() {
+          public Searchability defaultSearchability() {
             return Searchability.yes;
           }
 
-          protected String defaultDisplayName() {
+          public String defaultDisplayName() {
             return "Approved";
           }
 
-          protected int defaultDisplayOrder() {
+          public int defaultDisplayOrder() {
             return 5;
           }
 
-          protected String defaultDescription() {
+          public String defaultDescription() {
             return "Has this user's subscription to this board been approved by a manager (if the board has moderated subscription)";
           }
 
@@ -544,19 +550,19 @@ public class SubscriptionTableBase extends BoardsTable {
   protected JdbcPersistent _newPersistent() {
     return new Subscription();
   }
-  protected String defaultDisplayName() {
+  public String defaultDisplayName() {
     return "Subscription";
   }
 
-  protected String defaultDescription() {
+  public String defaultDescription() {
     return "Which users are members of which boards with what settings";
   }
 
-  protected String defaultCategory() {
+  public String defaultCategory() {
     return "Boards";
   }
 
-  protected int defaultDisplayOrder() {
+  public int defaultDisplayOrder() {
     return 1040;
   }
 }

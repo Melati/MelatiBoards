@@ -3,9 +3,10 @@
 package org.paneris.melati.boards.model.generated;
 
 
-import org.melati.poem.Setting;
+// import org.melati.poem.Setting;
 import org.paneris.melati.boards.model.BoardsDatabaseTables;
-import org.paneris.melati.boards.model.SettingTable;
+// import org.paneris.melati.boards.model.Setting;
+// import org.paneris.melati.boards.model.SettingTable;
 
 
 /**
@@ -14,7 +15,7 @@ import org.paneris.melati.boards.model.SettingTable;
  *
  * see org.melati.poem.prepro.TableDef#generatePersistentBaseJava 
  */
-public abstract class SettingBase extends Setting {
+public abstract class SettingBase extends org.melati.poem.Setting {
 
 
  /**
@@ -35,8 +36,9 @@ public abstract class SettingBase extends Setting {
   * see org.melati.poem.prepro.TableDef#generatePersistentBaseJava 
   * @return the org.melati.poem.SettingTable
   */
-  public org.melati.poem.SettingTable getSettingTable() {
-    return (org.melati.poem.SettingTable)getTable();
+  @SuppressWarnings("unchecked")
+  public org.melati.poem.SettingTable<org.melati.poem.Setting> getSettingTable() {
+    return (org.melati.poem.SettingTable<org.melati.poem.Setting>)getTable();
   }
 
   // There are no Fields in this table, only in its ancestors 

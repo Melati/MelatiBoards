@@ -63,6 +63,7 @@ import org.melati.poem.PoemException;
 import org.melati.poem.ValidationPoemException;
 import org.paneris.melati.boards.model.generated.MessageTableBase;
 
+
 /**
  * Melati POEM generated, programmer modifiable stub 
  * for a <code>MessageTable</code> object.
@@ -96,14 +97,14 @@ import org.paneris.melati.boards.model.generated.MessageTableBase;
  * moderated postings) </td></tr> 
  * </table> 
  * 
- * @generator  org.melati.poem.prepro.TableDef#generateTableMainJava 
+ * see  org.melati.poem.prepro.TableDef#generateTableJava 
  */
-public class MessageTable extends MessageTableBase {
+public class MessageTable<T extends Message> extends MessageTableBase<Message> {
 
  /**
   * Constructor.
   * 
-  * @generator org.melati.poem.prepro.TableDef#generateTableMainJava 
+  * see org.melati.poem.prepro.TableDef#generateTableJava 
   * @param database          the POEM database we are using
   * @param name              the name of this <code>Table</code>
   * @param definitionSource  which definition is being used
@@ -117,87 +118,88 @@ public class MessageTable extends MessageTableBase {
 
   // programmer's domain-specific code here
 
- /**
-  * Write down a message.
-  *
-  * @param persistent  a persistent object to write down
-  */
-  public void create(Persistent persistent)
-      throws AccessPoemException, ValidationPoemException,
-             InitialisationPoemException {
+  /**
+   * Write down a message.
+   *
+   * @param persistent  a persistent object to write down
+   */
+   public void create(Persistent persistent)
+       throws AccessPoemException, ValidationPoemException,
+              InitialisationPoemException {
 
-    Board b = getBoardsDatabaseTables().getBoardTable().
-                getBoardObject(((Message)persistent).getBoard_unsafe());
+     Board b = getBoardsDatabaseTables().getBoardTable().
+                 getBoardObject(((Message)persistent).getBoard_unsafe());
 
-    if ("".equals(((Message)persistent).getSubject_unsafe())) {
-      persistent.setRaw("subject", "(no subject)");
-    }
-    Timestamp now = new Timestamp(new java.util.Date().getTime());
-    persistent.setRaw("date", now);
-    
-    // you don't need to be logged in to author a message!
-    // persistent.setRaw("author", ((User)token).troid());
-    
-    boolean approved = !b.getModeratedposting_unsafe().booleanValue() ||
-                       b.canManage(((Message)persistent).getAuthor());
-    persistent.setRaw("approved", new Boolean(approved));
+     if ("".equals(((Message)persistent).getSubject_unsafe())) {
+       persistent.setRaw("subject", "(no subject)");
+     }
+     Timestamp now = new Timestamp(new java.util.Date().getTime());
+     persistent.setRaw("date", now);
+     
+     // you don't need to be logged in to author a message!
+     // persistent.setRaw("author", ((User)token).troid());
+     
+     boolean approved = !b.getModeratedposting_unsafe().booleanValue() ||
+                        b.canManage(((Message)persistent).getAuthor());
+     persistent.setRaw("approved", new Boolean(approved));
 
-    super.create(persistent);
+     super.create(persistent);
 
-    if (approved) {    
-      // Update the message trees for the relevant board
-      Integer parent = ((Message)persistent).getParent_unsafe();
-      if (parent == null)
-        b.addThread((Message)persistent, true);
-      else
-        b.addToParent((Message)persistent, getMessageObject(parent));
-    }
-  }
-
- /**
-  * SQL to get the messages in this board.
-  */
-  public String messageInBoardSQL(Board board, boolean approved) {
-    return getBoardColumn().eqClause(board.troid()) + " AND " +
-           getApprovedColumn().eqClause(new Boolean(approved)) + " AND " +
-           getDeletedColumn().eqClause(Boolean.FALSE);
-  }
+     if (approved) {    
+       // Update the message trees for the relevant board
+       Integer parent = ((Message)persistent).getParent_unsafe();
+       if (parent == null)
+         b.addThread((Message)persistent, true);
+       else
+         b.addToParent((Message)persistent, getMessageObject(parent));
+     }
+   }
 
   /**
-   * @return a CachedSelection of the roots
+   * SQL to get the messages in this board.
    */
-  public CachedSelection cachedBoardRoots(Board board) {
-    return cachedSelection(messageInBoardSQL(board, true) + " AND " +
-                             getParentColumn().eqClause(null),
-                           null);
-  }
+   public String messageInBoardSQL(Board board, boolean approved) {
+     return getBoardColumn().eqClause(board.troid()) + " AND " +
+            getApprovedColumn().eqClause(new Boolean(approved)) + " AND " +
+            getDeletedColumn().eqClause(Boolean.FALSE);
+   }
 
-  /**
-   * @return a CahcedCount of the number of messages in the board
-   */
-  public CachedCount cachedMessageCount(Board board) {
-    return cachedCount(messageInBoardSQL(board, true));
-  }
+   /**
+    * @return a CachedSelection of the roots
+    */
+   public CachedSelection<?> cachedBoardRoots(Board board) {
+     return cachedSelection(messageInBoardSQL(board, true) + " AND " +
+                              getParentColumn().eqClause(null),
+                            null);
+   }
 
-  /**
-   * @return a CachedSelection of the messages in the board
-   */
-  public CachedSelection cachedMessages(Board board) {
-    return cachedSelection(messageInBoardSQL(board, false), null);
-  }
+   /**
+    * @return a CahcedCount of the number of messages in the board
+    */
+   public CachedCount cachedMessageCount(Board board) {
+     return cachedCount(messageInBoardSQL(board, true));
+   }
 
-  /**
-   * @return a CachedCount of the messages in the board
-   */
-  public CachedCount cachedPendingMessageCount(Board board) {
-    return cachedCount(messageInBoardSQL(board, false));
-  }
+   /**
+    * @return a CachedSelection of the messages in the board
+    */
+   public CachedSelection<?> cachedMessages(Board board) {
+     return cachedSelection(messageInBoardSQL(board, false), null);
+   }
 
-  /**
-   * @return a CachedSelection of the pendign messages in the board
-   */
-  public CachedSelection cachedPendingMessages(Board board) {
-    return cachedSelection(messageInBoardSQL(board, false), null);
-  }
+   /**
+    * @return a CachedCount of the messages in the board
+    */
+   public CachedCount cachedPendingMessageCount(Board board) {
+     return cachedCount(messageInBoardSQL(board, false));
+   }
+
+   /**
+    * @return a CachedSelection of the pending messages in the board
+    */
+   public CachedSelection<?> cachedPendingMessages(Board board) {
+     return cachedSelection(messageInBoardSQL(board, false), null);
+   }
 
 }
+

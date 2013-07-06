@@ -27,13 +27,12 @@ import org.paneris.melati.boards.model.Message;
 
 
 /**
- * Melati POEM generated base class for 
-<code>Table</code> <code>Attachment</code>.
+ * Melati POEM generated base class for <code>Table</code> <code>Attachment</code>.
  *
  * see org.melati.poem.prepro.TableDef#generateTableBaseJava 
  */
 
-public class AttachmentTableBase extends BoardsTable {
+public class AttachmentTableBase<T extends Attachment> extends BoardsTable<T> {
 
   private Column<Integer> col_id = null;
   private Column<Integer> col_message = null;
@@ -70,6 +69,12 @@ public class AttachmentTableBase extends BoardsTable {
     return (BoardsDatabaseTables)getDatabase();
   }
 
+
+ /**
+  * Initialise this table by defining its columns.
+  *
+  * see org.melati.poem.prepro.TableDef#generateTableBaseJava 
+  */
   public void init() throws PoemException {
     super.init();
     defineColumn(col_id =
@@ -90,15 +95,15 @@ public class AttachmentTableBase extends BoardsTable {
             return ((Attachment)g).getIdField();
           }
 
-          protected boolean defaultUserEditable() {
+          public boolean defaultUserEditable() {
             return false;
           }
 
-          protected boolean defaultUserCreateable() {
+          public boolean defaultUserCreateable() {
             return false;
           }
 
-          protected int defaultDisplayOrder() {
+          public int defaultDisplayOrder() {
             return 0;
           }
 
@@ -142,31 +147,31 @@ public class AttachmentTableBase extends BoardsTable {
             return ((Attachment)g).getMessageField();
           }
 
-          protected DisplayLevel defaultDisplayLevel() {
+          public DisplayLevel defaultDisplayLevel() {
             return DisplayLevel.summary;
           }
 
-          protected Searchability defaultSearchability() {
+          public Searchability defaultSearchability() {
             return Searchability.yes;
           }
 
-          protected Integer defaultDisplayOrderPriority() {
+          public Integer defaultDisplayOrderPriority() {
             return new Integer(0);
           }
 
-          protected int defaultDisplayOrder() {
+          public int defaultDisplayOrder() {
             return 1;
           }
 
-          protected String defaultDescription() {
+          public String defaultDescription() {
             return "The message this attachment belongs to";
           }
 
-          protected boolean defaultIndexed() {
+          public boolean defaultIndexed() {
             return true;
           }
 
-          protected String defaultRenderinfo() {
+          public String defaultRenderinfo() {
             return "SelectionWindow";
           }
 
@@ -213,35 +218,35 @@ public class AttachmentTableBase extends BoardsTable {
             return ((Attachment)g).getFilenameField();
           }
 
-          protected boolean defaultUserEditable() {
+          public boolean defaultUserEditable() {
             return false;
           }
 
-          protected boolean defaultUserCreateable() {
+          public boolean defaultUserCreateable() {
             return false;
           }
 
-          protected DisplayLevel defaultDisplayLevel() {
+          public DisplayLevel defaultDisplayLevel() {
             return DisplayLevel.primary;
           }
 
-          protected Searchability defaultSearchability() {
+          public Searchability defaultSearchability() {
             return Searchability.yes;
           }
 
-          protected Integer defaultDisplayOrderPriority() {
+          public Integer defaultDisplayOrderPriority() {
             return new Integer(1);
           }
 
-          protected int defaultDisplayOrder() {
+          public int defaultDisplayOrder() {
             return 2;
           }
 
-          protected String defaultDescription() {
+          public String defaultDescription() {
             return "The filename of this attachment";
           }
 
-          protected int defaultWidth() {
+          public int defaultWidth() {
             return 40;
           }
 
@@ -284,27 +289,27 @@ public class AttachmentTableBase extends BoardsTable {
             return ((Attachment)g).getPathField();
           }
 
-          protected boolean defaultUserCreateable() {
+          public boolean defaultUserCreateable() {
             return false;
           }
 
-          protected DisplayLevel defaultDisplayLevel() {
+          public DisplayLevel defaultDisplayLevel() {
             return DisplayLevel.record;
           }
 
-          protected Searchability defaultSearchability() {
+          public Searchability defaultSearchability() {
             return Searchability.yes;
           }
 
-          protected int defaultDisplayOrder() {
+          public int defaultDisplayOrder() {
             return 3;
           }
 
-          protected String defaultDescription() {
+          public String defaultDescription() {
             return "The path to this attachment";
           }
 
-          protected int defaultWidth() {
+          public int defaultWidth() {
             return 40;
           }
 
@@ -347,27 +352,27 @@ public class AttachmentTableBase extends BoardsTable {
             return ((Attachment)g).getUrlField();
           }
 
-          protected boolean defaultUserCreateable() {
+          public boolean defaultUserCreateable() {
             return false;
           }
 
-          protected DisplayLevel defaultDisplayLevel() {
+          public DisplayLevel defaultDisplayLevel() {
             return DisplayLevel.record;
           }
 
-          protected Searchability defaultSearchability() {
+          public Searchability defaultSearchability() {
             return Searchability.yes;
           }
 
-          protected int defaultDisplayOrder() {
+          public int defaultDisplayOrder() {
             return 4;
           }
 
-          protected String defaultDescription() {
+          public String defaultDescription() {
             return "A url to this attachment";
           }
 
-          protected int defaultWidth() {
+          public int defaultWidth() {
             return 40;
           }
 
@@ -410,27 +415,27 @@ public class AttachmentTableBase extends BoardsTable {
             return ((Attachment)g).getSizeField();
           }
 
-          protected boolean defaultUserEditable() {
+          public boolean defaultUserEditable() {
             return false;
           }
 
-          protected boolean defaultUserCreateable() {
+          public boolean defaultUserCreateable() {
             return false;
           }
 
-          protected DisplayLevel defaultDisplayLevel() {
+          public DisplayLevel defaultDisplayLevel() {
             return DisplayLevel.summary;
           }
 
-          protected Searchability defaultSearchability() {
+          public Searchability defaultSearchability() {
             return Searchability.no;
           }
 
-          protected int defaultDisplayOrder() {
+          public int defaultDisplayOrder() {
             return 5;
           }
 
-          protected String defaultDescription() {
+          public String defaultDescription() {
             return "The size of the file in bytes";
           }
 
@@ -474,19 +479,19 @@ public class AttachmentTableBase extends BoardsTable {
             return ((Attachment)g).getTypeField();
           }
 
-          protected DisplayLevel defaultDisplayLevel() {
+          public DisplayLevel defaultDisplayLevel() {
             return DisplayLevel.summary;
           }
 
-          protected Searchability defaultSearchability() {
+          public Searchability defaultSearchability() {
             return Searchability.yes;
           }
 
-          protected int defaultDisplayOrder() {
+          public int defaultDisplayOrder() {
             return 6;
           }
 
-          protected String defaultDescription() {
+          public String defaultDescription() {
             return "The type of this attachment";
           }
 
@@ -623,15 +628,15 @@ public class AttachmentTableBase extends BoardsTable {
   protected JdbcPersistent _newPersistent() {
     return new Attachment();
   }
-  protected String defaultDescription() {
+  public String defaultDescription() {
     return "A file sent as an attachment to a message";
   }
 
-  protected String defaultCategory() {
+  public String defaultCategory() {
     return "Boards";
   }
 
-  protected int defaultDisplayOrder() {
+  public int defaultDisplayOrder() {
     return 1070;
   }
 }

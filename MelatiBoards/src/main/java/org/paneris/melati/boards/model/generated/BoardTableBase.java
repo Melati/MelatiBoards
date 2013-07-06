@@ -25,13 +25,12 @@ import org.paneris.melati.boards.model.BoardsTable;
 
 
 /**
- * Melati POEM generated base class for 
-<code>Table</code> <code>Board</code>.
+ * Melati POEM generated base class for <code>Table</code> <code>Board</code>.
  *
  * see org.melati.poem.prepro.TableDef#generateTableBaseJava 
  */
 
-public class BoardTableBase extends BoardsTable {
+public class BoardTableBase<T extends Board> extends BoardsTable<T> {
 
   private Column<Integer> col_id = null;
   private Column<Integer> col_type = null;
@@ -77,6 +76,12 @@ public class BoardTableBase extends BoardsTable {
     return (BoardsDatabaseTables)getDatabase();
   }
 
+
+ /**
+  * Initialise this table by defining its columns.
+  *
+  * see org.melati.poem.prepro.TableDef#generateTableBaseJava 
+  */
   public void init() throws PoemException {
     super.init();
     defineColumn(col_id =
@@ -97,15 +102,15 @@ public class BoardTableBase extends BoardsTable {
             return ((Board)g).getIdField();
           }
 
-          protected boolean defaultUserEditable() {
+          public boolean defaultUserEditable() {
             return false;
           }
 
-          protected boolean defaultUserCreateable() {
+          public boolean defaultUserCreateable() {
             return false;
           }
 
-          protected int defaultDisplayOrder() {
+          public int defaultDisplayOrder() {
             return 0;
           }
 
@@ -149,27 +154,27 @@ public class BoardTableBase extends BoardsTable {
             return ((Board)g).getTypeField();
           }
 
-          protected DisplayLevel defaultDisplayLevel() {
+          public DisplayLevel defaultDisplayLevel() {
             return DisplayLevel.summary;
           }
 
-          protected Searchability defaultSearchability() {
+          public Searchability defaultSearchability() {
             return Searchability.primary;
           }
 
-          protected Integer defaultDisplayOrderPriority() {
+          public Integer defaultDisplayOrderPriority() {
             return new Integer(0);
           }
 
-          protected int defaultDisplayOrder() {
+          public int defaultDisplayOrder() {
             return 1;
           }
 
-          protected String defaultDescription() {
+          public String defaultDescription() {
             return "The type of this messageboard";
           }
 
-          protected boolean defaultIndexed() {
+          public boolean defaultIndexed() {
             return true;
           }
 
@@ -212,35 +217,35 @@ public class BoardTableBase extends BoardsTable {
             return ((Board)g).getNameField();
           }
 
-          protected DisplayLevel defaultDisplayLevel() {
+          public DisplayLevel defaultDisplayLevel() {
             return DisplayLevel.summary;
           }
 
-          protected Searchability defaultSearchability() {
+          public Searchability defaultSearchability() {
             return Searchability.yes;
           }
 
-          protected Integer defaultDisplayOrderPriority() {
+          public Integer defaultDisplayOrderPriority() {
             return new Integer(1);
           }
 
-          protected String defaultDisplayName() {
+          public String defaultDisplayName() {
             return "Name";
           }
 
-          protected int defaultDisplayOrder() {
+          public int defaultDisplayOrder() {
             return 2;
           }
 
-          protected String defaultDescription() {
+          public String defaultDescription() {
             return "A code-name for this board";
           }
 
-          protected boolean defaultUnique() {
+          public boolean defaultUnique() {
             return true;
           }
 
-          protected int defaultWidth() {
+          public int defaultWidth() {
             return 40;
           }
 
@@ -283,27 +288,27 @@ public class BoardTableBase extends BoardsTable {
             return ((Board)g).getDisplaynameField();
           }
 
-          protected DisplayLevel defaultDisplayLevel() {
+          public DisplayLevel defaultDisplayLevel() {
             return DisplayLevel.primary;
           }
 
-          protected Searchability defaultSearchability() {
+          public Searchability defaultSearchability() {
             return Searchability.yes;
           }
 
-          protected int defaultDisplayOrder() {
+          public int defaultDisplayOrder() {
             return 3;
           }
 
-          protected String defaultDescription() {
+          public String defaultDescription() {
             return "A user-friendly name of this board";
           }
 
-          protected boolean defaultUnique() {
+          public boolean defaultUnique() {
             return true;
           }
 
-          protected int defaultWidth() {
+          public int defaultWidth() {
             return 40;
           }
 
@@ -346,27 +351,27 @@ public class BoardTableBase extends BoardsTable {
             return ((Board)g).getPurposeField();
           }
 
-          protected DisplayLevel defaultDisplayLevel() {
+          public DisplayLevel defaultDisplayLevel() {
             return DisplayLevel.record;
           }
 
-          protected Searchability defaultSearchability() {
+          public Searchability defaultSearchability() {
             return Searchability.no;
           }
 
-          protected int defaultDisplayOrder() {
+          public int defaultDisplayOrder() {
             return 4;
           }
 
-          protected String defaultDescription() {
+          public String defaultDescription() {
             return "The purpose of this message board";
           }
 
-          protected int defaultWidth() {
+          public int defaultWidth() {
             return 40;
           }
 
-          protected int defaultHeight() {
+          public int defaultHeight() {
             return 6;
           }
 
@@ -409,19 +414,19 @@ public class BoardTableBase extends BoardsTable {
             return ((Board)g).getArchivedField();
           }
 
-          protected DisplayLevel defaultDisplayLevel() {
+          public DisplayLevel defaultDisplayLevel() {
             return DisplayLevel.record;
           }
 
-          protected Searchability defaultSearchability() {
+          public Searchability defaultSearchability() {
             return Searchability.no;
           }
 
-          protected int defaultDisplayOrder() {
+          public int defaultDisplayOrder() {
             return 5;
           }
 
-          protected String defaultDescription() {
+          public String defaultDescription() {
             return "If a board is archived then it cannot be viewed and is not displayed on lists by default";
           }
 
@@ -464,23 +469,23 @@ public class BoardTableBase extends BoardsTable {
             return ((Board)g).getOpensubscriptionField();
           }
 
-          protected DisplayLevel defaultDisplayLevel() {
+          public DisplayLevel defaultDisplayLevel() {
             return DisplayLevel.record;
           }
 
-          protected Searchability defaultSearchability() {
+          public Searchability defaultSearchability() {
             return Searchability.yes;
           }
 
-          protected String defaultDisplayName() {
+          public String defaultDisplayName() {
             return "Open Subscription";
           }
 
-          protected int defaultDisplayOrder() {
+          public int defaultDisplayOrder() {
             return 6;
           }
 
-          protected String defaultDescription() {
+          public String defaultDescription() {
             return "With open subscription anyone can subscribe to the board. Otherwise a board manager must subscribe members";
           }
 
@@ -523,23 +528,23 @@ public class BoardTableBase extends BoardsTable {
             return ((Board)g).getModeratedsubscriptionField();
           }
 
-          protected DisplayLevel defaultDisplayLevel() {
+          public DisplayLevel defaultDisplayLevel() {
             return DisplayLevel.record;
           }
 
-          protected Searchability defaultSearchability() {
+          public Searchability defaultSearchability() {
             return Searchability.yes;
           }
 
-          protected String defaultDisplayName() {
+          public String defaultDisplayName() {
             return "Moderated Subscription";
           }
 
-          protected int defaultDisplayOrder() {
+          public int defaultDisplayOrder() {
             return 7;
           }
 
-          protected String defaultDescription() {
+          public String defaultDescription() {
             return "With moderated subscription the manager must approve all requests to be subscribed";
           }
 
@@ -582,23 +587,23 @@ public class BoardTableBase extends BoardsTable {
             return ((Board)g).getOpenpostingField();
           }
 
-          protected DisplayLevel defaultDisplayLevel() {
+          public DisplayLevel defaultDisplayLevel() {
             return DisplayLevel.record;
           }
 
-          protected Searchability defaultSearchability() {
+          public Searchability defaultSearchability() {
             return Searchability.yes;
           }
 
-          protected String defaultDisplayName() {
+          public String defaultDisplayName() {
             return "Open Posting";
           }
 
-          protected int defaultDisplayOrder() {
+          public int defaultDisplayOrder() {
             return 8;
           }
 
-          protected String defaultDescription() {
+          public String defaultDescription() {
             return "With open posting anyone with a user account can post a message to this list. Otherwise, only members can post";
           }
 
@@ -641,23 +646,23 @@ public class BoardTableBase extends BoardsTable {
             return ((Board)g).getModeratedpostingField();
           }
 
-          protected DisplayLevel defaultDisplayLevel() {
+          public DisplayLevel defaultDisplayLevel() {
             return DisplayLevel.record;
           }
 
-          protected Searchability defaultSearchability() {
+          public Searchability defaultSearchability() {
             return Searchability.yes;
           }
 
-          protected String defaultDisplayName() {
+          public String defaultDisplayName() {
             return "Moderated Posting";
           }
 
-          protected int defaultDisplayOrder() {
+          public int defaultDisplayOrder() {
             return 9;
           }
 
-          protected String defaultDescription() {
+          public String defaultDescription() {
             return "With moderated posting all messages must be approved by a manager";
           }
 
@@ -700,23 +705,23 @@ public class BoardTableBase extends BoardsTable {
             return ((Board)g).getOpenmessageviewingField();
           }
 
-          protected DisplayLevel defaultDisplayLevel() {
+          public DisplayLevel defaultDisplayLevel() {
             return DisplayLevel.record;
           }
 
-          protected Searchability defaultSearchability() {
+          public Searchability defaultSearchability() {
             return Searchability.yes;
           }
 
-          protected String defaultDisplayName() {
+          public String defaultDisplayName() {
             return "Open Message Viewing";
           }
 
-          protected int defaultDisplayOrder() {
+          public int defaultDisplayOrder() {
             return 10;
           }
 
-          protected String defaultDescription() {
+          public String defaultDescription() {
             return "With open message viewing anyone can view messages in a board. Otherwise, only members can see messages";
           }
 
@@ -759,23 +764,23 @@ public class BoardTableBase extends BoardsTable {
             return ((Board)g).getOpenmemberlistField();
           }
 
-          protected DisplayLevel defaultDisplayLevel() {
+          public DisplayLevel defaultDisplayLevel() {
             return DisplayLevel.record;
           }
 
-          protected Searchability defaultSearchability() {
+          public Searchability defaultSearchability() {
             return Searchability.yes;
           }
 
-          protected String defaultDisplayName() {
+          public String defaultDisplayName() {
             return "Open Member List";
           }
 
-          protected int defaultDisplayOrder() {
+          public int defaultDisplayOrder() {
             return 11;
           }
 
-          protected String defaultDescription() {
+          public String defaultDescription() {
             return "With open member list anyone can see the members of the list. Otherwise, only members can see who else is subscribed";
           }
 
@@ -818,23 +823,23 @@ public class BoardTableBase extends BoardsTable {
             return ((Board)g).getAttachmentsallowedField();
           }
 
-          protected DisplayLevel defaultDisplayLevel() {
+          public DisplayLevel defaultDisplayLevel() {
             return DisplayLevel.record;
           }
 
-          protected Searchability defaultSearchability() {
+          public Searchability defaultSearchability() {
             return Searchability.yes;
           }
 
-          protected String defaultDisplayName() {
+          public String defaultDisplayName() {
             return "Attachments Allowed";
           }
 
-          protected int defaultDisplayOrder() {
+          public int defaultDisplayOrder() {
             return 12;
           }
 
-          protected String defaultDescription() {
+          public String defaultDescription() {
             return "Can attachments be sent with messages. If not, attachments are ignored";
           }
 
@@ -877,23 +882,23 @@ public class BoardTableBase extends BoardsTable {
             return ((Board)g).getAnonymouspostingField();
           }
 
-          protected DisplayLevel defaultDisplayLevel() {
+          public DisplayLevel defaultDisplayLevel() {
             return DisplayLevel.record;
           }
 
-          protected Searchability defaultSearchability() {
+          public Searchability defaultSearchability() {
             return Searchability.yes;
           }
 
-          protected String defaultDisplayName() {
+          public String defaultDisplayName() {
             return "Anonymous Posting Allowed";
           }
 
-          protected int defaultDisplayOrder() {
+          public int defaultDisplayOrder() {
             return 13;
           }
 
-          protected String defaultDescription() {
+          public String defaultDescription() {
             return "Can people without user accounts post to this messageboard. If so, a user account is created for them when they post.";
           }
 
@@ -936,31 +941,31 @@ public class BoardTableBase extends BoardsTable {
             return ((Board)g).getAttachmentspathField();
           }
 
-          protected boolean defaultUserCreateable() {
+          public boolean defaultUserCreateable() {
             return false;
           }
 
-          protected DisplayLevel defaultDisplayLevel() {
+          public DisplayLevel defaultDisplayLevel() {
             return DisplayLevel.record;
           }
 
-          protected Searchability defaultSearchability() {
+          public Searchability defaultSearchability() {
             return Searchability.yes;
           }
 
-          protected String defaultDisplayName() {
+          public String defaultDisplayName() {
             return "Attachments Path";
           }
 
-          protected int defaultDisplayOrder() {
+          public int defaultDisplayOrder() {
             return 14;
           }
 
-          protected String defaultDescription() {
+          public String defaultDescription() {
             return "A path to the directory containing attachments for this board";
           }
 
-          protected int defaultWidth() {
+          public int defaultWidth() {
             return 70;
           }
 
@@ -1003,31 +1008,31 @@ public class BoardTableBase extends BoardsTable {
             return ((Board)g).getAttachmentsurlField();
           }
 
-          protected boolean defaultUserCreateable() {
+          public boolean defaultUserCreateable() {
             return false;
           }
 
-          protected DisplayLevel defaultDisplayLevel() {
+          public DisplayLevel defaultDisplayLevel() {
             return DisplayLevel.record;
           }
 
-          protected Searchability defaultSearchability() {
+          public Searchability defaultSearchability() {
             return Searchability.yes;
           }
 
-          protected String defaultDisplayName() {
+          public String defaultDisplayName() {
             return "Attachments URL";
           }
 
-          protected int defaultDisplayOrder() {
+          public int defaultDisplayOrder() {
             return 15;
           }
 
-          protected String defaultDescription() {
+          public String defaultDescription() {
             return "A URL to the directory containing attachments for this board";
           }
 
-          protected int defaultWidth() {
+          public int defaultWidth() {
             return 70;
           }
 
@@ -1272,27 +1277,27 @@ public class BoardTableBase extends BoardsTable {
   protected JdbcPersistent _newPersistent() {
     return new Board();
   }
-  protected String defaultDisplayName() {
+  public String defaultDisplayName() {
     return "Board";
   }
 
-  protected String defaultDescription() {
+  public String defaultDescription() {
     return "A board for messages";
   }
 
-  protected boolean defaultRememberAllTroids() {
+  public boolean defaultRememberAllTroids() {
     return true;
   }
 
-  protected Integer defaultCacheLimit() {
+  public Integer defaultCacheLimit() {
     return new Integer(2000);
   }
 
-  protected String defaultCategory() {
+  public String defaultCategory() {
     return "Boards";
   }
 
-  protected int defaultDisplayOrder() {
+  public int defaultDisplayOrder() {
     return 1020;
   }
 }

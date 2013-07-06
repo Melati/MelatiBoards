@@ -5,21 +5,37 @@ package org.paneris.melati.boards.model.generated;
 
 import org.melati.poem.PoemDatabase;
 import org.melati.poem.DefinitionSource;
+import org.melati.poem.Group;
 import org.melati.poem.GroupTable;
+import org.melati.poem.Capability;
 import org.melati.poem.CapabilityTable;
+import org.melati.poem.GroupMembership;
 import org.melati.poem.GroupMembershipTable;
+import org.melati.poem.GroupCapability;
 import org.melati.poem.GroupCapabilityTable;
+import org.melati.poem.TableCategory;
 import org.melati.poem.TableCategoryTable;
+import org.melati.poem.TableInfo;
 import org.melati.poem.TableInfoTable;
+import org.melati.poem.ColumnInfo;
 import org.melati.poem.ColumnInfoTable;
+import org.paneris.melati.boards.model.BoardType;
 import org.paneris.melati.boards.model.BoardTypeTable;
+import org.paneris.melati.boards.model.Board;
 import org.paneris.melati.boards.model.BoardTable;
+import org.paneris.melati.boards.model.User;
 import org.paneris.melati.boards.model.UserTable;
+import org.paneris.melati.boards.model.MembershipStatus;
 import org.paneris.melati.boards.model.MembershipStatusTable;
+import org.paneris.melati.boards.model.Subscription;
 import org.paneris.melati.boards.model.SubscriptionTable;
+import org.paneris.melati.boards.model.Message;
 import org.paneris.melati.boards.model.MessageTable;
+import org.paneris.melati.boards.model.AttachmentType;
 import org.paneris.melati.boards.model.AttachmentTypeTable;
+import org.paneris.melati.boards.model.Attachment;
 import org.paneris.melati.boards.model.AttachmentTable;
+import org.paneris.melati.boards.model.Setting;
 import org.paneris.melati.boards.model.SettingTable;
 
 /**
@@ -27,40 +43,41 @@ import org.paneris.melati.boards.model.SettingTable;
  */
 public class BoardsDatabaseBase extends PoemDatabase {
 
-  private GroupTable tab_group = null;
-  private CapabilityTable tab_capability = null;
-  private GroupMembershipTable tab_groupmembership = null;
-  private GroupCapabilityTable tab_groupcapability = null;
-  private TableCategoryTable tab_tablecategory = null;
-  private TableInfoTable tab_tableinfo = null;
-  private ColumnInfoTable tab_columninfo = null;
-  private BoardTypeTable tab_boardtype = null;
-  private BoardTable tab_board = null;
-  private UserTable tab_user = null;
-  private MembershipStatusTable tab_membershipstatus = null;
-  private SubscriptionTable tab_subscription = null;
-  private MessageTable tab_message = null;
-  private AttachmentTypeTable tab_attachmenttype = null;
-  private AttachmentTable tab_attachment = null;
-  private SettingTable tab_setting = null;
+  private GroupTable<Group> tab_group = null;
+  private CapabilityTable<Capability> tab_capability = null;
+  private GroupMembershipTable<GroupMembership> tab_groupmembership = null;
+  private GroupCapabilityTable<GroupCapability> tab_groupcapability = null;
+  private TableCategoryTable<TableCategory> tab_tablecategory = null;
+  private TableInfoTable<TableInfo> tab_tableinfo = null;
+  private ColumnInfoTable<ColumnInfo> tab_columninfo = null;
+  private BoardTypeTable<BoardType> tab_boardtype = null;
+  private BoardTable<Board> tab_board = null;
+  private UserTable<User> tab_user = null;
+  private MembershipStatusTable<MembershipStatus> tab_membershipstatus = null;
+  private SubscriptionTable<Subscription> tab_subscription = null;
+  private MessageTable<Message> tab_message = null;
+  private AttachmentTypeTable<AttachmentType> tab_attachmenttype = null;
+  private AttachmentTable<Attachment> tab_attachment = null;
+  private SettingTable<Setting> tab_setting = null;
 
+  @SuppressWarnings({ "unchecked", "rawtypes" })
   protected BoardsDatabaseBase() {
-    redefineTable(tab_group = new GroupTable(this, "group", DefinitionSource.dsd));
-    redefineTable(tab_capability = new CapabilityTable(this, "capability", DefinitionSource.dsd));
-    redefineTable(tab_groupmembership = new GroupMembershipTable(this, "groupMembership", DefinitionSource.dsd));
-    redefineTable(tab_groupcapability = new GroupCapabilityTable(this, "groupCapability", DefinitionSource.dsd));
-    redefineTable(tab_tablecategory = new TableCategoryTable(this, "tableCategory", DefinitionSource.dsd));
-    redefineTable(tab_tableinfo = new TableInfoTable(this, "tableInfo", DefinitionSource.dsd));
-    redefineTable(tab_columninfo = new ColumnInfoTable(this, "columnInfo", DefinitionSource.dsd));
-    redefineTable(tab_boardtype = new BoardTypeTable(this, "boardType", DefinitionSource.dsd));
-    redefineTable(tab_board = new BoardTable(this, "board", DefinitionSource.dsd));
-    redefineTable(tab_user = new UserTable(this, "user", DefinitionSource.dsd));
-    redefineTable(tab_membershipstatus = new MembershipStatusTable(this, "membershipStatus", DefinitionSource.dsd));
-    redefineTable(tab_subscription = new SubscriptionTable(this, "subscription", DefinitionSource.dsd));
-    redefineTable(tab_message = new MessageTable(this, "message", DefinitionSource.dsd));
-    redefineTable(tab_attachmenttype = new AttachmentTypeTable(this, "attachmentType", DefinitionSource.dsd));
-    redefineTable(tab_attachment = new AttachmentTable(this, "attachment", DefinitionSource.dsd));
-    redefineTable(tab_setting = new SettingTable(this, "setting", DefinitionSource.dsd));
+    redefineTable(tab_group = new GroupTable<Group>(this, "group", DefinitionSource.dsd));
+    redefineTable(tab_capability = new CapabilityTable<Capability>(this, "capability", DefinitionSource.dsd));
+    redefineTable(tab_groupmembership = new GroupMembershipTable<GroupMembership>(this, "groupMembership", DefinitionSource.dsd));
+    redefineTable(tab_groupcapability = new GroupCapabilityTable<GroupCapability>(this, "groupCapability", DefinitionSource.dsd));
+    redefineTable(tab_tablecategory = new TableCategoryTable<TableCategory>(this, "tableCategory", DefinitionSource.dsd));
+    redefineTable(tab_tableinfo = new TableInfoTable<TableInfo>(this, "tableInfo", DefinitionSource.dsd));
+    redefineTable(tab_columninfo = new ColumnInfoTable<ColumnInfo>(this, "columnInfo", DefinitionSource.dsd));
+    redefineTable(tab_boardtype = new BoardTypeTable<BoardType>(this, "BoardType", DefinitionSource.dsd));
+    redefineTable(tab_board = new BoardTable<Board>(this, "Board", DefinitionSource.dsd));
+    redefineTable(tab_user = new org.paneris.melati.boards.model.UserTable(this, "User", DefinitionSource.dsd));
+    redefineTable(tab_membershipstatus = new MembershipStatusTable<MembershipStatus>(this, "MembershipStatus", DefinitionSource.dsd));
+    redefineTable(tab_subscription = new SubscriptionTable<Subscription>(this, "Subscription", DefinitionSource.dsd));
+    redefineTable(tab_message = new MessageTable<Message>(this, "Message", DefinitionSource.dsd));
+    redefineTable(tab_attachmenttype = new AttachmentTypeTable<AttachmentType>(this, "AttachmentType", DefinitionSource.dsd));
+    redefineTable(tab_attachment = new AttachmentTable<Attachment>(this, "Attachment", DefinitionSource.dsd));
+    redefineTable(tab_setting = new org.paneris.melati.boards.model.SettingTable(this, "Setting", DefinitionSource.dsd));
   }
 
 
@@ -70,7 +87,7 @@ public class BoardsDatabaseBase extends PoemDatabase {
   * see org.melati.poem.prepro.TableDef#generateTableAccessorJava 
   * @return the GroupTable from this database
   */
-  public GroupTable getGroupTable() {
+  public GroupTable<Group> getGroupTable() {
     return tab_group;
   }
 
@@ -81,7 +98,7 @@ public class BoardsDatabaseBase extends PoemDatabase {
   * see org.melati.poem.prepro.TableDef#generateTableAccessorJava 
   * @return the CapabilityTable from this database
   */
-  public CapabilityTable getCapabilityTable() {
+  public CapabilityTable<Capability> getCapabilityTable() {
     return tab_capability;
   }
 
@@ -92,7 +109,7 @@ public class BoardsDatabaseBase extends PoemDatabase {
   * see org.melati.poem.prepro.TableDef#generateTableAccessorJava 
   * @return the GroupMembershipTable from this database
   */
-  public GroupMembershipTable getGroupMembershipTable() {
+  public GroupMembershipTable<GroupMembership> getGroupMembershipTable() {
     return tab_groupmembership;
   }
 
@@ -103,7 +120,7 @@ public class BoardsDatabaseBase extends PoemDatabase {
   * see org.melati.poem.prepro.TableDef#generateTableAccessorJava 
   * @return the GroupCapabilityTable from this database
   */
-  public GroupCapabilityTable getGroupCapabilityTable() {
+  public GroupCapabilityTable<GroupCapability> getGroupCapabilityTable() {
     return tab_groupcapability;
   }
 
@@ -114,7 +131,7 @@ public class BoardsDatabaseBase extends PoemDatabase {
   * see org.melati.poem.prepro.TableDef#generateTableAccessorJava 
   * @return the TableCategoryTable from this database
   */
-  public TableCategoryTable getTableCategoryTable() {
+  public TableCategoryTable<TableCategory> getTableCategoryTable() {
     return tab_tablecategory;
   }
 
@@ -125,7 +142,7 @@ public class BoardsDatabaseBase extends PoemDatabase {
   * see org.melati.poem.prepro.TableDef#generateTableAccessorJava 
   * @return the TableInfoTable from this database
   */
-  public TableInfoTable getTableInfoTable() {
+  public TableInfoTable<TableInfo> getTableInfoTable() {
     return tab_tableinfo;
   }
 
@@ -137,7 +154,7 @@ public class BoardsDatabaseBase extends PoemDatabase {
   * see org.melati.poem.prepro.TableDef#generateTableAccessorJava 
   * @return the ColumnInfoTable from this database
   */
-  public ColumnInfoTable getColumnInfoTable() {
+  public ColumnInfoTable<ColumnInfo> getColumnInfoTable() {
     return tab_columninfo;
   }
 
@@ -148,7 +165,7 @@ public class BoardsDatabaseBase extends PoemDatabase {
   * see org.melati.poem.prepro.TableDef#generateTableAccessorJava 
   * @return the BoardTypeTable from this database
   */
-  public BoardTypeTable getBoardTypeTable() {
+  public BoardTypeTable<BoardType> getBoardTypeTable() {
     return tab_boardtype;
   }
 
@@ -159,7 +176,7 @@ public class BoardsDatabaseBase extends PoemDatabase {
   * see org.melati.poem.prepro.TableDef#generateTableAccessorJava 
   * @return the BoardTable from this database
   */
-  public BoardTable getBoardTable() {
+  public BoardTable<Board> getBoardTable() {
     return tab_board;
   }
 
@@ -167,10 +184,22 @@ public class BoardsDatabaseBase extends PoemDatabase {
  /**
   * Retrieves the UserTable table.
   *
+  * Deprecated: use getBoardsUserTable
   * see org.melati.poem.prepro.TableDef#generateTableAccessorJava 
   * @return the org.melati.poem.UserTable from this database
   */
-  public org.melati.poem.UserTable getUserTable() {
+  @SuppressWarnings({ "rawtypes", "unchecked" })
+  public org.melati.poem.UserTable<org.melati.poem.User> getUserTable() {
+    return (org.melati.poem.UserTable)tab_user;
+  }
+
+ /**
+  * Retrieves our (Boards) UserTable table.
+  *
+  * see org.melati.poem.prepro.TableDef#generateSubclassedTableAccessorDeclaration 
+  * @return the org.melati.poem.UserTable from this database
+  */
+  public UserTable<User> getBoardsUserTable() {
     return tab_user;
   }
 
@@ -181,7 +210,7 @@ public class BoardsDatabaseBase extends PoemDatabase {
   * see org.melati.poem.prepro.TableDef#generateTableAccessorJava 
   * @return the MembershipStatusTable from this database
   */
-  public MembershipStatusTable getMembershipStatusTable() {
+  public MembershipStatusTable<MembershipStatus> getMembershipStatusTable() {
     return tab_membershipstatus;
   }
 
@@ -192,7 +221,7 @@ public class BoardsDatabaseBase extends PoemDatabase {
   * see org.melati.poem.prepro.TableDef#generateTableAccessorJava 
   * @return the SubscriptionTable from this database
   */
-  public SubscriptionTable getSubscriptionTable() {
+  public SubscriptionTable<Subscription> getSubscriptionTable() {
     return tab_subscription;
   }
 
@@ -203,7 +232,7 @@ public class BoardsDatabaseBase extends PoemDatabase {
   * see org.melati.poem.prepro.TableDef#generateTableAccessorJava 
   * @return the MessageTable from this database
   */
-  public MessageTable getMessageTable() {
+  public MessageTable<Message> getMessageTable() {
     return tab_message;
   }
 
@@ -214,7 +243,7 @@ public class BoardsDatabaseBase extends PoemDatabase {
   * see org.melati.poem.prepro.TableDef#generateTableAccessorJava 
   * @return the AttachmentTypeTable from this database
   */
-  public AttachmentTypeTable getAttachmentTypeTable() {
+  public AttachmentTypeTable<AttachmentType> getAttachmentTypeTable() {
     return tab_attachmenttype;
   }
 
@@ -225,7 +254,7 @@ public class BoardsDatabaseBase extends PoemDatabase {
   * see org.melati.poem.prepro.TableDef#generateTableAccessorJava 
   * @return the AttachmentTable from this database
   */
-  public AttachmentTable getAttachmentTable() {
+  public AttachmentTable<Attachment> getAttachmentTable() {
     return tab_attachment;
   }
 
@@ -233,10 +262,22 @@ public class BoardsDatabaseBase extends PoemDatabase {
  /**
   * Retrieves the SettingTable table.
   *
+  * Deprecated: use getBoardsSettingTable
   * see org.melati.poem.prepro.TableDef#generateTableAccessorJava 
   * @return the org.melati.poem.SettingTable from this database
   */
-  public org.melati.poem.SettingTable getSettingTable() {
+  @SuppressWarnings({ "rawtypes", "unchecked" })
+  public org.melati.poem.SettingTable<org.melati.poem.Setting> getSettingTable() {
+    return (org.melati.poem.SettingTable)tab_setting;
+  }
+
+ /**
+  * Retrieves our (Boards) SettingTable table.
+  *
+  * see org.melati.poem.prepro.TableDef#generateSubclassedTableAccessorDeclaration 
+  * @return the org.melati.poem.SettingTable from this database
+  */
+  public SettingTable<Setting> getBoardsSettingTable() {
     return tab_setting;
   }
 }

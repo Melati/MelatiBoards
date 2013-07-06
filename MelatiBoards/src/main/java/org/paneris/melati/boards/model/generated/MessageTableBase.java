@@ -25,17 +25,17 @@ import org.paneris.melati.boards.model.Board;
 import org.paneris.melati.boards.model.BoardsDatabaseTables;
 import org.paneris.melati.boards.model.BoardsTable;
 import org.paneris.melati.boards.model.Message;
+// FIXME extended table 
 import org.paneris.melati.boards.model.User;
 
 
 /**
- * Melati POEM generated base class for 
-<code>Table</code> <code>Message</code>.
+ * Melati POEM generated base class for <code>Table</code> <code>Message</code>.
  *
  * see org.melati.poem.prepro.TableDef#generateTableBaseJava 
  */
 
-public class MessageTableBase extends BoardsTable {
+public class MessageTableBase<T extends Message> extends BoardsTable<T> {
 
   private Column<Integer> col_id = null;
   private Column<Integer> col_board = null;
@@ -74,6 +74,12 @@ public class MessageTableBase extends BoardsTable {
     return (BoardsDatabaseTables)getDatabase();
   }
 
+
+ /**
+  * Initialise this table by defining its columns.
+  *
+  * see org.melati.poem.prepro.TableDef#generateTableBaseJava 
+  */
   public void init() throws PoemException {
     super.init();
     defineColumn(col_id =
@@ -94,15 +100,15 @@ public class MessageTableBase extends BoardsTable {
             return ((Message)g).getIdField();
           }
 
-          protected boolean defaultUserEditable() {
+          public boolean defaultUserEditable() {
             return false;
           }
 
-          protected boolean defaultUserCreateable() {
+          public boolean defaultUserCreateable() {
             return false;
           }
 
-          protected int defaultDisplayOrder() {
+          public int defaultDisplayOrder() {
             return 0;
           }
 
@@ -146,31 +152,31 @@ public class MessageTableBase extends BoardsTable {
             return ((Message)g).getBoardField();
           }
 
-          protected DisplayLevel defaultDisplayLevel() {
+          public DisplayLevel defaultDisplayLevel() {
             return DisplayLevel.summary;
           }
 
-          protected Searchability defaultSearchability() {
+          public Searchability defaultSearchability() {
             return Searchability.primary;
           }
 
-          protected Integer defaultDisplayOrderPriority() {
+          public Integer defaultDisplayOrderPriority() {
             return new Integer(0);
           }
 
-          protected int defaultDisplayOrder() {
+          public int defaultDisplayOrder() {
             return 1;
           }
 
-          protected String defaultDescription() {
+          public String defaultDescription() {
             return "The board this message belongs to";
           }
 
-          protected boolean defaultIndexed() {
+          public boolean defaultIndexed() {
             return true;
           }
 
-          protected String defaultRenderinfo() {
+          public String defaultRenderinfo() {
             return "SelectionWindow";
           }
 
@@ -217,35 +223,35 @@ public class MessageTableBase extends BoardsTable {
             return ((Message)g).getDateField();
           }
 
-          protected boolean defaultUserEditable() {
+          public boolean defaultUserEditable() {
             return false;
           }
 
-          protected boolean defaultUserCreateable() {
+          public boolean defaultUserCreateable() {
             return false;
           }
 
-          protected DisplayLevel defaultDisplayLevel() {
+          public DisplayLevel defaultDisplayLevel() {
             return DisplayLevel.summary;
           }
 
-          protected Searchability defaultSearchability() {
+          public Searchability defaultSearchability() {
             return Searchability.no;
           }
 
-          protected Integer defaultDisplayOrderPriority() {
+          public Integer defaultDisplayOrderPriority() {
             return new Integer(1);
           }
 
-          protected boolean defaultSortDescending() {
+          public boolean defaultSortDescending() {
             return true;
           }
 
-          protected int defaultDisplayOrder() {
+          public int defaultDisplayOrder() {
             return 2;
           }
 
-          protected String defaultDescription() {
+          public String defaultDescription() {
             return "The date and time at which this message was posted";
           }
 
@@ -288,23 +294,23 @@ public class MessageTableBase extends BoardsTable {
             return ((Message)g).getSubjectField();
           }
 
-          protected DisplayLevel defaultDisplayLevel() {
+          public DisplayLevel defaultDisplayLevel() {
             return DisplayLevel.primary;
           }
 
-          protected Searchability defaultSearchability() {
+          public Searchability defaultSearchability() {
             return Searchability.yes;
           }
 
-          protected int defaultDisplayOrder() {
+          public int defaultDisplayOrder() {
             return 3;
           }
 
-          protected String defaultDescription() {
+          public String defaultDescription() {
             return "The subject line of this message";
           }
 
-          protected int defaultWidth() {
+          public int defaultWidth() {
             return 40;
           }
 
@@ -348,23 +354,23 @@ public class MessageTableBase extends BoardsTable {
             return ((Message)g).getAuthorField();
           }
 
-          protected DisplayLevel defaultDisplayLevel() {
+          public DisplayLevel defaultDisplayLevel() {
             return DisplayLevel.summary;
           }
 
-          protected Searchability defaultSearchability() {
+          public Searchability defaultSearchability() {
             return Searchability.yes;
           }
 
-          protected int defaultDisplayOrder() {
+          public int defaultDisplayOrder() {
             return 4;
           }
 
-          protected String defaultDescription() {
+          public String defaultDescription() {
             return "Author of this message";
           }
 
-          protected String defaultRenderinfo() {
+          public String defaultRenderinfo() {
             return "SelectionWindow";
           }
 
@@ -412,31 +418,31 @@ public class MessageTableBase extends BoardsTable {
             return ((Message)g).getParentField();
           }
 
-          protected DisplayLevel defaultDisplayLevel() {
+          public DisplayLevel defaultDisplayLevel() {
             return DisplayLevel.record;
           }
 
-          protected Searchability defaultSearchability() {
+          public Searchability defaultSearchability() {
             return Searchability.yes;
           }
 
-          protected String defaultDisplayName() {
+          public String defaultDisplayName() {
             return "Parent";
           }
 
-          protected int defaultDisplayOrder() {
+          public int defaultDisplayOrder() {
             return 5;
           }
 
-          protected String defaultDescription() {
+          public String defaultDescription() {
             return "The message to which this message is a follow-up";
           }
 
-          protected boolean defaultIndexed() {
+          public boolean defaultIndexed() {
             return true;
           }
 
-          protected String defaultRenderinfo() {
+          public String defaultRenderinfo() {
             return "SelectionWindow";
           }
 
@@ -479,27 +485,27 @@ public class MessageTableBase extends BoardsTable {
             return ((Message)g).getBodyField();
           }
 
-          protected DisplayLevel defaultDisplayLevel() {
+          public DisplayLevel defaultDisplayLevel() {
             return DisplayLevel.record;
           }
 
-          protected Searchability defaultSearchability() {
+          public Searchability defaultSearchability() {
             return Searchability.yes;
           }
 
-          protected int defaultDisplayOrder() {
+          public int defaultDisplayOrder() {
             return 6;
           }
 
-          protected String defaultDescription() {
+          public String defaultDescription() {
             return "The main content of this message";
           }
 
-          protected int defaultWidth() {
+          public int defaultWidth() {
             return 70;
           }
 
-          protected int defaultHeight() {
+          public int defaultHeight() {
             return 20;
           }
 
@@ -542,23 +548,23 @@ public class MessageTableBase extends BoardsTable {
             return ((Message)g).getDeletedField();
           }
 
-          protected DisplayLevel defaultDisplayLevel() {
+          public DisplayLevel defaultDisplayLevel() {
             return DisplayLevel.record;
           }
 
-          protected Searchability defaultSearchability() {
+          public Searchability defaultSearchability() {
             return Searchability.no;
           }
 
-          protected String defaultDisplayName() {
+          public String defaultDisplayName() {
             return "Deleted";
           }
 
-          protected int defaultDisplayOrder() {
+          public int defaultDisplayOrder() {
             return 7;
           }
 
-          protected String defaultDescription() {
+          public String defaultDescription() {
             return "A deleted message cannot be viewed or displayed on lists";
           }
 
@@ -601,27 +607,27 @@ public class MessageTableBase extends BoardsTable {
             return ((Message)g).getApprovedField();
           }
 
-          protected boolean defaultUserCreateable() {
+          public boolean defaultUserCreateable() {
             return false;
           }
 
-          protected DisplayLevel defaultDisplayLevel() {
+          public DisplayLevel defaultDisplayLevel() {
             return DisplayLevel.record;
           }
 
-          protected Searchability defaultSearchability() {
+          public Searchability defaultSearchability() {
             return Searchability.no;
           }
 
-          protected String defaultDisplayName() {
+          public String defaultDisplayName() {
             return "Approved";
           }
 
-          protected int defaultDisplayOrder() {
+          public int defaultDisplayOrder() {
             return 8;
           }
 
-          protected String defaultDescription() {
+          public String defaultDescription() {
             return "A message must be approved by a manager of the board before it can be viewed (if the board has moderated postings)";
           }
 
@@ -782,19 +788,19 @@ public class MessageTableBase extends BoardsTable {
   protected JdbcPersistent _newPersistent() {
     return new Message();
   }
-  protected String defaultDescription() {
+  public String defaultDescription() {
     return "A message posted to a message board";
   }
 
-  protected Integer defaultCacheLimit() {
+  public Integer defaultCacheLimit() {
     return new Integer(2000);
   }
 
-  protected String defaultCategory() {
+  public String defaultCategory() {
     return "Boards";
   }
 
-  protected int defaultDisplayOrder() {
+  public int defaultDisplayOrder() {
     return 1050;
   }
 }
