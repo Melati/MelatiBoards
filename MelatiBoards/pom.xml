@@ -65,7 +65,7 @@
       </plugin>
       <plugin>
        <groupId>org.melati</groupId>
-       <artifactId>maven-dsd-plugin</artifactId>
+       <artifactId>dsd-maven-plugin</artifactId>
        <version>0.7.9-SNAPSHOT</version>
        <executions>
          <execution>
