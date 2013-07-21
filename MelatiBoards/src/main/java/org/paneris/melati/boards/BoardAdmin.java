@@ -606,11 +606,11 @@ public class BoardAdmin extends TemplateServlet {
 
     Board board = null;
     if (melati.getTable() != null && melati.getObject() != null) {
-      if (melati.getTable().getName().equals("board"))
+      if (melati.getTable().getName().equals("Board"))
         board = (Board)melati.getObject();
-      else if (melati.getTable().getName().equals("subscription"))
+      else if (melati.getTable().getName().equals("Subscription"))
         board = ((Subscription)melati.getObject()).getBoard();
-      else if (melati.getTable().getName().equals("message"))
+      else if (melati.getTable().getName().equals("Message"))
         board = ((Message)melati.getObject()).getBoard();
     }
 
@@ -626,7 +626,7 @@ public class BoardAdmin extends TemplateServlet {
         return searchForBoardTemplate();
       }
     }
-    else if (melati.getTable().getName().equals("board") &&
+    else if (melati.getTable().getName().equals("Board") &&
                                          melati.getObject() != null) {
       if (melati.getMethod().equals("Board"))
         return boardTemplate(context, melati);
@@ -665,19 +665,19 @@ public class BoardAdmin extends TemplateServlet {
       if (melati.getMethod().equals("ApproveSubscriptions"))
         return approveSubscriptionsTemplate(context, melati);
     }
-    else if (melati.getTable().getName().equals("message") &&
+    else if (melati.getTable().getName().equals("Message") &&
                                          melati.getObject() != null) {
       if (melati.getMethod().equals("Message"))
         return messageTemplate(context, true);
       if (melati.getMethod().equals("MessageNoThread"))
         return messageTemplate(context, false);
     }
-    else if (melati.getTable().getName().equals("boardtype") &&
+    else if (melati.getTable().getName().equals("BoardType") &&
                                          melati.getObject() != null) {
       if (melati.getMethod().equals("ListBoards"))
         return listBoardsTemplate();
     }
-    else if (melati.getTable().getName().equals("subscription") &&
+    else if (melati.getTable().getName().equals("Subscription") &&
                                              melati.getObject() != null) {
       if (melati.getMethod().equals("SubscriptionEdit"))
         return subscriptionEditTemplate(melati, board);
