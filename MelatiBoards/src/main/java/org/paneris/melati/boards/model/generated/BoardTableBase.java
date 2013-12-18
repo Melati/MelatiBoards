@@ -1255,7 +1255,7 @@ public class BoardTableBase<T extends Board> extends BoardsTable<T> {
   * Retrieve the <code>Board</code> as a <code>Board</code>.
   *
   * see org.melati.poem.prepro.TableDef#generateTableBaseJava 
-  * @param troid a Table Row Oject ID
+  * @param troid a Table Row Object ID
   * @return the <code>Persistent</code> identified by the <code>troid</code>
   */
   public Board getBoardObject(Integer troid) {
@@ -1299,6 +1299,31 @@ public class BoardTableBase<T extends Board> extends BoardsTable<T> {
 
   public int defaultDisplayOrder() {
     return 1020;
+  }
+
+  /**
+   * @return a newly created or existing Board
+   **/
+  public Board ensure(BoardType type, String name, String displayname, Boolean archived, Boolean opensubscription, Boolean moderatedsubscription, Boolean openposting, Boolean moderatedposting, Boolean openmessageviewing, Boolean openmemberlist, Boolean attachmentsallowed, Boolean anonymousposting, String attachmentspath, String attachmentsurl) {
+    Board p = (Board)getNameColumn().firstWhereEq(name);
+    if (p == null) {
+      p = (Board)newPersistent();
+      p.setType(type);
+      p.setName(name);
+      p.setDisplayname(displayname);
+      p.setArchived(archived);
+      p.setOpensubscription(opensubscription);
+      p.setModeratedsubscription(moderatedsubscription);
+      p.setOpenposting(openposting);
+      p.setModeratedposting(moderatedposting);
+      p.setOpenmessageviewing(openmessageviewing);
+      p.setOpenmemberlist(openmemberlist);
+      p.setAttachmentsallowed(attachmentsallowed);
+      p.setAnonymousposting(anonymousposting);
+      p.setAttachmentspath(attachmentspath);
+      p.setAttachmentsurl(attachmentsurl);
+    }
+    return (Board)getNameColumn().ensure(p);
   }
 }
 

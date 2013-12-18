@@ -25,7 +25,7 @@ import org.paneris.melati.boards.model.Board;
 import org.paneris.melati.boards.model.BoardsDatabaseTables;
 import org.paneris.melati.boards.model.BoardsTable;
 import org.paneris.melati.boards.model.Message;
-// FIXME extended table 
+// Extended table 
 import org.paneris.melati.boards.model.User;
 
 
@@ -766,7 +766,7 @@ public class MessageTableBase<T extends Message> extends BoardsTable<T> {
   * Retrieve the <code>Message</code> as a <code>Message</code>.
   *
   * see org.melati.poem.prepro.TableDef#generateTableBaseJava 
-  * @param troid a Table Row Oject ID
+  * @param troid a Table Row Object ID
   * @return the <code>Persistent</code> identified by the <code>troid</code>
   */
   public Message getMessageObject(Integer troid) {

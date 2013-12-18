@@ -6,12 +6,11 @@ package org.paneris.melati.boards.model.generated;
 import org.melati.poem.Database;
 import org.melati.poem.DefinitionSource;
 import org.melati.poem.JdbcPersistent;
-import org.melati.poem.Persistent;
 import org.melati.poem.PoemException;
-// FIXME extended table 
+// Extended table 
 import org.melati.poem.SettingTable;
 import org.paneris.melati.boards.model.BoardsDatabaseTables;
-// FIXME extended table 
+// Extended table 
 import org.paneris.melati.boards.model.Setting;
 
 
@@ -66,7 +65,7 @@ public class SettingTableBase<T extends Setting> extends SettingTable<T> {
   * Retrieve the <code>Setting</code> as a <code>org.melati.poem.Setting</code>.
   *
   * see org.melati.poem.prepro.TableDef#generateTableBaseJava 
-  * @param troid a Table Row Oject ID
+  * @param troid a Table Row Object ID
   * @return the <code>Persistent</code> identified by the <code>troid</code>
   */
   public org.melati.poem.Setting getSettingObject(Integer troid) {

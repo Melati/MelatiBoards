@@ -219,7 +219,7 @@ public class MembershipStatusTableBase<T extends MembershipStatus> extends Board
   * Retrieve the <code>MembershipStatus</code> as a <code>MembershipStatus</code>.
   *
   * see org.melati.poem.prepro.TableDef#generateTableBaseJava 
-  * @param troid a Table Row Oject ID
+  * @param troid a Table Row Object ID
   * @return the <code>Persistent</code> identified by the <code>troid</code>
   */
   public MembershipStatus getMembershipStatusObject(Integer troid) {
@@ -263,6 +263,18 @@ public class MembershipStatusTableBase<T extends MembershipStatus> extends Board
 
   public int defaultDisplayOrder() {
     return 1030;
+  }
+
+  /**
+   * @return a newly created or existing MembershipStatus
+   **/
+  public MembershipStatus ensure(String status) {
+    MembershipStatus p = (MembershipStatus)getStatusColumn().firstWhereEq(status);
+    if (p == null) {
+      p = (MembershipStatus)newPersistent();
+      p.setStatus(status);
+    }
+    return (MembershipStatus)getStatusColumn().ensure(p);
   }
 }
 

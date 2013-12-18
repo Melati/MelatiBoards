@@ -299,7 +299,7 @@ public class BoardTypeTableBase<T extends BoardType> extends BoardsTable<T> {
   * Retrieve the <code>BoardType</code> as a <code>BoardType</code>.
   *
   * see org.melati.poem.prepro.TableDef#generateTableBaseJava 
-  * @param troid a Table Row Oject ID
+  * @param troid a Table Row Object ID
   * @return the <code>Persistent</code> identified by the <code>troid</code>
   */
   public BoardType getBoardTypeObject(Integer troid) {
@@ -343,6 +343,19 @@ public class BoardTypeTableBase<T extends BoardType> extends BoardsTable<T> {
 
   public int defaultDisplayOrder() {
     return 1010;
+  }
+
+  /**
+   * @return a newly created or existing BoardType
+   **/
+  public BoardType ensure(String type, String description) {
+    BoardType p = (BoardType)getTypeColumn().firstWhereEq(type);
+    if (p == null) {
+      p = (BoardType)newPersistent();
+      p.setType(type);
+      p.setDescription(description);
+    }
+    return (BoardType)getTypeColumn().ensure(p);
   }
 }
 
