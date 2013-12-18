@@ -3,10 +3,13 @@
 package org.paneris.melati.boards.model.generated;
 
 
-// import org.melati.poem.Setting;
+// base extension
+import org.melati.poem.Setting;
 import org.paneris.melati.boards.model.BoardsDatabaseTables;
-// import org.paneris.melati.boards.model.Setting;
-// import org.paneris.melati.boards.model.SettingTable;
+// ours
+//import org.paneris.melati.boards.model.Setting;
+// ours
+//import org.paneris.melati.boards.model.SettingTable;
 
 
 /**

@@ -219,7 +219,7 @@ public class AttachmentTypeTableBase<T extends AttachmentType> extends BoardsTab
   * Retrieve the <code>AttachmentType</code> as a <code>AttachmentType</code>.
   *
   * see org.melati.poem.prepro.TableDef#generateTableBaseJava 
-  * @param troid a Table Row Oject ID
+  * @param troid a Table Row Object ID
   * @return the <code>Persistent</code> identified by the <code>troid</code>
   */
   public AttachmentType getAttachmentTypeObject(Integer troid) {
@@ -263,6 +263,18 @@ public class AttachmentTypeTableBase<T extends AttachmentType> extends BoardsTab
 
   public int defaultDisplayOrder() {
     return 1060;
+  }
+
+  /**
+   * @return a newly created or existing AttachmentType
+   **/
+  public AttachmentType ensure(String type) {
+    AttachmentType p = (AttachmentType)getTypeColumn().firstWhereEq(type);
+    if (p == null) {
+      p = (AttachmentType)newPersistent();
+      p.setType(type);
+    }
+    return (AttachmentType)getTypeColumn().ensure(p);
   }
 }
 
