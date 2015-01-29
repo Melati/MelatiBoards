@@ -23,7 +23,7 @@ import org.paneris.melati.boards.model.BoardsDatabaseTables;
 import org.paneris.melati.boards.model.BoardsTable;
 import org.paneris.melati.boards.model.MembershipStatus;
 import org.paneris.melati.boards.model.Subscription;
-// FIXME extended table 
+// Extended table 
 import org.paneris.melati.boards.model.User;
 
 
@@ -528,7 +528,7 @@ public class SubscriptionTableBase<T extends Subscription> extends BoardsTable<T
   * Retrieve the <code>Subscription</code> as a <code>Subscription</code>.
   *
   * see org.melati.poem.prepro.TableDef#generateTableBaseJava 
-  * @param troid a Table Row Oject ID
+  * @param troid a Table Row Object ID
   * @return the <code>Persistent</code> identified by the <code>troid</code>
   */
   public Subscription getSubscriptionObject(Integer troid) {
