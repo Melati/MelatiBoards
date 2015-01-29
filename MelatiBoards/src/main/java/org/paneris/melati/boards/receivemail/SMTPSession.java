@@ -329,9 +329,7 @@ class SMTPSession extends Thread {
   }
 
   /**
-   * Run the interpretter.
-   * 
-   * @TODO Handle EHLO (also HELP for debugging)
+   * Run the interpreter.
    */
 
   public void run() {
@@ -360,6 +358,7 @@ class SMTPSession extends Thread {
           break;
         }
 
+        // Not recognising EHLO is a good thing
         // does it matter that we don't do VRFY?
 
         else
