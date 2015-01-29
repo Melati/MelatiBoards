@@ -116,7 +116,7 @@ public class SMTPServer implements Runnable {
         // die when SMTPServerServlet is 'destroy'ed
         // (and sets its smtpserver to null)
 
-        while (launcher.smtpserver == myThread)
+        while (launcher.smtpserverThread == myThread)
           (new SMTPSession(smtpIdentifier,
                            serverSocket.accept(),
                            databaseNameOfDomain,
