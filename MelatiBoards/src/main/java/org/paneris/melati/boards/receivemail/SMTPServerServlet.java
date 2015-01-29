@@ -146,7 +146,7 @@ import org.melati.util.PropertiesUtils;
  *     <TD><TT>log <I>filename</I></TT></TD>
  *     <TD>
  *       the name of the log file (defaults to
- *       <TT>/usr/local/apache/log/messageboard-receivemail.log</TT>
+ *       <TT>/var/log/messageboard-receivemail.log</TT>
  *     </TD>
  *   </TR>
  * </TABLE>
@@ -154,12 +154,12 @@ import org.melati.util.PropertiesUtils;
 public class SMTPServerServlet implements Servlet {
 
   private ServletConfig config;
-  Thread smtpserver = null;
+  Thread smtpserverThread = null;
 
   private static final int portDefault = 1615;
   private static final String propertiesNameDefault = "smtpServer.properties";
   private static final String logPathDefault =
-      "/usr/local/apache/log/messageboard-receivemail.log";
+      "/var/log/messageboard-receivemail.log";
 
 /*
 
@@ -215,13 +215,13 @@ public class SMTPServerServlet implements Servlet {
                                        propertiesName);
 
       // Launch our smtpserver
-      if (smtpserver == null) {
-        smtpserver = new Thread(new SMTPServer(this,
+      if (smtpserverThread == null) {
+        smtpserverThread = new Thread(new SMTPServer(this,
                        "messageboards."+InetAddress.getLocalHost().getHostName(),
                        port,
                        databaseNameOfDomain,
                        65536, log), "board smtpserver");
-        smtpserver.start();
+        smtpserverThread.start();
     log.debug("Started SMTP server servlet");
       }
     }
@@ -240,7 +240,7 @@ public class SMTPServerServlet implements Servlet {
    * to null means it exits.
    */
   public void destroy() {
-    smtpserver = null;
+    smtpserverThread = null;
   }
 
   /* 
@@ -271,7 +271,7 @@ public class SMTPServerServlet implements Servlet {
     resp.setContentType("text/html");
     PrintWriter out = resp.getWriter();
     out.println("The SMTP server is "+
-                  (smtpserver != null ? "running" : "not running"));
+                  (smtpserverThread != null ? "running" : "not running"));
     out.close();
   }
 
