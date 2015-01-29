@@ -770,7 +770,7 @@ class DistributeThread extends Thread {
           try {
 
       // Send email to user
-      Email.send(board.getDatabase().getSettingTable().get(Email.SMTPSERVER), 
+      Email.send(board.getDatabase().getSettingTable().get(Board.SMTPSERVER),
                  "admin."+board.getEmailAddress(),       // From
                  user.getEmail(),      // To
                  "",                   // reply to
@@ -787,7 +787,7 @@ class DistributeThread extends Thread {
       managers.copyInto(emailArray);
 
       // Send email to managers
-      Email.sendToList(board.getDatabase().getSettingTable().get(Email.SMTPSERVER), 
+      Email.sendToList(board.getDatabase().getSettingTable().get(Board.SMTPSERVER),
                        "admin."+board.getEmailAddress(),       // From
                        emailArray,           // To
                        "",                   // reply to

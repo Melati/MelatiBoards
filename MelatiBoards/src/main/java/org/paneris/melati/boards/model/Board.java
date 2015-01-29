@@ -91,9 +91,11 @@ public class Board extends BoardBase {
   */
   public Board() { 
     super();
-}
+  }
 
   // programmer's domain-specific code here
+
+  public static String SMTPSERVER = "SMTPServer";
 
   /*****************************************************************************
    * Users levels - Admin, Manager, Member
@@ -368,7 +370,7 @@ public class Board extends BoardBase {
     body += getMessageURL(message) + "\n";
 
     try {
-      String smtpServer = getDatabase().getSettingTable().get(Email.SMTPSERVER);
+      String smtpServer = getDatabase().getSettingTable().get(SMTPSERVER);
       File[] empty = {};
       Email.sendWithAttachments(smtpServer, 
                 Email.mailAddress(message.getAuthor().getName(), // From
